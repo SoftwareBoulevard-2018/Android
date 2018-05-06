@@ -15,6 +15,8 @@ import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
 import { SetUpPage } from '../pages/set-up/set-up';
 import { ReportsPage } from '../pages/reports/reports';
+//import { ComposeEmailPage } from '../pages/compose-email/compose-email';
+import { InboxPage } from '../pages/inbox/inbox';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -43,7 +45,8 @@ export class SoftwareBoulevardApp {
   // the login page disables the left menu
   navigationPages: PageInterface[] = [
     { title: 'Main', name: 'MainPage', component: MainPage, icon: 'md-home' },
-    { title: 'Reports', name: 'ReportsPage', component: ReportsPage, icon: 'md-podium' }
+    { title: 'Reports', name: 'ReportsPage', component: ReportsPage, icon: 'md-podium' },
+    { title: 'Email', name: 'InboxPage', component: InboxPage, icon: 'mail' }
   ];
   loggedInPages: PageInterface[] = [
     //{ title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },

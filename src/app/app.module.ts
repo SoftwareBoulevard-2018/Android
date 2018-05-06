@@ -30,6 +30,10 @@ import { CreateCompanyPage } from '../pages/create-company/create-company';
 import { EditCompanyPage } from '../pages/edit-company/edit-company';
 import { ViewAccountPage } from '../pages/account/account';
 import { EditAccountPage } from '../pages/edit-account/edit-account';
+import { ComposeEmailPage } from '../pages/compose-email/compose-email';
+import { InboxPage } from '../pages/inbox/inbox';
+import { MenuemailpopoverPage } from '../pages/menuemailpopover/menuemailpopover';
+import { ReademailPage } from '../pages/reademail/reademail';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -43,6 +47,8 @@ import { UserData } from '../providers/user-data';
     
     LoginPage,
     MainPage,
+    ComposeEmailPage,
+    InboxPage,
     ListUsersPage,
     AboutPage,
     ListCompaniesPage,
@@ -53,7 +59,9 @@ import { UserData } from '../providers/user-data';
     CreateCompanyPage,
     EditCompanyPage,
     ViewAccountPage,
-    EditAccountPage
+    EditAccountPage,
+    MenuemailpopoverPage,
+    ReademailPage
   ],
   imports: [
     BrowserModule,
@@ -62,6 +70,8 @@ import { UserData } from '../providers/user-data';
       links: [
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
         { component: MainPage, name: 'MainPage', segment: 'main' },
+        { component: InboxPage, name: 'InboxPage', segment: 'inbox' },
+        { component: ComposeEmailPage, name: 'ComposeEmailPage', segment: 'compose-email' },
         { component: ListUsersPage, name: 'ListUsersPage', segment: 'users' },
         { component: AboutPage, name: 'AboutPage', segment: 'about' },
         { component: ListCompaniesPage, name: 'ListCompaniesPage', segment: 'companies' },
@@ -85,6 +95,8 @@ import { UserData } from '../providers/user-data';
 
     LoginPage,
     MainPage,
+    InboxPage,
+    ComposeEmailPage,
     ListUsersPage,
     AboutPage,
     ListCompaniesPage,
@@ -95,7 +107,9 @@ import { UserData } from '../providers/user-data';
     CreateCompanyPage,
     EditCompanyPage,
     ViewAccountPage,
-    EditAccountPage
+    EditAccountPage,
+    MenuemailpopoverPage,
+    ReademailPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
