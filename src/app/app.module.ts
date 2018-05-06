@@ -25,6 +25,7 @@ import { ListUsersPage } from '../pages/list-users/list-users';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
+import { TestDataProvider } from '../providers/test-data/test-data';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import { UserData } from '../providers/user-data';
     ConferenceData,
     UserData,
     InAppBrowser,
-    SplashScreen
+    SplashScreen,
+    TestDataProvider
   ]
 })
 export class AppModule { }
