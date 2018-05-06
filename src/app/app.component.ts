@@ -14,6 +14,7 @@ import { AboutPage } from '../pages/about/about';
 import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
 import { ListUsersPage } from '../pages/list-users/list-users';
+import { SetUpPage } from '../pages/set-up/set-up';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -49,7 +50,8 @@ export class SoftwareBoulevardApp {
     { title: 'Logout', name: 'LoginPage', component: LoginPage, icon: 'log-out', logsOut: true }
   ];
   adminPages: PageInterface[] = [
-    { title: 'List users', name: 'ListUsersPage', component: ListUsersPage, icon: 'person-add' }
+    { title: 'List users', name: 'ListUsersPage', component: ListUsersPage, icon: 'md-list' },
+    { title: 'Set-up', name: 'SetUpPage', component: SetUpPage, icon: 'md-cog' }
   ];
   rootPage: any;
 

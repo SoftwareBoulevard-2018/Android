@@ -22,6 +22,9 @@ import { SignupPage } from '../pages/signup/signup';
 import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
 import { ListUsersPage } from '../pages/list-users/list-users';
+import { viewCompanyPage } from '../pages/company/company';
+import { ListCompaniesPage } from '../pages/list-companies/list-companies';
+import { SetUpPage } from '../pages/set-up/set-up';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -38,22 +41,26 @@ import { UserData } from '../providers/user-data';
     MainPage,
     ListUsersPage,
     AboutPage,
-
+    ListCompaniesPage,
+    viewCompanyPage,
+    SetUpPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(SoftwareBoulevardApp, {}, {
       links: [
-
-        { component: AboutPage, name: 'About', segment: 'about' },
         { component: AccountPage, name: 'AccountPage', segment: 'account' },
         { component: SignupPage, name: 'SignupPage', segment: 'signup' },
         //software boulevard
-        { component: AboutPage, name: 'AboutPage', segment: 'about' },
+
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
         { component: MainPage, name: 'MainPage', segment: 'main' },
         { component: ListUsersPage, name: 'ListUsersPage', segment: 'users' },
+        { component: AboutPage, name: 'AboutPage', segment: 'about' },
+        { component: ListCompaniesPage, name: 'ListCompaniesPage', segment: 'companies' },
+        { component: viewCompanyPage, name: 'viewCompanyPage', segment: 'companies' },
+        { component: SetUpPage, name: 'SetUpPage', segment: 'set-up' }
       ]
     }),
     IonicStorageModule.forRoot()
@@ -68,7 +75,10 @@ import { UserData } from '../providers/user-data';
     LoginPage,
     MainPage,
     ListUsersPage,
-    AboutPage
+    AboutPage,
+    ListCompaniesPage,
+    viewCompanyPage,
+    SetUpPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
