@@ -13,7 +13,6 @@ import { AboutPage } from '../pages/about/about';
 //software boulevard
 import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
-import { ListUsersPage } from '../pages/list-users/list-users';
 import { SetUpPage } from '../pages/set-up/set-up';
 import { ReportsPage } from '../pages/reports/reports';
 
@@ -52,7 +51,6 @@ export class SoftwareBoulevardApp {
     { title: 'Logout', name: 'LoginPage', component: LoginPage, icon: 'log-out', logsOut: true }
   ];
   adminPages: PageInterface[] = [
-    { title: 'List users', name: 'ListUsersPage', component: ListUsersPage, icon: 'md-list' },
     { title: 'Set-up', name: 'SetUpPage', component: SetUpPage, icon: 'md-cog' }
   ];
   rootPage: any;
