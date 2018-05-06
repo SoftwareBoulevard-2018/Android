@@ -9,7 +9,7 @@ import {
   selector: 'company',
   templateUrl: 'company.html'
 })
-export class viewCompanyPage {
+export class ViewCompanyPage {
 
   constructor(
     public navCtrl: NavController,

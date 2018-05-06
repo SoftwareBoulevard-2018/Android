@@ -1,27 +1,29 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 import { Company } from '../../models/company';
 
 @Component({
-  selector: 'create-company',
-  templateUrl: 'create-company.html'
+  selector: 'edit-company',
+  templateUrl: 'edit-company.html'
 })
-export class CreateCompanyPage {
-  company = new Company("",undefined,"");
+export class EditCompanyPage {
+  company: Company;
   submitted = false;
 
   constructor(
     public navCtrl: NavController,
-  ) {}
+    public navParams: NavParams
+  ) {
+    this.company = this.navParams.data.c;
+  }
 
-  onSubmit(form: NgForm) {
+  onSignup(form: NgForm) {
     this.submitted = true;
 
     if (form.valid) {
-      //TODO: send company to server
       //this.userData.signup(this.signup.username);
       this.navCtrl.pop();
     }

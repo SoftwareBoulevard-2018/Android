@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
 
 
-import { AccountPage } from '../pages/account/account';
+//import { ViewAccountPage } from '../pages/account/account';
 import { AboutPage } from '../pages/about/about';
 
 
@@ -47,7 +47,7 @@ export class SoftwareBoulevardApp {
     { title: 'Reports', name: 'ReportsPage', component: ReportsPage, icon: 'md-podium' }
   ];
   loggedInPages: PageInterface[] = [
-    { title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },
+    //{ title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },
     { title: 'About', name: 'AboutPage', component: AboutPage, icon: 'help' },
     { title: 'Logout', name: 'LoginPage', component: LoginPage, icon: 'log-out', logsOut: true }
   ];

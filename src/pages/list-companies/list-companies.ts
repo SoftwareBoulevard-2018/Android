@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 
-import { viewCompanyPage } from '../company/company';
+import { ViewCompanyPage } from '../company/company';
+import { EditCompanyPage } from '../edit-company/edit-company';
 import { CreateCompanyPage } from '../create-company/create-company';
+
+import { GeneralServiceService } from '../../app/general-service.service';
 
 import {
   NavController
@@ -13,15 +16,27 @@ import {
 })
 export class ListCompaniesPage {
 
+  companies: any;
+
   constructor(
     public navCtrl: NavController,
-  ) {}
+    public service: GeneralServiceService
+  ) {
+    this.companies = service.companies;
+  }
 
-  viewCompany() {
-    this.navCtrl.push(viewCompanyPage);
+  viewCompany(company) {
+    this.navCtrl.push(ViewCompanyPage,{
+      c: company
+    });
   }
   createCompany() {
     this.navCtrl.push(CreateCompanyPage);
+  }
+  editCompany(company) {
+    this.navCtrl.push(EditCompanyPage, {
+      c: company
+    })
   }
 
 }

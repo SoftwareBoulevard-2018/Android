@@ -3,29 +3,25 @@ import { NgForm } from '@angular/forms';
 
 import { NavController } from 'ionic-angular';
 
-import { UserData } from '../../providers/user-data';
-
-import { UserOptions } from '../../interfaces/user-options';
-
-import { MainPage } from '../main/main';
-
+import { User } from '../../models/user';
 
 @Component({
   selector: 'create-account',
   templateUrl: 'create-account.html'
 })
 export class CreateAccountPage {
-  signup: UserOptions = { username: '', password: '' };
+  user = new User("","","","","");
   submitted = false;
 
-  constructor(public navCtrl: NavController, public userData: UserData) {}
+  constructor(public navCtrl: NavController) {}
 
-  onSignup(form: NgForm) {
+  onSubmit(form: NgForm) {
     this.submitted = true;
 
     if (form.valid) {
+      //TODO: send company to server
       //this.userData.signup(this.signup.username);
-      this.navCtrl.push(MainPage);
+      this.navCtrl.pop();
     }
   }
 }

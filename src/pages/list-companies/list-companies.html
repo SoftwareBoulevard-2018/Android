@@ -12,19 +12,16 @@
         <button ion-fab ><ion-icon name="add"></ion-icon></button>
     </ion-fab>
     <ion-list>
-        <ion-item>
+        <ion-item *ngFor="let c of companies" >
             <ion-avatar item-start>
-              <img src="assets/img/speakers/puppy.jpg">
+                <img src="{{c.image}}">
             </ion-avatar>
-            <h2>Oracle</h2>
-            <p>Resources: 9000  -  K:2</p>
+            <h2 (click)="viewCompany(c)" >{{c.name}}</h2>
+            <p>Resources: 9000  -  K:{{c.capacity_k}}</p>
+            <button ion-button color="primary" item-end (click)="editCompany(c)">
+                <ion-icon name='md-create'></ion-icon>
+            </button>
         </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-              <img src="assets/img/speakers/rabbit.jpg">
-            </ion-avatar>
-            <h2>NASA</h2>
-            <p>Resources: 2  -  K:20</p>
-        </ion-item>
+        
     </ion-list>
 </ion-content>
