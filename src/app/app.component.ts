@@ -15,6 +15,7 @@ import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
 import { ListUsersPage } from '../pages/list-users/list-users';
 import { SetUpPage } from '../pages/set-up/set-up';
+import { ReportsPage } from '../pages/reports/reports';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -42,7 +43,8 @@ export class SoftwareBoulevardApp {
   // the left menu only works after login
   // the login page disables the left menu
   navigationPages: PageInterface[] = [
-    { title: 'Main', name: 'MainPage', component: MainPage, icon: 'md-home' }
+    { title: 'Main', name: 'MainPage', component: MainPage, icon: 'md-home' },
+    { title: 'Reports', name: 'ReportsPage', component: ReportsPage, icon: 'md-podium' }
   ];
   loggedInPages: PageInterface[] = [
     { title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },

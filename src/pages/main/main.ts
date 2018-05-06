@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ListUsersPage } from '../list-users/list-users';
 import { ListCompaniesPage } from '../list-companies/list-companies';
 import { SetUpPage } from '../set-up/set-up';
+import { ReportsPage } from '../reports/reports';
 
 import {
   NavController
@@ -25,6 +26,11 @@ export class MainPage {
   }
   viewCompanies() {
     this.navCtrl.push(ListCompaniesPage);
+  }
+  viewReports(){
+    this.navCtrl.push(ReportsPage,{
+      type: "general"
+    });
   }
   viewSetUp(){
     this.navCtrl.push(SetUpPage);

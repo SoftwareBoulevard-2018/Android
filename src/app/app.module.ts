@@ -25,6 +25,7 @@ import { ListUsersPage } from '../pages/list-users/list-users';
 import { viewCompanyPage } from '../pages/company/company';
 import { ListCompaniesPage } from '../pages/list-companies/list-companies';
 import { SetUpPage } from '../pages/set-up/set-up';
+import { ReportsPage } from '../pages/reports/reports';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -43,7 +44,8 @@ import { UserData } from '../providers/user-data';
     AboutPage,
     ListCompaniesPage,
     viewCompanyPage,
-    SetUpPage
+    SetUpPage,
+    ReportsPage
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,8 @@ import { UserData } from '../providers/user-data';
         { component: AboutPage, name: 'AboutPage', segment: 'about' },
         { component: ListCompaniesPage, name: 'ListCompaniesPage', segment: 'companies' },
         { component: viewCompanyPage, name: 'viewCompanyPage', segment: 'companies' },
-        { component: SetUpPage, name: 'SetUpPage', segment: 'set-up' }
+        { component: SetUpPage, name: 'SetUpPage', segment: 'set-up' },
+        { component: ReportsPage, name: 'ReportsPage', segment: 'reports' }
       ]
     }),
     IonicStorageModule.forRoot()
@@ -78,7 +81,8 @@ import { UserData } from '../providers/user-data';
     AboutPage,
     ListCompaniesPage,
     viewCompanyPage,
-    SetUpPage
+    SetUpPage,
+    ReportsPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
