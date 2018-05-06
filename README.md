@@ -29,7 +29,7 @@ _Note: You may need to add “sudo” in front of any global commands to install
 ## File Structure of App
 
 ```
-ionic-conference-app/
+Android/
 ├-- .github/                            * GitHub files
 │   ├── CONTRIBUTING.md                 * Documentation on contributing to this repo
 │   └── ISSUE_TEMPLATE.md               * Template used to populate issues in this repo
@@ -57,7 +57,7 @@ ionic-conference-app/
 |    |    ├── img/
 |    |
 |    |-- pages/                          * Contains all of our pages
-│    │    ├── about/                     * About tab page
+│    │    ├── about/                     * About page
 │    │    │    ├── about.html            * AboutPage template
 │    │    │    └── about.ts              * AboutPage code
 │    │    │    └── about.scss            * AboutPage stylesheet
@@ -72,52 +72,14 @@ ionic-conference-app/
 │    │    │    └── login.ts              * LoginPage code
 │    │    │    └── login.scss            * LoginPage stylesheet
 │    │    │
-│    │    │── map/                       * Map tab page
-│    │    │    ├── map.html              * MapPage template
-│    │    │    └── map.ts                * MapPage code
-│    │    │    └── map.scss              * MapPage stylesheet
-│    │    │
-│    │    │── schedule/                  * Schedule tab page
-│    │    │    ├── schedule.html         * SchedulePage template
-│    │    │    └── schedule.ts           * SchedulePage code
-│    │    │    └── schedule.scss         * SchedulePage stylesheet
-│    │    │
-│    │    │── schedule-filter/            * Schedule Filter page
-│    │    │    ├── schedule-filter.html   * ScheduleFilterPage template
-│    │    │    └── schedule-filter.ts     * ScheduleFilterPage code
-│    │    │    └── schedule-filter.scss   * ScheduleFilterPage stylesheet
-│    │    │
-│    │    │── session-detail/            * Session Detail page
-│    │    │    ├── session-detail.html   * SessionDetailPage template
-│    │    │    └── session-detail.ts     * SessionDetailPage code
+│    │    │── main/                      * Main page
+│    │    │    ├── main.html             * MainPage template
+│    │    │    └── main.ts               * MainPage code
+│    │    │    └── main.scss             * MainPage stylesheet
 │    │    │
 │    │    │── signup/                    * Signup page
-│    │    │    ├── signup.html           * SignupPage template
-│    │    │    └── signup.ts             * SignupPage code
-│    │    │
-│    │    │── speaker-detail/            * Speaker Detail page
-│    │    │    ├── speaker-detail.html   * SpeakerDetailPage template
-│    │    │    └── speaker-detail.ts     * SpeakerDetailPage code
-│    │    │    └── speaker-detail.scss   * SpeakerDetailPage stylesheet
-│    │    │
-│    │    │── speaker-list/              * Speakers tab page
-│    │    │    ├── speaker-list.html     * SpeakerListPage template
-│    │    │    └── speaker-list.ts       * SpeakerListPage code
-│    │    │    └── speaker-list.scss     * SpeakerListPage stylesheet
-|    |    |
-│    │    │── support/                   * Support page
-│    │    │    ├── support.html          * SupportPage template
-│    │    │    └── support.ts            * SupportPage code
-│    │    │    └── support.scss          * SupportPage stylesheet
-│    │    │
-│    │    │── tabs/                      * Tabs page
-│    │    │    ├── tabs.html             * TabsPage template
-│    │    │    └── tabs.ts               * TabsPage code
-│    │    │
-│    │    └── tutorial/                  * Tutorial Intro page
-│    │         ├── tutorial.html         * TutorialPage template
-│    │         └── tutorial.ts           * TutorialPage code
-│    │         └── tutorial.scss         * TutorialPage stylesheet
+│    │         ├── signup.html           * SignupPage template
+│    │         └── signup.ts             * SignupPage code
 |    |
 │    ├── providers/                      * Contains all Injectables
 │    │     ├── conference-data.ts        * ConferenceData code
