@@ -1,3 +1,4 @@
+import { TestDataProvider } from './../../providers/test-data/test-data';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -14,12 +15,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'home-user.html',
 })
 export class HomeUserPage {
+  displayName: String; 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public TestDataProvider: TestDataProvider) {
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomeUserPage');
+    this.getDisplayName();
   }
+
+  getDisplayName()
+  {
+    this.displayName = this.TestDataProvider.selectDisplayName();
+  }
+
 
 }

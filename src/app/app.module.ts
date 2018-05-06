@@ -16,6 +16,8 @@ import { PopoverPage } from '../pages/about-popover/about-popover';
 import { AccountPage } from '../pages/account/account';
 
 import { SignupPage } from '../pages/signup/signup';
+import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
+
 
 
 //software boulevard
@@ -26,6 +28,8 @@ import { ListUsersPage } from '../pages/list-users/list-users';
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import { TestDataProvider } from '../providers/test-data/test-data';
+import { HomeUserPage } from './../pages/home-user/home-user';
+
 
 
 @NgModule({
@@ -39,6 +43,8 @@ import { TestDataProvider } from '../providers/test-data/test-data';
     MainPage,
     ListUsersPage,
     AboutPage,
+
+    HomeUserPage
 
   ],
   imports: [
@@ -55,6 +61,7 @@ import { TestDataProvider } from '../providers/test-data/test-data';
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
         { component: MainPage, name: 'MainPage', segment: 'main' },
         { component: ListUsersPage, name: 'ListUsersPage', segment: 'users' },
+        { component: HomeUserPage, name: 'HomeUserPage', segment: 'homeuser' }
       ]
     }),
     IonicStorageModule.forRoot()
@@ -69,10 +76,15 @@ import { TestDataProvider } from '../providers/test-data/test-data';
     LoginPage,
     MainPage,
     ListUsersPage,
-    AboutPage
+    AboutPage,
+
+    HomeUserPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    HttpClientModule,
+    HttpClient,
+    HttpHandler,
     ConferenceData,
     UserData,
     InAppBrowser,

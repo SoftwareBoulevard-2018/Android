@@ -19,5 +19,10 @@ export class MainPage {
   viewUsers() {
     this.navCtrl.push(ListUsersPage);
   }
-
+  viewCompanies() {
+    alert("Daaaaanm you empty method");
+  }
+  viewReports() {
+    alert("Daaaaanm you empty method");
+  }
 }

@@ -1,3 +1,5 @@
+import { TestDataProvider } from './../providers/test-data/test-data';
+import { HomeUserPage } from './../pages/home-user/home-user';
 import { Component, ViewChild } from '@angular/core';
 
 import { Events, MenuController, Nav, Platform } from 'ionic-angular';
@@ -17,6 +19,9 @@ import { ListUsersPage } from '../pages/list-users/list-users';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 export interface PageInterface {
   title: string;
@@ -42,11 +47,15 @@ export class SoftwareBoulevardApp {
   // the login page disables the left menu
   navigationPages: PageInterface[] = [
     { title: 'Main', name: 'MainPage', component: MainPage, icon: 'md-home' }
+
   ];
   loggedInPages: PageInterface[] = [
+    
     { title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },
     { title: 'About', name: 'AboutPage', component: AboutPage, icon: 'help' },
-    { title: 'Logout', name: 'LoginPage', component: LoginPage, icon: 'log-out', logsOut: true }
+    { title: 'Logout', name: 'LoginPage', component: LoginPage, icon: 'log-out', logsOut: true },
+    { title: 'HomeUserPage', name: 'HomeUserPage', component: HomeUserPage, icon: 'help' },
+
   ];
   adminPages: PageInterface[] = [
     { title: 'List users', name: 'ListUsersPage', component: ListUsersPage, icon: 'person-add' }
@@ -60,7 +69,8 @@ export class SoftwareBoulevardApp {
     public platform: Platform,
     public confData: ConferenceData,
     public storage: Storage,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
+    public TestDataProvider: TestDataProvider
   ) {
 
     // load the conference data
