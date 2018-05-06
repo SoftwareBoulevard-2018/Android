@@ -1,0 +1,87 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Main</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="outer-content">
+
+    <ion-card>
+        <ion-card-header (click)="viewUsers()">
+            <ion-card-title>Users</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content class="outer-content">
+            information
+        </ion-card-content>
+        
+        <ion-row no-padding>
+            <ion-col>
+                <button ion-button clear small color="primary" icon-start >
+                        <ion-icon name='chatboxes'></ion-icon>
+                        action
+                </button>
+            </ion-col>
+            <ion-col>
+                <button ion-button clear small color="primary" icon-start >
+                        <ion-icon name='chatboxes'></ion-icon>
+                        action 2
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+    
+    <ion-card>
+            <ion-card-header (click)="viewCompanies()">
+                <ion-card-title>Companies</ion-card-title>
+            </ion-card-header>
+    
+            <ion-card-content class="outer-content">
+                information
+            </ion-card-content>
+            
+            <ion-row no-padding>
+                <ion-col>
+                    <button ion-button clear small color="primary" icon-start >
+                            <ion-icon name='chatboxes'></ion-icon>
+                            action
+                    </button>
+                </ion-col>
+                <ion-col>
+                    <button ion-button clear small color="primary" icon-start >
+                            <ion-icon name='chatboxes'></ion-icon>
+                            action 2
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+
+        <ion-card>
+                <ion-card-header (click)="viewReports()">
+                    <ion-card-title>Reports</ion-card-title>
+                </ion-card-header>
+        
+                <ion-card-content class="outer-content">
+                    information
+                </ion-card-content>
+                
+                <ion-row no-padding>
+                    <ion-col>
+                        <button ion-button clear small color="primary" icon-start >
+                                <ion-icon name='chatboxes'></ion-icon>
+                                action
+                        </button>
+                    </ion-col>
+                    <ion-col>
+                        <button ion-button clear small color="primary" icon-start >
+                                <ion-icon name='chatboxes'></ion-icon>
+                                action 2
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </ion-card>
+
+</ion-content>
