@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-//import { ListUsersPage } from '../list-users/list-users';
+import { CreateAccountPage } from '../create-account/create-account';
 
 import {
   NavController
@@ -18,6 +18,9 @@ export class ListUsersPage {
 
   viewUsers() {
     this.navCtrl.push(ListUsersPage);
+  }
+  createUser(){
+    this.navCtrl.push(CreateAccountPage);
   }
 
 }

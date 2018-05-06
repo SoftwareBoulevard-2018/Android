@@ -4,6 +4,8 @@ import { ListUsersPage } from '../list-users/list-users';
 import { ListCompaniesPage } from '../list-companies/list-companies';
 import { SetUpPage } from '../set-up/set-up';
 import { ReportsPage } from '../reports/reports';
+import { CreateAccountPage } from '../create-account/create-account';
+import { CreateCompanyPage } from '../create-company/create-company';
 
 import {
   NavController
@@ -34,6 +36,12 @@ export class MainPage {
   }
   viewSetUp(){
     this.navCtrl.push(SetUpPage);
+  }
+  createUser(){
+    this.navCtrl.push(CreateAccountPage);
+  }
+  createCompany() {
+    this.navCtrl.push(CreateCompanyPage);
   }
 
 }

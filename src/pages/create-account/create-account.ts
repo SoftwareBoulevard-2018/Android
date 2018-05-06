@@ -11,10 +11,10 @@ import { MainPage } from '../main/main';
 
 
 @Component({
-  selector: 'page-user',
-  templateUrl: 'signup.html'
+  selector: 'create-account',
+  templateUrl: 'create-account.html'
 })
-export class SignupPage {
+export class CreateAccountPage {
   signup: UserOptions = { username: '', password: '' };
   submitted = false;
 
@@ -24,7 +24,7 @@ export class SignupPage {
     this.submitted = true;
 
     if (form.valid) {
-      this.userData.signup(this.signup.username);
+      //this.userData.signup(this.signup.username);
       this.navCtrl.push(MainPage);
     }
   }

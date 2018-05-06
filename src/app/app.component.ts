@@ -70,16 +70,17 @@ export class SoftwareBoulevardApp {
     // load the conference data
     //confData.load();
 
-    // decide which menu items should be hidden by current login status stored in local storage
+    // 
+    
     this.userData.hasLoggedIn().then((hasLoggedIn) => {
-      this.enableMenu(hasLoggedIn === true);
       if(hasLoggedIn===true){
         this.rootPage = MainPage;
+        this.menu.enable(true);
       }else{
+        this.menu.enable(false);
         this.rootPage = LoginPage;
       }
     });
-    this.enableMenu(true);
 
     this.listenToLoginEvents();
   }
@@ -100,22 +101,15 @@ export class SoftwareBoulevardApp {
 
   listenToLoginEvents() {
     this.events.subscribe('user:login', () => {
-      this.enableMenu(true);
-    });
-
-    this.events.subscribe('user:signup', () => {
-      this.enableMenu(true);
+      this.menu.enable(true);
     });
 
     this.events.subscribe('user:logout', () => {
-      this.enableMenu(false);
+      this.menu.enable(false);
     });
   }
 
-  enableMenu(loggedIn: boolean) {
-    this.menu.enable(loggedIn, 'loggedInMenu');
-    this.menu.enable(!loggedIn, 'loggedOutMenu');
-  }
+
 
   platformReady() {
     // Call any initial plugins when ready

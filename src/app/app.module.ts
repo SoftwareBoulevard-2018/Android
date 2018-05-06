@@ -15,9 +15,6 @@ import { AboutPage } from '../pages/about/about';
 import { PopoverPage } from '../pages/about-popover/about-popover';
 import { AccountPage } from '../pages/account/account';
 
-import { SignupPage } from '../pages/signup/signup';
-
-
 //software boulevard
 import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
@@ -26,6 +23,8 @@ import { viewCompanyPage } from '../pages/company/company';
 import { ListCompaniesPage } from '../pages/list-companies/list-companies';
 import { SetUpPage } from '../pages/set-up/set-up';
 import { ReportsPage } from '../pages/reports/reports';
+import { CreateAccountPage } from '../pages/create-account/create-account';
+import { CreateCompanyPage } from '../pages/create-company/create-company';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -36,8 +35,7 @@ import { UserData } from '../providers/user-data';
     SoftwareBoulevardApp,
     AccountPage,
     PopoverPage,
-    SignupPage,
-
+    
     LoginPage,
     MainPage,
     ListUsersPage,
@@ -45,7 +43,9 @@ import { UserData } from '../providers/user-data';
     ListCompaniesPage,
     viewCompanyPage,
     SetUpPage,
-    ReportsPage
+    ReportsPage,
+    CreateAccountPage,
+    CreateCompanyPage
   ],
   imports: [
     BrowserModule,
@@ -53,7 +53,6 @@ import { UserData } from '../providers/user-data';
     IonicModule.forRoot(SoftwareBoulevardApp, {}, {
       links: [
         { component: AccountPage, name: 'AccountPage', segment: 'account' },
-        { component: SignupPage, name: 'SignupPage', segment: 'signup' },
         //software boulevard
 
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
@@ -63,7 +62,9 @@ import { UserData } from '../providers/user-data';
         { component: ListCompaniesPage, name: 'ListCompaniesPage', segment: 'companies' },
         { component: viewCompanyPage, name: 'viewCompanyPage', segment: 'companies' },
         { component: SetUpPage, name: 'SetUpPage', segment: 'set-up' },
-        { component: ReportsPage, name: 'ReportsPage', segment: 'reports' }
+        { component: ReportsPage, name: 'ReportsPage', segment: 'reports' },
+        { component: CreateAccountPage, name: 'CreateAccountPage', segment: 'users' },
+        { component: CreateCompanyPage, name: 'CreateCompanyPage', segment: 'companies' }
       ]
     }),
     IonicStorageModule.forRoot()
@@ -73,7 +74,6 @@ import { UserData } from '../providers/user-data';
     SoftwareBoulevardApp,
     AccountPage,
     PopoverPage,
-    SignupPage,
 
     LoginPage,
     MainPage,
@@ -82,7 +82,9 @@ import { UserData } from '../providers/user-data';
     ListCompaniesPage,
     viewCompanyPage,
     SetUpPage,
-    ReportsPage
+    ReportsPage,
+    CreateAccountPage,
+    CreateCompanyPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
