@@ -8,14 +8,16 @@
 </ion-header>
 
 <ion-content>
+    <ion-fab right bottom>
+        <button ion-fab (click)="createUser()"><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
     <ion-list>
-        <ion-item>
-            <h2>Pedro Picapiedra</h2>
-            <p>developer - oracle</p>
-        </ion-item>
-        <ion-item>
-            <h2>John Smith</h2>
-            <p>developer - NASA</p>
+        <ion-item *ngFor="let u of users" >
+            <h2>{{u.name}}</h2>
+            <p>{{u.role}}  -  {{u.company_name}}</p>
+            <button ion-button color="primary" item-end (click)="editUser(u)">
+                <ion-icon name='md-create'></ion-icon>
+            </button>
         </ion-item>
     </ion-list>
 </ion-content>

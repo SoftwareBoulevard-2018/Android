@@ -7,11 +7,13 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content class="outer-content">
+<ion-content class="outer-content" id="admin-main" *ngIf="user_type === 'Game Administrator'">
 
     <ion-card>
         <ion-card-header (click)="viewUsers()">
-            <ion-card-title>Users</ion-card-title>
+            <ion-card-title>
+                <ion-icon name='md-people' margin-right></ion-icon>Users
+            </ion-card-title>
         </ion-card-header>
 
         <ion-card-content class="outer-content">
@@ -20,15 +22,21 @@
         
         <ion-row no-padding>
             <ion-col>
-                <button ion-button clear small color="primary" icon-start >
-                        <ion-icon name='chatboxes'></ion-icon>
-                        action
+                <button ion-button clear small color="primary" icon-start (click)="viewUsers()">
+                        <ion-icon name='md-list'></ion-icon>
+                        list
+                </button>
+            </ion-col>
+            <ion-col>
+                <button ion-button clear small color="primary" icon-start (click)="createUser()">
+                        <ion-icon name='person-add'></ion-icon>
+                        create
                 </button>
             </ion-col>
             <ion-col>
                 <button ion-button clear small color="primary" icon-start >
-                        <ion-icon name='chatboxes'></ion-icon>
-                        action 2
+                        <ion-icon name='md-podium'></ion-icon>
+                        reports
                 </button>
             </ion-col>
         </ion-row>
@@ -36,7 +44,9 @@
     
     <ion-card>
             <ion-card-header (click)="viewCompanies()">
-                <ion-card-title>Companies</ion-card-title>
+                <ion-card-title>
+                    <ion-icon name='md-briefcase' margin-right></ion-icon>Companies
+                </ion-card-title>
             </ion-card-header>
     
             <ion-card-content class="outer-content">
@@ -45,43 +55,48 @@
             
             <ion-row no-padding>
                 <ion-col>
-                    <button ion-button clear small color="primary" icon-start >
-                            <ion-icon name='chatboxes'></ion-icon>
-                            action
+                    <button ion-button clear small color="primary" icon-start (click)="viewCompanies()">
+                            <ion-icon name='md-list'></ion-icon>
+                            list
+                    </button>
+                </ion-col>
+                <ion-col>
+                    <button ion-button clear small color="primary" icon-start (click)="createCompany()">
+                            <ion-icon name='md-add-circle'></ion-icon>
+                            create
                     </button>
                 </ion-col>
                 <ion-col>
                     <button ion-button clear small color="primary" icon-start >
-                            <ion-icon name='chatboxes'></ion-icon>
-                            action 2
+                            <ion-icon name='md-podium'></ion-icon>
+                            reports
                     </button>
                 </ion-col>
             </ion-row>
         </ion-card>
 
-        <ion-card>
-                <ion-card-header (click)="viewReports()">
-                    <ion-card-title>Reports</ion-card-title>
-                </ion-card-header>
+        <ion-card (click)="viewReports()">
+            <ion-card-header >
+                <ion-card-title>
+                    <ion-icon name='md-podium' margin-right></ion-icon>Reports
+                </ion-card-title>
+            </ion-card-header>
+    
+            <ion-card-content class="outer-content">
+                Here you can see the reports of the game.
+            </ion-card-content>
+        </ion-card>
         
-                <ion-card-content class="outer-content">
-                    information
-                </ion-card-content>
-                
-                <ion-row no-padding>
-                    <ion-col>
-                        <button ion-button clear small color="primary" icon-start >
-                                <ion-icon name='chatboxes'></ion-icon>
-                                action
-                        </button>
-                    </ion-col>
-                    <ion-col>
-                        <button ion-button clear small color="primary" icon-start >
-                                <ion-icon name='chatboxes'></ion-icon>
-                                action 2
-                        </button>
-                    </ion-col>
-                </ion-row>
-            </ion-card>
+        <ion-card (click)="viewSetUp()">
+            <ion-card-header >
+                <ion-card-title>
+                    <ion-icon name='md-cog' margin-right></ion-icon>Set-up
+                </ion-card-title>
+            </ion-card-header>
+    
+            <ion-card-content class="outer-content">
+                Here you can create/update projects, puzzles, questions, and update parameters.
+            </ion-card-content>
+        </ion-card>
 
 </ion-content>
