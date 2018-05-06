@@ -22,6 +22,11 @@ import { SignupPage } from '../pages/signup/signup';
 import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
 import { ListUsersPage } from '../pages/list-users/list-users';
+import { ComposeEmailPage } from '../pages/compose-email/compose-email';
+import { InboxPage } from '../pages/inbox/inbox';
+import { MenuemailpopoverPage } from '../pages/menuemailpopover/menuemailpopover';
+import { ReademailPage } from '../pages/reademail/reademail';
+
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -36,8 +41,12 @@ import { UserData } from '../providers/user-data';
 
     LoginPage,
     MainPage,
+    ComposeEmailPage,
+    InboxPage,
     ListUsersPage,
     AboutPage,
+    MenuemailpopoverPage,
+    ReademailPage
 
   ],
   imports: [
@@ -53,6 +62,8 @@ import { UserData } from '../providers/user-data';
         { component: AboutPage, name: 'AboutPage', segment: 'about' },
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
         { component: MainPage, name: 'MainPage', segment: 'main' },
+        { component: InboxPage, name: 'InboxPage', segment: 'inbox' },
+        { component: ComposeEmailPage, name: 'ComposeEmailPage', segment: 'compose-email' },
         { component: ListUsersPage, name: 'ListUsersPage', segment: 'users' },
       ]
     }),
@@ -67,8 +78,12 @@ import { UserData } from '../providers/user-data';
 
     LoginPage,
     MainPage,
+    InboxPage,
+    ComposeEmailPage,
     ListUsersPage,
-    AboutPage
+    AboutPage,
+    MenuemailpopoverPage,
+    ReademailPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
