@@ -52,7 +52,6 @@ export class SoftwareBoulevardApp {
     { title: 'Logout', name: 'LoginPage', component: LoginPage, icon: 'log-out', logsOut: true }
   ];
   adminPages: PageInterface[] = [
-    { title: 'List users', name: 'ListUsersPage', component: ListUsersPage, icon: 'md-list' },
     { title: 'Set-up', name: 'SetUpPage', component: SetUpPage, icon: 'md-cog' }
   ];
   rootPage: any;
