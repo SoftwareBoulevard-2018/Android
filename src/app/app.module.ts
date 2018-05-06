@@ -49,6 +49,7 @@ import { HomeUserPage } from './../pages/home-user/home-user';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     HttpModule,
     IonicModule.forRoot(SoftwareBoulevardApp, {}, {
       links: [
@@ -82,9 +83,6 @@ import { HomeUserPage } from './../pages/home-user/home-user';
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    HttpClientModule,
-    HttpClient,
-    HttpHandler,
     ConferenceData,
     UserData,
     InAppBrowser,
