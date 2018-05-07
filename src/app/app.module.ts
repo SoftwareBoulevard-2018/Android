@@ -22,10 +22,12 @@ import { SignupPage } from '../pages/signup/signup';
 import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
 import { ListUsersPage } from '../pages/list-users/list-users';
+//Module 5 components (Email communication)
 import { ComposeEmailPage } from '../pages/compose-email/compose-email';
 import { InboxPage } from '../pages/inbox/inbox';
 import { MenuemailpopoverPage } from '../pages/menuemailpopover/menuemailpopover';
 import { ReademailPage } from '../pages/reademail/reademail';
+import { SentemailpagePage } from '../pages/sentemailpage/sentemailpage';
 
 
 import { ConferenceData } from '../providers/conference-data';
@@ -46,7 +48,8 @@ import { UserData } from '../providers/user-data';
     ListUsersPage,
     AboutPage,
     MenuemailpopoverPage,
-    ReademailPage
+    ReademailPage,
+    SentemailpagePage
 
   ],
   imports: [
@@ -83,7 +86,8 @@ import { UserData } from '../providers/user-data';
     ListUsersPage,
     AboutPage,
     MenuemailpopoverPage,
-    ReademailPage
+    ReademailPage,
+    SentemailpagePage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
