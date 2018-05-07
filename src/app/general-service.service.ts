@@ -20,7 +20,8 @@ export class GeneralServiceService {
     new User("Juan David Fernandez Moreno","judfernandez","fatbastard","Project Manager"),
     new User("Juan Pablo Chaves Morales","jpchavesm","ouiaboo","Developer", "Amazon"),
     new User("Victor Daniel JAramillo Gomez", "vdjaramillog","0000","Developer","UNAL"),
-    new User("1", "1","1","Game Administrator")];
+    new User("1", "1","1","Game Administrator"),
+    new User("2", "2","2","Project Manager")];
 
   projects = [new BiddingProject(1,"FIFA",10,3, 10, 10, 10, 5000,0, 0, 0 ,0),
     new BiddingProject(2,"Bancolombia System",10,3, 10, 10, 10, 5000,0, 0, 0 ,0)];

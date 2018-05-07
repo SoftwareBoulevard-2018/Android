@@ -13,9 +13,10 @@ export class UserData {
     public storage: Storage
   ) {}
 
-  login(username: string): void {
+  login(username: string, role: string): void {
     this.storage.set(this.HAS_LOGGED_IN, true);
     this.setUsername(username);
+    this.setRole(role);
     this.events.publish('user:login');
   };
 
@@ -35,8 +36,17 @@ export class UserData {
     this.storage.set('username', username);
   };
 
+  setRole(role: string): void {
+    this.storage.set('role', role);
+  };
+
   getUsername(): Promise<string> {
     return this.storage.get('username').then((value) => {
+      return value;
+    });
+  };
+  getRole(): Promise<string> {
+    return this.storage.get('role').then((value) => {
       return value;
     });
   };
