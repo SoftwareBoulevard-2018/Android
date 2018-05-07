@@ -42,6 +42,9 @@ import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 
 
+import { servicesEmail } from '../providers/servicesEmail';
+
+
 @NgModule({
   declarations: [
     SoftwareBoulevardApp,
@@ -125,7 +128,8 @@ import { UserData } from '../providers/user-data';
     UserData,
     InAppBrowser,
     SplashScreen,
-    GeneralServiceService
+    GeneralServiceService,
+    servicesEmail
   ]
 })
 export class AppModule { }

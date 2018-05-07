@@ -4,7 +4,7 @@ import { PopoverController } from 'ionic-angular';
 
 import { MenuemailpopoverPage } from '../../pages/menuemailpopover/menuemailpopover';
 import { ReademailPage } from '../../pages/reademail/reademail';
-
+import { servicesEmail } from '../../providers/servicesEmail';
 
 /**
  * Generated class for the InboxPage page.
@@ -23,30 +23,16 @@ export class InboxPage {
   test: String;
 
   //Esto deberia obtenerse de un servicio.
-  private emailArray: any[];
-  private defaultList: any[];
+  private emailArray;
+  private defaultList;
   
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController,  public serviceEmail: servicesEmail ) {
 
     //ID, Subject, Content, Date, Sender, Receiver.
     //Esto se deberia obtener de un servicio.
 
-    this.emailArray = [
-      { id: 1, subject: 'Bidding project negotiation', content: 'Hello          , I am Carlos and we need to negotiate a bidding project', date: '01/04/2020', sender: 'cmzapata@company.edu.co', receiver: 'jupvillegasgo@unal.edu.co' },
-      { id: 2, subject: 'Instant project negotiation', content: 'Hello         , I am Paul and we need to negotiate a instant project', date: '01/01/2020', sender: 'pauv-22@unal.edu.co', receiver: 'jupvillegasgo@unal.edu.co' },
-      { id: 3, subject: 'Analyst for our company', content: 'Hello, we need an analyst for our company called Cidenet, you can talk with us', date: '01/02/2020', sender: 'cddr33@gmail.com', receiver: 'jupvillegasgo@unal.edu.co' },
-      { id: 4, subject: 'Bidding project negotiation', content: 'Hello          , I am Carlos and we need to negotiate a bidding project', date: '01/04/2020', sender: 'cmzapata@company.edu.co', receiver: 'jupvillegasgo@unal.edu.co' },
-      { id: 5, subject: 'Instant project negotiation', content: 'Hello         , I am Paul and we need to negotiate a instant project', date: '01/01/2020', sender: 'pauv-22@unal.edu.co', receiver: 'jupvillegasgo@unal.edu.co' },
-      { id: 6, subject: 'Analyst for our company', content: 'Hello, we need an analyst for our company called Cidenet, you can talk with us', date: '01/02/2020', sender: 'cddr33@gmail.com', receiver: 'jupvillegasgo@unal.edu.co' },
-      { id: 7, subject: 'Bidding project negotiation', content: 'Hello          , I am Carlos and we need to negotiate a bidding project', date: '01/04/2020', sender: 'cmzapata@company.edu.co', receiver: 'jupvillegasgo@unal.edu.co' },
-      { id: 8, subject: 'Instant project negotiation', content: 'Hello         , I am Paul and we need to negotiate a instant project', date: '01/01/2020', sender: 'pauv-22@unal.edu.co', receiver: 'jupvillegasgo@unal.edu.co' },
-      { id: 9, subject: 'Analyst for our company', content: 'Hello, we need an analyst for our company called Cidenet, you can talk with us', date: '01/02/2020', sender: 'cddr33@gmail.com', receiver: 'jupvillegasgo@unal.edu.co' },
-      { id: 10, subject: 'Bidding project negotiation', content: 'Hello          , I am Carlos and we need to negotiate a bidding project', date: '01/04/2020', sender: 'cmzapata@company.edu.co', receiver: 'jupvillegasgo@unal.edu.co' },
-      { id: 11, subject: 'Instant project negotiation', content: 'Hello         , I am Paul and we need to negotiate a instant project', date: '01/01/2020', sender: 'pauv-22@unal.edu.co', receiver: 'jupvillegasgo@unal.edu.co' },
-      { id: 12, subject: 'Analyst for our company', content: 'Hello, we need an analyst for our company called Cidenet, you can talk with us', date: '01/02/2020', sender: 'cddr33@gmail.com', receiver: 'jupvillegasgo@unal.edu.co' }
-
-    ];
+    this.emailArray = this.serviceEmail.getEmailsReceived();
 
     this.defaultList = this.emailArray;
   }
