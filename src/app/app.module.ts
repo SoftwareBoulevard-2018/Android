@@ -1,4 +1,6 @@
-import { HireUserPage } from './../pages/hire-user/hire-user';
+/**
+ * imports and declarations of everything
+ */
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { NgModule, ErrorHandler } from '@angular/core';
@@ -10,47 +12,44 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { IonicStorageModule } from '@ionic/storage';
 
-import { SoftwareBoulevardApp } from './app.component';
 
-import { AboutPage } from '../pages/about/about';
 import { PopoverPage } from '../pages/about-popover/about-popover';
 
-
 //software boulevard
+import { SoftwareBoulevardApp } from './app.component';
 import { GeneralServiceService } from './general-service.service';
-
+import { AboutPage } from '../pages/about/about';
+import { SetUpPage } from '../pages/set-up/set-up';
+//Module 2 components
 import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
 import { ListUsersPage } from '../pages/list-users/list-users';
-//Module 5 components (Email communication)
 import { ViewCompanyPage } from '../pages/company/company';
 import { ListCompaniesPage } from '../pages/list-companies/list-companies';
-import { SetUpPage } from '../pages/set-up/set-up';
-import { ReportsPage } from '../pages/reports/reports';
 import { CreateAccountPage } from '../pages/create-account/create-account';
 import { CreateCompanyPage } from '../pages/create-company/create-company';
 import { EditCompanyPage } from '../pages/edit-company/edit-company';
 import { ViewAccountPage } from '../pages/account/account';
 import { EditAccountPage } from '../pages/edit-account/edit-account';
+import { ReportsPage } from '../pages/reports/reports';
+//Module 3 components
+import { HireUserPage } from './../pages/hire-user/hire-user';
+//Module 5 components (Email communication)
 import { ComposeEmailPage } from '../pages/compose-email/compose-email';
 import { InboxPage } from '../pages/inbox/inbox';
 import { MenuemailpopoverPage } from '../pages/menuemailpopover/menuemailpopover';
 import { ReademailPage } from '../pages/reademail/reademail';
 import { SentemailpagePage } from '../pages/sentemailpage/sentemailpage';
 
-import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
-
 
 import { servicesEmail } from '../providers/servicesEmail';
 
 
 @NgModule({
   declarations: [
-    SoftwareBoulevardApp,
-    
     PopoverPage,
-    
+    SoftwareBoulevardApp,
     LoginPage,
     MainPage,
     ComposeEmailPage,
@@ -98,10 +97,8 @@ import { servicesEmail } from '../providers/servicesEmail';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    SoftwareBoulevardApp,
-    
     PopoverPage,
-
+    SoftwareBoulevardApp,
     LoginPage,
     MainPage,
     InboxPage,
@@ -124,7 +121,6 @@ import { servicesEmail } from '../providers/servicesEmail';
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    ConferenceData,
     UserData,
     InAppBrowser,
     SplashScreen,

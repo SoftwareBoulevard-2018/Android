@@ -5,12 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { Storage } from '@ionic/storage';
 
-
 //import { ViewAccountPage } from '../pages/account/account';
 import { AboutPage } from '../pages/about/about';
-
-
-//software boulevard
 import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
 import { SetUpPage } from '../pages/set-up/set-up';
@@ -18,7 +14,6 @@ import { ReportsPage } from '../pages/reports/reports';
 //import { ComposeEmailPage } from '../pages/compose-email/compose-email';
 import { InboxPage } from '../pages/inbox/inbox';
 
-import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 
 export interface PageInterface {
@@ -31,7 +26,6 @@ export interface PageInterface {
   tabName?: string;
   tabComponent?: any;
 }
-
 @Component({
   templateUrl: 'app.template.html'
 })
@@ -41,7 +35,6 @@ export class SoftwareBoulevardApp {
   @ViewChild(Nav) nav: Nav;
 
   // List of pages that can be navigated to from the left menu
-  // the left menu only works after login
   // the login page disables the left menu
   navigationPages: PageInterface[] = [
     { title: 'Main', name: 'MainPage', component: MainPage, icon: 'md-home' },
@@ -63,16 +56,10 @@ export class SoftwareBoulevardApp {
     public userData: UserData,
     public menu: MenuController,
     public platform: Platform,
-    public confData: ConferenceData,
     public storage: Storage,
     public splashScreen: SplashScreen
   ) {
-
-    // load the conference data
-    //confData.load();
-
-    // 
-    
+    //verificates if the user is already logged in and skips the login page    
     this.userData.hasLoggedIn().then((hasLoggedIn) => {
       if(hasLoggedIn===true){
         this.rootPage = MainPage;
@@ -86,6 +73,11 @@ export class SoftwareBoulevardApp {
     this.listenToLoginEvents();
   }
 
+  /**
+   * opens a page as root page and verifies if it's a logout.
+   * 
+   * @param page page to be opened
+   */
   openPage(page: PageInterface) {
     let params = {};
 
@@ -100,6 +92,9 @@ export class SoftwareBoulevardApp {
     }
   }
 
+  /**
+   * disables menu if ocurrs logout event.
+   */
   listenToLoginEvents() {
     this.events.subscribe('user:login', () => {
       this.menu.enable(true);
@@ -110,8 +105,6 @@ export class SoftwareBoulevardApp {
     });
   }
 
-
-
   platformReady() {
     // Call any initial plugins when ready
     this.platform.ready().then(() => {
@@ -119,7 +112,9 @@ export class SoftwareBoulevardApp {
     });
   }
 
-//used to change the color of the active page in the menu
+  /**
+   * changes the color of the active page in the menu.
+   */
   isActive(page: PageInterface) {
     let childNav = this.nav.getActiveChildNavs()[0];
 
