@@ -16,6 +16,7 @@ import { ReportsPage } from '../pages/reports/reports';
 import { InboxPage } from '../pages/inbox/inbox';
 
 import { UserData } from '../providers/user-data';
+import { GenerateResourcesPage } from '../pages/generate-resources/generate-resources';
 
 
 export interface PageInterface {
@@ -48,6 +49,8 @@ export class SoftwareBoulevardApp {
     { title: 'About', name: 'AboutPage', component: AboutPage, icon: 'help' },
     { title: 'Logout', name: 'LoginPage', component: LoginPage, icon: 'log-out', logsOut: true },
     { title: 'SelectProjectPage', name: 'SelectProjectPage', component: SelectProjectPage, icon: 'help'},
+    { title: 'GenerateResourcesPage', name: 'GenerateResourcesPage', component: GenerateResourcesPage, icon: 'help'},
+    
     
   ];
   adminPages: PageInterface[] = [

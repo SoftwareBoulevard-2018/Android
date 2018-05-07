@@ -45,6 +45,7 @@ import { UserData } from '../providers/user-data';
 
 import { servicesEmail } from '../providers/servicesEmail';
 import { SelectProjectPage } from '../pages/select-project/select-project';
+import { GenerateResourcesPage } from '../pages/generate-resources/generate-resources';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { SelectProjectPage } from '../pages/select-project/select-project';
     ReademailPage,
     SentemailpagePage,
     HireUserPage,
-    SelectProjectPage
+    SelectProjectPage,
+    GenerateResourcesPage
   ],
   imports: [
     BrowserModule,
@@ -92,7 +94,9 @@ import { SelectProjectPage } from '../pages/select-project/select-project';
         { component: ViewAccountPage, name: 'AccountPage', segment: 'account' },
         { component: EditAccountPage, name: 'EditAccountPage', segment: 'account' },
         { component: HireUserPage, name: 'HireUserPage', segment: 'users' },
-        { component: SelectProjectPage, name: 'SelectProjectPage', segment: 'users' }
+        { component: SelectProjectPage, name: 'SelectProjectPage', segment: 'users' },
+        { component: GenerateResourcesPage, name: 'GenerateResourcesPage', segment: 'users' }
+        
       ]
     }),
     IonicStorageModule.forRoot()
@@ -120,7 +124,8 @@ import { SelectProjectPage } from '../pages/select-project/select-project';
     ReademailPage,
     SentemailpagePage,
     HireUserPage,
-    SelectProjectPage
+    SelectProjectPage,
+    GenerateResourcesPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
