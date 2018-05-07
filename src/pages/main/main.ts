@@ -10,7 +10,7 @@ import { ReportsPage } from '../reports/reports';
 import { CreateAccountPage } from '../create-account/create-account';
 import { CreateCompanyPage } from '../create-company/create-company';
 
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
 @Component({
   selector: 'main-page',
@@ -22,10 +22,11 @@ export class MainPage {
 
   constructor(
     public navCtrl: NavController, 
-    public userData: UserData,
-    public navParams: NavParams
+    public userData: UserData
   ) {
-    this.user_type = navParams.get("role");
+    userData.getRole().then(role =>{
+      this.user_type = role;
+    })
   }
 
   viewUsers() {
