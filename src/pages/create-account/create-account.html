@@ -1,0 +1,62 @@
+<ion-header>
+	<ion-navbar>
+		<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+		<ion-title>Create account</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content class="login-page">
+
+	<form #creationForm="ngForm" novalidate>
+		<ion-list no-lines>
+			<ion-item>
+				<ion-label stacked color="primary">Name</ion-label>
+				<ion-input [(ngModel)]="user.name" name="name" type="text" #name="ngModel" required>
+				</ion-input>
+			</ion-item>
+			<p ion-text [hidden]="name.valid || submitted == false" color="danger" padding-left>
+				name is required
+			</p>
+			<ion-item>
+				<ion-label stacked color="primary">Username</ion-label>
+				<ion-input [(ngModel)]="user.username" name="username" type="text" #username="ngModel" required>
+				</ion-input>
+			</ion-item>
+			<p ion-text [hidden]="username.valid || submitted == false" color="danger" padding-left>
+				Username is required
+			</p>
+
+			<ion-item>
+				<ion-label stacked color="primary">Password</ion-label>
+				<ion-input [(ngModel)]="user.password" name="password" type="password" #password="ngModel" required>
+				</ion-input>
+			</ion-item>
+			<p ion-text [hidden]="password.valid || submitted == false" color="danger" padding-left>
+				Password is required
+			</p>
+			<ion-item>
+				<ion-label stacked color="primary">Role</ion-label>
+				<ion-input [(ngModel)]="user.role" name="role" type="text" #role="ngModel" required>
+				</ion-input>
+			</ion-item>
+			<p ion-text [hidden]="role.valid || submitted == false" color="danger" padding-left>
+				error
+			</p>
+			<ion-item>
+				<ion-label stacked color="primary">Company</ion-label>
+				<ion-input [(ngModel)]="user.company_name" name="company_name" type="text" #company="ngModel">
+				</ion-input>
+			</ion-item>
+			<p ion-text [hidden]="company.valid || submitted == false" color="danger" padding-left>
+				error
+			</p>
+		</ion-list>
+
+		<div padding>
+			<button ion-button (click)="onSubmit(creationForm)" type="submit" block>Create</button>
+		</div>
+	</form>
+
+</ion-content>

@@ -6,14 +6,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
 
 
-import { AccountPage } from '../pages/account/account';
+//import { ViewAccountPage } from '../pages/account/account';
 import { AboutPage } from '../pages/about/about';
 
 
 //software boulevard
 import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
-import { ListUsersPage } from '../pages/list-users/list-users';
+import { SetUpPage } from '../pages/set-up/set-up';
+import { ReportsPage } from '../pages/reports/reports';
 //import { ComposeEmailPage } from '../pages/compose-email/compose-email';
 import { InboxPage } from '../pages/inbox/inbox';
 
@@ -44,15 +45,16 @@ export class SoftwareBoulevardApp {
   // the login page disables the left menu
   navigationPages: PageInterface[] = [
     { title: 'Main', name: 'MainPage', component: MainPage, icon: 'md-home' },
+    { title: 'Reports', name: 'ReportsPage', component: ReportsPage, icon: 'md-podium' },
     { title: 'Email', name: 'InboxPage', component: InboxPage, icon: 'mail' }
   ];
   loggedInPages: PageInterface[] = [
-    { title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },
+    //{ title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },
     { title: 'About', name: 'AboutPage', component: AboutPage, icon: 'help' },
     { title: 'Logout', name: 'LoginPage', component: LoginPage, icon: 'log-out', logsOut: true }
   ];
   adminPages: PageInterface[] = [
-    { title: 'List users', name: 'ListUsersPage', component: ListUsersPage, icon: 'person-add' }
+    { title: 'Set-up', name: 'SetUpPage', component: SetUpPage, icon: 'md-cog' }
   ];
   rootPage: any;
 
@@ -69,16 +71,17 @@ export class SoftwareBoulevardApp {
     // load the conference data
     //confData.load();
 
-    // decide which menu items should be hidden by current login status stored in local storage
+    // 
+    
     this.userData.hasLoggedIn().then((hasLoggedIn) => {
-      this.enableMenu(hasLoggedIn === true);
       if(hasLoggedIn===true){
         this.rootPage = MainPage;
+        this.menu.enable(true);
       }else{
+        this.menu.enable(false);
         this.rootPage = LoginPage;
       }
     });
-    this.enableMenu(true);
 
     this.listenToLoginEvents();
   }
@@ -99,22 +102,15 @@ export class SoftwareBoulevardApp {
 
   listenToLoginEvents() {
     this.events.subscribe('user:login', () => {
-      this.enableMenu(true);
-    });
-
-    this.events.subscribe('user:signup', () => {
-      this.enableMenu(true);
+      this.menu.enable(true);
     });
 
     this.events.subscribe('user:logout', () => {
-      this.enableMenu(false);
+      this.menu.enable(false);
     });
   }
 
-  enableMenu(loggedIn: boolean) {
-    this.menu.enable(loggedIn, 'loggedInMenu');
-    this.menu.enable(!loggedIn, 'loggedOutMenu');
-  }
+
 
   platformReady() {
     // Call any initial plugins when ready

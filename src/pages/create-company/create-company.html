@@ -1,0 +1,38 @@
+<ion-header>
+	<ion-navbar>
+		<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+		<ion-title>Create company</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content class="login-page">
+
+	<form #creationForm="ngForm" novalidate>
+		<ion-list no-lines>
+			<ion-item>
+				<ion-label stacked color="primary">Name</ion-label>
+				<ion-input [(ngModel)]="company.name" name="name" type="text" #name="ngModel" required>
+				</ion-input>
+			</ion-item>
+			<p ion-text [hidden]="name.valid || submitted == false" color="danger" padding-left>
+				Name is required
+			</p>
+
+			<ion-item>
+				<ion-label stacked color="primary">Image</ion-label>
+				<ion-input [(ngModel)]="company.image" name="image" type="text" #image="ngModel" required>
+				</ion-input>
+			</ion-item>
+			<p ion-text [hidden]="image.valid || submitted == false" color="danger" padding-left>
+				Image is required
+			</p>
+		</ion-list>
+
+		<div padding>
+			<button ion-button (click)="onSubmit(creationForm)" type="submit" block>Create</button>
+		</div>
+	</form>
+
+</ion-content>
