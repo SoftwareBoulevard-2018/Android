@@ -10,12 +10,17 @@
       <button ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
           </button>
-    <ion-title>{{displayname}}</ion-title>
+    <ion-title>{{displayName}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <div text-center padding>
+    <button ion-button (click)="selectNewProject()">Select new project</button><br>
+    <button ion-button (click)="generateResources()">Generate Resources</button><br>
+    <button ion-button (click)="recruitTeamMember()">Recruit Team Members</button><br>
+    <button ion-button (click)="viewReports()">View Reports</button><br>
+  </div>
 </ion-content>

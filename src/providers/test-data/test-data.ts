@@ -21,8 +21,7 @@ export class TestDataProvider {
     console.log('Hello TestDataProvider Provider');
   }
 
-  selectDisplayName(): string {
-
-    return(this.TEST_DISPLAY_NAMES[1]);
+  selectDisplayName(input: number): string {
+    return(this.TEST_DISPLAY_NAMES[input]);
   }
 }
