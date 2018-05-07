@@ -1,0 +1,54 @@
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Develop Project</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="stats">
+      <p>Resources: {{resour}}</p>
+      <p>Team Members: 2</p>
+  </div>
+
+  
+  <div [hidden]=textNoHid>
+      <h3 class="title1">You don't have any activities pending in this project</h3>
+      <p class="title3">Slide down to refresh</p>
+    </div>
+  <div [hidden]=textHid>
+    <h3 class="title1">{{questions[questionnumber].qtext}}</h3>
+  </div>
+
+  <div class="answers">
+    <ion-item [hidden]=ans1hid>
+      <ion-label>{{questions[questionnumber].option1}}</ion-label>
+      <ion-checkbox [(ngModel)]="answer1temp"></ion-checkbox>
+    </ion-item>
+    <ion-item [hidden]=ans2hid>
+      <ion-label>{{questions[questionnumber].option2}}</ion-label>
+      <ion-checkbox [(ngModel)]="answer2temp"></ion-checkbox>
+    </ion-item>
+    <ion-item [hidden]=ans3hid>
+      <ion-label>{{questions[questionnumber].option3}}</ion-label>
+      <ion-checkbox [(ngModel)]="answer3temp"></ion-checkbox>
+    </ion-item>
+    <ion-item [hidden]=ans4hid>
+      <ion-label>{{questions[questionnumber].option4}}</ion-label>
+      <ion-checkbox [(ngModel)]="answer4temp"></ion-checkbox>
+    </ion-item>
+  </div>
+
+  <div class="buttonSend" [hidden]=sendhid>
+    <button ion-button (click)="checkAnswers()">SEND</button>
+  </div>
+
+</ion-content>
