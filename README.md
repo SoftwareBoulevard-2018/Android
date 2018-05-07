@@ -67,6 +67,16 @@ Android/
 │    │    │    └── account.ts            * AccountPage code
 │    │    │    └── account.scss          * AccountPage stylesheet
 │    │    │
+│    │    ├── compose-email/             * Compose email page
+│    │    │    ├── compose-email.html    * ComposeEmailPage template
+│    │    │    └── compose-email.ts      * ComposeEmailPage code
+│    │    │    └── compose-email.scss    * ComposeEmailPage stylesheet
+│    │    │
+│    │    ├── inbox/                     * Inbox page
+│    │    │    ├── inbox.html            * InboxPage template
+│    │    │    └── inbox.ts              * InboxPage code
+│    │    │    └── inbox.scss            * InboxPage stylesheet
+│    │    │
 │    │    │── login/                     * Login page
 │    │    │    ├── login.html            * LoginPage template
 │    │    │    └── login.ts              * LoginPage code
@@ -76,6 +86,21 @@ Android/
 │    │    │    ├── main.html             * MainPage template
 │    │    │    └── main.ts               * MainPage code
 │    │    │    └── main.scss             * MainPage stylesheet
+│    │    │
+│    │    │── menuemailpopover/             * Menu Email Popover
+│    │    │    ├── menuemailpopover.html    * MenuemailPopover template
+│    │    │    └── menuemailpopover.ts      * MenuemailPopover code
+│    │    │    └── menuemailpopover.scss    * MenuemailPopover stylesheet
+│    │    │
+│    │    │── reademail/                 * Read Email Page
+│    │    │    ├── reademail.html        * ReadEmail template
+│    │    │    └── reademail.ts          * ReadEmail code
+│    │    │    └── reademail.scss        * ReadEmail stylesheet
+│    │    │
+│    │    │── sentemailpage/             * Sent Email Page
+│    │    │    ├── sentemailpage.html    * SentemailPage template
+│    │    │    └── sentemailpage.ts      * SentemailPage code
+│    │    │    └── sentemailpage.scss    * SentemailPage stylesheet
 │    │    │
 │    │    │── signup/                    * Signup page
 │    │         ├── signup.html           * SignupPage template
