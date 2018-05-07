@@ -109,6 +109,7 @@ Android/
 │    ├── providers/                      * Contains all Injectables
 │    │     ├── conference-data.ts        * ConferenceData code
 │    │     └── user-data.ts              * UserData code
+│    │     └── servicesEmail.ts          * servicesEmail code
 │    ├── theme/                          * App theme files
 |    |     ├── variables.scss            * App Shared Sass Variables
 |    |
