@@ -20,7 +20,7 @@ export class EditCompanyPage {
     this.company = this.navParams.data.c;
   }
 
-  onSignup(form: NgForm) {
+  onSubmit(form: NgForm) {
     this.submitted = true;
 
     if (form.valid) {

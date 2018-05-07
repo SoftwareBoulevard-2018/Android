@@ -22,25 +22,7 @@ export class ComposeEmailPage {
   @ViewChild('myInput') myInput: ElementRef;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-
-
   }
-  
-  //Falta por programar la lista de Posibles receivers.
-
-  
-  /*goBack(){
-   
-    
-    console.log("Para " + this.To);
-    console.log("Subject " + this.Subject);
-    console.log("Contenido" + this.Content);
-
-
-     this.navCtrl.push(MainPage);
-  }*/
-
-
   resize() {
     var element = this.myInput['_elementRef'].nativeElement.getElementsByClassName("text-input")[0];
     var scrollHeight = element.scrollHeight;

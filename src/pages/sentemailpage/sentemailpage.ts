@@ -1,47 +1,39 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular';
-
 import { MenuemailpopoverPage } from '../../pages/menuemailpopover/menuemailpopover';
 import { ReademailPage } from '../../pages/reademail/reademail';
 import { servicesEmail } from '../../providers/servicesEmail';
-
 /**
- * Generated class for the InboxPage page.
+ * Generated class for the SentemailpagePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
 @Component({
-  selector: 'page-inbox',
-  templateUrl: 'inbox.html',
+  selector: 'page-sentemailpage',
+  templateUrl: 'sentemailpage.html',
+
 })
-export class InboxPage {
-
+export class SentemailpagePage {
   searchQuery: String;
-  test: String;
-
-  //Esto deberia obtenerse de un servicio.
   private emailArray;
   private defaultList;
-  
+   
+  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl:PopoverController, public serviceEmail: servicesEmail ) {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController,  public serviceEmail: servicesEmail ) {
+    //Colocarlo en un servicio.
 
-    //ID, Subject, Content, Date, Sender, Receiver.
-    //Esto se deberia obtener de un servicio.
-
-    this.emailArray = this.serviceEmail.getEmailsReceived();
-
+    this.emailArray = this.serviceEmail.getEmailsSent();
     this.defaultList = this.emailArray;
+
   }
 
   searchEmail() {
     //SearchQuery
     //Subject o Sender.
     let IDEmailSolution = [];
-
     let EmailSolution = [];
 
     for (var i = 0; i < this.emailArray.length; i++) {
@@ -81,8 +73,8 @@ export class InboxPage {
     this.emailArray = this.defaultList;
   }
 
-  viewEmailMenu(myEvent){
-    let popover = this.popoverCtrl.create(MenuemailpopoverPage, {},{ cssClass: 'custom-popover' });
+  viewEmailMenu(myEvent) {
+    let popover = this.popoverCtrl.create(MenuemailpopoverPage, {}, { cssClass: 'custom-popover' });
     popover.present({
       ev: myEvent
     });
@@ -90,9 +82,9 @@ export class InboxPage {
 
   readEmail(emailToRead) {
     this.navCtrl.push(ReademailPage, {
-    sender: emailToRead.sender,
-    subject: emailToRead.subject,
-    content: emailToRead.content,
-  });
+      sender: emailToRead.sender,
+      subject: emailToRead.subject,
+      content: emailToRead.content,
+    });
   }
 }

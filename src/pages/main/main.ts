@@ -1,6 +1,8 @@
 import { HireUserPage } from './../hire-user/hire-user';
 import { Component } from '@angular/core';
 
+import { UserData } from '../../providers/user-data';
+
 import { ListUsersPage } from '../list-users/list-users';
 import { ListCompaniesPage } from '../list-companies/list-companies';
 import { SetUpPage } from '../set-up/set-up';
@@ -8,22 +10,32 @@ import { ReportsPage } from '../reports/reports';
 import { CreateAccountPage } from '../create-account/create-account';
 import { CreateCompanyPage } from '../create-company/create-company';
 
-import {
-  NavController
-} from 'ionic-angular';
+import { Events, NavController } from 'ionic-angular';
 
 @Component({
   selector: 'main-page',
   templateUrl: 'main.html'
 })
 export class MainPage {
-  //TODO: get user_type
-  user_type = 'Game Administrator';
+
+  user_type: string;
 
   constructor(
-    public navCtrl: NavController,
-  ) {}
-
+    public navCtrl: NavController, 
+    public userData: UserData,
+    public events: Events
+  ) {
+    this.events.subscribe('user:login', () => {
+      this.userData.getRole().then(role =>{
+        this.user_type = role;
+      })
+    });
+  }
+  ionViewWillEnter() {
+    this.userData.getRole().then(role =>{
+      this.user_type = role;
+    })
+  }
   viewUsers() {
     this.navCtrl.push(ListUsersPage);
   }

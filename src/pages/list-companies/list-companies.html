@@ -13,10 +13,10 @@
     </ion-fab>
     <ion-list>
         <ion-item *ngFor="let c of companies" >
-            <ion-avatar item-start>
+            <ion-avatar item-start (click)="viewCompany(c)">
                 <img src="{{c.image}}">
             </ion-avatar>
-            <h2 (click)="viewCompany(c)" >{{c.name}}</h2>
+            <h2 (click)="viewCompany(c)">{{c.name}}</h2>
             <p>Resources: 9000  -  K:{{c.capacity_k}}</p>
             <button ion-button color="primary" item-end (click)="editCompany(c)">
                 <ion-icon name='md-create'></ion-icon>

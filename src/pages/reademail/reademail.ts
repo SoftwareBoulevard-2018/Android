@@ -25,13 +25,7 @@ export class ReademailPage {
 
     this.From = navParams.get('sender');
     this.Subject = navParams.get('subject');
-
     this.Content = navParams.get('content');
-
-    
-    console.log("From " + this.From );
-    console.log("Subject " + this.Subject );
-    console.log("Content " + this.Content );
   }
 
 
