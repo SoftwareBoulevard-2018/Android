@@ -1,3 +1,4 @@
+import { HireUserPage } from './../pages/hire-user/hire-user';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { NgModule, ErrorHandler } from '@angular/core';
@@ -64,7 +65,8 @@ import { UserData } from '../providers/user-data';
     EditAccountPage,
     MenuemailpopoverPage,
     ReademailPage,
-    SentemailpagePage
+    SentemailpagePage,
+    HireUserPage
   ],
   imports: [
     BrowserModule,
@@ -85,7 +87,8 @@ import { UserData } from '../providers/user-data';
         { component: CreateCompanyPage, name: 'CreateCompanyPage', segment: 'companies' },
         { component: EditCompanyPage, name: 'EditCompanyPage', segment: 'companies' },
         { component: ViewAccountPage, name: 'AccountPage', segment: 'account' },
-        { component: EditAccountPage, name: 'EditAccountPage', segment: 'account' }
+        { component: EditAccountPage, name: 'EditAccountPage', segment: 'account' },
+        { component: HireUserPage, name: 'HireUserPage', segment: 'users' }
       ]
     }),
     IonicStorageModule.forRoot()
@@ -113,7 +116,8 @@ import { UserData } from '../providers/user-data';
     EditAccountPage,
     MenuemailpopoverPage,
     ReademailPage,
-    SentemailpagePage
+    SentemailpagePage,
+    HireUserPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
