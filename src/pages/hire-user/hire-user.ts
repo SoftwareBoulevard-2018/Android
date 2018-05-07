@@ -43,6 +43,7 @@ export class HireUserPage {
 
   hireUser(user)
   {
-    alert("Working");
+    user = "working";
+    alert(user);
   }
 }
