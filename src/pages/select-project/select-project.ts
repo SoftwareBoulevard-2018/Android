@@ -33,7 +33,14 @@ export class SelectProjectPage {
 
   viewProjectInfo(p: InstantProject)
   {
-    alert(p.project_name);
+    var info = "Instant Project Information".concat("\n"
+    ).concat("Id: ").concat(p.project_id.toString()).concat("\n").concat("Name: "
+    ).concat(p.project_name).concat("\n").concat("Reward k: ").concat(p.rewarded_k.toString()
+    ).concat("\n").concat("No. Analyst Questions: ").concat(p.amount_analyst_question.toString()
+    ).concat("\n").concat("No. Developer Questions: ").concat(p.amount_developer_question.toString()
+    ).concat("\n").concat("No. Tester Questions: ").concat(p.amount_tester_question.toString());
+
+    alert(info);
   }
 
 }
