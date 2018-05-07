@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular';
 import { MenuemailpopoverPage } from '../../pages/menuemailpopover/menuemailpopover';
 import { ReademailPage } from '../../pages/reademail/reademail';
-
+import { servicesEmail } from '../../providers/servicesEmail';
 /**
  * Generated class for the SentemailpagePage page.
  *
@@ -20,47 +20,12 @@ export class SentemailpagePage {
   searchQuery: String;
   private emailArray;
   private defaultList;
- 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl:PopoverController) {
+   
+  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl:PopoverController, public serviceEmail: servicesEmail ) {
 
     //Colocarlo en un servicio.
 
-    this.emailArray = [
-      {
-        "id": 15,
-        "subject": "We should change our time for the project",
-        "sender": "jupvillegasgo@company.edu.co",
-        "content": "Hello , I was checking our project and I think we need to estimate more time ",
-        "receiver": ["cmzapata@company.edu.co", "jsnino@company.edu.co", "jorgitopro@company.edu.co", "paula_001@company.edu.co"],
-        "date": '01/02/2019'
-      },
-      {
-        "id": 16,
-        "subject": "We should change our cost for the project",
-        "sender": "jupvillegasgo@company.edu.co",
-        "content": "Hello , I was checking our project and I think we need to estimate more cost",
-        "receiver": ["eealpalav@cidenet.edu.co", "esalvarezpi@unal.edu.co", "bandradea@unal.edu.co", "scardonac@unal.edu.co", "hdgilh@unal.edu.co"],
-        "date": '01/03/2019'
-      },
-      {
-        "id": 17,
-        "subject": "We should change our time for project",
-        "sender": "jupvillegasgo@company.edu.co",
-        "content": "Hello , I was checking our project and I think we need to estimate more time ",
-        "receiver": ["lfbustamantea@company.edu.co", "sarbelaezc@company.edu.co", "jmespinosag@company.edu.co", "vgaviriam@company.edu.co", "afcalderad@company.edu.co"],
-        "date": '01/04/2019'
-      },
-      {
-        "id": 18,
-        "subject": "We need an analyst for our company",
-        "sender": "jupvillegasgo@company.edu.co",
-        "content": "Hello ,  We need an analyst for our company. Just send your CV",
-        "receiver": ["darias@unal.edu.co", "ldpenal@unal.edu.co"],
-        "date": '01/05/2019'
-      }
-    ];
-     
-  
+    this.emailArray = this.serviceEmail.getEmailsSent();
     this.defaultList = this.emailArray;
 
   }

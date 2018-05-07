@@ -1,3 +1,4 @@
+import { HireUserPage } from './../pages/hire-user/hire-user';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { NgModule, ErrorHandler } from '@angular/core';
@@ -41,6 +42,9 @@ import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 
 
+import { servicesEmail } from '../providers/servicesEmail';
+
+
 @NgModule({
   declarations: [
     SoftwareBoulevardApp,
@@ -64,7 +68,8 @@ import { UserData } from '../providers/user-data';
     EditAccountPage,
     MenuemailpopoverPage,
     ReademailPage,
-    SentemailpagePage
+    SentemailpagePage,
+    HireUserPage
   ],
   imports: [
     BrowserModule,
@@ -113,7 +118,8 @@ import { UserData } from '../providers/user-data';
     EditAccountPage,
     MenuemailpopoverPage,
     ReademailPage,
-    SentemailpagePage
+    SentemailpagePage,
+    HireUserPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
@@ -121,7 +127,8 @@ import { UserData } from '../providers/user-data';
     UserData,
     InAppBrowser,
     SplashScreen,
-    GeneralServiceService
+    GeneralServiceService,
+    servicesEmail
   ]
 })
 export class AppModule { }
