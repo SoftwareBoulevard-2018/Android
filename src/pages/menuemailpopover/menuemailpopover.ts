@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ComposeEmailPage } from '../compose-email/compose-email';
 import { InboxPage } from '../inbox/inbox';
+import { SentemailpagePage } from '../sentemailpage/sentemailpage';
 
 /**
  * Generated class for the MenuemailpopoverPage page.
@@ -29,7 +30,7 @@ export class MenuemailpopoverPage {
   }
   //Falta
   openSentPage() {
-
+    this.navCtrl.push(SentemailpagePage);
   }
 
 }

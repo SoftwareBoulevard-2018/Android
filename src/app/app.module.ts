@@ -21,6 +21,7 @@ import { GeneralServiceService } from './general-service.service';
 import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
 import { ListUsersPage } from '../pages/list-users/list-users';
+//Module 5 components (Email communication)
 import { ViewCompanyPage } from '../pages/company/company';
 import { ListCompaniesPage } from '../pages/list-companies/list-companies';
 import { SetUpPage } from '../pages/set-up/set-up';
@@ -34,6 +35,7 @@ import { ComposeEmailPage } from '../pages/compose-email/compose-email';
 import { InboxPage } from '../pages/inbox/inbox';
 import { MenuemailpopoverPage } from '../pages/menuemailpopover/menuemailpopover';
 import { ReademailPage } from '../pages/reademail/reademail';
+import { SentemailpagePage } from '../pages/sentemailpage/sentemailpage';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -61,7 +63,8 @@ import { UserData } from '../providers/user-data';
     ViewAccountPage,
     EditAccountPage,
     MenuemailpopoverPage,
-    ReademailPage
+    ReademailPage,
+    SentemailpagePage
   ],
   imports: [
     BrowserModule,
@@ -109,7 +112,8 @@ import { UserData } from '../providers/user-data';
     ViewAccountPage,
     EditAccountPage,
     MenuemailpopoverPage,
-    ReademailPage
+    ReademailPage,
+    SentemailpagePage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
