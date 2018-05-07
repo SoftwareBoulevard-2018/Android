@@ -50,6 +50,7 @@ export class SoftwareBoulevardApp {
     { title: 'Set-up', name: 'SetUpPage', component: SetUpPage, icon: 'md-cog' }
   ];
   rootPage: any;
+  user_type: string;
 
   constructor(
     public events: Events,
@@ -69,6 +70,11 @@ export class SoftwareBoulevardApp {
         this.rootPage = LoginPage;
       }
     });
+    this.userData.getRole().then(role =>{
+      this.user_type = role;
+      console.log("promise ut: "+this.user_type);
+    })
+    console.log("constructor ut: "+this.user_type);
 
     this.listenToLoginEvents();
   }
@@ -97,6 +103,10 @@ export class SoftwareBoulevardApp {
    */
   listenToLoginEvents() {
     this.events.subscribe('user:login', () => {
+      this.userData.getRole().then(role =>{
+        this.user_type = role;
+        console.log("ionopen ut: "+this.user_type);
+      })
       this.menu.enable(true);
     });
 

@@ -14,10 +14,14 @@ export class UserData {
   ) {}
 
   login(username: string, role: string): void {
-    this.storage.set(this.HAS_LOGGED_IN, true);
+    this.storage.set(this.HAS_LOGGED_IN, true)
+    .then(() => {this.storage.set('username', username)})
+    .then(() => {this.storage.set('role', role)})
+    .then(() => {this.events.publish('user:login')})
+    /*
     this.setUsername(username);
     this.setRole(role);
-    this.events.publish('user:login');
+    this.events.publish('user:login');*/
   };
 
   signup(username: string): void {
