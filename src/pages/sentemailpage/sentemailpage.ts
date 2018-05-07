@@ -4,6 +4,8 @@ import { PopoverController } from 'ionic-angular';
 import { MenuemailpopoverPage } from '../../pages/menuemailpopover/menuemailpopover';
 import { ReademailPage } from '../../pages/reademail/reademail';
 import { servicesEmail } from '../../providers/servicesEmail';
+import { UserData } from '../../providers/user-data';
+
 /**
  * Generated class for the SentemailpagePage page.
  *
@@ -18,16 +20,36 @@ import { servicesEmail } from '../../providers/servicesEmail';
 })
 export class SentemailpagePage {
   searchQuery: String;
-  private emailArray;
-  private defaultList;
+  private emailArray =  [];
+  private defaultList  =  [];
+  private username;
    
-  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl:PopoverController, public serviceEmail: servicesEmail ) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl:PopoverController, public serviceEmail: servicesEmail, public userdata: UserData ) {
 
     //Colocarlo en un servicio.
 
-    this.emailArray = this.serviceEmail.getEmailsSent();
-    this.defaultList = this.emailArray;
+    this.userdata.getUsername().then(user => {
+      this.username = user;
+      this.listEmailsSentForUser(this.serviceEmail.getEmails(), this.username);
 
+    });
+  }
+
+  
+  //Esta metodo se encarga de actualizar el array del email de outbox que tiene el usuario.
+  listEmailsSentForUser(email: any[], user: string) {
+
+    var indexemailArray = 0;
+    for (let i = 0; i < email.length; i++) {
+
+        if (user.localeCompare(email[i].sender) == 0) {
+          this.emailArray[indexemailArray] = email[i];
+          indexemailArray++;
+        }
+  
+    }
+
+    this.defaultList = this.emailArray;
   }
 
   searchEmail() {
