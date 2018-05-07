@@ -10,7 +10,7 @@ import { ReportsPage } from '../reports/reports';
 import { CreateAccountPage } from '../create-account/create-account';
 import { CreateCompanyPage } from '../create-company/create-company';
 
-import { NavController } from 'ionic-angular';
+import { Events, NavController } from 'ionic-angular';
 
 @Component({
   selector: 'main-page',
@@ -22,13 +22,20 @@ export class MainPage {
 
   constructor(
     public navCtrl: NavController, 
-    public userData: UserData
+    public userData: UserData,
+    public events: Events
   ) {
-    userData.getRole().then(role =>{
+    this.events.subscribe('user:login', () => {
+      this.userData.getRole().then(role =>{
+        this.user_type = role;
+      })
+    });
+  }
+  ionViewWillEnter() {
+    this.userData.getRole().then(role =>{
       this.user_type = role;
     })
   }
-
   viewUsers() {
     this.navCtrl.push(ListUsersPage);
   }
