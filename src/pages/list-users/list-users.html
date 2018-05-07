@@ -13,7 +13,7 @@
     </ion-fab>
     <ion-list>
         <ion-item *ngFor="let u of users" >
-            <h2>{{u.name}}</h2>
+            <h2 (click)="viewUser(u)" >{{u.name}}</h2>
             <p>{{u.role}}  -  {{u.company_name}}</p>
             <button ion-button color="primary" item-end (click)="editUser(u)">
                 <ion-icon name='md-create'></ion-icon>

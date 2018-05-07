@@ -10,11 +10,17 @@ import { Company } from '../../models/company';
 })
 export class ViewCompanyPage {
   company: Company;
+  project_manager: string;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams
   ) {
     this.company = navParams.get("c")
+    if(this.company.project_manager){
+      this.project_manager = this.company.project_manager.name;
+    }else{
+      this.project_manager = "pending";
+    }
   }
 
 }
