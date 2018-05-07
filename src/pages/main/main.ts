@@ -1,3 +1,4 @@
+import { HireUserPage } from './../hire-user/hire-user';
 import { Component } from '@angular/core';
 
 import { ListUsersPage } from '../list-users/list-users';
@@ -42,6 +43,10 @@ export class MainPage {
   }
   createCompany() {
     this.navCtrl.push(CreateCompanyPage);
+  }
+
+  hireUser(){
+    this.navCtrl.push(HireUserPage);
   }
 
 }
