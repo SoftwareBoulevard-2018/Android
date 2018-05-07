@@ -21,12 +21,26 @@
         <ion-item *ngFor="let ip of instP" >
             <h2>{{ip.project_name}}</h2>
             <p>Reward K: {{ip.rewarded_k}} - Instant Project</p>
-            <button ion-button color="primary" item-end>
+            <button ion-button color="primary" item-end (click)="selectProject(ip)">
                 Select Project
                 <ion-icon name='md-create'></ion-icon>
             </button>
 
             <button ion-fab mini color="primary" item-end (click)="viewProjectInfo(ip)">
+                <ion-icon name='help'></ion-icon>
+            </button>
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-item *ngFor="let bp of bidP" (click)="selectProject(bp)">
+            <h2>{{bp.project_name}}</h2>
+            <p>Reward K: {{bp.rewarded_k}} - Bidding Project</p>
+            <button ion-button color="primary" item-end>
+                Select Project
+                <ion-icon name='md-create'></ion-icon>
+            </button>
+
+            <button ion-fab mini color="primary" item-end (click)="viewProjectInfo(bp)">
                 <ion-icon name='help'></ion-icon>
             </button>
         </ion-item>
