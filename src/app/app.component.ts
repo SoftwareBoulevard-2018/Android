@@ -1,3 +1,4 @@
+import { SelectProjectPage } from './../pages/select-project/select-project';
 import { Component, ViewChild } from '@angular/core';
 
 import { Events, MenuController, Nav, Platform } from 'ionic-angular';
@@ -20,6 +21,7 @@ import { InboxPage } from '../pages/inbox/inbox';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
+
 
 export interface PageInterface {
   title: string;
@@ -51,7 +53,9 @@ export class SoftwareBoulevardApp {
   loggedInPages: PageInterface[] = [
     //{ title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },
     { title: 'About', name: 'AboutPage', component: AboutPage, icon: 'help' },
-    { title: 'Logout', name: 'LoginPage', component: LoginPage, icon: 'log-out', logsOut: true }
+    { title: 'Logout', name: 'LoginPage', component: LoginPage, icon: 'log-out', logsOut: true },
+    { title: 'SelectProjectPage', name: 'SelectProjectPage', component: SelectProjectPage, icon: 'help'},
+    
   ];
   adminPages: PageInterface[] = [
     { title: 'Set-up', name: 'SetUpPage', component: SetUpPage, icon: 'md-cog' }

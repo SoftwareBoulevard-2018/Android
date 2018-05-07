@@ -39,6 +39,7 @@ import { ReademailPage } from '../pages/reademail/reademail';
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 
+import { SelectProjectPage } from '../pages/select-project/select-project';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { UserData } from '../providers/user-data';
     EditAccountPage,
     MenuemailpopoverPage,
     ReademailPage,
-    HireUserPage
+    HireUserPage,
+    SelectProjectPage
   ],
   imports: [
     BrowserModule,
@@ -85,7 +87,9 @@ import { UserData } from '../providers/user-data';
         { component: EditCompanyPage, name: 'EditCompanyPage', segment: 'companies' },
         { component: ViewAccountPage, name: 'AccountPage', segment: 'account' },
         { component: EditAccountPage, name: 'EditAccountPage', segment: 'account' },
-        { component: HireUserPage, name: 'HireUserPage', segment: 'users' }
+        { component: HireUserPage, name: 'HireUserPage', segment: 'users' },
+        { component: SelectProjectPage, name: 'SelectProjectPage', segment: 'users' }
+
       ]
     }),
     IonicStorageModule.forRoot()
@@ -113,7 +117,8 @@ import { UserData } from '../providers/user-data';
     EditAccountPage,
     MenuemailpopoverPage,
     ReademailPage,
-    HireUserPage
+    HireUserPage,
+    SelectProjectPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
