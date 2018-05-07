@@ -1,0 +1,13 @@
+{
+  "name": "Software Boulevard",
+  "short_name": "Sw Bld",
+  "start_url": "index.html",
+  "display": "standalone",
+  "icons": [{
+    "src": "assets/img/appicon.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }],
+  "background_color": "#F5F2DC",
+  "theme_color": "#F5F2DC"
+}

@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Companies</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-fab right bottom (click)="createCompany()">
+        <button ion-fab ><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
+    <ion-list>
+        <ion-item *ngFor="let c of companies" >
+            <ion-avatar item-start>
+                <img src="{{c.image}}">
+            </ion-avatar>
+            <h2 (click)="viewCompany(c)" >{{c.name}}</h2>
+            <p>Resources: 9000  -  K:{{c.capacity_k}}</p>
+            <button ion-button color="primary" item-end (click)="editCompany(c)">
+                <ion-icon name='md-create'></ion-icon>
+            </button>
+        </ion-item>
+        
+    </ion-list>
+</ion-content>
