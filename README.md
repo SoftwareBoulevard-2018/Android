@@ -166,3 +166,9 @@ Android/
   * ViewAccountPage
   * EditAccountPage
   * ReportsPag
+
+### Module 4
+  * MainPage (Profile)
+  * DevelopProjectPage
+  * ImproveSkillLevelPage
+  * JoinTeamPage
