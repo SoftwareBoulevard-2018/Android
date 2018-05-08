@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content class="outer-content">
+    <!-- each div contains cards for each user role -->
     <div id="admin-main" *ngIf="user_type === 'Game Administrator'">
         <ion-card>
             <ion-card-header (click)="viewUsers()">
@@ -19,7 +20,7 @@
             <ion-card-content class="outer-content">
                 information
             </ion-card-content>
-            
+
             <ion-row no-padding>
                 <ion-col>
                     <button ion-button clear small color="primary" icon-start (click)="viewUsers()">
@@ -42,12 +43,12 @@
                 <ion-col>
                     <button ion-button clear small color="primary" icon-start (click)="hireUser()">
                             <ion-icon name='person-add'></ion-icon>
-                            Hire 
+                            Hire
                     </button>
                 </ion-col>
             </ion-row>
         </ion-card>
-        
+
         <ion-card>
             <ion-card-header (click)="viewCompanies()">
                 <ion-card-title>
@@ -58,7 +59,7 @@
             <ion-card-content class="outer-content">
                 information
             </ion-card-content>
-            
+
             <ion-row no-padding>
                 <ion-col>
                     <button ion-button clear small color="primary" icon-start (click)="viewCompanies()">
@@ -92,7 +93,7 @@
                 Here you can see the reports of the game.
             </ion-card-content>
         </ion-card>
-        
+
         <ion-card (click)="viewSetUp()">
             <ion-card-header >
                 <ion-card-title>
@@ -108,7 +109,7 @@
 
 
     <div id="pm-main" *ngIf="user_type === 'Project Manager'">
-        
+
         <ion-card>
             <ion-card-header >
                 <ion-card-title>
@@ -119,7 +120,7 @@
             <ion-card-content class="outer-content">
                 information
             </ion-card-content>
-            
+
             <ion-row no-padding>
                 <ion-col>
                     <button ion-button clear small color="primary" icon-start >
@@ -142,5 +143,24 @@
             </ion-card-content>
         </ion-card>
     </div>
+
+    <div id="role-main" *ngIf="user_type === 'Developer' || user_type === 'Analyst' || user_type === 'Tester'">
+
+      <div class="stats">
+          <p>Resources: 5</p>
+          <p>Team Members: 2</p>
+      </div>
+
+      <div class="profilepic">
+        <img src="https://lh3.googleusercontent.com/8eexFR0Q_ZYb-FupOVEUXX3viofSSf3-6nCvxVJgOUqlymH5ijMYeGPmRr4Z4MxISX5-nwJWT4kuED9hSzkwG-F73knTdgFvdb-215ZX_FZmOa49dsrUfPPgQZxnNUfJ39UyDYuysmX1E8mItfVuUWLcb_WsFO3I4VSuR2Cwc4y_LqbD7ujzkpEG-mbbj0KOOjwD0qpya9YqgGzJd7zYyFOTphnqGxLZTqQKw5Mr2mJF_sDqXOUufb-1r7-XggZeTWKmodaF9_idntRAHFlWxNFz8aW2le1BiUi9lOVn_uYMN3LGHhGXAVGfzNhzNuwhrshmc-isCGTEMUhD2aOod7Of_FraToi_pGlrEzWa_kwSJsO97WvctHnGSg5ldvuG3QU3yZ0YtDSGj2PV6wBxwNNyClcZv-6U4xwNNnFyHRiJu1PhkRh0If2rVL_E-TQ9GRob0dRr7piJy2A8p7fqnuvJ_5kQrw-hI7FDBUpUo9_4FUOWqZ5YPtz5_Fa_0aeb2BKDyXcjIl_qsVK_0VoD_IzfMc1YvUdzhrREgIPLNB--HcrMQak6vldF2PNzkiyMwhtRRQWdA-dYCmrv_3HDk1RGegU-xpbJucRbnSXqmT_Wg_oJVDev9gzzO1ou1sltqx0J9N8vjrj1p_d3gc_zMpBZAdqQJ9Jw=w893-h505-no" alt="Profile Picture">
+      </div>
+
+      <div class="profile">
+        <h3>Profile</h3>
+        <p>Johan Alejandro Holguín Arango</p>
+        <p>Analyst</p>
+        <p>Level 1</p>
+      </div>
+     </div>
 
 </ion-content>

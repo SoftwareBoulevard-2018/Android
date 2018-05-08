@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { Company } from '../models/company';
 import {BiddingProject} from '../models/biddingProject';
-
+/**
+ * contains burned data to show the functionality of the GUI
+ */
 @Injectable()
 export class GeneralServiceService {
 
@@ -12,7 +14,7 @@ export class GeneralServiceService {
 
   loggedusr;
 
-  users = [new User("Andres Felipe Aguilar","afaguilarr","ElMejor123","Developer","UNAL"),
+  users = [new User("Andres Felipe Aguilar","afaguilarr","ElMejor123","Developer","UNAL",2,3),
     new User("John Jairo Serna","jjsernaco","holaMUNDO456","Project Manager","UNAL"),
     new User("Carlos Mario Zapata","cmzapata","EnserioEsaEsTuPregunta?","Game Administrator"),
     new User("David","dddavid","david","Project Manager","Amazon"),

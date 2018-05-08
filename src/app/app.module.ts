@@ -46,6 +46,16 @@ import { MenuemailpopoverPage } from '../pages/menuemailpopover/menuemailpopover
 import { ReademailPage } from '../pages/reademail/reademail';
 import { SentemailpagePage } from '../pages/sentemailpage/sentemailpage';
 
+
+
+import { DevelopProjectPage } from '../pages/develop-project/develop-project';
+import { ImproveSkillLevelPage } from '../pages/improve-skill-level/improve-skill-level';
+import { JoinTeamPage } from '../pages/join-team/join-team';
+
+
+
+
+
 import { UserData } from '../providers/user-data';
 
 import { servicesEmail } from '../providers/servicesEmail';
@@ -73,6 +83,9 @@ import { servicesEmail } from '../providers/servicesEmail';
     MenuemailpopoverPage,
     ReademailPage,
     SentemailpagePage,
+    DevelopProjectPage,
+    ImproveSkillLevelPage,
+    JoinTeamPage,
     HireUserPage,
     ProjectlistPage,
     NewprojectPage,
@@ -99,6 +112,16 @@ import { servicesEmail } from '../providers/servicesEmail';
         { component: EditCompanyPage, name: 'EditCompanyPage', segment: 'companies' },
         { component: ViewAccountPage, name: 'AccountPage', segment: 'account' },
         { component: EditAccountPage, name: 'EditAccountPage', segment: 'account' },
+
+
+        { component: DevelopProjectPage, name: 'DevelopProjectPage', segment: 'account' },
+        { component: ImproveSkillLevelPage, name: 'ImproveSkillLevelPage', segment: 'account' },
+        { component: JoinTeamPage, name: 'JoinTeamPage', segment: 'account' },
+
+
+
+
+
         { component: HireUserPage, name: 'HireUserPage', segment: 'users' }
       ]
     }),
@@ -126,6 +149,9 @@ import { servicesEmail } from '../providers/servicesEmail';
     MenuemailpopoverPage,
     ReademailPage,
     SentemailpagePage,
+    DevelopProjectPage,
+    ImproveSkillLevelPage,
+    JoinTeamPage,
     HireUserPage,
     ProjectlistPage,
     NewprojectPage,

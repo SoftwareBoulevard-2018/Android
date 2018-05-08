@@ -1,0 +1,43 @@
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Join Team</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <div [hidden]=noInvita>
+    <h3 class="title1">You have no team invitations pending</h3>
+    <p class="title3">Slide down to refresh</p>
+  </div>
+  <div class="title1" [hidden]=invita>
+    <h3>This company wants you as a part of their team</h3>
+  </div>
+
+  <div [hidden]=infohid>
+    <p class="title2">{{teamName}}</p>
+    <p class="title3">{{teamMessage}}</p>
+  </div>
+
+  <div [hidden]=buttonshid>
+    <ion-list>
+      <ion-item></ion-item>
+      <ion-item>
+        <button ion-button full outline color="secondary" (click)="showAccepted()">Accept</button>
+      </ion-item>
+      <ion-item>
+        <button ion-button full outline color="danger" (click)="showRejected()">Reject</button>
+      </ion-item>
+      <ion-item></ion-item>
+    </ion-list>
+  </div>
+</ion-content>

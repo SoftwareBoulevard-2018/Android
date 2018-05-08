@@ -1,12 +1,12 @@
 # Software Boulevard
 
 This is the ionic version of the software engineering learning game created with DSD.
-Based on the [Ionic Conference Application](https://github.com/ionic-team/ionic-conference-app.git) with huge modifications.
 
 
 ## Table of Contents
  - [Getting Started](#getting-started)
  - [File Structure of App](#file-structure-of-app)
+ - [Components by Module](#components-by-module)
 
 
 ## Getting Started
@@ -30,22 +30,17 @@ _Note: You may need to add “sudo” in front of any global commands to install
 
 ```
 Android/
-├-- .github/                            * GitHub files
-│   ├── CONTRIBUTING.md                 * Documentation on contributing to this repo
-│   └── ISSUE_TEMPLATE.md               * Template used to populate issues in this repo
 |
 |-- resources/
 |
 |-- src/
 |    |-- app/
-|    |    ├── app.component.ts
-|    |    └── app.module.ts
-|    |    └── app.template.html
+|    |    ├── app.component.ts            *first component of software boulevard
+|    |    └── app.module.ts               *all components are imported and declared here
+|    |    └── app.template.html           *contains the left menu
 |    |    └── main.ts
 |    |
 |    |-- assets/
-|    |    ├── data/
-|    |    |    └── data.json
 |    |    |
 |    |    ├── fonts/
 |    |    |     ├── ionicons.eot
@@ -56,61 +51,76 @@ Android/
 |    |    |
 |    |    ├── img/
 |    |
-|    |-- pages/                          * Contains all of our pages
-│    │    ├── about/                     * About page
-│    │    │    ├── about.html            * AboutPage template
-│    │    │    └── about.ts              * AboutPage code
-│    │    │    └── about.scss            * AboutPage stylesheet
+|    |-- pages/                                 * Contains all of our pages
+│    │    ├── about/                            * About page
+│    │    │    ├── about.html                   * AboutPage template
+│    │    │    └── about.ts                     * AboutPage code
+│    │    │    └── about.scss                   * AboutPage stylesheet
 │    │    │
-│    │    ├── account/                   * Account page
-│    │    │    ├── account.html          * AccountPage template
-│    │    │    └── account.ts            * AccountPage code
-│    │    │    └── account.scss          * AccountPage stylesheet
+│    │    ├── account/                          * Account page
+│    │    │    ├── account.html                 * AccountPage template
+│    │    │    └── account.ts                   * AccountPage code
+│    │    │    └── account.scss                 * AccountPage stylesheet
 │    │    │
-│    │    ├── compose-email/             * Compose email page
-│    │    │    ├── compose-email.html    * ComposeEmailPage template
-│    │    │    └── compose-email.ts      * ComposeEmailPage code
-│    │    │    └── compose-email.scss    * ComposeEmailPage stylesheet
+│    │    ├── compose-email/                    * Compose email page
+│    │    │    ├── compose-email.html           * ComposeEmailPage template
+│    │    │    └── compose-email.ts             * ComposeEmailPage code
+│    │    │    └── compose-email.scss           * ComposeEmailPage stylesheet
 │    │    │
-│    │    ├── inbox/                     * Inbox page
-│    │    │    ├── inbox.html            * InboxPage template
-│    │    │    └── inbox.ts              * InboxPage code
-│    │    │    └── inbox.scss            * InboxPage stylesheet
+│    │    ├── develop-project/                  * Develop project page
+│    │    │    ├── develop-project.html         * Develop project template
+│    │    │    └── develop-project.ts           * Develop project code
+│    │    │    └── develop-project.scss         * Develop project stylesheet
 │    │    │
-│    │    │── login/                     * Login page
-│    │    │    ├── login.html            * LoginPage template
-│    │    │    └── login.ts              * LoginPage code
-│    │    │    └── login.scss            * LoginPage stylesheet
+│    │    ├── improve-skill-level/              * Improve skill level page
+│    │    │    ├── improve-skill-level.html     * Improve skill level template
+│    │    │    └── improve-skill-level.ts       * Improve skill level code
+│    │    │    └── improve-skill-level.scss     * Improve skill level stylesheet
 │    │    │
-│    │    │── main/                      * Main page
-│    │    │    ├── main.html             * MainPage template
-│    │    │    └── main.ts               * MainPage code
-│    │    │    └── main.scss             * MainPage stylesheet
+│    │    ├── inbox/                            * Inbox page
+│    │    │    ├── inbox.html                   * InboxPage template
+│    │    │    └── inbox.ts                     * InboxPage code
+│    │    │    └── inbox.scss                   * InboxPage stylesheet
 │    │    │
-│    │    │── menuemailpopover/             * Menu Email Popover
-│    │    │    ├── menuemailpopover.html    * MenuemailPopover template
-│    │    │    └── menuemailpopover.ts      * MenuemailPopover code
-│    │    │    └── menuemailpopover.scss    * MenuemailPopover stylesheet
+│    │    ├── join-team/                        * Join team page
+│    │    │    ├── join-team.html               * Join team template
+│    │    │    └── join-team.ts                 * Join team code
+│    │    │    └── join-team.scss               * Join team stylesheet
 │    │    │
-│    │    │── reademail/                 * Read Email Page
-│    │    │    ├── reademail.html        * ReadEmail template
-│    │    │    └── reademail.ts          * ReadEmail code
-│    │    │    └── reademail.scss        * ReadEmail stylesheet
+│    │    │── login/                            * Login page
+│    │    │    ├── login.html                   * LoginPage template
+│    │    │    └── login.ts                     * LoginPage code
+│    │    │    └── login.scss                   * LoginPage stylesheet
 │    │    │
-│    │    │── sentemailpage/             * Sent Email Page
-│    │    │    ├── sentemailpage.html    * SentemailPage template
-│    │    │    └── sentemailpage.ts      * SentemailPage code
-│    │    │    └── sentemailpage.scss    * SentemailPage stylesheet
+│    │    │── main/                             * Main page
+│    │    │    ├── main.html                    * MainPage template
+│    │    │    └── main.ts                      * MainPage code
+│    │    │    └── main.scss                    * MainPage stylesheet
 │    │    │
-│    │    │── signup/                    * Signup page
-│    │         ├── signup.html           * SignupPage template
-│    │         └── signup.ts             * SignupPage code
+│    │    │── menuemailpopover/                 * Menu Email Popover
+│    │    │    ├── menuemailpopover.html        * MenuemailPopover template
+│    │    │    └── menuemailpopover.ts          * MenuemailPopover code
+│    │    │    └── menuemailpopover.scss        * MenuemailPopover stylesheet
+│    │    │
+│    │    │── reademail/                        * Read Email Page
+│    │    │    ├── reademail.html               * ReadEmail template
+│    │    │    └── reademail.ts                 * ReadEmail code
+│    │    │    └── reademail.scss               * ReadEmail stylesheet
+│    │    │
+│    │    │── sentemailpage/                    * Sent Email Page
+│    │    │    ├── sentemailpage.html           * SentemailPage template
+│    │    │    └── sentemailpage.ts             * SentemailPage code
+│    │    │    └── sentemailpage.scss           * SentemailPage stylesheet
+│    │    │
+│    │    │── signup/                           * Signup page
+│    │         ├── signup.html                  * SignupPage template
+│    │         └── signup.ts                    * SignupPage code
 |    |
-│    ├── providers/                      * Contains all Injectables
-│    │     ├── conference-data.ts        * ConferenceData code
-│    │     └── user-data.ts              * UserData code
-│    ├── theme/                          * App theme files
-|    |     ├── variables.scss            * App Shared Sass Variables
+│    ├── providers/                             * Contains all Injectables
+│    │     ├── conference-data.ts               * ConferenceData code
+│    │     └── user-data.ts                     * UserData code
+│    ├── theme/                                 * App theme files
+|    |     ├── variables.scss                   * App Shared Sass Variables
 |    |
 |    |-- index.html
 |
@@ -131,13 +141,28 @@ Android/
 |    └── build/
 |    └── index.html
 |
-├── .editorconfig                       * Defines coding styles between editors
-├── .gitignore                          * Example git ignore file
-├── LICENSE                             * Apache License
-├── README.md                           * This file
-├── config.xml                          * Cordova configuration file
-├── ionic.config.json                   * Ionic configuration file
-├── package.json                        * Defines our JavaScript dependencies
-├── tsconfig.json                       * Defines the root files and the compiler options
-├── tslint.json                         * Defines the rules for the TypeScript linter
+├── .editorconfig                               * Defines coding styles between editors
+├── .gitignore                                  * Example git ignore file
+├── LICENSE                                     * Apache License
+├── README.md                                   * This file
+├── config.xml                                  * Cordova configuration file
+├── ionic.config.json                           * Ionic configuration file
+├── package.json                                * Defines our JavaScript dependencies
+├── tsconfig.json                               * Defines the root files and the compiler options
+├── tslint.json                                 * Defines the rules for the TypeScript linter
 ```
+
+## Components by Module
+
+### Module 2
+  * LoginPage
+  * MainPage
+  * ListUsersPage
+  * ViewCompanyPage
+  * ListCompaniesPage
+  * CreateAccountPage
+  * CreateCompanyPage
+  * EditCompanyPage
+  * ViewAccountPage
+  * EditAccountPage
+  * ReportsPag
