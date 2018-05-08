@@ -49,9 +49,9 @@ export class SoftwareBoulevardApp {
     //{ title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },
     { title: 'About', name: 'AboutPage', component: AboutPage, icon: 'help' },
     { title: 'Logout', name: 'LoginPage', component: LoginPage, icon: 'log-out', logsOut: true },
-    { title: 'SelectProjectPage', name: 'SelectProjectPage', component: SelectProjectPage, icon: 'help'},
-    { title: 'GenerateResourcesPage', name: 'GenerateResourcesPage', component: GenerateResourcesPage, icon: 'help'},
-    { title: 'EstimateCostTimePage', name: 'EstimateCostTimePage', component: EstimateCostTimePage, icon: 'help'},
+    { title: 'Select Project', name: 'SelectProjectPage', component: SelectProjectPage, icon: 'checkbox-outline'},
+    { title: 'Generate Resources', name: 'GenerateResourcesPage', component: GenerateResourcesPage, icon: 'hammer'},
+    { title: 'Estimate Cost and Time', name: 'EstimateCostTimePage', component: EstimateCostTimePage, icon: 'logo-yen'},
     
     
   ];
