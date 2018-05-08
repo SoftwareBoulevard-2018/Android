@@ -14,6 +14,13 @@ import { ReportsPage } from '../pages/reports/reports';
 //import { ComposeEmailPage } from '../pages/compose-email/compose-email';
 import { InboxPage } from '../pages/inbox/inbox';
 
+
+import { DevelopProjectPage } from '../pages/develop-project/develop-project';
+import { ImproveSkillLevelPage } from '../pages/improve-skill-level/improve-skill-level';
+import { JoinTeamPage } from '../pages/join-team/join-team';
+
+
+
 import { UserData } from '../providers/user-data';
 
 export interface PageInterface {
@@ -41,6 +48,17 @@ export class SoftwareBoulevardApp {
     { title: 'Reports', name: 'ReportsPage', component: ReportsPage, icon: 'md-podium' },
     { title: 'Email', name: 'InboxPage', component: InboxPage, icon: 'mail' }
   ];
+
+
+
+  gamePages: PageInterface[] = [
+    //{ title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },
+    { title: 'Develop project', name: 'DevelopProjectPage', component: DevelopProjectPage, icon: 'bulb' },
+    { title: 'Improve skill level', name: 'ImproveSkillLevelPage', component: ImproveSkillLevelPage, icon: 'book' },
+    { title: 'Join team', name: 'JoinTeamPage', component: JoinTeamPage, icon: 'body' }
+  ];
+
+
   loggedInPages: PageInterface[] = [
     //{ title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },
     { title: 'About', name: 'AboutPage', component: AboutPage, icon: 'help' },
@@ -60,7 +78,7 @@ export class SoftwareBoulevardApp {
     public storage: Storage,
     public splashScreen: SplashScreen
   ) {
-    //verificates if the user is already logged in and skips the login page    
+    //verificates if the user is already logged in and skips the login page
     this.userData.hasLoggedIn().then((hasLoggedIn) => {
       if(hasLoggedIn===true){
         this.rootPage = MainPage;
@@ -76,7 +94,7 @@ export class SoftwareBoulevardApp {
 
   /**
    * opens a page as root page and verifies if it's a logout.
-   * 
+   *
    * @param page page to be opened
    */
   openPage(page: PageInterface) {
@@ -85,7 +103,7 @@ export class SoftwareBoulevardApp {
       this.nav.setRoot(page.name, params).catch((err: any) => {
         console.log(`Didn't set nav root: ${err}`);
       });
-    
+
 
     if (page.logsOut === true) {
       // Give the menu time to close before changing to logged out

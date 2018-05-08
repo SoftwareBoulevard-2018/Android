@@ -21,6 +21,21 @@
         </button>
       </ion-list>
 
+
+
+    <ion-list *ngIf="user_type === 'Developer' || user_type === 'Analyst' || user_type === 'Tester'">
+      <ion-list-header>
+        Play
+      </ion-list-header>
+      <button ion-item menuClose *ngFor="let p of gamePages" (click)="openPage(p)">
+        <ion-icon item-start [name]="p.icon" [color]="isActive(p)"></ion-icon>
+        {{p.title}}
+      </button>
+    </ion-list>
+
+
+
+
       <ion-list *ngIf="user_type === 'Game Administrator'">
         <ion-list-header>
           Administration
