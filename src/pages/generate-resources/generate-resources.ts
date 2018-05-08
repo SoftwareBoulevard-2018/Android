@@ -35,7 +35,7 @@ export class GenerateResourcesPage {
     var i: number;
     for(i=0; i<16; i++)
     {
-      var imgSrc: String = "./puzzles/puzzle1/".concat("result").concat(i.toString()).concat(".png");
+      var imgSrc: String = './../../assets/img/puzzles/puzzle1/'.concat('result').concat(i.toString()).concat('.png');
       this.puzzlePieces.push(imgSrc);
       console.log(this.puzzlePieces[i]);
     }
