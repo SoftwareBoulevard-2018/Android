@@ -53,7 +53,94 @@ export class GenerateResourcesPage {
     }
 
   }
+  sendPuzzle()
+  {
+    alert("Wrong answer");
+  }
 
+  movePiece(row: number, col: number)
+  {
+    var temp: any;
+    alert(row.toString().concat(col.toString()));
+    
 
-
+    /*if((row + 1) === 4 && (col + 1) < 4)
+    {
+      if(this.puzzle[row + 1][col + 1] === 0)
+      {
+        temp = this.puzzle[row + 1][col + 1];
+        this.puzzle[row + 1][col + 1] = this.puzzle[row][col];
+        this.puzzle[row + 1][col + 1] = temp;
+      }
+      if(this.puzzle[row + 1][col] === 0)
+      {
+        temp = this.puzzle[row + 1][col + 1];
+        this.puzzle[row + 1][col] = this.puzzle[row][col];
+        this.puzzle[row + 1][col] = temp;
+        alert("Swarpped");
+      }*/
+    }
+        
 }
+
+/*
+if((row + 1) < 4 && (col + 1) < 4)
+    {
+      if(this.puzzle[row + 1][col + 1] === 0)
+      {
+        temp = this.puzzle[row + 1][col + 1];
+        this.puzzle[row + 1][col + 1] = this.puzzle[row][col];
+        this.puzzle[row + 1][col + 1] = temp;
+      }
+      if(this.puzzle[row][col + 1] === 0)
+      {
+        temp = this.puzzle[row][col + 1];
+        this.puzzle[row][col + 1] = this.puzzle[row][col];
+        this.puzzle[row][col + 1] = temp;
+      }
+      if(this.puzzle[row + 1][col] === 0)
+      {
+        temp = this.puzzle[row + 1][col];
+        this.puzzle[row + 1][col] = this.puzzle[row][col];
+        this.puzzle[row + 1][col] = temp;
+      }
+    }
+    if((row - 1) > 0 && (col - 1) > 0)
+    {
+      if(this.puzzle[row - 1][col - 1] === 0)
+      {
+        temp = this.puzzle[row - 1][col - 1];
+        this.puzzle[row - 1][col - 1] = this.puzzle[row][col];
+        this.puzzle[row - 1][col - 1] = temp;
+      }
+      if(this.puzzle[row][col - 1] === 0)
+      {
+        temp = this.puzzle[row][col - 1];
+        this.puzzle[row][col - 1] = this.puzzle[row][col];
+        this.puzzle[row][col - 1] = temp;
+      }
+      if(this.puzzle[row - 1][col] === 0)
+      {
+        temp = this.puzzle[row - 1][col];
+        this.puzzle[row - 1][col] = this.puzzle[row][col];
+        this.puzzle[row - 1][col] = temp;
+      }
+    }
+    if((row + 1) === 4 && (col + 1) < 4)
+    {
+      if(this.puzzle[row + 1][col + 1] === 0)
+      {
+        temp = this.puzzle[row + 1][col + 1];
+        this.puzzle[row + 1][col + 1] = this.puzzle[row][col];
+        this.puzzle[row + 1][col + 1] = temp;
+      }
+      if(this.puzzle[row + 1][col] === 0)
+      {
+        temp = this.puzzle[row + 1][col + 1];
+        this.puzzle[row + 1][col] = this.puzzle[row][col];
+        this.puzzle[row + 1][col] = temp;
+        alert("Swarpped");
+      }
+    }
+  }
+*/
