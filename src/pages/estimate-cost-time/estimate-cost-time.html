@@ -15,7 +15,19 @@
 
 <ion-content padding>
   <ion-item>
-    <ion-label tappable color="primary" (tap)="try()">Cost Required: </ion-label>
-    <ion-label color="primary">Time Required: </ion-label>
+    <ion-label color="primary">Cost Required: {{p.cost}}</ion-label>
+    <ion-label color="primary">Time Required: {{p.time}}</ion-label>
   </ion-item>
+  <ion-item>
+    <ion-label color="primary">Cost Estimated: {{lastCostEst}}</ion-label>
+    <ion-label color="primary">Time Estimated: {{lastTimeEst}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary">Available Resources: {{comp.resources}}</ion-label>
+  </ion-item>
+  <button ion-button color="primary" (click)="estimateCostTime()">
+    Estiamate &nbsp;
+    <ion-icon name='md-create'></ion-icon>
+  </button>
+
 </ion-content>

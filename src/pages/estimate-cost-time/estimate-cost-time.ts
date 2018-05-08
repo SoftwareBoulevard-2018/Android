@@ -23,6 +23,9 @@ export class EstimateCostTimePage {
   ser: GeneralServiceService;
   costEst: number[] = [];
   timeEst: number[] = [];
+  p: BiddingProject;
+  lastTimeEst: number = 0;
+  lastCostEst: number = 0;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -30,7 +33,9 @@ export class EstimateCostTimePage {
 
     this.user = new User("Pedro el test user", "Testy", "1", "Project manager","UNAL",2,0);
     this.comp = service.companies.find(c => c.name === this.user.company_name);
+    //this.comp.resources = 10;
     this.ser = service;
+    this.p = this.ser.bidProjects[this.comp.active_project];
   }
 
   ionViewDidLoad() {
@@ -38,18 +43,30 @@ export class EstimateCostTimePage {
   }
 
   estimateCostTime()
-  {
-    var p: BiddingProject = this.ser.bidProjects[this.comp.active_project];
-    var ce =  Math.floor(Math.random() * (10000 - 0 + 1)) + 0;
-    var te =  Math.floor(Math.random() * (10000 - 0 + 1)) + 0;
-
-    if(ce >= p.cost && te >= p.time)
+  { 
+    if(!(this.comp.resources > 0))
     {
-      var rg: Number = Math.floor(Math.random() * (10 - 0 + 1)) + 0;
-      this.comp.resources = parseInt(this.comp.resources.toString()) + parseInt(rg.toString());
+      alert("Not enough resources!! get more!");
+      return;
+    }
+    else{
+      this.comp.resources = parseInt(this.comp.resources.toString()) - 1;
     }
 
-    
+    var ce =  Math.floor(Math.random() * (10000 - 0 + 1)) + 0;
+    var te =  Math.floor(Math.random() * (20 - 0 + 1)) + 0;
+    this.costEst.push(ce);
+    this.timeEst.push(te);
+    this.lastCostEst = ce;
+    this.lastTimeEst = te;
+
+    if(ce >= this.p.cost && te >= this.p.time)
+    {
+      alert("Success!!!");
+    }
+    else{
+      alert("Fail!!! try again =)");
+    }
   }
 
   try()
