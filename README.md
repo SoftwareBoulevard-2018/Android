@@ -234,6 +234,12 @@ Android/
   * ViewAccountPage
   * EditAccountPage
   * ReportsPag
+  
+### Module 3
+  * HireUserPage: allows users to look and start the process of contraction. 
+  * SelectProjectPage: allows you to select the project you want to perform.
+  * EstimateCostTimePage: allows to estimate the times and costs of the project that is being developed.
+  * GenerateResurcesPage: it is possible to solve the puzzles and with these generate recourses for the project.
 
 ### Module 4
   * MainPage (Profile): The main component allows the user to see his profile including his stats and data.
