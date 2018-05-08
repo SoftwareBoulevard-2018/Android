@@ -168,7 +168,7 @@ Android/
   * ReportsPag
 
 ### Module 4
-  * MainPage (Profile)
-  * DevelopProjectPage
-  * ImproveSkillLevelPage
-  * JoinTeamPage
+  * MainPage (Profile): The main component allows the user to see his profile including his stats and data.
+  * DevelopProjectPage: The develop project component allows the user to know if he has pending questions and if his team has enough resources for him to answer those questions, if so he can answer the questions in the same component.
+  * ImproveSkillLevelPage: The improve skill level component allow the user to answer training questions in order to improve his competency level, the user is only available to answer a question if he has enough resources.
+  * JoinTeamPage: The join team component allows the user to see if he has a pending invitation sent by an enterprise, if so he is able to accept or reject such invitation.
