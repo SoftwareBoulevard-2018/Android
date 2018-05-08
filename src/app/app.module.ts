@@ -25,6 +25,11 @@ import { ProjectlistPage } from '../pages/set-up/projectlist/projectlist';
 import { NewprojectPage } from '../pages/set-up/newproject/newproject';
 import { BiddingeditorPage } from '../pages/set-up/biddingeditor/biddingeditor';
 import { InstanteditorPage } from '../pages/set-up/instanteditor/instanteditor';
+import { QuestlistPage } from '../pages/set-up/questlist/questlist';
+import { UpdatequestPage } from '../pages/set-up/updatequest/updatequest';
+import { OptionquestPage } from '../pages/set-up/optionquest/optionquest';
+import { PuzzlelistPage } from '../pages/set-up/puzzlelist/puzzlelist';
+import { NewpuzzlePage } from '../pages/set-up/newpuzzle/newpuzzle';
 //Module 2 components
 import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
@@ -51,6 +56,7 @@ import { SentemailpagePage } from '../pages/sentemailpage/sentemailpage';
 import { DevelopProjectPage } from '../pages/develop-project/develop-project';
 import { ImproveSkillLevelPage } from '../pages/improve-skill-level/improve-skill-level';
 import { JoinTeamPage } from '../pages/join-team/join-team';
+
 
 
 
@@ -90,7 +96,13 @@ import { servicesEmail } from '../providers/servicesEmail';
     ProjectlistPage,
     NewprojectPage,
     BiddingeditorPage,
-    InstanteditorPage
+    InstanteditorPage,
+    QuestlistPage,
+    UpdatequestPage,
+    OptionquestPage,
+    PuzzlelistPage,
+    NewpuzzlePage
+    
   ],
   imports: [
     BrowserModule,
@@ -156,7 +168,12 @@ import { servicesEmail } from '../providers/servicesEmail';
     ProjectlistPage,
     NewprojectPage,
     BiddingeditorPage,
-    InstanteditorPage
+    InstanteditorPage,
+    QuestlistPage,
+    UpdatequestPage,
+    OptionquestPage,
+    PuzzlelistPage,
+    NewpuzzlePage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

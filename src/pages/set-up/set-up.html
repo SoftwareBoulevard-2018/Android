@@ -8,9 +8,6 @@
 </ion-header>
 
 <ion-content>
-    <h1>set up</h1>
-    <h1 class="titulo"> prueba</h1>
-
   <div class="card" >
     <div class="item item-divider">
       Define / Edit
@@ -18,13 +15,13 @@
     <div class="item item-text-wrap">
       <ion-grid>
         <ion-row>
-          <button ion-button icon-left color="primary">
+          <button ion-button icon-left color="primary" (click)=goToPuzzlelist()>
             <ion-icon name="apps"></ion-icon>
             Puzzle
           </button>
         </ion-row>
         <ion-row>
-          <button ion-button icon-left color="primary">
+          <button ion-button icon-left color="primary" (click)=goToQuestlist()>
             <ion-icon name="help"></ion-icon>
             Question 
           </button>
