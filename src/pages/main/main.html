@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content class="outer-content">
+    <!-- each div contains cards for each user role -->
     <div id="admin-main" *ngIf="user_type === 'Game Administrator'">
         <ion-card>
             <ion-card-header (click)="viewUsers()">

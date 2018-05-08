@@ -4,7 +4,9 @@ import { NgForm } from '@angular/forms';
 import { NavController } from 'ionic-angular';
 
 import { User } from '../../models/user';
-
+/**
+ * shows and validates a form used to create a new account
+ */
 @Component({
   selector: 'create-account',
   templateUrl: 'create-account.html'
@@ -19,8 +21,7 @@ export class CreateAccountPage {
     this.submitted = true;
 
     if (form.valid) {
-      //TODO: send company to server
-      //this.userData.signup(this.signup.username);
+      //TODO: send account to server
       this.navCtrl.pop();
     }
   }

@@ -6,10 +6,14 @@ import { CreateCompanyPage } from '../create-company/create-company';
 
 import { GeneralServiceService } from '../../app/general-service.service';
 
-import {
-  NavController
-} from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
+/**
+ * shows a list with all companies.
+ * 
+ * also shows a FAB to create a new company and each company has
+ * a edit button and can be viewed by taping in the name/image.
+ */
 @Component({
   selector: 'list-companies',
   templateUrl: 'list-companies.html'

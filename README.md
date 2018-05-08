@@ -1,7 +1,6 @@
 # Software Boulevard
 
 This is the ionic version of the software engineering learning game created with DSD.
-Based on the [Ionic Conference Application](https://github.com/ionic-team/ionic-conference-app.git) with huge modifications.
 
 
 ## Table of Contents
@@ -30,9 +29,6 @@ _Note: You may need to add “sudo” in front of any global commands to install
 
 ```
 Android/
-├-- .github/                            * GitHub files
-│   ├── CONTRIBUTING.md                 * Documentation on contributing to this repo
-│   └── ISSUE_TEMPLATE.md               * Template used to populate issues in this repo
 |
 |-- resources/
 |
@@ -44,8 +40,6 @@ Android/
 |    |    └── main.ts
 |    |
 |    |-- assets/
-|    |    ├── data/
-|    |    |    └── data.json
 |    |    |
 |    |    ├── fonts/
 |    |    |     ├── ionicons.eot
@@ -56,7 +50,7 @@ Android/
 |    |    |
 |    |    ├── img/
 |    |
-|    |-- pages/                          * Contains all of our pages
+|    |-- pages/                          * Contains all of our pages here is some of them
 │    │    ├── about/                     * About page
 │    │    │    ├── about.html            * AboutPage template
 │    │    │    └── about.ts              * AboutPage code
@@ -107,8 +101,7 @@ Android/
 │    │         └── signup.ts             * SignupPage code
 |    |
 │    ├── providers/                      * Contains all Injectables
-│    │     ├── conference-data.ts        * ConferenceData code
-│    │     └── user-data.ts              * UserData code
+│    │     ├── user-data.ts              * UserData code
 │    │     └── servicesEmail.ts          * servicesEmail code
 │    ├── theme/                          * App theme files
 |    |     ├── variables.scss            * App Shared Sass Variables
@@ -134,7 +127,6 @@ Android/
 |
 ├── .editorconfig                       * Defines coding styles between editors
 ├── .gitignore                          * Example git ignore file
-├── LICENSE                             * Apache License
 ├── README.md                           * This file
 ├── config.xml                          * Cordova configuration file
 ├── ionic.config.json                   * Ionic configuration file

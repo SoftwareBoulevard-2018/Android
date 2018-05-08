@@ -4,7 +4,9 @@ import { NgForm } from '@angular/forms';
 import { NavController } from 'ionic-angular';
 
 import { Company } from '../../models/company';
-
+/**
+ * shows and validates a form used to create a new company
+ */
 @Component({
   selector: 'create-company',
   templateUrl: 'create-company.html'
@@ -22,7 +24,6 @@ export class CreateCompanyPage {
 
     if (form.valid) {
       //TODO: send company to server
-      //this.userData.signup(this.signup.username);
       this.navCtrl.pop();
     }
   }
