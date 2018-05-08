@@ -113,9 +113,64 @@ Android/
 │    │    │    └── sentemailpage.scss           * SentemailPage stylesheet
 │    │    │
 │    │    │── signup/                           * Signup page
-│    │         ├── signup.html                  * SignupPage template
-│    │         └── signup.ts                    * SignupPage code
-|    |
+│    │    |    ├── signup.html                  * SignupPage template
+│    │    |    └── signup.ts                    * SignupPage code
+|    |    |  
+|    |    |── home/                             * Home page
+|    |    |    ├── home.html                    * Home page template
+|    |    |    └── home.scss                    * Home page stylesheet
+|    |    |    └── home.ts                      * Home page code
+|    |    |
+|    |    |── biddingeditor/                    * Biddingeditor page
+|    |    |    ├─── biddingeditor.html          * Biddingeditor page template
+|    |    |    └── biddingeditor.scss           * Biddingeditor page stylesheet
+|    |    |    └── biddingeditor.ts             * Biddingeditor page code
+|    |    |
+|    |    |── instanteditor/                    * instanteditor page
+|    |    |    ├── instanteditor.html           * instanteditor page template
+|    |    |    └── instanteditor.scss           * instanteditor page stylesheet
+|    |    |    └── instanteditor.ts             * instanteditor page code
+|    |    |
+|    |    |── newproject/                       * newproject page
+|    |    |    ├── newproject.html               * newproject page template
+|    |    |    └── newproject.scss              * newproject page stylesheet
+|    |    |    └── newproject.ts                * newproject page code
+|    |    |
+|    |    |── newpuzzle/                        * newpuzzle page
+|    |    |    ├── newpuzzle.html                * newpuzzle page template
+|    |    |    └── newpuzzle.scss               * newpuzzle page stylesheet
+|    |    |    └── newpuzzle.ts                 * newpuzzle page code
+|    |    |
+|    |    |── optionquest/                      * optionquest page
+|    |    |    ├── optionquest.html             * optionquestlate page templae
+|    |    |    └── optionquest.scss             * optionquestesheet page stylesheet
+|    |    |    └── optionquest.ts               * optionquest page code
+|    |    |
+|    |    |── projectlist/                      * projectlist page
+|    |    |    ├── projectlist.html             * projectlist page template
+|    |    |    └── projectlist.scss             * projectlist page stylesheet
+|    |    |    └── projectlist.ts               * projectlist page code
+|    |    |
+|    |    |── puzzlelist/                       * puzzlelist page
+|    |    |    ├── puzzlelist.html              * puzzlelist page template
+|    |    |    └── puzzlelist.scss              * puzzlelist page stylesheet
+|    |    |    └── puzzlelist.ts                * puzzlelist page code
+|    |    |
+|    |    |── questlist/                        * questlist page
+|    |    |    ├── questlist.html               * questlist page template
+|    |    |    └── questlist.scss               * questlist page stylesheet
+|    |    |    └── questlist.ts                 * questlist page code
+|    |    |
+|    |    |── selectquest/                      * selectquest page
+|    |    |    ├── selectquest.html             * selectquest page template
+|    |    |    └── selectquest.scss             * selectquest page stylesheet
+|    |    |    └── selectquest.ts               * selectquest page code
+|    |    |
+|    |    |── updatequest/                      * updatequest page
+|    |    |    ├── updatequest.html             * updatequest page template
+|    |    |    └── updatequest.scss             * updatequest page stylesheet
+|    |    |    └── updatequest.ts               * updatequest page code
+|    |    
 │    ├── providers/                             * Contains all Injectables
 │    │     ├── conference-data.ts               * ConferenceData code
 │    │     └── user-data.ts                     * UserData code
@@ -154,6 +209,19 @@ Android/
 
 ## Components by Module
 
+### Module 1
+  * BiddingeditorPage
+  * HomePage
+  * InstanteditoPage
+  * NewprojectPage
+  * NewpuzzlePage
+  * OptionquestPage
+  * ProjectlistPage
+  * PuzzlelistPage
+  * QuestlistPage
+  * SelectquestPage
+  * UpdatequestPage
+  
 ### Module 2
   * LoginPage
   * MainPage
@@ -168,20 +236,7 @@ Android/
   * ReportsPag
 
 ### Module 4
-  * MainPage (Profile): The main component allows the user to see his profile including his stats and data.
-  * DevelopProjectPage: The develop project component allows the user to know if he has pending questions and if his team has enough resources for him to answer those questions, if so he can answer the questions in the same component.
-  * ImproveSkillLevelPage: The improve skill level component allow the user to answer training questions in order to improve his competency level, the user is only available to answer a question if he has enough resources.
-  * JoinTeamPage: The join team component allows the user to see if he has a pending invitation sent by an enterprise, if so he is able to accept or reject such invitation.
-  
-### Module 5
-  * ComposeEmailPage
-  * InboxPage
-  * MenuemailpopverPage
-  * ReademailPage
-  * SentemailPage
-
-
-## Providers by Module
-
-### Module 5
-  * servicesEmail
+  * MainPage (Profile)
+  * DevelopProjectPage
+  * ImproveSkillLevelPage
+  * JoinTeamPage
