@@ -1,8 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {BiddingeditorPage} from '../biddingeditor/biddingeditor';
 import {InstanteditorPage} from '../instanteditor/instanteditor';
-import {ElementRef} from '@angular/core';
 
 @IonicPage()
 @Component({
