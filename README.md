@@ -234,6 +234,12 @@ Android/
   * ViewAccountPage
   * EditAccountPage
   * ReportsPag
+  
+### Module 3
+  * HireUserPage 
+  * SelectProjectPage
+  * EstimateCostTimePage
+  * SelectProjectPAge
 
 ### Module 4
   * MainPage (Profile): The main component allows the user to see his profile including his stats and data.
