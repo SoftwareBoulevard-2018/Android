@@ -1,3 +1,5 @@
+//Created by group 9 - module 5
+//The necessary components are imported.
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ComposeEmailPage } from '../compose-email/compose-email';
@@ -21,14 +23,17 @@ export class MenuemailpopoverPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
+  //This component opens the ComposeEmail component using a routing.
   openComposePage() {
     this.navCtrl.push(ComposeEmailPage);
   }
 
+  //This component opens the InboxPage component using a routing.
   openInboxPage() {
     this.navCtrl.push(InboxPage);
   }
-  //Falta
+ 
+  //This component opens the SentemailPage component using a routing.
   openSentPage() {
     this.navCtrl.push(SentemailpagePage);
   }

@@ -1,3 +1,4 @@
+//Created by group 9 - module 5
 import { Injectable } from '@angular/core';
 
 
@@ -5,7 +6,9 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class servicesEmail {
 
-
+    /*
+    An array of emails is created as test cases for this prototype.
+    */
     private emails =  [
         {
             "id": 1,
@@ -98,9 +101,10 @@ export class servicesEmail {
         }
 
     ];
- 
 
-
+    /*
+    The email array is returned
+    */
     public getEmails() {
         return this.emails;
 
