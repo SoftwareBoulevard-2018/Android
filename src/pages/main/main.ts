@@ -11,7 +11,9 @@ import { CreateAccountPage } from '../create-account/create-account';
 import { CreateCompanyPage } from '../create-company/create-company';
 
 import { Events, NavController } from 'ionic-angular';
-
+/**
+ * shows the cards for each user role.
+ */
 @Component({
   selector: 'main-page',
   templateUrl: 'main.html'
@@ -25,12 +27,15 @@ export class MainPage {
     public userData: UserData,
     public events: Events
   ) {
+    //after log-in knows the role.
+    //because of asynchrony can blink thus I'm thinking of a better implementatnion.
     this.events.subscribe('user:login', () => {
       this.userData.getRole().then(role =>{
         this.user_type = role;
       })
     });
   }
+  //if this view is reopened we need to obtain the role.
   ionViewWillEnter() {
     this.userData.getRole().then(role =>{
       this.user_type = role;

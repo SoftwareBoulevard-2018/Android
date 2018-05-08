@@ -1,12 +1,36 @@
 <ion-header>
     <ion-navbar>
-        <button ion-button menuToggle>
+      <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
-        </button>
-        <ion-title>{{company.name}}</ion-title>
+      </button>
+      <ion-title>{{company.name}}</ion-title>
     </ion-navbar>
-</ion-header>
-
-<ion-content>
-    <h1>{{company.name}}</h1>
-</ion-content>
+  </ion-header>
+  
+  <ion-content>
+    <div class="about-header">
+      <img src="{{company.image}}">
+    </div>
+    <div padding class="about-info">
+      <h4>{{company.name}}</h4>
+  
+      <ion-list>  
+        <ion-item>
+          <ion-icon name="md-person" item-start></ion-icon>
+          project manager: {{project_manager}}
+        </ion-item>
+        <ion-item>
+          <ion-icon name="md-flame" item-start></ion-icon>
+          capacity k: {{company.capacity_k||0}}
+        </ion-item>
+        <ion-item>
+          <ion-icon name="md-pint" item-start></ion-icon>
+          resources: {{company.resources||0}}
+        </ion-item>
+        <ion-item>
+          <ion-icon name="md-list-box" item-start></ion-icon>
+          current project: {{company.current_project_name||pending}}
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-content>

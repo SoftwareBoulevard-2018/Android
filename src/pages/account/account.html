@@ -3,19 +3,26 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Account</ion-title>
+    <ion-title>{{user.name}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="outer-content">
   <div padding-top text-center>
     <h2>{{user.name}}</h2>
+    <ion-row no-padding>
+      <ion-col>
+        <p>{{user.role}}</p>
+      </ion-col>
+      <ion-col *ngIf="user.company_name">
+        @<button ion-button color="primary"> {{user.company_name}} </button>
+      </ion-col>
+  </ion-row>
 
     <ion-list inset>
-      <button ion-item (click)="updatePicture()">Update Picture</button>
-      <button ion-item (click)="changeUsername()">Change Username</button>
-      <button ion-item (click)="changePassword()">Change Password</button>
-      <button ion-item (click)="logout()">Logout</button>
+      <ion-item *ngIf="user.questions_answered_right"> Questions answered right: {{user.questions_answered_right}}</ion-item>
+      <ion-item *ngIf="user.questions_answered_wrong"> Questions answered wrong: {{user.questions_answered_wrong}}</ion-item>
+      <ion-item *ngIf="user.questions_answered_right"> User performance: {{100*user.questions_answered_right/(user.questions_answered_wrong+user.questions_answered_right)}}%</ion-item>
     </ion-list>
   </div>
 </ion-content>

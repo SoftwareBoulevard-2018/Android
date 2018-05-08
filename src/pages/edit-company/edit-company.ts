@@ -5,6 +5,9 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { Company } from '../../models/company';
 
+/**
+ * shows and validates a form used to update a company received in param c
+ */
 @Component({
   selector: 'edit-company',
   templateUrl: 'edit-company.html'
@@ -24,7 +27,7 @@ export class EditCompanyPage {
     this.submitted = true;
 
     if (form.valid) {
-      //this.userData.signup(this.signup.username);
+      //TODO send data to server
       this.navCtrl.pop();
     }
   }

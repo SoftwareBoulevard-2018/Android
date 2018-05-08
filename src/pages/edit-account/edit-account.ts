@@ -5,6 +5,9 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { User } from '../../models/user';
 
+/**
+ * shows and validates a form used to update an account
+ */
 @Component({
   selector: 'edit-account',
   templateUrl: 'edit-account.html'
@@ -24,7 +27,7 @@ export class EditAccountPage {
     this.submitted = true;
 
     if (form.valid) {
-      //this.userData.signup(this.signup.username);
+      //TODO send data to server
       this.navCtrl.pop();
     }
   }

@@ -1,12 +1,12 @@
 # Software Boulevard
 
 This is the ionic version of the software engineering learning game created with DSD.
-Based on the [Ionic Conference Application](https://github.com/ionic-team/ionic-conference-app.git) with huge modifications.
 
 
 ## Table of Contents
  - [Getting Started](#getting-started)
  - [File Structure of App](#file-structure-of-app)
+ - [Components by Module](#components-by-module)
 
 
 ## Getting Started
@@ -30,22 +30,17 @@ _Note: You may need to add “sudo” in front of any global commands to install
 
 ```
 Android/
-├-- .github/                            * GitHub files
-│   ├── CONTRIBUTING.md                 * Documentation on contributing to this repo
-│   └── ISSUE_TEMPLATE.md               * Template used to populate issues in this repo
 |
 |-- resources/
 |
 |-- src/
 |    |-- app/
-|    |    ├── app.component.ts
-|    |    └── app.module.ts
-|    |    └── app.template.html
+|    |    ├── app.component.ts            *first component of software boulevard
+|    |    └── app.module.ts               *all components are imported and declared here
+|    |    └── app.template.html           *contains the left menu
 |    |    └── main.ts
 |    |
 |    |-- assets/
-|    |    ├── data/
-|    |    |    └── data.json
 |    |    |
 |    |    ├── fonts/
 |    |    |     ├── ionicons.eot
@@ -156,3 +151,18 @@ Android/
 ├── tsconfig.json                               * Defines the root files and the compiler options
 ├── tslint.json                                 * Defines the rules for the TypeScript linter
 ```
+
+## Components by Module
+
+### Module 2
+  * LoginPage
+  * MainPage
+  * ListUsersPage
+  * ViewCompanyPage
+  * ListCompaniesPage
+  * CreateAccountPage
+  * CreateCompanyPage
+  * EditCompanyPage
+  * ViewAccountPage
+  * EditAccountPage
+  * ReportsPag
