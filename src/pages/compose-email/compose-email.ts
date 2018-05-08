@@ -1,3 +1,5 @@
+//Created by group 9 - module 5
+//The necessary components are imported.
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 //import { MainPage } from '../main/main';
@@ -15,6 +17,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ComposeEmailPage {
 
+  /*
+  The following variables are used to save information about the email in order 
+  to send it to another user.
+  */
   To:String;
   Subject:String;
   Content:String;
@@ -23,6 +29,10 @@ export class ComposeEmailPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
+
+  /*
+  This method is used to resize the space that the user has for writting the content of the email.
+  */
   resize() {
     var element = this.myInput['_elementRef'].nativeElement.getElementsByClassName("text-input")[0];
     var scrollHeight = element.scrollHeight;

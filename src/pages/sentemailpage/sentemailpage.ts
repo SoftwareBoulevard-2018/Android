@@ -1,3 +1,5 @@
+//Created by group 9 - module 5
+//The necessary components are imported.
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular';
@@ -19,15 +21,18 @@ import { UserData } from '../../providers/user-data';
 
 })
 export class SentemailpagePage {
-  searchQuery: String;
-  private emailArray =  [];
-  private defaultList  =  [];
-  private username;
+
+  searchQuery: String; //This variable is the text entered by the user to perform the search in the outbox
+  private emailArray =  []; //This is the arrangement that the user has in the outbox
+  private defaultList  =  []; //This arrangement serves to update the entire list of emails
+  private username; //It is the user to whom the outbox will be shown
    
   constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl:PopoverController, public serviceEmail: servicesEmail, public userdata: UserData ) {
 
-    //Colocarlo en un servicio.
-
+    /*
+    The username is obtained, in this component, from the user that was connected to the system.
+    Then a method is invoked to obtain the emails that this user has sent.
+    */
     this.userdata.getUsername().then(user => {
       this.username = user;
       this.listEmailsSentForUser(this.serviceEmail.getEmails(), this.username);
@@ -36,7 +41,12 @@ export class SentemailpagePage {
   }
 
   
-  //Esta metodo se encarga de actualizar el array del email de outbox que tiene el usuario.
+   /*
+  This method is in charge of updating the array of the outbox email that the user has.
+  It receives an array of emails and the user who wants to see their outbox.
+  We need to check for every email that the name of the user equals to the sender of the email
+  in order to update the emailArray.
+  */
   listEmailsSentForUser(email: any[], user: string) {
 
     var indexemailArray = 0;
@@ -53,11 +63,13 @@ export class SentemailpagePage {
   }
 
   searchEmail() {
-    //SearchQuery
-    //Subject o Sender.
     let IDEmailSolution = [];
     let EmailSolution = [];
 
+    /*
+    In this cycle (for), all the emails on the outbox are scanned, and the id of the email that it has 
+    in his subject or sender is added, which is written in the search.
+    */
     for (var i = 0; i < this.emailArray.length; i++) {
       var subjectElement = this.emailArray[i].subject;
       var senderElement = this.emailArray[i].sender;
@@ -67,6 +79,12 @@ export class SentemailpagePage {
       }
     }
 
+    /*
+    The external cycle (var z) runs through all the emails. 
+    The internal cycle (var j) goes through all the solutions of email identifiers and it is checked 
+    that the email id solution matches the email id of all the emails that travel through the external 
+    cycle. The purpose is to find the id of the emails that meet the search.
+    */ 
     var index = 0;
 
     for (var z = 0; z < this.emailArray.length; z++) {
@@ -91,10 +109,18 @@ export class SentemailpagePage {
 
   }
 
+  /* 
+  This method is responsible for displaying the entire entry outbox. It is used after 
+  performing a search.
+  */
   viewFullInbox() {
     this.emailArray = this.defaultList;
   }
 
+  /*
+  This method allows you to see the menu by clicking on the 3-point icon. 
+  From there you can access the inbox, outbox and you can go to create a new email.
+  */
   viewEmailMenu(myEvent) {
     let popover = this.popoverCtrl.create(MenuemailpopoverPage, {}, { cssClass: 'custom-popover' });
     popover.present({
@@ -102,6 +128,9 @@ export class SentemailpagePage {
     });
   }
 
+  /*
+  This method is responsible for routing the page where the selected email is read.
+  */
   readEmail(emailToRead) {
     this.navCtrl.push(ReademailPage, {
       sender: emailToRead.sender,
