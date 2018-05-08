@@ -1,3 +1,4 @@
+import { SelectProjectPage } from './../pages/select-project/select-project';
 import { Component, ViewChild } from '@angular/core';
 
 import { Events, MenuController, Nav, Platform } from 'ionic-angular';
@@ -22,6 +23,9 @@ import { JoinTeamPage } from '../pages/join-team/join-team';
 
 
 import { UserData } from '../providers/user-data';
+import { GenerateResourcesPage } from '../pages/generate-resources/generate-resources';
+import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cost-time';
+
 
 export interface PageInterface {
   title: string;
@@ -62,7 +66,12 @@ export class SoftwareBoulevardApp {
   loggedInPages: PageInterface[] = [
     //{ title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },
     { title: 'About', name: 'AboutPage', component: AboutPage, icon: 'help' },
-    { title: 'Logout', name: 'LoginPage', component: LoginPage, icon: 'log-out', logsOut: true }
+    { title: 'Logout', name: 'LoginPage', component: LoginPage, icon: 'log-out', logsOut: true },
+    { title: 'Select Project', name: 'SelectProjectPage', component: SelectProjectPage, icon: 'checkbox-outline'},
+    { title: 'Generate Resources', name: 'GenerateResourcesPage', component: GenerateResourcesPage, icon: 'hammer'},
+    { title: 'Estimate Cost and Time', name: 'EstimateCostTimePage', component: EstimateCostTimePage, icon: 'logo-yen'},
+    
+    
   ];
   adminPages: PageInterface[] = [
     { title: 'Set-up', name: 'SetUpPage', component: SetUpPage, icon: 'md-cog' }

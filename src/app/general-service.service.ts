@@ -1,10 +1,18 @@
+
+import { InstantProject } from '../models/instantProject';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { Company } from '../models/company';
+<<<<<<< HEAD
 import {BiddingProject} from '../models/biddingProject';
 /**
  * contains burned data to show the functionality of the GUI
  */
+=======
+import { BiddingProject } from '../models/biddingProject';
+
+
+>>>>>>> module3
 @Injectable()
 export class GeneralServiceService {
 
@@ -27,6 +35,12 @@ export class GeneralServiceService {
 
   projects = [new BiddingProject(1,"FIFA",10,3, 10, 10, 10, 5000,0, 0, 0 ,0),
     new BiddingProject(2,"Bancolombia System",10,3, 10, 10, 10, 5000,0, 0, 0 ,0)];
+  
+  bidProjects = [new BiddingProject(1,"FIFA",10,3, 10, 10, 10, 5000,0, 0, 0 ,0),
+    new BiddingProject(2,"Bancolombia System",10,3, 10, 10, 10, 5000,0, 0, 0 ,0)];
+
+  InstProjects = [new InstantProject(10, "Excel dataBase", 5, 2, 2, 2),
+    new InstantProject(11, "Calculator", 6, 2, 2, 2)];
 
   user_to_be_updated;
 
