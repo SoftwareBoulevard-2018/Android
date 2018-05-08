@@ -19,7 +19,12 @@ import { PopoverPage } from '../pages/about-popover/about-popover';
 import { SoftwareBoulevardApp } from './app.component';
 import { GeneralServiceService } from './general-service.service';
 import { AboutPage } from '../pages/about/about';
+//Module 1 components
 import { SetUpPage } from '../pages/set-up/set-up';
+import { ProjectlistPage } from '../pages/set-up/projectlist/projectlist';
+import { NewprojectPage } from '../pages/set-up/newproject/newproject';
+import { BiddingeditorPage } from '../pages/set-up/biddingeditor/biddingeditor';
+import { InstanteditorPage } from '../pages/set-up/instanteditor/instanteditor';
 //Module 2 components
 import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
@@ -81,7 +86,11 @@ import { servicesEmail } from '../providers/servicesEmail';
     DevelopProjectPage,
     ImproveSkillLevelPage,
     JoinTeamPage,
-    HireUserPage
+    HireUserPage,
+    ProjectlistPage,
+    NewprojectPage,
+    BiddingeditorPage,
+    InstanteditorPage
   ],
   imports: [
     BrowserModule,
@@ -143,7 +152,11 @@ import { servicesEmail } from '../providers/servicesEmail';
     DevelopProjectPage,
     ImproveSkillLevelPage,
     JoinTeamPage,
-    HireUserPage
+    HireUserPage,
+    ProjectlistPage,
+    NewprojectPage,
+    BiddingeditorPage,
+    InstanteditorPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
