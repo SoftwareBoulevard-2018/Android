@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>GenerateResources</ion-title>
+    <ion-title>Generate Resources</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,4 +15,34 @@
 
 <ion-content padding>
 
+    <ion-grid>
+        <ion-row>
+          <ion-col tappable (tap)="try()"> <ion-img style="width: 15vh;height: 12vh;" src={{puzzlePieces[puzzle[0][3]]}}></ion-img></ion-col>
+          <ion-col>{{puzzlePieces[puzzle[0][1]]}}</ion-col>
+          <ion-col>{{puzzlePieces[puzzle[0][2]]}}</ion-col>
+          <ion-col>{{puzzlePieces[puzzle[0][3]]}}</ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col tappable (tap)="try()">{{puzzle[1][0]}}</ion-col>
+            <ion-col>{{puzzle[1][1]}}</ion-col>
+            <ion-col>{{puzzle[1][2]}}</ion-col>
+            <ion-col>{{puzzle[1][3]}}</ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col tappable (tap)="try()">{{puzzle[2][0]}}</ion-col>
+              <ion-col>{{puzzle[2][1]}}</ion-col>
+              <ion-col>{{puzzle[2][2]}}</ion-col>
+              <ion-col>{{puzzle[2][3]}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col tappable (tap)="try()">{{puzzle[3][0]}}</ion-col>
+                <ion-col>{{puzzle[3][1]}}</ion-col>
+                <ion-col>{{puzzle[3][2]}}</ion-col>
+                <ion-col>{{puzzle[3][3]}}</ion-col>
+              </ion-row>
+      </ion-grid>
+      <button ion-button color="primary" (click)="selectPuzzle()">
+          Select Puzzle &nbsp;
+          <ion-icon name='md-create'></ion-icon>
+        </button>
 </ion-content>
