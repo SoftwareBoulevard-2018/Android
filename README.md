@@ -242,14 +242,26 @@ Android/
   * JoinTeamPage: The join team component allows the user to see if he has a pending invitation sent by an enterprise, if so he is able to accept or reject such invitation.
 
 ### Module 5
-  * ComposeEmailPage
-  * InboxPage
-  * MenuemailpopverPage
-  * ReademailPage
-  * SentemailPage
+  * ComposeEmailPage: This component allows user to write an email. The user writes some information that includes the content, subject     and according to user role (administrator, project manager,  the system shows of recipients (user) to send a email and  that feature     will be implemented in the next deliverable  with the backend code and the database.
+    This component includes 3 bottons, one of the bottoms is used to send the email and the another one is used to go back in the app.
+  
+  * InboxPage: This component allows to user that is logged in the app to see what emails that he has received. Each email shows data       about the sender, subject and date and if you click one of the emails you can see the content in the component of ReademailPage.
+    Also in this component you can do searchs of emails filtering with subject or sender.
+
+    Each email has a checkbox in order to see what emails of the inbox had been read.
+  
+    If you click SEE FULL INBOX you can see all the list of emails, it can be useful when you do a search and you need to refresh again     all the emails received also this component has a botton of options of the menu that is on the MenuemailpopverPage.
+
+  * MenuemailpopverPage: This component is used to display a menu with the options of New Email, Inbox and Sent. 
+
+  * ReademailPage: This component is used to display information about the email that includes the subject, content and the sender           (From).
+  
+  * SentemailPage:   In this component a user that is logged can see the emails that he has sent to other users. Each email shows data       about the subject and the sender that is the same of the user that is logged and if you click one of the emails you can see the         content in the component of ReademailPage.
+  
+    If you click SEE FULL OUTBOX you can see all the list of emails, it can be useful when you do a search and you need to refresh again     all the emails sent also this component has a botton of options of the menu that is on the MenuemailpopverPage.
 
 
 ## Providers by Module
 
 ### Module 5
-  * servicesEmail
+  * servicesEmail: This service saves tests cases for emails that are in relation with the login of a user.
