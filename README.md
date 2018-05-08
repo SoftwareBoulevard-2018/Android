@@ -6,6 +6,7 @@ This is the ionic version of the software engineering learning game created with
 ## Table of Contents
  - [Getting Started](#getting-started)
  - [File Structure of App](#file-structure-of-app)
+ - [Components by Module](#components-by-module)
 
 
 ## Getting Started
@@ -34,9 +35,9 @@ Android/
 |
 |-- src/
 |    |-- app/
-|    |    ├── app.component.ts
-|    |    └── app.module.ts
-|    |    └── app.template.html
+|    |    ├── app.component.ts            *first component of software boulevard
+|    |    └── app.module.ts               *all components are imported and declared here
+|    |    └── app.template.html           *contains the left menu
 |    |    └── main.ts
 |    |
 |    |-- assets/
@@ -134,3 +135,18 @@ Android/
 ├── tsconfig.json                       * Defines the root files and the compiler options
 ├── tslint.json                         * Defines the rules for the TypeScript linter
 ```
+
+## Components by Module
+
+### Module 2
+  * LoginPage
+  * MainPage
+  * ListUsersPage
+  * ViewCompanyPage
+  * ListCompaniesPage
+  * CreateAccountPage
+  * CreateCompanyPage
+  * EditCompanyPage
+  * ViewAccountPage
+  * EditAccountPage
+  * ReportsPag
