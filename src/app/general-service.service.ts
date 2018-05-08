@@ -1,18 +1,11 @@
-
 import { InstantProject } from '../models/instantProject';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { Company } from '../models/company';
-<<<<<<< HEAD
-import {BiddingProject} from '../models/biddingProject';
+import { BiddingProject } from '../models/biddingProject';
 /**
  * contains burned data to show the functionality of the GUI
  */
-=======
-import { BiddingProject } from '../models/biddingProject';
-
-
->>>>>>> module3
 @Injectable()
 export class GeneralServiceService {
 
