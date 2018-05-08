@@ -60,7 +60,7 @@ export class GenerateResourcesPage {
 
   movePiece(row: number, col: number)
   {
-    var temp: any;
+    //var temp: any;
     alert(row.toString().concat(col.toString()));
   }
         
