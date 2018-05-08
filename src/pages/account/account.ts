@@ -6,7 +6,9 @@ import { User } from '../../models/user';
 
 import { UserData } from '../../providers/user-data';
 
-
+/**
+ * shows an account received in param "u"
+ */
 @Component({
   selector: 'page-account',
   templateUrl: 'account.html'

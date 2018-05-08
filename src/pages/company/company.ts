@@ -4,6 +4,9 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { Company } from '../../models/company';
 
+/**
+ * shows a company received in the param "c"
+ */
 @Component({
   selector: 'company',
   templateUrl: 'company.html'

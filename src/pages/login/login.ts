@@ -1,6 +1,3 @@
-/**
- * shows the login form and validates the data
- */
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
@@ -13,7 +10,9 @@ import { GeneralServiceService } from '../../app/general-service.service';
 
 import { MainPage } from '../main/main';
 
-
+/**
+ * shows the login form and validates the data, shows a toast if invalid.
+ */
 @Component({
   selector: 'login',
   templateUrl: 'login.html'

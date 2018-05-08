@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { Company } from '../models/company';
 import {BiddingProject} from '../models/biddingProject';
-
+/**
+ * contains burned data to show the functionality of the GUI
+ */
 @Injectable()
 export class GeneralServiceService {
 

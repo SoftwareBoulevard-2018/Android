@@ -123,6 +123,7 @@ export class SoftwareBoulevardApp {
     });
 
     this.events.subscribe('user:logout', () => {
+      this.user_type = "";
       this.menu.enable(false);
     });
   }
