@@ -172,3 +172,16 @@ Android/
   * DevelopProjectPage
   * ImproveSkillLevelPage
   * JoinTeamPage
+  
+### Module 5
+  * ComposeEmailPage
+  * InboxPage
+  * MenuemailpopverPage
+  * ReademailPage
+  * SentemailPage
+
+
+## Providers by Module
+
+### Module 5
+  * servicesEmail
