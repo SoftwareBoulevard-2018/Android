@@ -62,17 +62,19 @@ export class SoftwareBoulevardApp {
     { title: 'Join team', name: 'JoinTeamPage', component: JoinTeamPage, icon: 'body' }
   ];
 
+  managementPages: PageInterface[] = [
+    //{ title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },
+    { title: 'Select Project', name: 'SelectProjectPage', component: SelectProjectPage, icon: 'checkbox-outline'},
+    { title: 'Generate Resources', name: 'GenerateResourcesPage', component: GenerateResourcesPage, icon: 'hammer'},
+    { title: 'Estimate Cost and Time', name: 'EstimateCostTimePage', component: EstimateCostTimePage, icon: 'logo-yen'}
+  ];
 
   loggedInPages: PageInterface[] = [
     //{ title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },
     { title: 'About', name: 'AboutPage', component: AboutPage, icon: 'help' },
-    { title: 'Logout', name: 'LoginPage', component: LoginPage, icon: 'log-out', logsOut: true },
-    { title: 'Select Project', name: 'SelectProjectPage', component: SelectProjectPage, icon: 'checkbox-outline'},
-    { title: 'Generate Resources', name: 'GenerateResourcesPage', component: GenerateResourcesPage, icon: 'hammer'},
-    { title: 'Estimate Cost and Time', name: 'EstimateCostTimePage', component: EstimateCostTimePage, icon: 'logo-yen'},
-    
-    
+    { title: 'Logout', name: 'LoginPage', component: LoginPage, icon: 'log-out', logsOut: true }
   ];
+  
   adminPages: PageInterface[] = [
     { title: 'Set-up', name: 'SetUpPage', component: SetUpPage, icon: 'md-cog' }
   ];

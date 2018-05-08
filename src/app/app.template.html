@@ -33,8 +33,15 @@
       </button>
     </ion-list>
 
-
-
+    <ion-list *ngIf="user_type === 'Project Manager'">
+      <ion-list-header>
+        Management
+      </ion-list-header>
+      <button ion-item menuClose *ngFor="let p of managementPages" (click)="openPage(p)">
+        <ion-icon item-start [name]="p.icon" [color]="isActive(p)"></ion-icon>
+        {{p.title}}
+      </button>
+    </ion-list>
 
       <ion-list *ngIf="user_type === 'Game Administrator'">
         <ion-list-header>
