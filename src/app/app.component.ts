@@ -17,6 +17,7 @@ import { InboxPage } from '../pages/inbox/inbox';
 
 import { UserData } from '../providers/user-data';
 import { GenerateResourcesPage } from '../pages/generate-resources/generate-resources';
+import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cost-time';
 
 
 export interface PageInterface {
@@ -50,6 +51,7 @@ export class SoftwareBoulevardApp {
     { title: 'Logout', name: 'LoginPage', component: LoginPage, icon: 'log-out', logsOut: true },
     { title: 'SelectProjectPage', name: 'SelectProjectPage', component: SelectProjectPage, icon: 'help'},
     { title: 'GenerateResourcesPage', name: 'GenerateResourcesPage', component: GenerateResourcesPage, icon: 'help'},
+    { title: 'EstimateCostTimePage', name: 'EstimateCostTimePage', component: EstimateCostTimePage, icon: 'help'},
     
     
   ];

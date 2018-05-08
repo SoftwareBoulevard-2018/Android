@@ -46,6 +46,7 @@ import { UserData } from '../providers/user-data';
 import { servicesEmail } from '../providers/servicesEmail';
 import { SelectProjectPage } from '../pages/select-project/select-project';
 import { GenerateResourcesPage } from '../pages/generate-resources/generate-resources';
+import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cost-time';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { GenerateResourcesPage } from '../pages/generate-resources/generate-reso
     SentemailpagePage,
     HireUserPage,
     SelectProjectPage,
-    GenerateResourcesPage
+    GenerateResourcesPage,
+    EstimateCostTimePage
   ],
   imports: [
     BrowserModule,
@@ -95,7 +97,9 @@ import { GenerateResourcesPage } from '../pages/generate-resources/generate-reso
         { component: EditAccountPage, name: 'EditAccountPage', segment: 'account' },
         { component: HireUserPage, name: 'HireUserPage', segment: 'users' },
         { component: SelectProjectPage, name: 'SelectProjectPage', segment: 'users' },
-        { component: GenerateResourcesPage, name: 'GenerateResourcesPage', segment: 'users' }
+        { component: GenerateResourcesPage, name: 'GenerateResourcesPage', segment: 'users' },
+        { component: EstimateCostTimePage, name: 'EstimateCostTimePage', segment: 'users' }
+        
         
       ]
     }),
@@ -125,7 +129,8 @@ import { GenerateResourcesPage } from '../pages/generate-resources/generate-reso
     SentemailpagePage,
     HireUserPage,
     SelectProjectPage,
-    GenerateResourcesPage
+    GenerateResourcesPage,
+    EstimateCostTimePage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
