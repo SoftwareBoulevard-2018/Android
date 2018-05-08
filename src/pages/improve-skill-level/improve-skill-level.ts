@@ -41,10 +41,12 @@ export class ImproveSkillLevelPage {
   ans4hid: boolean = false;
   sendhid: boolean = false;
 
+  //Constructor
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
     this.checkForQuestions();
   }
 
+  //It's meant to be used to check for remaining questions for the user in the server. Must be called every time the improve skill level page is opened.
   checkForQuestions(){
     if(this.questionspending == 0){
       this.hideOptions();  
@@ -53,7 +55,7 @@ export class ImproveSkillLevelPage {
     }
   }
 
-  //Change visibily 
+  //Shows the questions and it's options in case there is a question available
   showOptions(){
     this.textHid = false;
     this.ans1hid = false;
@@ -63,7 +65,7 @@ export class ImproveSkillLevelPage {
     this.sendhid = false;
     this.textNoHid = true;
   }
-  
+  //Hides the questions and it's options, shows only a message. In case there is no questions available
   hideOptions(){
     this.textHid = true;
     this.ans1hid = true;
@@ -74,7 +76,7 @@ export class ImproveSkillLevelPage {
     this.textNoHid = false;
   }
 
-  //Alerts when answers were sent
+  //Wrong answer alert
   showWrongAnswer() {
     let alert = this.alertCtrl.create({
       title: 'Wrong answer',
@@ -83,6 +85,7 @@ export class ImproveSkillLevelPage {
     });
     alert.present();
   }
+  //Correct answer alert, but there are more questions remaining
   showCorrectAnswer() {
     let alert = this.alertCtrl.create({
       title: 'Correct answer',
@@ -95,6 +98,7 @@ export class ImproveSkillLevelPage {
     this.answer4temp = false;
     alert.present();
   }
+  //Correct answer alert, in the last available question
   showLastAnswer() {
     let alert = this.alertCtrl.create({
       title: 'Correct answer',
@@ -103,6 +107,7 @@ export class ImproveSkillLevelPage {
     });
     alert.present();
   }
+  //Alert to be used when user tries to send an answer but his team has no resources left
   showNoResour() {
     let alert = this.alertCtrl.create({
       title: 'You have no resources left',
@@ -112,7 +117,7 @@ export class ImproveSkillLevelPage {
     alert.present();
   }
 
-  //Function called with the SEND button, checks if the answers are correct
+  //Function called with the SEND button, checks if the answers are correct and calls the alerts according to the result
   checkAnswers(){
     if(this.left <= 0){
       this.showNoResour();
@@ -129,7 +134,7 @@ export class ImproveSkillLevelPage {
       this.showWrongAnswer();
     }
   }
-  //Refresher
+  //Slide down refresher, works for the first deliverable demo's purpose, must be updated when theres connection to the server
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
     this.answer1temp = false;
@@ -148,7 +153,7 @@ export class ImproveSkillLevelPage {
     }, 2000);
   }
 
-  //Confirms the screen loaded (?)
+  //Confirms the screen loaded (?) auto-generated code
   ionViewDidLoad() {
     console.log('ionViewDidLoad DevelopProjectPage');
   }

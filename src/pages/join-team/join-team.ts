@@ -22,6 +22,7 @@ export class JoinTeamPage {
   buttonshid: boolean = true;
   infohid: boolean = true
 
+  //Information to retrieve from server in the next deliverable
   teamName: string = "Fellowship of the ring";
   teamMessage: string = "A day may come, when the courage of men fails, when we forsake our friends and break all bonds of Fellowship, but it is not this day! This day we code!";
   
@@ -29,20 +30,21 @@ export class JoinTeamPage {
     
     
   }
-
+  //Hide invitation, show only the no invitations message
   noInvitations(){
     this.noInvita = false;
     this.invita = true;
     this.buttonshid = true;
     this.infohid = true
   }
+  //Show the invitation
   haveInvitations(){
     this.noInvita = true;
     this.invita = false;
     this.buttonshid = false;
     this.infohid = false;
   }
-
+  //Show alert when the invitation was accepted, should be updated to actually join the team when the server is available
   showAccepted() {
     let alert = this.alertCtrl.create({
       title: 'Invitation accepted',
@@ -52,6 +54,7 @@ export class JoinTeamPage {
     alert.present();
     this.noInvitations();
   }
+  //Show alert when the invitation was rejected
   showRejected() {
     let alert = this.alertCtrl.create({
       title: 'Invitation rejected',
@@ -61,11 +64,11 @@ export class JoinTeamPage {
     alert.present();
     this.noInvitations();
   }
-
+  //Automatically generated code
   ionViewDidLoad() {
     console.log('ionViewDidLoad JoinTeamPage');
   }
-
+  //Refresher
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
     
