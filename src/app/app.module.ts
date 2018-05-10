@@ -59,7 +59,9 @@ import { JoinTeamPage } from '../pages/join-team/join-team';
 import { UserData } from '../providers/user-data';
 
 import { servicesEmail } from '../providers/servicesEmail';
-
+import { SelectProjectPage } from '../pages/select-project/select-project';
+import { GenerateResourcesPage } from '../pages/generate-resources/generate-resources';
+import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cost-time';
 
 @NgModule({
   declarations: [
@@ -86,11 +88,14 @@ import { servicesEmail } from '../providers/servicesEmail';
     DevelopProjectPage,
     ImproveSkillLevelPage,
     JoinTeamPage,
-    HireUserPage,
     ProjectlistPage,
     NewprojectPage,
     BiddingeditorPage,
-    InstanteditorPage
+    InstanteditorPage,
+    HireUserPage,
+    SelectProjectPage,
+    GenerateResourcesPage,
+    EstimateCostTimePage
   ],
   imports: [
     BrowserModule,
@@ -117,12 +122,12 @@ import { servicesEmail } from '../providers/servicesEmail';
         { component: DevelopProjectPage, name: 'DevelopProjectPage', segment: 'account' },
         { component: ImproveSkillLevelPage, name: 'ImproveSkillLevelPage', segment: 'account' },
         { component: JoinTeamPage, name: 'JoinTeamPage', segment: 'account' },
-
-
-
-
-
-        { component: HireUserPage, name: 'HireUserPage', segment: 'users' }
+        { component: HireUserPage, name: 'HireUserPage', segment: 'users' },
+        { component: SelectProjectPage, name: 'SelectProjectPage', segment: 'users' },
+        { component: GenerateResourcesPage, name: 'GenerateResourcesPage', segment: 'users' },
+        { component: EstimateCostTimePage, name: 'EstimateCostTimePage', segment: 'users' }
+        
+        
       ]
     }),
     IonicStorageModule.forRoot()
@@ -152,11 +157,14 @@ import { servicesEmail } from '../providers/servicesEmail';
     DevelopProjectPage,
     ImproveSkillLevelPage,
     JoinTeamPage,
-    HireUserPage,
     ProjectlistPage,
     NewprojectPage,
     BiddingeditorPage,
-    InstanteditorPage
+    InstanteditorPage,
+    HireUserPage,
+    SelectProjectPage,
+    GenerateResourcesPage,
+    EstimateCostTimePage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
