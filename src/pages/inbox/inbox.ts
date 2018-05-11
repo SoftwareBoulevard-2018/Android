@@ -1,3 +1,5 @@
+//Created by group 9 - module 5
+//The necessary components are imported.
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular';
@@ -21,18 +23,18 @@ import { UserData } from '../../providers/user-data';
 })
 export class InboxPage {
 
-  searchQuery: String;
-  test: String;
-
-  //Esto deberia obtenerse de un servicio.
-  private emailArray = [];
-  private defaultList = [];
-
-  private username;
+  searchQuery: String; //This variable is the text entered by the user to perform the search in the inbox
+  private emailArray = []; //This is the arrangement that the user has in the outbox
+  private defaultList = []; //This arrangement serves to update the entire list of emails
+  private username; //It is the user to whom the inbox will be shown
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, public serviceEmail: servicesEmail, public userdata: UserData) {
 
+    /*
+    The username is obtained, in this component, from the user that was connected to the system.
+    Then a method is invoked to obtain the emails that this user has received.
+    */
     this.userdata.getUsername().then(user => {
       this.username = user;
       this.listEmailsReceivedForUser(this.serviceEmail.getEmails(), this.username);
@@ -41,7 +43,13 @@ export class InboxPage {
 
   }
 
-  //Esta metodo se encarga de actualizar el array del email de inbox que tiene el usuario.
+  /*
+  This method is in charge of updating the array of the inbox email that the user has.
+  It receives an array of emails and the user who wants to see their inbox.
+  In this case we have an array of emails and every email has an array of receivers, we need to check if our 
+  user logged in the app is on the array of receivers. In the internal cycle in order to add that user we
+  check if our user equals to at least one receiver.
+  */
   listEmailsReceivedForUser(email: any[], user: string) {
 
     var indexemailArray = 0;
@@ -58,12 +66,14 @@ export class InboxPage {
     this.defaultList = this.emailArray;
   }
   searchEmail() {
-    //SearchQuery
-    //Subject o Sender.
     let IDEmailSolution = [];
 
     let EmailSolution = [];
 
+    /*
+    In this cycle (for), all the emails on the inbox are scanned, and the id of the email that it has 
+    in his subject or sender is added, which is written in the search.
+    */
     for (var i = 0; i < this.emailArray.length; i++) {
       var subjectElement = this.emailArray[i].subject;
       var senderElement = this.emailArray[i].sender;
@@ -73,6 +83,12 @@ export class InboxPage {
       }
     }
 
+    /*
+    The external cycle (var z) runs through all the emails. 
+    The internal cycle (var j) goes through all the solutions of email identifiers and it is checked 
+    that the email id solution matches the email id of all the emails that travel through the external 
+    cycle. The purpose is to find the id of the emails that meet the search.
+    */ 
     var index = 0;
 
     for (var z = 0; z < this.emailArray.length; z++) {
@@ -97,10 +113,18 @@ export class InboxPage {
 
   }
 
+  /* 
+  This method is responsible for displaying the entire entry mailbox. It is used after 
+  performing a search.
+  */
   viewFullInbox() {
     this.emailArray = this.defaultList;
   }
 
+  /*
+  This method allows you to see the menu by clicking on the 3-point icon. 
+  From there you can access the inbox, outbox and you can go to create a new email.
+  */
   viewEmailMenu(myEvent) {
     let popover = this.popoverCtrl.create(MenuemailpopoverPage, {}, { cssClass: 'custom-popover' });
     popover.present({
@@ -108,6 +132,9 @@ export class InboxPage {
     });
   }
 
+  /*
+  This method is responsible for routing the page where the selected email is read.
+  */
   readEmail(emailToRead) {
     this.navCtrl.push(ReademailPage, {
       sender: emailToRead.sender,

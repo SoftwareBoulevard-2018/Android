@@ -7,7 +7,7 @@ import { EditAccountPage } from '../edit-account/edit-account';
 import { ViewAccountPage } from '../account/account';
 
 import { GeneralServiceService } from '../../app/general-service.service';
-
+import { User } from '../../models/user';
 /**
  * Generated class for the HireUserPage page.
  *
@@ -41,9 +41,9 @@ export class HireUserPage {
     });
   }
 
-  hireUser(user)
+  hireUser(user: User)
   {
-    user = "working";
-    alert(user);
+    var out = user.name.concat("\n").concat(user.role);
+    alert(out);
   }
 }

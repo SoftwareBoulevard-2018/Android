@@ -10,7 +10,7 @@
       <button ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
       </button>
-    <ion-title>HireUser</ion-title>
+    <ion-title>Hire Users</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -21,7 +21,7 @@
         <ion-item *ngFor="let u of users" >
             <h2>{{u.name}}</h2>
             <p>{{u.role}}  -  {{u.company_name}}</p>
-            <button ion-button color="primary" item-end (click)="hireUser()">
+            <button ion-button color="primary" item-end (click)="hireUser(u)">
                 Hire User &nbsp;
                 <ion-icon name='md-create'></ion-icon>
             </button>
