@@ -25,11 +25,12 @@ import { ProjectlistPage } from '../pages/set-up/projectlist/projectlist';
 import { NewprojectPage } from '../pages/set-up/newproject/newproject';
 import { BiddingeditorPage } from '../pages/set-up/biddingeditor/biddingeditor';
 import { InstanteditorPage } from '../pages/set-up/instanteditor/instanteditor';
+import { NewpuzzlePage } from '../pages/set-up/newpuzzle/newpuzzle';
+import { PuzzlelistPage } from '../pages/set-up/puzzlelist/puzzlelist';
 import { QuestlistPage } from '../pages/set-up/questlist/questlist';
 import { UpdatequestPage } from '../pages/set-up/updatequest/updatequest';
 import { OptionquestPage } from '../pages/set-up/optionquest/optionquest';
-import { PuzzlelistPage } from '../pages/set-up/puzzlelist/puzzlelist';
-import { NewpuzzlePage } from '../pages/set-up/newpuzzle/newpuzzle';
+import { SelectquestPage } from '../pages/set-up/selectquest/selectquest';
 //Module 2 components
 import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
@@ -61,11 +62,12 @@ import { JoinTeamPage } from '../pages/join-team/join-team';
 
 
 
-
 import { UserData } from '../providers/user-data';
 
 import { servicesEmail } from '../providers/servicesEmail';
-
+import { SelectProjectPage } from '../pages/select-project/select-project';
+import { GenerateResourcesPage } from '../pages/generate-resources/generate-resources';
+import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cost-time';
 
 @NgModule({
   declarations: [
@@ -92,17 +94,20 @@ import { servicesEmail } from '../providers/servicesEmail';
     DevelopProjectPage,
     ImproveSkillLevelPage,
     JoinTeamPage,
-    HireUserPage,
     ProjectlistPage,
     NewprojectPage,
     BiddingeditorPage,
     InstanteditorPage,
+    HireUserPage,
+    SelectProjectPage,
+    GenerateResourcesPage,
+    EstimateCostTimePage,
+    NewpuzzlePage,
+    PuzzlelistPage,
     QuestlistPage,
     UpdatequestPage,
     OptionquestPage,
-    PuzzlelistPage,
-    NewpuzzlePage
-    
+    SelectquestPage
   ],
   imports: [
     BrowserModule,
@@ -129,12 +134,12 @@ import { servicesEmail } from '../providers/servicesEmail';
         { component: DevelopProjectPage, name: 'DevelopProjectPage', segment: 'account' },
         { component: ImproveSkillLevelPage, name: 'ImproveSkillLevelPage', segment: 'account' },
         { component: JoinTeamPage, name: 'JoinTeamPage', segment: 'account' },
-
-
-
-
-
-        { component: HireUserPage, name: 'HireUserPage', segment: 'users' }
+        { component: HireUserPage, name: 'HireUserPage', segment: 'users' },
+        { component: SelectProjectPage, name: 'SelectProjectPage', segment: 'users' },
+        { component: GenerateResourcesPage, name: 'GenerateResourcesPage', segment: 'users' },
+        { component: EstimateCostTimePage, name: 'EstimateCostTimePage', segment: 'users' }
+        
+        
       ]
     }),
     IonicStorageModule.forRoot()
@@ -164,16 +169,20 @@ import { servicesEmail } from '../providers/servicesEmail';
     DevelopProjectPage,
     ImproveSkillLevelPage,
     JoinTeamPage,
-    HireUserPage,
     ProjectlistPage,
     NewprojectPage,
     BiddingeditorPage,
     InstanteditorPage,
+    HireUserPage,
+    SelectProjectPage,
+    GenerateResourcesPage,
+    EstimateCostTimePage,
+    NewpuzzlePage,
+    PuzzlelistPage,
     QuestlistPage,
     UpdatequestPage,
     OptionquestPage,
-    PuzzlelistPage,
-    NewpuzzlePage
+    SelectquestPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
