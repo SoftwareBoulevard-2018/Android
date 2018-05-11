@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-title>Edit question</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content padding>
+  
+    <div class="card">
+      <div class="item item-divider">
+        <h3>Description</h3>
+        <div class="list">
+          <label class="item item-input">
+            <textarea placeholder="Descripton"></textarea>
+          </label>
+        </div>
+      </div>
+    </div>
+  
+    <div class="list">
+      <label class="item item-input item-select">
+        <div class="input-label">
+          <h3> Category </h3>
+        </div>
+        <select id="projlist">
+          <option selected>...</option>
+          <option id="A" value=0>Analyst</option>
+          <option id="D" value=1>Developer</option>
+          <option id="T" value=2>Tester</option>
+        </select>
+      </label>
+    </div>
+  
+    <div class="card">
+      <div>
+        <h3>Level</h3>
+        <div class="list">
+          <label>
+            <textarea placeholder="Level"></textarea>
+          </label>
+        </div>
+      </div>
+    </div>
+  
+    <button ion-button icon-left color="primary" (click)=goToOptionquest()>
+      <ion-icon name="done-all"></ion-icon>
+      Done
+    </button>
+  
+  </ion-content>

@@ -1,0 +1,49 @@
+
+<ion-header>
+
+    <ion-navbar color="primary">
+      <ion-title>Question</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+  
+      <ion-list>
+          <ion-item>
+            <h1> Question List</h1>
+            <ion-icon></ion-icon>
+            Question 1
+            <ion-icon name="sync" item-end></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-icon></ion-icon>
+            Question 2
+            <ion-icon name="sync" item-end></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-icon></ion-icon>
+            Question 3
+            <ion-icon name="sync" item-end></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-icon></ion-icon>
+            Question 4
+            <ion-icon name="sync" item-end></ion-icon>
+          </ion-item>
+        </ion-list>
+        <button ion-button icon-left color="primary" (click)=goToHome()>
+            <ion-icon name="home"></ion-icon>
+            Home
+        </button>
+        <ion-content>
+            <ion-fab right edge (click)=goToUpdatequest()>
+              <button ion-fab>
+                <ion-icon name="add"></ion-icon>
+              </button>
+            </ion-fab>
+        </ion-content>
+  
+  </ion-content>
+   

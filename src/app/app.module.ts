@@ -25,6 +25,12 @@ import { ProjectlistPage } from '../pages/set-up/projectlist/projectlist';
 import { NewprojectPage } from '../pages/set-up/newproject/newproject';
 import { BiddingeditorPage } from '../pages/set-up/biddingeditor/biddingeditor';
 import { InstanteditorPage } from '../pages/set-up/instanteditor/instanteditor';
+import { NewpuzzlePage } from '../pages/set-up/newpuzzle/newpuzzle';
+import { PuzzlelistPage } from '../pages/set-up/puzzlelist/puzzlelist';
+import { QuestlistPage } from '../pages/set-up/questlist/questlist';
+import { UpdatequestPage } from '../pages/set-up/updatequest/updatequest';
+import { OptionquestPage } from '../pages/set-up/optionquest/optionquest';
+import { SelectquestPage } from '../pages/set-up/selectquest/selectquest';
 //Module 2 components
 import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
@@ -95,7 +101,13 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
     HireUserPage,
     SelectProjectPage,
     GenerateResourcesPage,
-    EstimateCostTimePage
+    EstimateCostTimePage,
+    NewpuzzlePage,
+    PuzzlelistPage,
+    QuestlistPage,
+    UpdatequestPage,
+    OptionquestPage,
+    SelectquestPage
   ],
   imports: [
     BrowserModule,
@@ -164,7 +176,13 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
     HireUserPage,
     SelectProjectPage,
     GenerateResourcesPage,
-    EstimateCostTimePage
+    EstimateCostTimePage,
+    NewpuzzlePage,
+    PuzzlelistPage,
+    QuestlistPage,
+    UpdatequestPage,
+    OptionquestPage,
+    SelectquestPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
