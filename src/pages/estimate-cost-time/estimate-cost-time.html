@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Estimate Cost and Time of Project</ion-title>
+    <ion-title>Estimate Time and Cost</ion-title>
     <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
     </button>
@@ -18,17 +18,21 @@
 
 <ion-content padding>
   <ion-item>
-    <ion-label color="primary">Cost Required: {{p.cost}}</ion-label>
-    <ion-label color="primary">Time Required: {{p.time}}</ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-label color="primary">Cost Estimated: {{lastCostEst}}</ion-label>
-    <ion-label color="primary">Time Estimated: {{lastTimeEst}}</ion-label>
-  </ion-item>
-  <ion-item>
     <ion-label color="primary">Available Resources: {{comp.resources}}</ion-label>
   </ion-item>
-  <button ion-button color="primary" (click)="estimateCostTime()">
+  
+  <ion-item>
+    <ion-label stacked color="primary">Time</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked color="primary">Cost</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+ 
+  
+  <button ion-button color="primary" (click)="estimateCostTime()" block>
     Estiamate &nbsp;
     <ion-icon name='md-create'></ion-icon>
   </button>
