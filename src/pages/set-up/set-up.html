@@ -1,70 +1,55 @@
 <ion-header>
   <ion-navbar>
-      <button ion-button menuToggle> 
-        <ion-icon name="menu"></ion-icon> 
-      </button>
-  <ion-title>
-    Game Administrator View
-  </ion-title>
-</ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Game Administrator View
+    </ion-title>
+  </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-card>
+    <ion-card-header (click)="goToProjeclist()">
+      <ion-card-title>
+        <ion-icon name='albums' margin-right></ion-icon>Define/update project
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="outer-content">
+      information
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header (click)="goToPuzzlelist()">
+      <ion-card-title>
+        <ion-icon name='apps' margin-right></ion-icon>Define/update puzzle
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="outer-content">
+      information
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header (click)="goToQuestlist()">
+      <ion-card-title>
+        <ion-icon name='help' margin-right></ion-icon>Define/update question
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="outer-content">
+      information
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+      <ion-card-header (click)="goToParameterlist()">
+        <ion-card-title>
+          <ion-icon name='create' margin-right></ion-icon>Update parameter
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="outer-content">
+        information
+      </ion-card-content>
+    </ion-card>
+  
 
-<h1 class="titulo"> prueba</h1>
-
-<div class="card" >
-  <div class="item item-divider">
-    Define / Edit
-  </div>
-  <div class="item item-text-wrap">
-    <ion-grid>
-      <ion-row>
-        <button ion-button icon-left color="primary" (click)=goToPuzzlelist()>
-          <ion-icon name="apps"></ion-icon>
-          Puzzle
-        </button>
-      </ion-row>
-      <ion-row>
-        <button ion-button icon-left color="primary" (click)=goToQuestlist()>
-          <ion-icon name="help"></ion-icon>
-          Question 
-        </button>
-      </ion-row>
-    </ion-grid>
-  </div>
-</div>
-
-<div class="card" >
-  <div class="item item-divider">
-    Create / Edit
-  </div>
-  <div class="item item-text-wrap">
-    <ion-grid>
-      <ion-row>
-        <button ion-button icon-left color="primary" (click)=goToProjeclist()>
-          <ion-icon name="albums"></ion-icon>
-          Project
-        </button>
-      </ion-row>
-    </ion-grid>
-  </div>
-</div>
-
-<div class="card" >
-  <div class="item item-divider">
-    View
-  </div>
-  <div class="item item-text-wrap">
-    <ion-grid>
-      <ion-row>
-        <button ion-button icon-left color="primary">
-          <ion-icon name="create"></ion-icon>
-          Report
-        </button>
-      </ion-row>
-    </ion-grid>
-  </div>
-</div>
-
-</ion-content> 
+</ion-content>

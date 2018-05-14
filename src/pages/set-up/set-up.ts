@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { ProjectlistPage } from '../set-up/projectlist/projectlist';
 import { QuestlistPage } from '../set-up/questlist/questlist';
 import { PuzzlelistPage } from '../set-up/puzzlelist/puzzlelist';
+import { UpdateparameterPage } from '../set-up/updateparameter/updateparameter';
 @Component({
   selector: 'set-up',
   templateUrl: 'set-up.html'
@@ -22,6 +23,9 @@ export class SetUpPage {
 
   goToPuzzlelist(){
     this.navCtrl.push(PuzzlelistPage);
+  }
+  goToParameterlist(){
+    this.navCtrl.push(UpdateparameterPage);
   }
 
 
