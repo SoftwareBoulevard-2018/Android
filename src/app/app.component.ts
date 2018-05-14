@@ -25,7 +25,7 @@ import { JoinTeamPage } from '../pages/join-team/join-team';
 import { UserData } from '../providers/user-data';
 import { GenerateResourcesPage } from '../pages/generate-resources/generate-resources';
 import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cost-time';
-
+import { HireUserPage } from './../pages/hire-user/hire-user';
 
 export interface PageInterface {
   title: string;
@@ -66,7 +66,8 @@ export class SoftwareBoulevardApp {
     //{ title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },
     { title: 'Select Project', name: 'SelectProjectPage', component: SelectProjectPage, icon: 'checkbox-outline'},
     { title: 'Generate Resources', name: 'GenerateResourcesPage', component: GenerateResourcesPage, icon: 'hammer'},
-    { title: 'Estimate Cost and Time', name: 'EstimateCostTimePage', component: EstimateCostTimePage, icon: 'logo-yen'}
+    { title: 'Estimate Cost and Time', name: 'EstimateCostTimePage', component: EstimateCostTimePage, icon: 'cash'},
+    { title: 'Recruit team member', name: 'HireUserPage', component: HireUserPage, icon: 'person-add'}
   ];
 
   loggedInPages: PageInterface[] = [
@@ -74,7 +75,7 @@ export class SoftwareBoulevardApp {
     { title: 'About', name: 'AboutPage', component: AboutPage, icon: 'help' },
     { title: 'Logout', name: 'LoginPage', component: LoginPage, icon: 'log-out', logsOut: true }
   ];
-  
+
   adminPages: PageInterface[] = [
     { title: 'Set-up', name: 'SetUpPage', component: SetUpPage, icon: 'md-cog' }
   ];
