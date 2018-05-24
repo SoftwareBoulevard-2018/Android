@@ -39,7 +39,7 @@ export class GenerateResourcesPage {
       this.puzzlePieces.push(imgSrc);
       console.log(this.puzzlePieces[i]);
     }
-
+    //this.puzzlePieces[15] = "";
     var suffle: number[] = [3, 2, 6, 10, 1, 4, 8, 11, 15, 5, 14, 13, 7, 9, 12, 0];
     
     var k = 0;
@@ -60,9 +60,224 @@ export class GenerateResourcesPage {
 
   movePiece(row: number, col: number)
   {
-    //var temp: any;
-    alert(row.toString().concat(col.toString()));
+    if(this.isAdjacent(row,col))
+    {
+      console.log("Piece moved");
+    }
+    //alert(r.toString());
+    //alert(row.toString().concat(col.toString()));
   }
+
+  private isAdjacent(row: number, col: number): boolean
+  {
+    if(row < 3 && col < 3 && row > 0 && col > 0)
+    {
+      if(this.puzzle[row+1][col] === 0)
+      {
         
+        this.swappPiece(row, col, row+1, col); 
+        return true;
+      }
+      if(this.puzzle[row][col+1] === 0)
+      {
+        
+        this.swappPiece(row, col, row, col+1); 
+        return true;
+      }
+      if(this.puzzle[row-1][col] === 0)
+      {
+        
+        this.swappPiece(row, col, row-1, col); 
+        return true;
+      }
+      if(this.puzzle[row][col-1] === 0)
+      {
+        
+        this.swappPiece(row, col, row, col-1); 
+        return true;
+      }     
+    }
+
+    if((row === 3 || row === 0) && (col < 3  && col > 0))
+    {
+      if(this.puzzle[row][col+1] === 0)
+      {
+        
+        this.swappPiece(row, col, row, col+1); 
+        return true;
+      }   
+      if(this.puzzle[row][col-1] === 0)
+      {
+        
+        this.swappPiece(row, col, row, col-1); 
+        return true;
+      } 
+      
+      if(row === 3 && col > 0 && col < 3)
+      {
+        if(this.puzzle[row-1][col] === 0)
+        {
+          
+          this.swappPiece(row, col, row-1, col); 
+          return true;
+        } 
+        if(this.puzzle[row][col+1] === 0)
+        {
+          
+          this.swappPiece(row, col, row, col+1); 
+          return true;
+        } 
+        if(this.puzzle[row][col-1] === 0)
+        {
+          
+          this.swappPiece(row, col, row, col-1); 
+          return true;
+        } 
+      }
+      if(row === 0 && col > 0 && col < 3)
+      {
+        if(this.puzzle[row+1][col] === 0)
+        {
+          
+          this.swappPiece(row, col, row+1, col); 
+          return true;
+        } 
+        if(this.puzzle[row][col+1] === 0)
+        {
+          
+          this.swappPiece(row, col, row, col+1); 
+          return true;
+        } 
+        if(this.puzzle[row][col-1] === 0)
+        {
+          
+          this.swappPiece(row, col, row, col-1); 
+          return true;
+        } 
+      }
+       
+    }
+
+    if((row < 3 && row > 0) && (col === 3 || col === 0))
+    {
+      if(this.puzzle[row+1][col] === 0)
+      {
+        
+        this.swappPiece(row, col, row+1, col); 
+        return true;
+      }   
+      if(this.puzzle[row-1][col] === 0)
+      {
+        
+        this.swappPiece(row, col, row-1, col); 
+        return true;
+      } 
+      if(row < 3 && col === 3 && row > 0)
+      {
+        if(this.puzzle[row][col-1] === 0)
+        {
+          
+          this.swappPiece(row, col, row, col-1); 
+          return true;
+        }   
+        if(this.puzzle[row+1][col] === 0)
+        {
+          
+          this.swappPiece(row, col, row+1, col); 
+          return true;
+        } 
+        if(this.puzzle[row-1][col] === 0)
+        {
+          
+          this.swappPiece(row, col, row-1, col); 
+          return true;
+        }
+      }
+      if(row < 3 && col === 0 && row > 0)
+      {
+        if(this.puzzle[row][col+1] === 0)
+        {
+          
+          this.swappPiece(row, col, row, col+1); 
+          return true;
+        }   
+        if(this.puzzle[row+1][col] === 0)
+        {
+          
+          this.swappPiece(row, col, row+1, col); 
+          return true;
+        } 
+        if(this.puzzle[row-1][col] === 0)
+        {
+          
+          this.swappPiece(row, col, row-1, col); 
+          return true;
+        }
+      }  
+    }
+    if((row === 3 || row === 0) && col === 0)
+    {
+      if(this.puzzle[row][col+1] === 0)
+      {
+        
+        this.swappPiece(row, col, row, col+1); 
+        return true;
+      }
+      if(row === 3)
+      {
+        if(this.puzzle[row-1][col] === 0)
+        {
+          
+          this.swappPiece(row, col, row-1, col); 
+          return true;
+        }
+      }
+      if(row === 0)
+      {
+        if(this.puzzle[row+1][col] === 0)
+        {
+          
+          this.swappPiece(row, col, row+1, col); 
+          return true;
+        }
+      }
+    }
+    if((row === 3 || row === 0) && col === 3)
+    {
+      if(this.puzzle[row][col-1] === 0)
+      {
+        
+        this.swappPiece(row, col, row, col-1); 
+        return true;
+      }
+      if(row === 3)
+      {
+        if(this.puzzle[row-1][col] === 0)
+        {
+          
+          this.swappPiece(row, col, row-1, col); 
+          return true;
+        }
+      }
+      if(row === 0)
+      {
+        if(this.puzzle[row+1][col] === 0)
+        {
+          
+          this.swappPiece(row, col, row+1, col); 
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  
+  private swappPiece(a_row:number, a_col:number, n_row:number, n_col:number)
+  {
+    var temp = this.puzzle[a_row][a_col];
+    this.puzzle[a_row][a_col] = this.puzzle[n_row][n_col];
+    this.puzzle[n_row][n_col] = temp;
+  }
 }
+
 
