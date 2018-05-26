@@ -22,6 +22,7 @@ export class HttpService {
   static companiesURL = '/companies';
   static loginURL = '/login';
   static emailURL = '/emails';
+  static reportsURL = '/reports';
 
   // All services related to Users
   getAllUsers() {
@@ -85,5 +86,10 @@ export class HttpService {
   updateState(idUsuario, idEmail){
     return this.http.post<Email>(HttpService.apiURL + HttpService.emailURL + '/updateState/',
       JSON.stringify({idUsuario: idUsuario, idEmail: idEmail}), HttpService.httpOptions);
+  }
+
+  // All services related to reports
+  getReports(){
+    return this.http.get(HttpService.apiURL + HttpService.reportsURL);
   }
 }
