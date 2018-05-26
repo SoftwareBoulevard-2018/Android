@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-import { UserData } from '../../providers/user-data';
-
 import { ListUsersPage } from '../list-users/list-users';
 import { ListCompaniesPage } from '../list-companies/list-companies';
 import { SetUpPage } from '../set-up/set-up';
@@ -10,6 +8,7 @@ import { CreateAccountPage } from '../create-account/create-account';
 import { CreateCompanyPage } from '../create-company/create-company';
 
 import { Events, NavController } from 'ionic-angular';
+import { GeneralServiceService } from '../../app/general-service.service';
 /**
  * shows the cards for each user role.
  */
@@ -23,22 +22,18 @@ export class MainPage {
 
   constructor(
     public navCtrl: NavController, 
-    public userData: UserData,
-    public events: Events
+    public events: Events,
+    public service: GeneralServiceService
   ) {
     //after log-in knows the role.
     //because of asynchrony can blink thus I'm thinking of a better implementatnion.
     this.events.subscribe('user:login', () => {
-      this.userData.getRole().then(role =>{
-        this.user_type = role;
-      })
+      this.user_type = this.service.user.role;
     });
   }
   //if this view is reopened we need to obtain the role.
   ionViewWillEnter() {
-    this.userData.getRole().then(role =>{
-      this.user_type = role;
-    })
+    this.user_type = this.service.user.role;
   }
   viewUsers() {
     this.navCtrl.push(ListUsersPage);

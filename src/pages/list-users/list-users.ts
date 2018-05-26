@@ -5,6 +5,7 @@ import { ViewAccountPage } from '../account/account';
 import { EditAccountPage } from '../edit-account/edit-account';
 
 import { GeneralServiceService } from '../../app/general-service.service';
+import { HttpService } from '../../app/http.service';
 
 import { NavController } from 'ionic-angular';
 
@@ -22,10 +23,46 @@ export class ListUsersPage {
   users: any;
   constructor(
     public navCtrl: NavController,
-    public service: GeneralServiceService
+    public service: GeneralServiceService,
+    public httpService: HttpService
   ) {
-    this.users = service.users;
+    //this.getAllUsers();
   }
+
+  /*WIP
+  getAllUsers() {
+    return this.httpService.getAllUsers().subscribe(data => this.listUser(data));
+  }
+
+  listUser(data) {
+    console.log(data);
+    this.users = [];
+    for (const value of Object.values(data.data)) {
+     this.getCompanyById(value.companyId, value);
+    }
+  }
+
+  getCompanyById(companyId, user) {
+    return this.httpService.getCompanyById(companyId).subscribe(data => {
+      user.companyName = data.name;
+      user.hide_password = true;
+      this.users.push({ id: user.id, createdAt: user.createdAt,
+        name: user.name, username: user.username,
+        password: user.password, role: user.role, companyName: user.companyName,
+      hide_password: true});
+      this.users2.data = this.users;
+      console.log(this.users2);
+    }, error => {
+        user.companyName = undefined;
+        user.hide_password = true;
+        this.users.push({ id: user.id, createdAt: user.createdAt,
+          name: user.name, username: user.username,
+          password: user.password, role: user.role, companyName: user.companyName,
+          hide_password: true});
+        this.users2.data = this.users;
+        console.log(this.users2);
+      });
+  }*/
 
   viewUser(user) {
     this.navCtrl.push(ViewAccountPage,{

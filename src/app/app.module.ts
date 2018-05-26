@@ -2,7 +2,7 @@
  * imports and declarations of everything
  */
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule, ErrorHandler } from '@angular/core';
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -11,6 +11,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { IonicStorageModule } from '@ionic/storage';
+
+import { HttpService } from './http.service';
 
 
 import { PopoverPage } from '../pages/about-popover/about-popover';
@@ -62,7 +64,6 @@ import { JoinTeamPage } from '../pages/join-team/join-team';
 
 
 
-import { UserData } from '../providers/user-data';
 
 import { servicesEmail } from '../providers/servicesEmail';
 import { SelectProjectPage } from '../pages/select-project/select-project';
@@ -111,7 +112,7 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
   ],
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     IonicModule.forRoot(SoftwareBoulevardApp, {}, {
       links: [
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
@@ -186,7 +187,7 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    UserData,
+    HttpService,
     InAppBrowser,
     SplashScreen,
     GeneralServiceService,

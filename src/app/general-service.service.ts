@@ -3,17 +3,14 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { Company } from '../models/company';
 import { BiddingProject } from '../models/biddingProject';
+import { Storage } from '@ionic/storage';
+import { Events } from 'ionic-angular';
 /**
  * contains burned data to show the functionality of the GUI
  */
 @Injectable()
 export class GeneralServiceService {
-
-  user_type;
-
-  username;
-
-  loggedusr;
+  user: User;
 
   users = [new User("Andres Felipe Aguilar","afaguilarr","ElMejor123","Developer","UNAL",2,3),
     new User("John Jairo Serna","jjsernaco","holaMUNDO456","Project Manager","UNAL"),
@@ -46,5 +43,17 @@ export class GeneralServiceService {
 
   company_to_be_updated;
 
-  constructor() { }
+  constructor(public storage: Storage,public events: Events) { }
+
+  logout(){
+    this.user = null;
+    this.storage.remove('userInSession');
+    this.events.publish('user:logout');
+  }
+  login(user){
+    this.user = user;
+    this.storage.set('userInSession',user).then(() => {
+      this.events.publish('user:login')
+    })
+  }
 }

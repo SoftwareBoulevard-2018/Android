@@ -6,7 +6,7 @@ import { PopoverController } from 'ionic-angular';
 import { MenuemailpopoverPage } from '../../pages/menuemailpopover/menuemailpopover';
 import { ReademailPage } from '../../pages/reademail/reademail';
 import { servicesEmail } from '../../providers/servicesEmail';
-import { UserData } from '../../providers/user-data';
+import { GeneralServiceService } from '../../app/general-service.service';
 
 /**
  * Generated class for the SentemailpagePage page.
@@ -27,17 +27,15 @@ export class SentemailpagePage {
   private defaultList  =  []; //This arrangement serves to update the entire list of emails
   private username; //It is the user to whom the outbox will be shown
    
-  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl:PopoverController, public serviceEmail: servicesEmail, public userdata: UserData ) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl:PopoverController, public serviceEmail: servicesEmail, public service: GeneralServiceService ) {
 
     /*
     The username is obtained, in this component, from the user that was connected to the system.
     Then a method is invoked to obtain the emails that this user has sent.
     */
-    this.userdata.getUsername().then(user => {
-      this.username = user;
-      this.listEmailsSentForUser(this.serviceEmail.getEmails(), this.username);
 
-    });
+      this.username = this.service.user.username;
+      this.listEmailsSentForUser(this.serviceEmail.getEmails(), this.username);
   }
 
   
