@@ -16,6 +16,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class GenerateResourcesPage {
   puzzlePieces: String[] = [];
   puzzle: number[][] = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+  puzzleReward: number = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.selectPuzzle();
@@ -42,7 +43,7 @@ export class GenerateResourcesPage {
     //this.puzzlePieces[15] = "";
     //var suffle: number[] = [0, 3, 2, 6, 10, 1, 4, 8, 11, 5, 14, 13, 7, 9, 12, 15];
     var suffle: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-    
+    this.puzzleReward = 10;
     var k = 0;
     for(i = 0; i< 4; i++)
     {
