@@ -19,11 +19,12 @@ export class ViewCompanyPage {
     public navParams: NavParams
   ) {
     this.company = navParams.get("c")
+    /* TODO
     if(this.company.project_manager){
       this.project_manager = this.company.project_manager.name;
     }else{
       this.project_manager = "pending";
-    }
+    }*/
   }
 
 }

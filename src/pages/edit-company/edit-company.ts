@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { Company } from '../../models/company';
+import {HttpService} from '../../app/http.service';
 
 /**
  * shows and validates a form used to update a company received in param c
@@ -18,7 +19,8 @@ export class EditCompanyPage {
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    public httpService: HttpService
   ) {
     this.company = this.navParams.data.c;
   }
@@ -27,8 +29,10 @@ export class EditCompanyPage {
     this.submitted = true;
 
     if (form.valid) {
-      //TODO send data to server
-      this.navCtrl.pop();
+      return this.httpService.updateCompany(this.company, this.company.id).subscribe(() => {
+        this.navCtrl.pop();
+      });
+      
     }
   }
 }

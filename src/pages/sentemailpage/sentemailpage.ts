@@ -34,8 +34,11 @@ export class SentemailpagePage {
     Then a method is invoked to obtain the emails that this user has sent.
     */
 
-      this.username = this.service.user.username;
+   this.service.getCurrentUser().then((user) => {
+      this.username = user.username;
       this.listEmailsSentForUser(this.serviceEmail.getEmails(), this.username);
+    })
+      
   }
 
   
