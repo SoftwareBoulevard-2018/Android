@@ -1,0 +1,30 @@
+<ion-header>
+
+    <ion-navbar color="primary">
+      <ion-title>New puzzle</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content padding>
+  
+    <ion-item>
+      <ion-label stacked>
+        <h1>Photo puzzle</h1>
+      </ion-label>
+      <ion-input type="image"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label stacked>
+        <h1>Reward</h1>
+      </ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+  
+    <button ion-button icon-left color="primary" (click)=goToPuzzlelist()>
+      <ion-icon name="done-all"></ion-icon>
+      Done
+    </button>
+  
+  </ion-content>

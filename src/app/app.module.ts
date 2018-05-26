@@ -2,7 +2,7 @@
  * imports and declarations of everything
  */
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule, ErrorHandler } from '@angular/core';
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -11,6 +11,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { IonicStorageModule } from '@ionic/storage';
+
+import { HttpService } from './http.service';
 
 
 import { PopoverPage } from '../pages/about-popover/about-popover';
@@ -25,6 +27,12 @@ import { ProjectlistPage } from '../pages/set-up/projectlist/projectlist';
 import { NewprojectPage } from '../pages/set-up/newproject/newproject';
 import { BiddingeditorPage } from '../pages/set-up/biddingeditor/biddingeditor';
 import { InstanteditorPage } from '../pages/set-up/instanteditor/instanteditor';
+import { NewpuzzlePage } from '../pages/set-up/newpuzzle/newpuzzle';
+import { PuzzlelistPage } from '../pages/set-up/puzzlelist/puzzlelist';
+import { QuestlistPage } from '../pages/set-up/questlist/questlist';
+import { UpdatequestPage } from '../pages/set-up/updatequest/updatequest';
+import { OptionquestPage } from '../pages/set-up/optionquest/optionquest';
+import { SelectquestPage } from '../pages/set-up/selectquest/selectquest';
 //Module 2 components
 import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
@@ -56,7 +64,6 @@ import { JoinTeamPage } from '../pages/join-team/join-team';
 
 
 
-import { UserData } from '../providers/user-data';
 
 import { servicesEmail } from '../providers/servicesEmail';
 import { SelectProjectPage } from '../pages/select-project/select-project';
@@ -95,11 +102,17 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
     HireUserPage,
     SelectProjectPage,
     GenerateResourcesPage,
-    EstimateCostTimePage
+    EstimateCostTimePage,
+    NewpuzzlePage,
+    PuzzlelistPage,
+    QuestlistPage,
+    UpdatequestPage,
+    OptionquestPage,
+    SelectquestPage
   ],
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     IonicModule.forRoot(SoftwareBoulevardApp, {}, {
       links: [
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
@@ -164,11 +177,17 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
     HireUserPage,
     SelectProjectPage,
     GenerateResourcesPage,
-    EstimateCostTimePage
+    EstimateCostTimePage,
+    NewpuzzlePage,
+    PuzzlelistPage,
+    QuestlistPage,
+    UpdatequestPage,
+    OptionquestPage,
+    SelectquestPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    UserData,
+    HttpService,
     InAppBrowser,
     SplashScreen,
     GeneralServiceService,

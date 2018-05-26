@@ -7,7 +7,8 @@ import { PopoverController } from 'ionic-angular';
 import { MenuemailpopoverPage } from '../../pages/menuemailpopover/menuemailpopover';
 import { ReademailPage } from '../../pages/reademail/reademail';
 import { servicesEmail } from '../../providers/servicesEmail';
-import { UserData } from '../../providers/user-data';
+
+import { GeneralServiceService } from '../../app/general-service.service';
 
 
 /**
@@ -29,17 +30,14 @@ export class InboxPage {
   private username; //It is the user to whom the inbox will be shown
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, public serviceEmail: servicesEmail, public userdata: UserData) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, public serviceEmail: servicesEmail, public service: GeneralServiceService) {
 
     /*
     The username is obtained, in this component, from the user that was connected to the system.
     Then a method is invoked to obtain the emails that this user has received.
     */
-    this.userdata.getUsername().then(user => {
-      this.username = user;
-      this.listEmailsReceivedForUser(this.serviceEmail.getEmails(), this.username);
-
-    });
+    this.username = this.service.user;
+    this.listEmailsReceivedForUser(this.serviceEmail.getEmails(), this.username);
 
   }
 

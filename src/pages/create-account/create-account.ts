@@ -14,13 +14,18 @@ import { User } from '../../models/user';
 export class CreateAccountPage {
   user = new User("","","","","");
   submitted = false;
+  password_confirm = "";
+  //TODO: get roles from server
+  roles = [ 'Project Manager', 'Analyst', 'Developer', 'Tester'];
 
   constructor(public navCtrl: NavController) {}
 
   onSubmit(form: NgForm) {
+    
     this.submitted = true;
 
     if (form.valid) {
+      //TODO: validate if password_confirm === password
       //TODO: send account to server
       this.navCtrl.pop();
     }
