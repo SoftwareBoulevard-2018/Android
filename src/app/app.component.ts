@@ -92,7 +92,7 @@ export class SoftwareBoulevardApp {
     public service: GeneralServiceService
   ) {
     //verificates if the user is already logged in and skips the login page
-    this.storage.get('userInSession').then((user) => {
+    this.service.getCurrentUser().then((user) => {
       if(user !== undefined && user !== null){
         this.rootPage = MainPage;
         this.menu.enable(true);
@@ -130,12 +130,10 @@ export class SoftwareBoulevardApp {
    */
   listenToLoginEvents() {
     this.events.subscribe('user:login', () => {
-      this.user_type = this.service.user.role;
       this.menu.enable(true);
     });
 
     this.events.subscribe('user:logout', () => {
-      this.user_type = "";
       this.menu.enable(false);
     });
   }

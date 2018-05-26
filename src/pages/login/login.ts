@@ -35,9 +35,8 @@ export class LoginPage {
     this.submitted = true;
 
     this.httpService.login(this.login.username, this.login.password).subscribe( user => {
-        this.service.login(user);
-        this.navCtrl.setRoot(MainPage,{
-          role: user.role
+        this.service.login(user).then(()=>{
+          this.navCtrl.setRoot(MainPage);
         });
       },
       () => {

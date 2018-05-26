@@ -24,16 +24,13 @@ export class MainPage {
     public navCtrl: NavController, 
     public events: Events,
     public service: GeneralServiceService
-  ) {
-    //after log-in knows the role.
-    //because of asynchrony can blink thus I'm thinking of a better implementatnion.
-    this.events.subscribe('user:login', () => {
-      this.user_type = this.service.user.role;
-    });
-  }
+  ) { }
   //if this view is reopened we need to obtain the role.
   ionViewWillEnter() {
-    this.user_type = this.service.user.role;
+    this.service.getCurrentUser().then((user) => {
+      this.user_type = user.role;
+    });
+    //this.user_type = this.service.user.role;
   }
   viewUsers() {
     this.navCtrl.push(ListUsersPage);

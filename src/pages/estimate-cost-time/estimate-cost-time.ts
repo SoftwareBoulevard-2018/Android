@@ -32,7 +32,7 @@ export class EstimateCostTimePage {
     service: GeneralServiceService) {
 
     this.user = new User("Pedro el test user", "Testy", "1", "Project manager","UNAL",2,0);
-    this.comp = service.companies.find(c => c.name === this.user.company_name);
+    //this.comp = service.companies.find(c => c.name === this.user.company_name); //line comented for compilation
     //this.comp.resources = 10;
     this.ser = service;
     this.p = this.ser.bidProjects[this.comp.active_project];
