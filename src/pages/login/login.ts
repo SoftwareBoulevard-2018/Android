@@ -25,7 +25,6 @@ export class LoginPage {
     public service: GeneralServiceService,
     public httpService: HttpService,
     public toastCtrl: ToastController) { 
-      console.log(service.users)
     }
   /**
    * validates the received form and if correct logs in.
