@@ -37,20 +37,15 @@
 					Password is required
 				</p>
 				<ion-item>
-					<ion-label stacked color="primary">Role</ion-label>
-					<ion-input [(ngModel)]="user.role" name="role" type="text" #role="ngModel" required>
-					</ion-input>
+					<ion-label floating color="primary">Role</ion-label>
+					<ion-select [(ngModel)]="user.role" name="role" #role="ngModel" required>
+					  <ion-option *ngFor="let role of roles" [value]="role">
+						  {{role}}
+					</ion-option>
+					</ion-select>
 				</ion-item>
 				<p ion-text [hidden]="role.valid || submitted == false" color="danger" padding-left>
-					error
-				</p>
-				<ion-item>
-					<ion-label stacked color="primary">Company</ion-label>
-					<ion-input [(ngModel)]="user.company_name" name="company_name" type="text" #company="ngModel">
-					</ion-input>
-				</ion-item>
-				<p ion-text [hidden]="company.valid || submitted == false" color="danger" padding-left>
-					error
+					role is required
 				</p>
 			</ion-list>
 	
