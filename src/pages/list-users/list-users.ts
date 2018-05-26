@@ -20,49 +20,32 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'list-users.html'
 })
 export class ListUsersPage {
-  users: any;
+  users: any = [];
   constructor(
     public navCtrl: NavController,
     public service: GeneralServiceService,
     public httpService: HttpService
   ) {
-    //this.getAllUsers();
+    this.getAllUsers();
   }
 
-  /*WIP
+
   getAllUsers() {
-    return this.httpService.getAllUsers().subscribe(data => this.listUser(data));
+    return this.httpService.getAllUsers().subscribe(data => this.addCompanies(data['data']));
   }
 
-  listUser(data) {
-    console.log(data);
-    this.users = [];
-    for (const value of Object.values(data.data)) {
-     this.getCompanyById(value.companyId, value);
-    }
-  }
-
-  getCompanyById(companyId, user) {
-    return this.httpService.getCompanyById(companyId).subscribe(data => {
-      user.companyName = data.name;
-      user.hide_password = true;
-      this.users.push({ id: user.id, createdAt: user.createdAt,
-        name: user.name, username: user.username,
-        password: user.password, role: user.role, companyName: user.companyName,
-      hide_password: true});
-      this.users2.data = this.users;
-      console.log(this.users2);
-    }, error => {
+  addCompanies(users: any[]) {
+    users.forEach(user => {
+      this.httpService.getCompanyById(user.companyId).subscribe(company => {
+        user.companyName = company.name;
+        this.users.push(user);
+      }, error => {
+        console.log(error);
         user.companyName = undefined;
-        user.hide_password = true;
-        this.users.push({ id: user.id, createdAt: user.createdAt,
-          name: user.name, username: user.username,
-          password: user.password, role: user.role, companyName: user.companyName,
-          hide_password: true});
-        this.users2.data = this.users;
-        console.log(this.users2);
-      });
-  }*/
+        this.users.push(user);
+      })
+    });
+  }
 
   viewUser(user) {
     this.navCtrl.push(ViewAccountPage,{
