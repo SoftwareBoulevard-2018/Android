@@ -46,6 +46,9 @@ export class HttpService {
     return this.http.post<User[]>(HttpService.apiURL + HttpService.usersURL + HttpService.usersURL2,
       JSON.stringify({ role: role, companyId: companyId }), HttpService.httpOptions);
   }
+  getUsersByCompany(companyId){
+    return this.http.get<User[]>(HttpService.apiURL + HttpService.usersURL + '/company/' + companyId);
+  }
 
   // All services related to companies
   getAllCompanies() {

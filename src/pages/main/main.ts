@@ -36,7 +36,7 @@ export class MainPage {
     
     this.httpService.getReports().subscribe(report => {
       this.users = report['users'];
-      this.companies = report['users'];
+      this.companies = report['companies'];
     })
   }
   viewUsers() {
