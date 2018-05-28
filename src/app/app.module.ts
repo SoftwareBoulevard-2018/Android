@@ -9,6 +9,8 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -113,6 +115,7 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
   imports: [
     BrowserModule,
     HttpClientModule,
+    NgxChartsModule,BrowserAnimationsModule,
     IonicModule.forRoot(SoftwareBoulevardApp, {}, {
       links: [
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
