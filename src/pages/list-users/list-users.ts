@@ -26,6 +26,10 @@ export class ListUsersPage {
     public service: GeneralServiceService,
     public httpService: HttpService
   ) {
+    
+  }
+  ionViewDidEnter(){
+    this.users = [];
     this.getAllUsers();
   }
 

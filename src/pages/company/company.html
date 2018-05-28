@@ -27,10 +27,13 @@
           <ion-icon name="md-pint" item-start></ion-icon>
           resources: {{company.companyResource||0}}
         </ion-item>
-        <ion-item>
-          <ion-icon name="md-list-box" item-start></ion-icon>
-          current project: {{company.current_project_name||pending}}
-        </ion-item>
+      </ion-list>
+      <h4>Members</h4>
+      <ion-list>
+        <ion-item *ngFor="let m of members" >
+          <h2>{{m.name}}</h2>
+          <p>{{m.role}}</p>
+      </ion-item>
       </ion-list>
     </div>
   </ion-content>

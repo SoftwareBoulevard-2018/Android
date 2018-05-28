@@ -94,6 +94,7 @@ export class SoftwareBoulevardApp {
     //verificates if the user is already logged in and skips the login page
     this.service.getCurrentUser().then((user) => {
       if(user !== undefined && user !== null){
+        this.user_type = user.role;
         this.rootPage = MainPage;
         this.menu.enable(true);
       }else{
@@ -130,6 +131,9 @@ export class SoftwareBoulevardApp {
    */
   listenToLoginEvents() {
     this.events.subscribe('user:login', () => {
+      this.service.getCurrentUser().then((user) => {
+        this.user_type = user.role;
+      });
       this.menu.enable(true);
     });
 
