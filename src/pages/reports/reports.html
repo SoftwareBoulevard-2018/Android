@@ -8,5 +8,28 @@
 </ion-header>
 
 <ion-content>
-    <h1>Reports</h1>
+    <ion-card>
+        <ion-card-header >
+            <ion-card-title>
+                <ion-icon name="md-flame" margin-right></ion-icon>Companies by K
+            </ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content class="outer-content">
+            <ngx-charts-bar-vertical
+                [view]="view"
+                [scheme]="colorScheme"
+                [results]="single"
+                [gradient]="gradient"
+                [xAxis]="showXAxis"
+                [yAxis]="showYAxis"
+                [legend]="showLegend"
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel"
+                [xAxisLabel]="xAxisLabel"
+                [yAxisLabel]="yAxisLabel">
+            </ngx-charts-bar-vertical>
+        </ion-card-content>
+    </ion-card>
+    
 </ion-content>
