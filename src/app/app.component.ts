@@ -130,6 +130,10 @@ export class SoftwareBoulevardApp {
    */
   listenToLoginEvents() {
     this.events.subscribe('user:login', () => {
+      this.service.getCurrentUser().then((user) => {
+        this.user_type = user.role;
+        console.log(this.user_type);
+      });
       this.menu.enable(true);
     });
 
