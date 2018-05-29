@@ -3,12 +3,11 @@ import { NgForm } from '@angular/forms';
 
 import { NavController, ToastController } from 'ionic-angular';
 
-import { UserData } from '../../providers/user-data';
-
 import { UserOptions } from '../../interfaces/user-options';
 import { GeneralServiceService } from '../../app/general-service.service';
 
 import { MainPage } from '../main/main';
+import { HttpService } from '../../app/http.service';
 
 /**
  * shows the login form and validates the data, shows a toast if invalid.
@@ -22,39 +21,33 @@ export class LoginPage {
   submitted = false;
 
   constructor(
-    public navCtrl: NavController, 
-    public userData: UserData,
+    public navCtrl: NavController,
     public service: GeneralServiceService,
+    public httpService: HttpService,
     public toastCtrl: ToastController) { 
-      console.log(service.users)
     }
   /**
    * validates the received form and if correct logs in.
    * @param form login form to be validated
    */
   onLogin(form: NgForm) {
+    if(!form.valid) return false;
     this.submitted = true;
 
-    if (form.valid) {
-      let found = false;
-      this.service.users.forEach(user => {
-        if(this.login.username === user.username && 
-          this.login.password == user.password){
-            found = true;
-            this.userData.login(this.login.username,user.role);
-            this.navCtrl.setRoot(MainPage,{
-              role: user.role
-            });
-          }
-      })
-      if(!found){
+    this.httpService.login(this.login.username, this.login.password).subscribe( user => {
+        this.service.login(user).then(()=>{
+          this.navCtrl.setRoot(MainPage,{
+            role: user.role
+          });
+        });
+      },
+      () => {
         let toast = this.toastCtrl.create({
           message: 'Username or password incorrect',
           duration: 3000
         });
         toast.present();
-      }
-      
-    }
+    });
   }
+  
 }

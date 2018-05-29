@@ -4,7 +4,7 @@ import { AlertController, NavController, NavParams } from 'ionic-angular';
 
 import { User } from '../../models/user';
 
-import { UserData } from '../../providers/user-data';
+
 
 /**
  * shows an account received in param "u"
@@ -19,7 +19,7 @@ export class ViewAccountPage {
   constructor(
     public alertCtrl: AlertController, 
     public nav: NavController, 
-    public userData: UserData,
+
     public navParams: NavParams
   ) {
 

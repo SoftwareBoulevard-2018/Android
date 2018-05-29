@@ -17,7 +17,7 @@
                 <img src="{{c.image}}">
             </ion-avatar>
             <h2 (click)="viewCompany(c)">{{c.name}}</h2>
-            <p>Resources: 9000  -  K:{{c.capacity_k}}</p>
+            <p><ion-icon name="md-pint"></ion-icon> Resources: {{c.companyResource}}  -  <ion-icon name="md-flame"></ion-icon> K: {{c.capacityK}}</p>
             <button ion-button color="primary" item-end (click)="editCompany(c)">
                 <ion-icon name='md-create'></ion-icon>
             </button>

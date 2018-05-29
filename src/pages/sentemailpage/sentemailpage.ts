@@ -5,8 +5,10 @@ import { NavController, NavParams } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular';
 import { MenuemailpopoverPage } from '../../pages/menuemailpopover/menuemailpopover';
 import { ReademailPage } from '../../pages/reademail/reademail';
-import { servicesEmail } from '../../providers/servicesEmail';
-import { UserData } from '../../providers/user-data';
+import { GeneralServiceService } from '../../app/general-service.service';
+import { HttpService } from '../../app/http.service';
+
+import * as moment from 'moment';
 
 /**
  * Generated class for the SentemailpagePage page.
@@ -23,44 +25,85 @@ import { UserData } from '../../providers/user-data';
 export class SentemailpagePage {
 
   searchQuery: String; //This variable is the text entered by the user to perform the search in the outbox
-  private emailArray =  []; //This is the arrangement that the user has in the outbox
-  private defaultList  =  []; //This arrangement serves to update the entire list of emails
-  private username; //It is the user to whom the outbox will be shown
-   
-  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl:PopoverController, public serviceEmail: servicesEmail, public userdata: UserData ) {
+  private emailArray = []; //This is the arrangement that the user has in the outbox
+  private defaultList = []; //This arrangement serves to update the entire list of emails
+  private idUser; //This id is used to do HTTP requests in order to read emails for that user.
 
-    /*
-    The username is obtained, in this component, from the user that was connected to the system.
-    Then a method is invoked to obtain the emails that this user has sent.
-    */
-    this.userdata.getUsername().then(user => {
-      this.username = user;
-      this.listEmailsSentForUser(this.serviceEmail.getEmails(), this.username);
+  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController,
+    public service: GeneralServiceService, public HttpService: HttpService) {
+
+    //Here we query the current user that is logged and then we do a request to see what emails he has received.
+    this.service.getCurrentUser().then((user) => {
+      this.idUser = user.id;
+
+      this.HttpService.sent(this.idUser).subscribe((data) => {
+        this.listEmailsSentForUser(data);
+
+      })
+
 
     });
   }
 
-  
-   /*
-  This method is in charge of updating the array of the outbox email that the user has.
-  It receives an array of emails and the user who wants to see their outbox.
-  We need to check for every email that the name of the user equals to the sender of the email
-  in order to update the emailArray.
-  */
-  listEmailsSentForUser(email: any[], user: string) {
 
-    var indexemailArray = 0;
-    for (let i = 0; i < email.length; i++) {
+  /*
+ This method is in charge of updating the array of the outbox email that the user has.
+ It receives the data retrieved from the http request that gets the sent emails by the user.
+ Also we update two arrays, we update emailArray in order to see the outbox and defaultList has all the emails sent of
+ that user, in case of a search we can go back to all emails with defaulList.
+ */
+  listEmailsSentForUser(data) {
 
-        if (user.localeCompare(email[i].sender) == 0) {
-          this.emailArray[indexemailArray] = email[i];
-          indexemailArray++;
-        }
-  
+
+    const dataJson = JSON.parse(JSON.stringify(data));
+    this.emailArray = dataJson.data;
+    this.defaultList = this.emailArray;
+
+
+    this.updateDate();
+    this.updateSender();
+
+  }
+
+  /* This method updates the date of an email in a format easy to read for the user*/
+  updateDate() {
+
+    var date;
+
+    for (let i = 0; i < this.emailArray.length; i++) {
+      date = this.emailArray[i].createdAt;
+      this.emailArray[i].date = moment(date).format('D MMM YYYY, h:mm:ss A');
     }
 
-    this.defaultList = this.emailArray;
   }
+
+  /*In this method we update the sender for each email because the response object has an objectID and not username. */
+  updateSender() {
+
+
+    this.HttpService.getAllUsers().subscribe((data) => {
+
+      var sender;
+      var dataJson = JSON.parse(JSON.stringify(data));
+      var userData = dataJson.data;
+
+      for (let i = 0; i < this.emailArray.length; i++) {
+
+        sender = this.emailArray[i].sender;
+        for (let j = 0; j < userData.length; j++) {
+
+          if (sender.localeCompare(userData[j].id) == 0) {
+
+            this.emailArray[i].sender = userData[j].username;
+            break;
+          }
+        }
+
+      }
+    }
+    )
+  }
+
 
   searchEmail() {
     let IDEmailSolution = [];
@@ -79,12 +122,14 @@ export class SentemailpagePage {
       }
     }
 
+
+
     /*
     The external cycle (var z) runs through all the emails. 
     The internal cycle (var j) goes through all the solutions of email identifiers and it is checked 
     that the email id solution matches the email id of all the emails that travel through the external 
     cycle. The purpose is to find the id of the emails that meet the search.
-    */ 
+    */
     var index = 0;
 
     for (var z = 0; z < this.emailArray.length; z++) {

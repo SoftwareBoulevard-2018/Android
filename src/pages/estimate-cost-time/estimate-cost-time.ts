@@ -4,7 +4,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Company } from './../../models/company';
 import { User } from './../../models/user';
 import { GeneralServiceService } from './../../app/general-service.service';
-
+import { HttpService } from '../../app/http.service';
+import 'rxjs/add/operator/map';
 /**
  * Generated class for the EstimateCostTimePage page.
  *
@@ -18,7 +19,8 @@ import { GeneralServiceService } from './../../app/general-service.service';
   templateUrl: 'estimate-cost-time.html',
 })
 export class EstimateCostTimePage {
-  comp: Company;
+  comp: Company = new Company("00000000000null", "Null Company", "No image",
+  0, 0, 0, 0, 0);;
   user: User;
   ser: GeneralServiceService;
   costEst: number[] = [];
@@ -26,16 +28,26 @@ export class EstimateCostTimePage {
   p: BiddingProject;
   lastTimeEst: number = 0;
   lastCostEst: number = 0;
+  hService: HttpService;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    service: GeneralServiceService) {
-
-    this.user = new User("Pedro el test user", "Testy", "1", "Project manager","UNAL",2,0);
-    this.comp = service.companies.find(c => c.name === this.user.company_name);
-    //this.comp.resources = 10;
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              service: GeneralServiceService,
+              public httpService: HttpService)
+  {
+    this.hService = httpService;
+    service.getCurrentUser().then((user) => {
+      this.user = user;
+        if (!(user.companyId == null))
+        {
+          httpService.getCompanyById(user.companyId).subscribe((comp) => {
+            this.comp = comp;
+          });
+        }
+      });
     this.ser = service;
-    this.p = this.ser.bidProjects[this.comp.active_project];
+    //this.p = this.ser.bidProjects[this.comp.active_project]; //property not in company
   }
 
   ionViewDidLoad() {
@@ -44,13 +56,13 @@ export class EstimateCostTimePage {
 
   estimateCostTime()
   { 
-    if(!(this.comp.resources > 0))
+    if(!(this.comp.companyResource > 0))
     {
       alert("Not enough resources!! get more!");
       return;
     }
     else{
-      this.comp.resources = parseInt(this.comp.resources.toString()) - 1;
+      this.comp.companyResource = parseInt(this.comp.companyResource.toString()) - 1;
     }
 
     var ce =  Math.floor(Math.random() * (10000 - 0 + 1)) + 0;
@@ -67,11 +79,8 @@ export class EstimateCostTimePage {
     else{
       alert("Fail!!! try again =)");
     }
+    //console.log('The user that got here in estimate is '.concat(this.user.name));
+    //console.log('the company id is '.concat(this.user.companyId));
+    
   }
-
-  try()
-  {
-    alert("hi");
-  }
-
 }

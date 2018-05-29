@@ -2,18 +2,19 @@
  * imports and declarations of everything
  */
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule, ErrorHandler } from '@angular/core';
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { IonicStorageModule } from '@ionic/storage';
 
-
-import { PopoverPage } from '../pages/about-popover/about-popover';
+import { HttpService } from './http.service';
 
 //software boulevard
 import { SoftwareBoulevardApp } from './app.component';
@@ -63,7 +64,6 @@ import { JoinTeamPage } from '../pages/join-team/join-team';
 
 
 
-import { UserData } from '../providers/user-data';
 
 import { servicesEmail } from '../providers/servicesEmail';
 import { SelectProjectPage } from '../pages/select-project/select-project';
@@ -72,7 +72,6 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
 
 @NgModule({
   declarations: [
-    PopoverPage,
     SoftwareBoulevardApp,
     LoginPage,
     MainPage,
@@ -113,7 +112,8 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
   ],
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
+    NgxChartsModule,BrowserAnimationsModule,
     IonicModule.forRoot(SoftwareBoulevardApp, {}, {
       links: [
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
@@ -148,7 +148,6 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    PopoverPage,
     SoftwareBoulevardApp,
     LoginPage,
     MainPage,
@@ -189,7 +188,7 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    UserData,
+    HttpService,
     InAppBrowser,
     SplashScreen,
     GeneralServiceService,

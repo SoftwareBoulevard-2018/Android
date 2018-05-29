@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { NavController } from 'ionic-angular';
 
 import { User } from '../../models/user';
+import {HttpService} from '../../app/http.service';
 /**
  * shows and validates a form used to create a new account
  */
@@ -14,15 +15,22 @@ import { User } from '../../models/user';
 export class CreateAccountPage {
   user = new User("","","","","");
   submitted = false;
+  password_confirm = "";
+  //TODO: get roles from server
+  roles = [ 'Project Manager', 'Analyst', 'Developer', 'Tester'];
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController,
+    public httpService: HttpService) {}
 
   onSubmit(form: NgForm) {
+    
     this.submitted = true;
 
     if (form.valid) {
-      //TODO: send account to server
-      this.navCtrl.pop();
+      //TODO: validate if password_confirm === password
+      return this.httpService.createUser(this.user).subscribe(() => {
+        this.navCtrl.pop();
+      });
     }
   }
 }

@@ -18,7 +18,7 @@
             </ion-card-header>
 
             <ion-card-content class="outer-content">
-                information
+                Currently there are {{users}} users working hard for the win
             </ion-card-content>
 
             <ion-row no-padding>
@@ -35,15 +35,9 @@
                     </button>
                 </ion-col>
                 <ion-col>
-                    <button ion-button clear small color="primary" icon-start >
+                    <button ion-button clear small color="primary" icon-start (click)="viewReports('users')">
                             <ion-icon name='md-podium'></ion-icon>
                             reports
-                    </button>
-                </ion-col>
-                <ion-col>
-                    <button ion-button clear small color="primary" icon-start (click)="hireUser()">
-                            <ion-icon name='person-add'></ion-icon>
-                            Hire
                     </button>
                 </ion-col>
             </ion-row>
@@ -57,7 +51,7 @@
             </ion-card-header>
 
             <ion-card-content class="outer-content">
-                information
+                Currently there are {{companies}} companies fighting for the victory
             </ion-card-content>
 
             <ion-row no-padding>
@@ -74,7 +68,7 @@
                     </button>
                 </ion-col>
                 <ion-col>
-                    <button ion-button clear small color="primary" icon-start >
+                    <button ion-button clear small color="primary" icon-start (click)="viewReports('companies')">
                             <ion-icon name='md-podium'></ion-icon>
                             reports
                     </button>

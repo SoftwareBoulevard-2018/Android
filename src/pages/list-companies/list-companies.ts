@@ -4,7 +4,7 @@ import { ViewCompanyPage } from '../company/company';
 import { EditCompanyPage } from '../edit-company/edit-company';
 import { CreateCompanyPage } from '../create-company/create-company';
 
-import { GeneralServiceService } from '../../app/general-service.service';
+import { HttpService } from '../../app/http.service';
 
 import { NavController } from 'ionic-angular';
 
@@ -24,11 +24,15 @@ export class ListCompaniesPage {
 
   constructor(
     public navCtrl: NavController,
-    public service: GeneralServiceService
+    public httpService: HttpService
   ) {
-    this.companies = service.companies;
+    
   }
-
+  ionViewWillEnter(){
+    this.httpService.getAllCompanies().subscribe(data => {
+      this.companies = data['data']
+    })
+  }
   viewCompany(company) {
     this.navCtrl.push(ViewCompanyPage,{
       c: company

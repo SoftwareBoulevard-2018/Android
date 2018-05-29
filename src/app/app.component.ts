@@ -1,3 +1,5 @@
+import { GeneralServiceService } from './general-service.service';
+
 import { SelectProjectPage } from './../pages/select-project/select-project';
 import { Component, ViewChild } from '@angular/core';
 
@@ -22,7 +24,6 @@ import { JoinTeamPage } from '../pages/join-team/join-team';
 
 
 
-import { UserData } from '../providers/user-data';
 import { GenerateResourcesPage } from '../pages/generate-resources/generate-resources';
 import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cost-time';
 import { HireUserPage } from './../pages/hire-user/hire-user';
@@ -84,15 +85,16 @@ export class SoftwareBoulevardApp {
 
   constructor(
     public events: Events,
-    public userData: UserData,
     public menu: MenuController,
     public platform: Platform,
     public storage: Storage,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
+    public service: GeneralServiceService
   ) {
     //verificates if the user is already logged in and skips the login page
-    this.userData.hasLoggedIn().then((hasLoggedIn) => {
-      if(hasLoggedIn===true){
+    this.service.getCurrentUser().then((user) => {
+      if(user !== undefined && user !== null){
+        this.user_type = user.role;
         this.rootPage = MainPage;
         this.menu.enable(true);
       }else{
@@ -100,6 +102,7 @@ export class SoftwareBoulevardApp {
         this.rootPage = LoginPage;
       }
     });
+
 
     this.listenToLoginEvents();
   }
@@ -119,7 +122,7 @@ export class SoftwareBoulevardApp {
 
     if (page.logsOut === true) {
       // Give the menu time to close before changing to logged out
-      this.userData.logout();
+      this.service.logout();
     }
   }
 
@@ -128,14 +131,13 @@ export class SoftwareBoulevardApp {
    */
   listenToLoginEvents() {
     this.events.subscribe('user:login', () => {
-      this.userData.getRole().then(role =>{
-        this.user_type = role;
-      })
+      this.service.getCurrentUser().then((user) => {
+        this.user_type = user.role;
+      });
       this.menu.enable(true);
     });
 
     this.events.subscribe('user:logout', () => {
-      this.user_type = "";
       this.menu.enable(false);
     });
   }
@@ -156,13 +158,13 @@ export class SoftwareBoulevardApp {
     // Tabs are a special case because they have their own navigation
     if (childNav) {
       if (childNav.getSelected() && childNav.getSelected().root === page.tabComponent) {
-        return 'primary';
+        return 'secondary';
       }
       return;
     }
 
     if (this.nav.getActive() && this.nav.getActive().name === page.name) {
-      return 'primary';
+      return 'secondary';
     }
     return;
   }

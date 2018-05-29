@@ -5,6 +5,7 @@ import { ViewAccountPage } from '../account/account';
 import { EditAccountPage } from '../edit-account/edit-account';
 
 import { GeneralServiceService } from '../../app/general-service.service';
+import { HttpService } from '../../app/http.service';
 
 import { NavController } from 'ionic-angular';
 
@@ -19,12 +20,36 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'list-users.html'
 })
 export class ListUsersPage {
-  users: any;
+  users: any = [];
   constructor(
     public navCtrl: NavController,
-    public service: GeneralServiceService
+    public service: GeneralServiceService,
+    public httpService: HttpService
   ) {
-    this.users = service.users;
+    
+  }
+  ionViewDidEnter(){
+    this.users = [];
+    this.getAllUsers();
+  }
+
+  getAllUsers() {
+    return this.httpService.getAllUsers().subscribe(data => this.addCompanies(data['data']));
+  }
+
+  addCompanies(users) {
+    users.forEach(user => {
+      this.httpService.getCompanyById(user.companyId).subscribe(company => {
+        user.company = company;
+        user.companyName = company.name;
+        this.users.push(user);
+      }, error => {
+        console.log(error);
+        user.company = undefined;
+        user.companyName = undefined;
+        this.users.push(user);
+      })
+    });
   }
 
   viewUser(user) {
