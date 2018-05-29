@@ -90,7 +90,7 @@ export class ComposeEmailPage {
 
 
       this.HttpService.send(emailToSend).subscribe(
-        data => {
+        () => {
           let toast = this.toastCtrl.create({
             message: 'Email sent',
             duration: 3000
@@ -98,7 +98,7 @@ export class ComposeEmailPage {
           toast.present();
 
         },
-        error => {
+        () => {
 
           let toast = this.toastCtrl.create({
             message: 'Something went wrong',
