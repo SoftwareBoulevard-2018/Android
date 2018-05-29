@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
+import { TrainingAttempt } from '../models/trainingAttempt';
+import { DevelopingAttempt } from '../models/developingAttempt';
 import { Company } from '../models/company';
 import { Email } from '../models/email';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -23,6 +25,8 @@ export class HttpService {
   static loginURL = '/login';
   static emailURL = '/emails';
   static reportsURL = '/reports';
+  static trainingAttemptsURL = '/trainingAttempts';
+  static developingAttemptsURL = '/developingAttempts';
 
   // All services related to Users
   getAllUsers() {
@@ -85,7 +89,7 @@ export class HttpService {
   }
   sended(idUsuario) {
      return this.http.get<Email[]>(HttpService.apiURL + HttpService.emailURL + '/sended/' + idUsuario);
-  }  
+  }
   updateState(idUsuario, idEmail){
     return this.http.post<Email>(HttpService.apiURL + HttpService.emailURL + '/updateState/',
       JSON.stringify({idUsuario: idUsuario, idEmail: idEmail}), HttpService.httpOptions);
@@ -94,5 +98,15 @@ export class HttpService {
   // All services related to reports
   getReports(){
     return this.http.get(HttpService.apiURL + HttpService.reportsURL);
+  }
+
+  getTrainingAttemptsByState(state) {
+    return this.http.post<TrainingAttempt[]>(HttpService.apiURL + HttpService.trainingAttemptsURL,
+      JSON.stringify({ state1: state }), HttpService.httpOptions);
+  }
+
+  getDevelopingAttemptsByState(state) {
+    return this.http.post<DevelopingAttempt[]>(HttpService.apiURL + HttpService.developingAttemptsURL,
+      JSON.stringify({ state1: state }), HttpService.httpOptions);
   }
 }
