@@ -122,7 +122,7 @@ export class HttpService {
   }
   getAllBiddingProjects() {
     return this.http.get<BiddingProject[]>(HttpService.apiURL + HttpService.getBiddingProjectURL);
-
+  }
 
   getTrainingAttemptsByState(state) {
     return this.http.post<TrainingAttempt[]>(HttpService.apiURL + HttpService.trainingAttemptsURL,

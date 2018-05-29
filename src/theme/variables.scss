@@ -67,7 +67,7 @@ ion-card-header{
   background: color($colors, terciary);
 }
 
-$card-md-title-text-color: color($colors, base);
+$card-md-title-text-color: #fff;
 .card-header-md + .card-content-md, .card-md .item + .card-content-md{
   padding-top: 13px !important;
 }
