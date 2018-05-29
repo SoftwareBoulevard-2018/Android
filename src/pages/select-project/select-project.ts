@@ -1,8 +1,9 @@
-import { InstantProject } from './../../models/instantProject';
+//import { InstantProject } from './../../models/instantProject';
 import { BiddingProject } from './../../models/biddingProject';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { GeneralServiceService } from '../../app/general-service.service';
+import { HttpService } from '../../app/http.service';
 
 /**
  * Generated class for the SelectProjectPage page.
@@ -17,19 +18,33 @@ import { GeneralServiceService } from '../../app/general-service.service';
   templateUrl: 'select-project.html',
 })
 export class SelectProjectPage {
-  instP: InstantProject[] = [];
-  bidP: BiddingProject[] = [];
+  projects: BiddingProject[] = [];
+  hService: HttpService;
 
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
-    public service: GeneralServiceService) {
-      this.instP = service.InstProjects;
-      this.bidP = service.bidProjects;
+    public service: GeneralServiceService,
+    public httpService: HttpService) {
+      this.hService = httpService;
+     // this.instP = service.InstProjects;
+     // this.bidP = service.bidProjects;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SelectProjectPage');
+    this.getAllProjects()
+  }
+
+  getAllProjects() {
+    return this.httpService.getAllBiddingProjects().subscribe(data => this.fillProjects(data['data']));
+  }
+
+  fillProjects(projects) {
+    projects.forEach(project => { 
+        this.projects.push(project);
+    });
+    console.log("Reached filled Projects");
   }
 
 
