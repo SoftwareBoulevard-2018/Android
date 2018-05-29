@@ -48,8 +48,7 @@ export class InboxPage {
 
 
 
-    //Every 5 seconds the emails are updated.
-
+    //Every 5 seconds the emails are updated, so we need to do the request.
 
     this.service.getCurrentUser().then((user) => {
       this.idUser = user.id;
@@ -57,6 +56,8 @@ export class InboxPage {
 
       Observable.interval(5000).subscribe(() => {
         this.HttpService.read(this.idUser).subscribe((data) => {
+
+          
           if (JSON.parse(JSON.stringify(data)).data.length > this.defaultList.length) {
 
             this.listEmailsReceivedForUser(data);
@@ -94,6 +95,9 @@ export class InboxPage {
     for (let i = 0; i < this.emailArray.length; i++) {
       date = this.emailArray[i].createdAt;
       this.emailArray[i].date = moment(date).format('D MMM YYYY, h:mm:ss A');
+
+      console.log("email " + i + " " + this.emailArray[i].acknoledgment);
+
     }
 
   }

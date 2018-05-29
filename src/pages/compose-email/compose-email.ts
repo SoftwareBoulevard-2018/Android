@@ -35,9 +35,6 @@ export class ComposeEmailPage {
 
   receiversSelectedByUser: string[];
 
-
-
-
   private sender; //This is the object id of the user that will send the email.
 
 
@@ -49,7 +46,7 @@ export class ComposeEmailPage {
     public toastCtrl: ToastController
   ) {
 
-    //Get all users.
+    //Get all users and update receivers Array.
 
     this.HttpService.getAllUsers().subscribe((data) => {
       var dataJson = JSON.parse(JSON.stringify(data));
@@ -72,6 +69,8 @@ export class ComposeEmailPage {
 
   /*
   This method is used to send an email. (ACCORDING TO USES CASES).
+  According to user session, we create an email object to send an email.
+  Then we send a message according to the status of the email to send.
   */
   send() {
 
@@ -95,6 +94,7 @@ export class ComposeEmailPage {
             message: 'Email sent',
             duration: 3000
           });
+          console.log(data);
           toast.present();
 
         },
@@ -105,6 +105,7 @@ export class ComposeEmailPage {
             duration: 3000
           });
           toast.present();
+          console.log(error);
         }
       )
 
