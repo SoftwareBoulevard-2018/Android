@@ -1,6 +1,7 @@
 //import { InstantProject } from '../models/instantProject';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
+//import { TrainingAttempt } from '../models/TrainingAttempt';
 //import { Company } from '../models/company';
 //import { BiddingProject } from '../models/biddingProject';
 import { Storage } from '@ionic/storage';
@@ -25,7 +26,7 @@ export class GeneralServiceService {
 
   projects = [new BiddingProject(1,"FIFA",10,3, 10, 10, 10, 5000,0, 0, 0 ,0),
     new BiddingProject(2,"Bancolombia System",10,3, 10, 10, 10, 5000,0, 0, 0 ,0)];
-  
+
   bidProjects = [new BiddingProject(1,"FIFA",10,3, 10, 10, 10, 5000,0, 0, 0 ,0),
     new BiddingProject(2,"Bancolombia System",10,3, 10, 10, 10, 5000,0, 0, 0 ,0)];
 
@@ -51,7 +52,7 @@ export class GeneralServiceService {
   }
   /**
    * saves a session with the newly logged user
-   * @param user 
+   * @param user
    */
   login(user):Promise<void>{
     return this.storage.set('userInSession',user).then(() => {

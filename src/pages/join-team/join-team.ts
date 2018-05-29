@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { HttpService } from '../../app/http.service';
 
 /**
  * Generated class for the JoinTeamPage page.
@@ -25,10 +26,15 @@ export class JoinTeamPage {
   //Information to retrieve from server in the next deliverable
   teamName: string = "Fellowship of the ring";
   teamMessage: string = "A day may come, when the courage of men fails, when we forsake our friends and break all bonds of Fellowship, but it is not this day! This day we code!";
-  
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
-    
-    
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private alertCtrl: AlertController,
+    public httpService: HttpService
+  ) {
+
+
   }
   //Hide invitation, show only the no invitations message
   noInvitations(){
@@ -67,11 +73,12 @@ export class JoinTeamPage {
   //Automatically generated code
   ionViewDidLoad() {
     console.log('ionViewDidLoad JoinTeamPage');
+    this.httpService.getTrainingAttemptsByState("wrong").subscribe(data => this.print_data(data))
   }
   //Refresher
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
-    
+
     setTimeout(() => {
       console.log('Async operation has ended');
       refresher.complete();
@@ -79,5 +86,8 @@ export class JoinTeamPage {
     }, 2000);
   }
 
+  print_data(data){
+    console.log(data)
+  }
 
 }

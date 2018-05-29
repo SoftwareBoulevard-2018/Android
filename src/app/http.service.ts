@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
+import { TrainingAttempt } from '../models/trainingAttempt';
+import { DevelopingAttempt } from '../models/developingAttempt';
 import { Company } from '../models/company';
 import { Email } from '../models/email';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -25,11 +27,16 @@ export class HttpService {
   static loginURL = '/login';
   static emailURL = '/emails';
   static reportsURL = '/reports';
+
   static puzzlesURL = '/puzzles';
   static recordsURL = '/records';
   static puzzleURL = '/puzzles';
   static getCurrentCompanyURL = '/getCurrentProject';
   static getBiddingProjectURL = '/biddingProjects';
+
+  static trainingAttemptsURL = '/trainingAttempts';
+  static developingAttemptsURL = '/developingAttempts';
+
 
   // All services related to Users
   getAllUsers() {
@@ -90,9 +97,11 @@ export class HttpService {
     return this.http.post<Email>(HttpService.apiURL + HttpService.emailURL + '/send/',
       JSON.stringify(email), HttpService.httpOptions);
   }
+
   sent(idUsuario) {
      return this.http.get<Email[]>(HttpService.apiURL + HttpService.emailURL + '/sent/' + idUsuario);
   }  
+
   updateState(idUsuario, idEmail){
     return this.http.post<Email>(HttpService.apiURL + HttpService.emailURL + '/updateState/',
       JSON.stringify({idUsuario: idUsuario, idEmail: idEmail}), HttpService.httpOptions);
@@ -102,6 +111,7 @@ export class HttpService {
   getReports(){
     return this.http.get(HttpService.apiURL + HttpService.reportsURL);
   }
+
   //All services related to Puzzles
   getAllPuzzles() {
     return this.http.get<Puzzle[]>(HttpService.apiURL + HttpService.puzzleURL);
@@ -112,5 +122,26 @@ export class HttpService {
   }
   getAllBiddingProjects() {
     return this.http.get<BiddingProject[]>(HttpService.apiURL + HttpService.getBiddingProjectURL);
+
+
+  getTrainingAttemptsByState(state) {
+    return this.http.post<TrainingAttempt[]>(HttpService.apiURL + HttpService.trainingAttemptsURL,
+      JSON.stringify({ state1: state }), HttpService.httpOptions);
+  }
+
+  getDevelopingAttemptsByState(state) {
+    return this.http.post<DevelopingAttempt[]>(HttpService.apiURL + HttpService.developingAttemptsURL,
+      JSON.stringify({ state1: state }), HttpService.httpOptions);
+  }
+
+  createTrainingAttempt(trainingAttempt: TrainingAttempt) {
+    return this.http.post<TrainingAttempt[]>(HttpService.apiURL + HttpService.trainingAttemptsURL,
+      JSON.stringify(trainingAttempt), HttpService.httpOptions);
+  }
+
+  createDevelopingAttempt(developingAttempt: DevelopingAttempt) {
+    return this.http.post<DevelopingAttempt[]>(HttpService.apiURL + HttpService.developingAttemptsURL,
+      JSON.stringify(developingAttempt), HttpService.httpOptions);
+
   }
 }
