@@ -35,11 +35,11 @@ export class HttpService {
   static recordsURL = '/records';
   static puzzleURL = '/puzzles';
   static getCurrentCompanyURL = '/getCurrentProject';
-  static getBiddingProjectURL = '/biddingProjects';
+  static getBiddingProjectURL = '/getBiddingProject';
 
-  static getInstantProjectURL = '/instantProjects';
-  static getQuestionURL = '/questions';
-  static getAssignmentURL = '/assignment';
+  static getInstantProjectURL = '/getInstantProject';
+  static getQuestionURL = '/getQuestions';
+  static getAssignmentURL = '/getAssignment';
 
   static trainingAttemptsURL = '/trainingAttempts';
   static developingAttemptsURL = '/developingAttempts';
@@ -125,7 +125,7 @@ export class HttpService {
   }
   //All services related to Projects
   getBiddingProjectById(id: String) {
-    return this.http.get<BiddingProject>(HttpService.apiURL + HttpService.getBiddingProjectURL+ '/' + id);
+    return this.http.get<BiddingProject>(HttpService.apiURL +'/biddingProjects/getBiddingProjectById'+ '/' + id);
   }
   getAllBiddingProjects() {
     return this.http.get<BiddingProject[]>(HttpService.apiURL + HttpService.getBiddingProjectURL);
