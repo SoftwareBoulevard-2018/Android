@@ -158,13 +158,13 @@ export class SoftwareBoulevardApp {
     // Tabs are a special case because they have their own navigation
     if (childNav) {
       if (childNav.getSelected() && childNav.getSelected().root === page.tabComponent) {
-        return 'primary';
+        return 'secondary';
       }
       return;
     }
 
     if (this.nav.getActive() && this.nav.getActive().name === page.name) {
-      return 'primary';
+      return 'secondary';
     }
     return;
   }
