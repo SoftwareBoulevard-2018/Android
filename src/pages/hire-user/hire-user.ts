@@ -1,3 +1,5 @@
+import { EditAccountPage } from '../edit-account/edit-account';
+import { Company } from '../../models/company';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 /*
@@ -8,6 +10,8 @@ import { ViewAccountPage } from '../account/account';
 
 import { GeneralServiceService } from '../../app/general-service.service';
 import { User } from '../../models/user';
+import { HttpService } from '../../app/http.service';
+
 /**
  * Generated class for the HireUserPage page.
  *
@@ -21,15 +25,42 @@ import { User } from '../../models/user';
   templateUrl: 'hire-user.html',
 })
 export class HireUserPage {
-  users: any;
+  users: User[];
+  companies: Company[];
+  hService: HttpService;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public service: GeneralServiceService
+    public service: GeneralServiceService,
+    public httpService: HttpService
+    
   ){
-    this.users = service.users;
+    this.hService = httpService;
   }
+  ionViewDidEnter(){
+    this.users = [];
+    this.getAllUsers();
+  }
+
+  getAllUsers() {
+    return this.httpService.getAllUsers().subscribe(data => this.addCompanies(data['data']));
+  }
+  addCompanies(users) {
+    users.forEach(user => {
+      this.httpService.getCompanyById(user.companyId).subscribe(company => {
+        user.company = company;
+        user.companyName = company.name;
+        this.users.push(user);
+      }, error => {
+        console.log(error);
+        user.company = undefined;
+        user.companyName = undefined;
+        this.users.push(user);
+      })
+    });
+  }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HireUserPage');
@@ -41,9 +72,13 @@ export class HireUserPage {
     });
   }
 
-  hireUser(user: User)
+  editUser(user) {
+    this.navCtrl.push(EditAccountPage, {
+      u: user
+    })
+  }
+  hireUser(user) 
   {
-    var out = user.name.concat("\n").concat(user.role);
-    alert(out);
+    alert('The user selected is ' + user.name);
   }
 }
