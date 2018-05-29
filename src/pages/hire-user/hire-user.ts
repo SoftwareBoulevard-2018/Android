@@ -11,6 +11,7 @@ import { ViewAccountPage } from '../account/account';
 import { GeneralServiceService } from '../../app/general-service.service';
 import { User } from '../../models/user';
 import { HttpService } from '../../app/http.service';
+import { Email } from '../../models/email';
 
 /**
  * Generated class for the HireUserPage page.
@@ -28,6 +29,7 @@ export class HireUserPage {
   users: User[];
   companies: Company[];
   hService: HttpService;
+  serv: GeneralServiceService;
 
   constructor(
     public navCtrl: NavController, 
@@ -37,6 +39,7 @@ export class HireUserPage {
     
   ){
     this.hService = httpService;
+    this.serv = this.service;
   }
   ionViewDidEnter(){
     this.users = [];
@@ -61,24 +64,23 @@ export class HireUserPage {
     });
   }
 
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad HireUserPage');
-  }
-
   viewUser(user) {
     this.navCtrl.push(ViewAccountPage,{
       u: user
     });
   }
 
-  editUser(user) {
-    this.navCtrl.push(EditAccountPage, {
-      u: user
-    })
-  }
   hireUser(user) 
   {
-    alert('The user selected is ' + user.name);
+    var us: User;
+    this.serv.getCurrentUser().then((u) => {
+      us = u;
+      
+    });
+
+
+    var email = new Email('us.name', "Recruitment" , ['user.name'], "You are invited to our team, join us =D");
+    console.log(email);
+    //this.httpService.send(email);
   }
 }
