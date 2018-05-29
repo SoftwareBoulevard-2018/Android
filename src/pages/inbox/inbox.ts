@@ -9,7 +9,9 @@ import { ReademailPage } from '../../pages/reademail/reademail';
 import { servicesEmail } from '../../providers/servicesEmail';
 
 import { GeneralServiceService } from '../../app/general-service.service';
+import { HttpService } from '../../app/http.service';
 
+import * as moment from 'moment';
 
 /**
  * Generated class for the InboxPage page.
@@ -27,44 +29,102 @@ export class InboxPage {
   searchQuery: String; //This variable is the text entered by the user to perform the search in the inbox
   private emailArray = []; //This is the arrangement that the user has in the outbox
   private defaultList = []; //This arrangement serves to update the entire list of emails
-  private username; //It is the user to whom the inbox will be shown
+  // private username; //It is the user to whom the inbox will be shown
+  private idUser;
 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, public serviceEmail: servicesEmail, public service: GeneralServiceService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController,
+    public serviceEmail: servicesEmail, public service: GeneralServiceService, public HttpService: HttpService) {
 
     /*
     The username is obtained, in this component, from the user that was connected to the system.
     Then a method is invoked to obtain the emails that this user has received.
     */
-    this.service.getCurrentUser().then((user) => {
+    /*this.service.getCurrentUser().then((user) => {
       this.username = user.username;
       this.listEmailsReceivedForUser(this.serviceEmail.getEmails(), this.username);
-    })
+    })*/
+
+    this.service.getCurrentUser().then((user) => {
+      this.idUser = user.id;
+
+      this.HttpService.read(this.idUser).subscribe((data) => {
+        this.listEmailsReceivedForUser(data);
+
+      })
+
+
+    });
 
   }
 
   /*
   This method is in charge of updating the array of the inbox email that the user has.
-  It receives an array of emails and the user who wants to see their inbox.
-  In this case we have an array of emails and every email has an array of receivers, we need to check if our 
-  user logged in the app is on the array of receivers. In the internal cycle in order to add that user we
-  check if our user equals to at least one receiver.
+  It receives the data retrieved from the http request that gets the received emails.
+  Also we update two arrays, we update emailArray in order to see the inbox and defaultList has all the emails received of
+  that user, in case we do a search we can go back to all emails with defaulList.
   */
-  listEmailsReceivedForUser(email: any[], user: string) {
+  listEmailsReceivedForUser(data) {
 
-    var indexemailArray = 0;
-    for (let i = 0; i < email.length; i++) {
-      for (let j = 0; j < email[i].receiver.length; j++) {
-        if (user.localeCompare(email[i].receiver[j]) == 0) {
-          this.emailArray[indexemailArray] = email[i];
-          indexemailArray++;
-          break;
+    const dataJson = JSON.parse(JSON.stringify(data));
+    this.emailArray = dataJson.data;
+    this.defaultList = this.emailArray;
+
+
+    this.updateDate();
+    this.updateSender();
+
+  }
+
+
+  /* This method updates the date of an email in a format easy to read for the user*/
+  updateDate() {
+
+    var date;
+
+    for (let i = 0; i < this.emailArray.length; i++) {
+      date = this.emailArray[i].createdAt;
+      this.emailArray[i].date = moment(date).format('D MMM YYYY, h:mm:ss A');
+    }
+
+  }
+
+  updateSender() {
+
+
+    /* for (let index = 0; index < this.emailArray.length; index++) {
+       this.emailArray[index].sender = "xd";
+ 
+     }*/
+
+    //Obtengamos los datos de los usuarios.
+    this.HttpService.getAllUsers().subscribe((data) => {
+
+      var sender;
+
+      var dataJson = JSON.parse(JSON.stringify(data));
+
+      var userData = dataJson.data;
+
+      for (let i = 0; i < this.emailArray.length; i++) {
+
+        sender = this.emailArray[i].sender;
+        for (let j = 0; j < userData.length; j++) {
+
+          if (sender.localeCompare(userData[j].id) == 0) {
+
+            this.emailArray[i].sender = userData[j].username;
+            break;
+          }
         }
+
       }
     }
 
-    this.defaultList = this.emailArray;
+
+    )
+
   }
+
   searchEmail() {
     let IDEmailSolution = [];
 
@@ -88,7 +148,7 @@ export class InboxPage {
     The internal cycle (var j) goes through all the solutions of email identifiers and it is checked 
     that the email id solution matches the email id of all the emails that travel through the external 
     cycle. The purpose is to find the id of the emails that meet the search.
-    */ 
+    */
     var index = 0;
 
     for (var z = 0; z < this.emailArray.length; z++) {
