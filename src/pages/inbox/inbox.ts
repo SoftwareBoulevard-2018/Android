@@ -36,8 +36,10 @@ export class InboxPage {
     The username is obtained, in this component, from the user that was connected to the system.
     Then a method is invoked to obtain the emails that this user has received.
     */
-    this.username = this.service.user;
-    this.listEmailsReceivedForUser(this.serviceEmail.getEmails(), this.username);
+    this.service.getCurrentUser().then((user) => {
+      this.username = user.username;
+      this.listEmailsReceivedForUser(this.serviceEmail.getEmails(), this.username);
+    })
 
   }
 

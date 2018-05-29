@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { User } from '../../models/user';
+import {HttpService} from '../../app/http.service';
 
 /**
  * shows and validates a form used to update an account
@@ -15,10 +16,13 @@ import { User } from '../../models/user';
 export class EditAccountPage {
   user: User;
   submitted = false;
+  //TODO: get roles from server
+  roles = [ 'Project Manager', 'Analyst', 'Developer', 'Tester'];
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    public httpService: HttpService
   ) {
     this.user = this.navParams.data.u;
   }
@@ -27,8 +31,10 @@ export class EditAccountPage {
     this.submitted = true;
 
     if (form.valid) {
-      //TODO send data to server
-      this.navCtrl.pop();
+      return this.httpService.updateUser(this.user, this.user.id).subscribe(() => {
+        this.navCtrl.pop();
+      });
+      
     }
   }
 }

@@ -32,10 +32,10 @@ export class EstimateCostTimePage {
     service: GeneralServiceService) {
 
     this.user = new User("Pedro el test user", "Testy", "1", "Project manager","UNAL",2,0);
-    this.comp = service.companies.find(c => c.name === this.user.company_name);
+    //this.comp = service.companies.find(c => c.name === this.user.company_name); //line comented for compilation
     //this.comp.resources = 10;
     this.ser = service;
-    this.p = this.ser.bidProjects[this.comp.active_project];
+    //this.p = this.ser.bidProjects[this.comp.active_project]; //property not in company
   }
 
   ionViewDidLoad() {
@@ -44,13 +44,13 @@ export class EstimateCostTimePage {
 
   estimateCostTime()
   { 
-    if(!(this.comp.resources > 0))
+    if(!(this.comp.companyResource > 0))
     {
       alert("Not enough resources!! get more!");
       return;
     }
     else{
-      this.comp.resources = parseInt(this.comp.resources.toString()) - 1;
+      this.comp.companyResource = parseInt(this.comp.companyResource.toString()) - 1;
     }
 
     var ce =  Math.floor(Math.random() * (10000 - 0 + 1)) + 0;

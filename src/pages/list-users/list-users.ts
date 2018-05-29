@@ -26,21 +26,26 @@ export class ListUsersPage {
     public service: GeneralServiceService,
     public httpService: HttpService
   ) {
+    
+  }
+  ionViewDidEnter(){
+    this.users = [];
     this.getAllUsers();
   }
-
 
   getAllUsers() {
     return this.httpService.getAllUsers().subscribe(data => this.addCompanies(data['data']));
   }
 
-  addCompanies(users: any[]) {
+  addCompanies(users) {
     users.forEach(user => {
       this.httpService.getCompanyById(user.companyId).subscribe(company => {
+        user.company = company;
         user.companyName = company.name;
         this.users.push(user);
       }, error => {
         console.log(error);
+        user.company = undefined;
         user.companyName = undefined;
         this.users.push(user);
       })
