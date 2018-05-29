@@ -1,5 +1,5 @@
-import { EditAccountPage } from '../edit-account/edit-account';
-import { Company } from '../../models/company';
+//import { EditAccountPage } from '../edit-account/edit-account';
+//import { Company } from '../../models/company';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 /*
@@ -27,7 +27,7 @@ import { Email } from '../../models/email';
 })
 export class HireUserPage {
   users: User[];
-  companies: Company[];
+  //companies: Company[];
   hService: HttpService;
   serv: GeneralServiceService;
 
@@ -70,17 +70,17 @@ export class HireUserPage {
     });
   }
 
-  hireUser(user) 
+  hireUser(user: User) 
   {
-    var us: User;
+    var sender: string;
     this.serv.getCurrentUser().then((u) => {
-      us = u;
-      
+      console.log(u);
+      sender = u.name;
+      var reciver = user.name;
+      var email = new Email(sender, "Recruitment" , [reciver] , "You are invited to our team, join us =D");
+      console.log(email);
+      this.httpService.send(email);
+      alert('Email sent to ' + user.name + '!');
     });
-
-
-    var email = new Email('us.name', "Recruitment" , ['user.name'], "You are invited to our team, join us =D");
-    console.log(email);
-    //this.httpService.send(email);
   }
 }
