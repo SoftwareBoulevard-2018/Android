@@ -56,7 +56,31 @@ export class EstimateCostTimePage {
 
   estimateCostTime()
   { 
-    console.log('The user that got here in estimate is '.concat(this.user.name));
-    console.log('the company id is '.concat(this.user.companyId));
+    if(!(this.comp.companyResource > 0))
+    {
+      alert("Not enough resources!! get more!");
+      return;
+    }
+    else{
+      this.comp.companyResource = parseInt(this.comp.companyResource.toString()) - 1;
+    }
+
+    var ce =  Math.floor(Math.random() * (10000 - 0 + 1)) + 0;
+    var te =  Math.floor(Math.random() * (20 - 0 + 1)) + 0;
+    this.costEst.push(ce);
+    this.timeEst.push(te);
+    this.lastCostEst = ce;
+    this.lastTimeEst = te;
+
+    if(ce >= this.p.cost && te >= this.p.time)
+    {
+      alert("Success!!!");
+    }
+    else{
+      alert("Fail!!! try again =)");
+    }
+    //console.log('The user that got here in estimate is '.concat(this.user.name));
+    //console.log('the company id is '.concat(this.user.companyId));
+    
   }
 }
