@@ -27,11 +27,11 @@
 <ion-content>
     <ion-item>
         <ion-label>To</ion-label>
-        <ion-select [(ngModel)]="receivers" multiple="true">
-            <ion-option>User1</ion-option>
-            <ion-option>User2</ion-option>
-            <ion-option>User3</ion-option>
+        <ion-select [(ngModel)]="receiversSelectedByUser" multiple="true">
+            <ion-option *ngFor="let receiver of receivers" [value]="receiver"> {{receiver.username}} </ion-option>
         </ion-select>
+
+
     </ion-item>
 
     <ion-item>
