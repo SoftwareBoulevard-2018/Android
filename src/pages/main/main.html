@@ -18,7 +18,7 @@
             </ion-card-header>
 
             <ion-card-content class="outer-content">
-                currently there are {{users}} users working hard for the win
+                Currently there are {{users}} users working hard for the win
             </ion-card-content>
 
             <ion-row no-padding>
@@ -35,7 +35,7 @@
                     </button>
                 </ion-col>
                 <ion-col>
-                    <button ion-button clear small color="primary" icon-start >
+                    <button ion-button clear small color="primary" icon-start (click)="viewReports('users')">
                             <ion-icon name='md-podium'></ion-icon>
                             reports
                     </button>
@@ -51,7 +51,7 @@
             </ion-card-header>
 
             <ion-card-content class="outer-content">
-                currently there are {{companies}} companies fighting for the victory
+                Currently there are {{companies}} companies fighting for the victory
             </ion-card-content>
 
             <ion-row no-padding>
@@ -68,7 +68,7 @@
                     </button>
                 </ion-col>
                 <ion-col>
-                    <button ion-button clear small color="primary" icon-start >
+                    <button ion-button clear small color="primary" icon-start (click)="viewReports('companies')">
                             <ion-icon name='md-podium'></ion-icon>
                             reports
                     </button>

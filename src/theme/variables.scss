@@ -36,6 +36,8 @@ $headings-font-weight: 300;
 $colors: (
   primary:    #00585E,
   secondary:  #FF5729,
+  terciary:   #454445,
+  base:       #F5F2DC,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222,
@@ -57,8 +59,18 @@ $colors: (
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
-$background-color: #F5F2DC;
+$background-color: color($colors, base);
 $toolbar-background: color($colors, primary);
+
+//$card-md-background-color: color($colors, terciary);
+ion-card-header{
+  background: color($colors, terciary);
+}
+
+$card-md-title-text-color: color($colors, base);
+.card-header-md + .card-content-md, .card-md .item + .card-content-md{
+  padding-top: 13px !important;
+}
 
 // Use the primary color as the background for the toolbar-md-background
 $toolbar-md-background:                   color($colors, primary);
@@ -98,3 +110,4 @@ $toolbar-md-active-color:                 #fff;
 
 @import "roboto";
 @import "noto-sans";
+

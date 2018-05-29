@@ -1,18 +1,19 @@
-import { InstantProject } from '../models/instantProject';
+//import { InstantProject } from '../models/instantProject';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 //import { TrainingAttempt } from '../models/TrainingAttempt';
 //import { Company } from '../models/company';
-import { BiddingProject } from '../models/biddingProject';
+//import { BiddingProject } from '../models/biddingProject';
 import { Storage } from '@ionic/storage';
 import { Events } from 'ionic-angular';
+import { HttpService } from './http.service';
 /**
  * contains burned data to show the functionality of the GUI
  */
 @Injectable()
 export class GeneralServiceService {
 
-  users = [new User("Andres Felipe Aguilar","afaguilarr","ElMejor123","Developer","UNAL",2,3),
+ /* users = [new User("Andres Felipe Aguilar","afaguilarr","ElMejor123","Developer","UNAL",2,3),
     new User("John Jairo Serna","jjsernaco","holaMUNDO456","Project Manager","UNAL"),
     new User("Carlos Mario Zapata","cmzapata","EnserioEsaEsTuPregunta?","Game Administrator"),
     new User("David","dddavid","david","Project Manager","Amazon"),
@@ -31,7 +32,7 @@ export class GeneralServiceService {
 
   InstProjects = [new InstantProject(10, "Excel dataBase", 5, 2, 2, 2),
     new InstantProject(11, "Calculator", 6, 2, 2, 2)];
-
+ */
   user_to_be_updated;
 
   /*companies = [new Company("UNAL",
@@ -43,7 +44,7 @@ export class GeneralServiceService {
 
   company_to_be_updated;
 
-  constructor(public storage: Storage,public events: Events) { }
+  constructor(public storage: Storage,public events: Events, public httpService: HttpService) { }
 
   logout(){
     this.storage.remove('userInSession');
