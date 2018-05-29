@@ -45,9 +45,9 @@ export class MainPage {
   viewCompanies() {
     this.navCtrl.push(ListCompaniesPage);
   }
-  viewReports(){
+  viewReports(type){
     this.navCtrl.push(ReportsPage,{
-      type: "general"
+      reportsType: type
     });
   }
   viewSetUp(){

@@ -6,12 +6,12 @@ import { PopoverController } from 'ionic-angular';
 
 import { MenuemailpopoverPage } from '../../pages/menuemailpopover/menuemailpopover';
 import { ReademailPage } from '../../pages/reademail/reademail';
-import { servicesEmail } from '../../providers/servicesEmail';
 
 import { GeneralServiceService } from '../../app/general-service.service';
 import { HttpService } from '../../app/http.service';
 
 import * as moment from 'moment';
+import { Observable } from 'rxjs/Rx';
 
 /**
  * Generated class for the InboxPage page.
@@ -38,13 +38,31 @@ export class InboxPage {
     //Here we query the current user that is logged and then we do a request to see what emails he has received.
     this.service.getCurrentUser().then((user) => {
       this.idUser = user.id;
+        this.HttpService.read(this.idUser).subscribe((data) => {
+          if (JSON.parse(JSON.stringify(data)).data.length > this.defaultList.length) {
+            this.listEmailsReceivedForUser(data);
 
-      this.HttpService.read(this.idUser).subscribe((data) => {
-        this.listEmailsReceivedForUser(data);
+          }
+        })
+    });
 
+
+
+    //Every 5 seconds the emails are updated.
+
+
+    this.service.getCurrentUser().then((user) => {
+      this.idUser = user.id;
+
+
+      Observable.interval(5000).subscribe(() => {
+        this.HttpService.read(this.idUser).subscribe((data) => {
+          if (JSON.parse(JSON.stringify(data)).data.length > this.defaultList.length) {
+
+            this.listEmailsReceivedForUser(data);
+          }
+        })
       })
-
-
     });
 
   }

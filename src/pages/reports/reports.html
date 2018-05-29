@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-    <ion-card>
+    <ion-card *ngIf="companiesReports">
         <ion-card-header >
             <ion-card-title>
                 <ion-icon name="md-flame" margin-right></ion-icon>Companies by K
@@ -19,16 +19,75 @@
             <ngx-charts-bar-vertical
                 [view]="view"
                 [scheme]="colorScheme"
-                [results]="single"
-                [gradient]="gradient"
-                [xAxis]="showXAxis"
-                [yAxis]="showYAxis"
-                [legend]="showLegend"
-                [showXAxisLabel]="showXAxisLabel"
-                [showYAxisLabel]="showYAxisLabel"
-                [xAxisLabel]="xAxisLabel"
-                [yAxisLabel]="yAxisLabel">
+                [results]="companyK"
+                xAxis=true
+                yAxis=true>
             </ngx-charts-bar-vertical>
+        </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="companiesReports">
+        <ion-card-header >
+            <ion-card-title>
+                <ion-icon name="md-pint" margin-right></ion-icon>Companies by Resources
+            </ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content class="outer-content">
+            <ngx-charts-pie-chart
+                [view]="view"
+                [scheme]="colorScheme"
+                [results]="companyResource"
+                labels=true>
+            </ngx-charts-pie-chart>
+        </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="usersReports">
+        <ion-card-header >
+            <ion-card-title>
+                <ion-icon name="md-podium" margin-right></ion-icon>Top 5 users by efficiency
+            </ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content class="outer-content">
+            <ion-list>
+                <ion-item>
+                    <h3 item-start>Rank</h3>
+                    <h3>Name</h3>
+                    <h3 item-end>efficiency</h3>
+                </ion-item>
+                <ion-item *ngFor="let u of topEfficentUsers; let i = index" >
+                    <ion-icon color="secondary" name="md-glasses" item-start *ngIf="i === 0"></ion-icon>
+                    <h3 item-start *ngIf="i !== 0" padding-horizontal> {{i+1}} </h3>
+                    <h2> {{u.name}}</h2>
+                    <p>{{u.role}}  -  {{u.companyName}}</p>
+                    <h3 item-end>{{u.efficiency}}%</h3>
+                    
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="usersReports">
+        <ion-card-header >
+            <ion-card-title>
+                <ion-icon name="md-podium" margin-right></ion-icon>Top 5 users by activity
+            </ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content class="outer-content">
+            <ion-list>
+                <ion-item>
+                    <h3 item-start>Rank</h3>
+                    <h3>Name</h3>
+                    <h3 item-end>Resources Spent</h3>
+                </ion-item>
+                <ion-item *ngFor="let u of topActiveUsers; let i = index" >
+                    <ion-icon color="secondary" name="md-glasses" item-start *ngIf="i === 0"></ion-icon>
+                    <h3 item-start *ngIf="i !== 0" padding-horizontal> {{i+1}} </h3>
+                    <h2> {{u.name}}</h2>
+                    <p>{{u.role}}  -  {{u.companyName}}</p>
+                    <h3 item-end>{{u.resourcesSpent}}</h3>
+                </ion-item>
+            </ion-list>
         </ion-card-content>
     </ion-card>
     

@@ -5,7 +5,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular';
 import { MenuemailpopoverPage } from '../../pages/menuemailpopover/menuemailpopover';
 import { ReademailPage } from '../../pages/reademail/reademail';
-import { servicesEmail } from '../../providers/servicesEmail';
 import { GeneralServiceService } from '../../app/general-service.service';
 import { HttpService } from '../../app/http.service';
 
