@@ -1,5 +1,5 @@
-import { EditAccountPage } from '../edit-account/edit-account';
-import { Company } from '../../models/company';
+//import { EditAccountPage } from '../edit-account/edit-account';
+//import { Company } from '../../models/company';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 /*
@@ -11,6 +11,7 @@ import { ViewAccountPage } from '../account/account';
 import { GeneralServiceService } from '../../app/general-service.service';
 import { User } from '../../models/user';
 import { HttpService } from '../../app/http.service';
+import { Email } from '../../models/email';
 
 /**
  * Generated class for the HireUserPage page.
@@ -26,8 +27,9 @@ import { HttpService } from '../../app/http.service';
 })
 export class HireUserPage {
   users: User[];
-  companies: Company[];
+  //companies: Company[];
   hService: HttpService;
+  serv: GeneralServiceService;
 
   constructor(
     public navCtrl: NavController, 
@@ -37,6 +39,7 @@ export class HireUserPage {
     
   ){
     this.hService = httpService;
+    this.serv = this.service;
   }
   ionViewDidEnter(){
     this.users = [];
@@ -61,24 +64,23 @@ export class HireUserPage {
     });
   }
 
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad HireUserPage');
-  }
-
   viewUser(user) {
     this.navCtrl.push(ViewAccountPage,{
       u: user
     });
   }
 
-  editUser(user) {
-    this.navCtrl.push(EditAccountPage, {
-      u: user
-    })
-  }
-  hireUser(user) 
+  hireUser(user: User) 
   {
-    alert('The user selected is ' + user.name);
+    var sender: string;
+    this.serv.getCurrentUser().then((u) => {
+      console.log(u);
+      sender = u.name;
+      var reciver = user.name;
+      var email = new Email(sender, "Recruitment" , [reciver] , "You are invited to our team, join us =D");
+      console.log(email);
+      this.httpService.send(email);
+      alert('Email sent to ' + user.name + '!');
+    });
   }
 }
