@@ -30,20 +30,12 @@ export class InboxPage {
   private emailArray = []; //This is the arrangement that the user has in the outbox
   private defaultList = []; //This arrangement serves to update the entire list of emails
   // private username; //It is the user to whom the inbox will be shown
-  private idUser;
+  private idUser; //This id is used to do HTTP requests in order to read emails for that user.
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController,
-    public serviceEmail: servicesEmail, public service: GeneralServiceService, public HttpService: HttpService) {
+    public service: GeneralServiceService, public HttpService: HttpService) {
 
-    /*
-    The username is obtained, in this component, from the user that was connected to the system.
-    Then a method is invoked to obtain the emails that this user has received.
-    */
-    /*this.service.getCurrentUser().then((user) => {
-      this.username = user.username;
-      this.listEmailsReceivedForUser(this.serviceEmail.getEmails(), this.username);
-    })*/
-
+    //Here we query the current user that is logged and then we do a request to see what emails he has received.
     this.service.getCurrentUser().then((user) => {
       this.idUser = user.id;
 
@@ -61,7 +53,7 @@ export class InboxPage {
   This method is in charge of updating the array of the inbox email that the user has.
   It receives the data retrieved from the http request that gets the received emails.
   Also we update two arrays, we update emailArray in order to see the inbox and defaultList has all the emails received of
-  that user, in case we do a search we can go back to all emails with defaulList.
+  that user, in case of a search we can go back to all emails with defaulList.
   */
   listEmailsReceivedForUser(data) {
 
@@ -88,21 +80,14 @@ export class InboxPage {
 
   }
 
+  /*In this method we update the sender for each email because the response object has an objectID and not username. */
   updateSender() {
 
 
-    /* for (let index = 0; index < this.emailArray.length; index++) {
-       this.emailArray[index].sender = "xd";
- 
-     }*/
-
-    //Obtengamos los datos de los usuarios.
     this.HttpService.getAllUsers().subscribe((data) => {
 
       var sender;
-
       var dataJson = JSON.parse(JSON.stringify(data));
-
       var userData = dataJson.data;
 
       for (let i = 0; i < this.emailArray.length; i++) {
@@ -119,10 +104,7 @@ export class InboxPage {
 
       }
     }
-
-
     )
-
   }
 
   searchEmail() {
