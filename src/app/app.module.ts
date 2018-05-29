@@ -16,9 +16,6 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { HttpService } from './http.service';
 
-
-import { PopoverPage } from '../pages/about-popover/about-popover';
-
 //software boulevard
 import { SoftwareBoulevardApp } from './app.component';
 import { GeneralServiceService } from './general-service.service';
@@ -74,7 +71,6 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
 
 @NgModule({
   declarations: [
-    PopoverPage,
     SoftwareBoulevardApp,
     LoginPage,
     MainPage,
@@ -150,7 +146,6 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    PopoverPage,
     SoftwareBoulevardApp,
     LoginPage,
     MainPage,
