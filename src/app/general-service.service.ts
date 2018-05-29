@@ -1,8 +1,8 @@
-import { InstantProject } from '../models/instantProject';
+//import { InstantProject } from '../models/instantProject';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 //import { Company } from '../models/company';
-import { BiddingProject } from '../models/biddingProject';
+//import { BiddingProject } from '../models/biddingProject';
 import { Storage } from '@ionic/storage';
 import { Events } from 'ionic-angular';
 import { HttpService } from './http.service';
