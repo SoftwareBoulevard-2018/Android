@@ -17,8 +17,8 @@ export class HttpService {
 
   constructor(public http: HttpClient) { }
 
-  // static apiURL = 'http://35.196.111.251:3000';
-  static apiURL = 'http://localhost:3000';
+  static apiURL = 'http://35.196.111.251:3000';
+  // static apiURL = 'http://localhost:3000';
   static usersURL = '/users';
   static usersURL2 = '/username';
   static companiesURL = '/companies';
@@ -108,5 +108,15 @@ export class HttpService {
   getDevelopingAttemptsByState(state) {
     return this.http.post<DevelopingAttempt[]>(HttpService.apiURL + HttpService.developingAttemptsURL,
       JSON.stringify({ state1: state }), HttpService.httpOptions);
+  }
+
+  createTrainingAttempt(trainingAttempt: TrainingAttempt) {
+    return this.http.post<TrainingAttempt[]>(HttpService.apiURL + HttpService.trainingAttemptsURL,
+      JSON.stringify(trainingAttempt), HttpService.httpOptions);
+  }
+
+  createDevelopingAttempt(developingAttempt: DevelopingAttempt) {
+    return this.http.post<DevelopingAttempt[]>(HttpService.apiURL + HttpService.developingAttemptsURL,
+      JSON.stringify(developingAttempt), HttpService.httpOptions);
   }
 }
