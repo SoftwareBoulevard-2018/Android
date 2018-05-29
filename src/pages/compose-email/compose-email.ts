@@ -21,9 +21,9 @@ export class ComposeEmailPage {
   The following variables are used to save information about the email in order 
   to send it to another user.
   */
-  To:String;
-  Subject:String;
-  Content:String;
+  receivers:String[];
+  subject:String;
+  content:String;
 
   @ViewChild('myInput') myInput: ElementRef;
 
@@ -39,5 +39,9 @@ export class ComposeEmailPage {
     element.style.height = scrollHeight + 'px';
     this.myInput['_elementRef'].nativeElement.style.height = (scrollHeight + 16) + 'px';
   } 
+
+  send(){
+
+  }
 
 }

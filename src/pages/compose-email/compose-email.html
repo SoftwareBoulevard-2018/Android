@@ -7,37 +7,40 @@
 
 <ion-header>
     <ion-navbar>
-            <button ion-button menuToggle>
-                <ion-icon name="menu"></ion-icon>
-            </button>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
         <ion-row>
             <ion-title>Compose</ion-title>
             <ion-buttons>
-                <button ion-button icon-only>
-                    <ion-icon name="attach"></ion-icon>
-                </button>
-                <button ion-button icon-only>
+                <button ion-button icon-only (click)="send()">
                     <ion-icon name="send"></ion-icon>
-              </button>
+                </button>
             </ion-buttons>
         </ion-row>
+
+
+
     </ion-navbar>
 </ion-header>
 
 <ion-content>
-
     <ion-item>
-        <ion-label color="dark" stacked>To</ion-label>
-        <ion-input [(ngModel)]="To" type="text" placeholder="To"></ion-input>
+        <ion-label>To</ion-label>
+        <ion-select [(ngModel)]="receivers" multiple="true">
+            <ion-option>User1</ion-option>
+            <ion-option>User2</ion-option>
+            <ion-option>User3</ion-option>
+        </ion-select>
     </ion-item>
 
     <ion-item>
         <ion-label color="dark" stacked>Subject</ion-label>
-        <ion-input [(ngModel)]="Subject" type="text" placeholder="Type your subject"></ion-input>
+        <ion-input [(ngModel)]="subject" type="text" placeholder="Type your subject"></ion-input>
     </ion-item>
 
     <ion-item>
         <ion-label floating>Type your message</ion-label>
-        <ion-textarea #myInput id="myInput" rows="1" maxLength="500" (keyup)="resize()" [(ngModel)]="Content"></ion-textarea>
+        <ion-textarea #myInput id="myInput" rows="1" maxLength="500" (keyup)="resize()" [(ngModel)]="content"></ion-textarea>
     </ion-item>
 </ion-content>
