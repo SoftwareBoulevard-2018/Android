@@ -13,6 +13,7 @@ import { User } from '../../models/user';
 import { HttpService } from '../../app/http.service';
 import { Email } from '../../models/email';
 import { ToastController } from 'ionic-angular';
+import { Invitation } from '../../models/invitation';
 
 /**
  * Generated class for the HireUserPage page.
@@ -100,6 +101,7 @@ export class HireUserPage {
           toast.present();
         }
       );
+      //var invitation: Invitation = new Invitation();
       alert('Email sent to ' + user.name + '!');
     });
   }
