@@ -1,4 +1,4 @@
-//import { InstantProject } from './../../models/instantProject';
+import { InstantProject } from './../../models/instantProject';
 import { BiddingProject } from './../../models/biddingProject';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -18,7 +18,8 @@ import { HttpService } from '../../app/http.service';
   templateUrl: 'select-project.html',
 })
 export class SelectProjectPage {
-  projects: BiddingProject[] = [];
+  instP: InstantProject[] = [];
+  bidP: BiddingProject[] = [];
   hService: HttpService;
 
 
@@ -31,65 +32,91 @@ export class SelectProjectPage {
      // this.bidP = service.bidProjects;
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
     console.log('ionViewDidLoad SelectProjectPage');
-    this.getAllProjects()
+    this.getAllBidProjects();
+    this.getAllInstProjects();
   }
 
-  getAllProjects() {
-    return this.httpService.getAllBiddingProjects().subscribe(data => 
-      {
-        this.fillProjects(data['data']);
-        console.log(data);      
+  getAllBidProjects() {
+    return this.httpService.getAllBiddingProjects().subscribe(data => {
+        this.fillBidProjects(data['data']);
+        //console.log(data);      
       }
-  );
-    
+    );
+  }
+  getAllInstProjects() {
+      this.httpService.getAllInstantProjects().subscribe(data => {
+        this.fillInstProjects(data['data']);
+        //console.log(data);      
+      }
+    );
   }
 
-  fillProjects(projects) {
+  fillBidProjects(projects) {
     projects.forEach(project => { 
-        this.projects.push(project);
+      var nip = new BiddingProject(JSON.stringify(project).substring(7,32),
+      project.name, project.numberOfDevelopingQuestionsPerAnalyst,
+      project.numberOfDevelopingQuestionsPerTester, 
+      project.numberOfDevelopingQuestionsPerDeveloper,
+      project.rewarded_K, project.time, project.cost,project.required_K,
+      project.required_analyst_level, project.required_developer_level,
+      project.required_tester_level);
+      this.bidP.push(nip);
     });
-    console.log("Reached filled Projects");
+    console.log(this.bidP);
+  }
+
+  fillInstProjects(projects) {
+    projects.forEach(project => { 
+        var nip = new InstantProject(JSON.stringify(project).substring(7,32),
+        project.name, project.numberOfDevelopingQuestionsPerAnalyst,
+        project.numberOfDevelopingQuestionsPerTester, 
+        project.numberOfDevelopingQuestionsPerDeveloper,
+        project.rewarded_K);
+        this.instP.push(nip);
+    });
+    console.log(this.instP);
   }
 
 
   viewProjectInfo(p: any)
-  {
+  { 
       var info: String;
-      if(p.required_k == null || p.required_k == undefined)
+      if(p.required_K == null || p.required_K == undefined)
       {
         info = "Instant Project Information".concat("\n"
-        ).concat("Id: ").concat(p.project_id.toString()).concat("\n").concat("Name: "
-        ).concat(p.project_name).concat("\n").concat("Reward k: ").concat(p.rewarded_k.toString()
-        ).concat("\n").concat("No. Analyst Questions: ").concat(p.amount_analyst_question.toString()
-        ).concat("\n").concat("No. Developer Questions: ").concat(p.amount_developer_question.toString()
-        ).concat("\n").concat("No. Tester Questions: ").concat(p.amount_tester_question.toString());
+        ).concat("Id: ").concat(p.id.toString()).concat("\n").concat("Name: "
+        ).concat(p.name).concat("\n").concat("Reward k: ").concat(p.rewarded_K.toString()
+        ).concat("\n").concat("No. Analyst Questions: ").concat(p.numberOfDevelopingQuestionsPerAnalyst.toString()
+        ).concat("\n").concat("No. Developer Questions: ").concat(p.numberOfDevelopingQuestionsPerDeveloper.toString()
+        ).concat("\n").concat("No. Tester Questions: ").concat(p.numberOfDevelopingQuestionsPerTester.toString());
       }
       else
       {
         info = "Bidding Project Information".concat("\n"
-        ).concat("Id: ").concat(p.project_id.toString()).concat("\n").concat("Name: "
-        ).concat(p.project_name).concat("\n").concat("Reward k: ").concat(p.rewarded_k.toString()
-        ).concat("\n").concat("No. Analyst Questions: ").concat(p.amount_analyst_question.toString()
-        ).concat("\n").concat("No. Developer Questions: ").concat(p.amount_developer_question.toString()
-        ).concat("\n").concat("No. Tester Questions: ").concat(p.amount_tester_question.toString()
+        ).concat("Id: ").concat(p.id.toString()).concat("\n").concat("Name: "
+        ).concat(p.name).concat("\n").concat("Reward k: ").concat(p.rewarded_K.toString()
+        ).concat("\n").concat("No. Analyst Questions: ").concat(p.numberOfDevelopingQuestionsPerAnalyst.toString()
+        ).concat("\n").concat("No. Developer Questions: ").concat(p.numberOfDevelopingQuestionsPerDeveloper.toString()
+        ).concat("\n").concat("No. Tester Questions: ").concat(p.numberOfDevelopingQuestionsPerTester.toString()
         ).concat("\n").concat("Time: ").concat(p.time.toString()
         ).concat("\n").concat("Cost ").concat(p.cost.toString()
-        ).concat("\n").concat("Required K: ").concat(p.required_k.toString()
+        ).concat("\n").concat("Required K: ").concat(p.required_K.toString()
         ).concat("\n").concat("Required Analyst Level: ").concat(p.required_analyst_level.toString()
         ).concat("\n").concat("Required Developer Level: ").concat(p.required_developer_level.toString()
         ).concat("\n").concat("Required Tester Level: ").concat(p.required_tester_level.toString())
         ;
       }
 
-      alert(info);
+      alert(info); 
   }
 
 
-  selectProject(p: any)
-  {
-    alert("Selected project: ".concat(p.project_id.toString()));
+  selectProject(p: BiddingProject)
+  { 
+    //JSON.stringify(p).substring(7,32)
+    alert(p.numberOfDevelopingQuestionsPerAnalyst);
   }
 
 

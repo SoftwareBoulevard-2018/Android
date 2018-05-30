@@ -135,7 +135,7 @@ export class HttpService {
     return this.http.get<InstantProject>(HttpService.apiURL + HttpService.getInstantProjectURL+ '/' + id);
   }
   getAllInstantProjects() {
-    return this.http.get<InstantProject[]>(HttpService.apiURL + HttpService.getInstantProjectURL);
+    return this.http.get<InstantProject[]>(HttpService.apiURL + HttpService.getInstantProjectURL + '/' + 'getInstantProject');
   }
   getQuestionsById(id: String) {
     return this.http.get<Questions>(HttpService.apiURL + HttpService.getQuestionURL+ '/' + id);
@@ -168,6 +168,5 @@ export class HttpService {
   createDevelopingAttempt(developingAttempt: DevelopingAttempt) {
     return this.http.post<DevelopingAttempt[]>(HttpService.apiURL + HttpService.developingAttemptsURL,
       JSON.stringify(developingAttempt), HttpService.httpOptions);
-
   }
 }
