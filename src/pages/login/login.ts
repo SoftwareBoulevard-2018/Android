@@ -19,6 +19,7 @@ import { HttpService } from '../../app/http.service';
 export class LoginPage {
   login: UserOptions = { username: '', password: ''};
   submitted = false;
+  apiOld = HttpService.apiURL;
 
   constructor(
     public navCtrl: NavController,
@@ -36,7 +37,9 @@ export class LoginPage {
 
     this.httpService.login(this.login.username, this.login.password).subscribe( user => {
         this.service.login(user).then(()=>{
-          this.navCtrl.setRoot(MainPage);
+          this.navCtrl.setRoot(MainPage,{
+            role: user.role
+          });
         });
       },
       () => {
@@ -47,5 +50,10 @@ export class LoginPage {
         toast.present();
     });
   }
+
+  changeAPI(form: NgForm) {
+    HttpService.apiURL = form.value['api']
+  }
+  
   
 }
