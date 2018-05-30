@@ -25,11 +25,11 @@
 			</ion-item>
 			<ion-item>
 				<h4>Image Preview</h4>
-				<img src="{{company.image}}" *ngIf="imageFileName" width="300" />
+				<img src="{{company.image||imageURI}}" *ngIf="imageFileName" width="300" />
 			</ion-item>
 			<ion-item>
 				<ion-label floating color="primary">Project Manager</ion-label>
-				<ion-select  name="project_manager" [(ngModel)]="project_manager" #pm="ngModel"required>
+				<ion-select  name="project_manager" [(ngModel)]="project_manager" #pm="ngModel">
 					<ion-option *ngFor="let user of project_managers" [value]="user.id">
 						{{ user.username }} - {{ user.name }}
 					</ion-option>

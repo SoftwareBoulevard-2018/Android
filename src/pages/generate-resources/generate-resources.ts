@@ -23,7 +23,8 @@ export class GenerateResourcesPage {
   puzzlePieces: String[] = [];
   puzzle: number[][] = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
   puzzleReward: number = 0;
-  comp: Company;
+  comp: Company = new Company("00000000000null", "Null Company", "No image",
+  0, 0, 0, 0, 0);
   image = 'https://dondelaviste.cl/public/images/species/1/delfin_austral.png';
   user: User;
   puzzles = [];
@@ -133,8 +134,8 @@ export class GenerateResourcesPage {
     if(this.isOrdered())
     {
       var c: Company = this.comp;
-      c.capacityK = c.capacityK + this.real_puzzle.rewarded_resources;
-      console.log('Total k = ' + c.capacityK);
+      c.companyResource = c.companyResource + this.real_puzzle.rewarded_resources;
+      console.log('resources = ' + c.companyResource);
       this.httpService.updateCompany(c,c.id).subscribe(
         () => {
           let toast = this.toastCtrl.create({
