@@ -5,7 +5,7 @@ import { Company } from './../../models/company';
 import { User } from './../../models/user';
 import { GeneralServiceService } from './../../app/general-service.service';
 import { HttpService } from '../../app/http.service';
-//import { Estimation } from './../../models/estimation';
+import { Estimation } from './../../models/estimation';
 import { ToastController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 /**
@@ -50,6 +50,7 @@ export class EstimateCostTimePage {
         }
       });
     this.ser = service;
+    this.comp.companyResource = 10;
     //this.p = this.ser.bidProjects[this.comp.active_project]; //property not in company
   }
 
@@ -61,7 +62,7 @@ export class EstimateCostTimePage {
   { 
     if(!(this.comp.companyResource > 0))
     {
-      alert(this.comp.name);
+      alert('Not enought K');
       return;
     }
     else{
@@ -75,14 +76,14 @@ export class EstimateCostTimePage {
     this.lastCostEst = ce;
     this.lastTimeEst = te;
 
-    //var estimation = new Estimation(this.user.name, "hola", ce, te); 
+    var estimation = new Estimation(this.user.name, "hola", ce, te); 
 
     if(ce >= this.p.cost && te >= this.p.time)
     {
-      alert("Success!!!");
+      alert('Success!!!');
     }
     else{
-      alert("Fail!!! try again =)");
+      alert(estimation);
     }
     //console.log('The user that got here in estimate is '.concat(this.user.name));
     //console.log('the company id is '.concat(this.user.companyId));

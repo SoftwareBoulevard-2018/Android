@@ -19,29 +19,29 @@
 <ion-content no-padding>
 
     <ion-grid no-padding align-items: center>
-        <ion-row col-4 no-padding>
-          <ion-col col-3 no-padding tappable (tap)="movePiece(0,0)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[0][0]]}}></ion-col>
-          <ion-col col-3 no-padding tappable (tap)="movePiece(0,1)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[0][1]]}}></ion-col>
-          <ion-col col-3 no-padding tappable (tap)="movePiece(0,2)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[0][2]]}}></ion-col>
-          <ion-col col-3 no-padding tappable (tap)="movePiece(0,3)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[0][3]]}}></ion-col>
+        <ion-row col-12 no-padding>
+          <ion-col col-3 no-padding tappable (tap)="movePiece(0,0)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[0][0]-1]}}></ion-col>
+          <ion-col col-3 no-padding tappable (tap)="movePiece(0,1)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[0][1]-1]}}></ion-col>
+          <ion-col col-3 no-padding tappable (tap)="movePiece(0,2)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[0][2]-1]}}></ion-col>
+          <ion-col col-3 no-padding tappable (tap)="movePiece(0,3)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[0][3]-1]}}></ion-col>
         </ion-row>
-        <ion-row col-4 no-padding>
-          <ion-col col-3 no-padding tappable (tap)="movePiece(1,0)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[1][0]]}}></ion-col>
-          <ion-col col-3 no-padding tappable (tap)="movePiece(1,1)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[1][1]]}}></ion-col>
-          <ion-col col-3 no-padding tappable (tap)="movePiece(1,2)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[1][2]]}}></ion-col>
-          <ion-col col-3 no-padding tappable (tap)="movePiece(1,3)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[1][3]]}}></ion-col>
+        <ion-row col-12 no-padding>
+          <ion-col col-3 no-padding tappable (tap)="movePiece(1,0)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[1][0]-1]}}></ion-col>
+          <ion-col col-3 no-padding tappable (tap)="movePiece(1,1)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[1][1]-1]}}></ion-col>
+          <ion-col col-3 no-padding tappable (tap)="movePiece(1,2)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[1][2]-1]}}></ion-col>
+          <ion-col col-3 no-padding tappable (tap)="movePiece(1,3)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[1][3]-1]}}></ion-col>
         </ion-row>
-        <ion-row col-4 no-padding>
-          <ion-col col-3 no-padding tappable (tap)="movePiece(2,0)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[2][0]]}}></ion-col>
-          <ion-col col-3 no-padding tappable (tap)="movePiece(2,1)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[2][1]]}}></ion-col>
-          <ion-col col-3 no-padding tappable (tap)="movePiece(2,2)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[2][2]]}}></ion-col>
-          <ion-col col-3 no-padding tappable (tap)="movePiece(2,3)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[2][3]]}}></ion-col>
+        <ion-row col-12 no-padding>
+          <ion-col col-3 no-padding tappable (tap)="movePiece(2,0)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[2][0]-1]}}></ion-col>
+          <ion-col col-3 no-padding tappable (tap)="movePiece(2,1)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[2][1]-1]}}></ion-col>
+          <ion-col col-3 no-padding tappable (tap)="movePiece(2,2)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[2][2]-1]}}></ion-col>
+          <ion-col col-3 no-padding tappable (tap)="movePiece(2,3)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[2][3]-1]}}></ion-col>
         </ion-row>
-        <ion-row col-4 no-padding>
-          <ion-col col-3 no-padding tappable (tap)="movePiece(3,0)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[3][0]]}}></ion-col>        
-          <ion-col col-3 no-padding tappable (tap)="movePiece(3,1)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[3][1]]}}></ion-col>
-          <ion-col col-3 no-padding tappable (tap)="movePiece(3,2)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[3][2]]}}></ion-col>
-          <ion-col col-3 no-padding tappable (tap)="movePiece(3,3)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[3][3]]}}></ion-col>
+        <ion-row col-12 no-padding>
+          <ion-col col-3 no-padding tappable (tap)="movePiece(3,0)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[3][0]-1]}}></ion-col>        
+          <ion-col col-3 no-padding tappable (tap)="movePiece(3,1)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[3][1]-1]}}></ion-col>
+          <ion-col col-3 no-padding tappable (tap)="movePiece(3,2)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[3][2]-1]}}></ion-col>
+          <ion-col col-3 no-padding tappable (tap)="movePiece(3,3)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[3][3]-1]}}></ion-col>
         </ion-row>
       </ion-grid>
       <button ion-button color="primary" (click)="selectPuzzle()">
