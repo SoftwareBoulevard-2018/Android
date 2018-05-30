@@ -11,7 +11,7 @@ import { Events, NavController } from 'ionic-angular';
 import { GeneralServiceService } from '../../app/general-service.service';
 import { HttpService } from '../../app/http.service';
 /**
- * shows the cards for each user role.
+ * shows cards for each user role.
  */
 @Component({
   selector: 'main-page',
@@ -33,7 +33,10 @@ export class MainPage {
     public service: GeneralServiceService,
     public httpService: HttpService
   ) { }
-  //if this view is reopened we need to obtain the role.
+  /**
+   * if this view is reopened we need to obtain the role.
+   * 
+   */
   ionViewWillEnter() {
     this.service.getCurrentUser().then((user) => {
       this.user_type = user.role;
@@ -50,6 +53,7 @@ export class MainPage {
           });
     });
     
+    //show the number of users and companies in some cards
     this.httpService.getReports().subscribe(report => {
       this.users = report['users'];
       this.companies = report['companies'];

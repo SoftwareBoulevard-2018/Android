@@ -8,6 +8,7 @@ import { Company } from '../../models/company';
 import {HttpService} from '../../app/http.service';
 /**
  * shows and validates a form used to create a new company
+ * includes the optional uploading of a image
  */
 @Component({
   selector: 'create-company',
@@ -30,6 +31,7 @@ export class CreateCompanyPage {
   ) {}
 
   ionViewWillEnter(){
+    //search for available project managers
     this.getUserByRoleCompany('Project Manager', null);
   }
 
@@ -99,13 +101,11 @@ export class CreateCompanyPage {
 
   getUserByRoleCompany(role, companyId) {
     return this.httpService.getUserByRoleCompany(role, companyId).subscribe( data => {
-        console.log(data);
       if (Array.isArray(data)) {
         this.project_managers = data;
       } else {
         this.project_managers = [data];
       }
-      console.log(this.project_managers);
     }, () => {
       this.project_managers = [];
       }

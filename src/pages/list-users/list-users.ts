@@ -37,18 +37,23 @@ export class ListUsersPage {
     return this.httpService.getAllUsers().subscribe(data => this.addCompanies(data['data']));
   }
 
+  /**
+   * search and add a company instance for each user
+   */
   addCompanies(users) {
     users.forEach(user => {
-      this.httpService.getCompanyById(user.companyId).subscribe(company => {
-        user.company = company;
-        user.companyName = company.name;
-        this.users.push(user);
-      }, error => {
-        console.log(error);
-        user.company = undefined;
-        user.companyName = undefined;
-        this.users.push(user);
-      })
+      if(user.companyId){
+        this.httpService.getCompanyById(user.companyId).subscribe(company => {
+          user.company = company;
+          user.companyName = company.name;
+        }, error => {
+          console.log(error);
+          user.company = undefined;
+          user.companyName = undefined;
+          
+        })
+      }
+      this.users.push(user);
     });
   }
 
