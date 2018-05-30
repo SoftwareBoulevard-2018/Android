@@ -87,25 +87,24 @@ export class ComposeEmailPage {
 
       var emailToSend = new Email(this.sender, this.subject, receiversObjectID, this.content);
 
-
+      /*We are sending a notification, depending if the email is sent or not*/
       this.HttpService.send(emailToSend).subscribe(
-        data => {
+        () => {
           let toast = this.toastCtrl.create({
             message: 'Email sent',
             duration: 3000
           });
-          console.log(data);
           toast.present();
 
         },
-        error => {
+        () => {
 
           let toast = this.toastCtrl.create({
             message: 'Something went wrong',
             duration: 3000
           });
           toast.present();
-          console.log(error);
+
         }
       )
 

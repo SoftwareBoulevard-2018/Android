@@ -6,18 +6,18 @@
 -->
 <ion-header>
   <ion-navbar>
-      <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-      </button>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-row>
-        <ion-title>Inbox</ion-title>
-        <ion-col col-2>
-            <ion-buttons>
-              <button ion-button icon-only (click)="viewEmailMenu($event)">
-              <ion-icon name="md-more"></ion-icon>
-            </button>
-           </ion-buttons>
-        </ion-col>
+      <ion-title>Inbox</ion-title>
+      <ion-col col-2>
+        <ion-buttons>
+          <button ion-button icon-only (click)="viewEmailMenu($event)">
+            <ion-icon name="md-more"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-col>
     </ion-row>
   </ion-navbar>
 </ion-header>
@@ -29,29 +29,40 @@
     <ion-searchbar [(ngModel)]="searchQuery" (change)="searchEmail()" autocorrect="off"></ion-searchbar>
   </ion-col>
 
-   <div align="center">
-      <ion-buttons>
-          <button class="content" ion-button icon-only (click)="viewFullInbox()">
-            <ion-label><b>VIEW ALL INBOX</b></ion-label>
-          </button>
-      </ion-buttons>
-   </div>
-    
+  <div align="center">
+    <ion-buttons>
+      <button class="content" ion-button icon-only (click)="viewFullInbox()">
+        <ion-label>
+          <b>VIEW ALL INBOX</b>
+        </ion-label>
+      </button>
+    </ion-buttons>
+  </div>
+
 
   <ion-list>
-    
+
     <ion-item *ngFor="let email of emailArray" (click)="readEmail(email)">
 
-      <p class="content"> <b> Subject: </b> {{ email.subject }} </p>
-      <p class="content"> <b> Sender: </b> {{ email.sender }} </p>
-      <p class="content"> <b>  Date: </b>{{ email.date }} </p>
-
+      <p class="content">
+        <b> Subject: </b> {{ email.subject }} </p>
+      <p class="content">
+        <b> Sender: </b> {{ email.sender }} </p>
+      <p class="content">
+        <b> Date: </b>{{ email.date }} </p>
       <div align="right">
-        <label class = "checkbox">
-          <input type = "checkbox" disabled="disabled" checked="checked">
-       </label>
+        <p>
+          <b> {{ email.status }} </b>
+        </p>
+
+        <div *ngIf="email.status=='READ'">
+          <label class="checkbox">
+            <input type="checkbox" disabled="disabled" checked="checked">
+          </label>
+        </div>
+
       </div>
-      
+
     </ion-item>
 
   </ion-list>

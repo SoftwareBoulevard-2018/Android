@@ -86,10 +86,13 @@ export class HttpService {
   sent(idUsuario) {
      return this.http.get<Email[]>(HttpService.apiURL + HttpService.emailURL + '/sent/' + idUsuario);
   }  
-  updateState(idUsuario, idEmail){
-    return this.http.post<Email>(HttpService.apiURL + HttpService.emailURL + '/updateState/',
-      JSON.stringify({idUsuario: idUsuario, idEmail: idEmail}), HttpService.httpOptions);
+
+
+  updateState(idEmail, email){
+    return this.http.put<Email>(HttpService.apiURL + HttpService.emailURL + '/updateState/'+idEmail,
+      JSON.stringify(email), HttpService.httpOptions);
   }
+
 
   // All services related to reports
   getReports(){
