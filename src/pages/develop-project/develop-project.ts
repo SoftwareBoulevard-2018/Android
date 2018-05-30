@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { GeneralServiceService } from '../../app/general-service.service';
+import { HttpService } from '../../app/http.service';
+import { Assignment } from './../../models/assignment';
+import { User } from './../../models/user';
+import { Company } from './../../models/company';
+import { InstantProject } from './../../models/instantProject';
 
 @IonicPage()
 @Component({
@@ -8,6 +14,13 @@ import { AlertController } from 'ionic-angular';
   templateUrl: 'develop-project.html',
 })
 export class DevelopProjectPage {
+  user: User;
+  company: Company;
+  analyst: number;
+  developer: number;
+  tester: number;
+  project: InstantProject;
+
   //Should be retrieved from server in the future
   resour: number = 5;
 
@@ -34,9 +47,47 @@ export class DevelopProjectPage {
   sendhid: boolean = false;
 
   //Constructor
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
+  constructor(public service: GeneralServiceService, public httpService: HttpService, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
     this.checkForQuestions();
   }
+
+
+
+  ionViewWillEnter() {
+
+    this.service.getCurrentUser().then((user) => {
+      this.user = user;
+
+      this.httpService.getCompanyById(user.companyId).subscribe(company => {
+        this.company = company;
+        this.analyst = this.company.numberOfCorrectDevelopingAttempsByAnalyst;
+        this.developer = this.company.numberOfCorrectDevelopingAttempsByDeveloper;
+        this.tester = this.company.numberOfCorrectDevelopingAttempsByTester;
+
+        this.httpService.getRecordByCompany(company.id).subscribe((records) => {
+          for (var i = 0; i < records.length; ++i) {
+            if (records[i].finishDate = null) {
+              this.httpService.getInstantProjectById(records[i].project).subscribe((project) => {
+                this.project = project;
+
+                this.httpService.getAssignmentById(records[i].project).subscribe((assignments) => {
+                  
+                });
+              });
+              
+            }
+          }
+        })
+      }, error => {
+        this.hideOptions();
+        console.log(error);
+      });
+    });
+
+  }
+
+
+
   //It's meant to be used to check for remaining questions for the user in the server. Must be called every time the improve skill level page is opened.
   checkForQuestions(){
     if(this.questionspending == 0){

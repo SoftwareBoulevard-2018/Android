@@ -18,7 +18,7 @@
             </ion-card-header>
 
             <ion-card-content class="outer-content">
-                Currently there are {{users}} users working hard for the win
+                Currently there are <ion-badge color="secondary">{{users}}</ion-badge> users working hard for the win
             </ion-card-content>
 
             <ion-row no-padding>
@@ -51,7 +51,7 @@
             </ion-card-header>
 
             <ion-card-content class="outer-content">
-                Currently there are {{companies}} companies fighting for the victory
+                Currently there are <ion-badge color="secondary">{{companies}}</ion-badge> companies fighting for the victory
             </ion-card-content>
 
             <ion-row no-padding>
@@ -141,8 +141,8 @@
     <div id="role-main" *ngIf="user_type === 'Developer' || user_type === 'Analyst' || user_type === 'Tester'">
 
       <div class="stats">
-          <p>Resources: 5</p>
-          <p>Team Members: 2</p>
+          <p>Resources: {{company_resources}}</p>
+          <p>Team Members: {{company_members}}</p>
       </div>
 
       <div class="profilepic">
@@ -151,9 +151,9 @@
 
       <div class="profile">
         <h3>Profile</h3>
-        <p>Johan Alejandro Holguín Arango</p>
-        <p>Analyst</p>
-        <p>Level 1</p>
+        <p> {{user_name}} </p>
+        <p> {{user_type}} </p>
+        <p> Level {{user_level}} </p>
       </div>
      </div>
 
