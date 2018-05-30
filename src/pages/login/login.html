@@ -35,8 +35,12 @@
 	</form>
 	<footer>
 		<form #APIform="ngForm" novalidate>
-			<ion-item><ion-label color="primary">api:</ion-label><ion-input [ngModel]="apiOld" name="api"></ion-input></ion-item>
-			<button ion-button (click)="changeAPI(APIform)" type="submit" block>change</button>
+			<ion-item>
+				<ion-label color="primary">Api url:</ion-label>
+				<ion-input [ngModel]="apiOld" name="api"></ion-input>
+				
+			</ion-item>
+			<button ion-button (click)="changeAPI(APIform)" type="submit" end>change</button>
 		</form>
 	</footer>
 </ion-content>

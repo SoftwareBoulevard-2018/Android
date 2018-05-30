@@ -11,6 +11,7 @@ import { HttpService } from '../../app/http.service';
 
 /**
  * shows the login form and validates the data, shows a toast if invalid.
+ * also shows the curren apiURL and a button to change it
  */
 @Component({
   selector: 'login',
@@ -54,6 +55,5 @@ export class LoginPage {
   changeAPI(form: NgForm) {
     HttpService.apiURL = form.value['api']
   }
-  
   
 }

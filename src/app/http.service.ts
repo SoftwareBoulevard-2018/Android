@@ -13,6 +13,10 @@ import { Assignment } from './../models/assignment';
 import { InstantProject } from './../models/instantProject';
 import { Record } from './../models/record';
 
+/**
+ * Provides communication with the api
+ */
+
 @Injectable()
 export class HttpService {
 
@@ -26,8 +30,15 @@ export class HttpService {
     private transfer: FileTransfer
   ) { }
 
+  /**
+   * defaul apiURL, can be changed in loginPage
+   */
   static apiURL = 'http://35.196.111.251:3000';
   //static apiURL = 'http://localhost:3000';
+
+  /**
+   * routes must coincide with backend services
+   */
   static usersURL = '/users';
   static usersURL2 = '/username';
   static companiesURL = '/companies';
@@ -74,6 +85,10 @@ export class HttpService {
   getUsersByCompany(companyId){
     return this.http.get<User[]>(HttpService.apiURL + HttpService.usersURL + '/company/' + companyId);
   }
+  login(username, password) {
+    return this.http.post<User>(HttpService.apiURL + HttpService.loginURL,
+      JSON.stringify({ username: username, password: password }), HttpService.httpOptions);
+  }
 
   // All services related to companies
   getAllCompanies() {
@@ -90,14 +105,18 @@ export class HttpService {
     return this.http.put<Object>(HttpService.apiURL + HttpService.companiesURL + '/' + companyId,
       JSON.stringify(company), HttpService.httpOptions);
   }
+  // uploads the image to the server before a company is created or updated
+  uploadCompanyImage(imageURI){
+    const fileTransfer: FileTransferObject = this.transfer.create();
+  
+    let options: FileUploadOptions = {
+      fileKey: 'image',
+      chunkedMode: false,
+      mimeType: 'multipart/form-data',
+      headers: {}
+    }
 
-  // All services related to session
-  getSession() {
-    return this.http.get<User>(HttpService.apiURL + HttpService.loginURL);
-  }
-  login(username, password) {
-    return this.http.post<User>(HttpService.apiURL + HttpService.loginURL,
-      JSON.stringify({ username: username, password: password }), HttpService.httpOptions);
+    return fileTransfer.upload(imageURI, HttpService.apiURL+HttpService.companiesURL+"/image", options);
   }
 
   // All services related to email
@@ -113,12 +132,13 @@ export class HttpService {
      return this.http.get<Email[]>(HttpService.apiURL + HttpService.emailURL + '/sent/' + idUsuario);
   }  
 
-  updateState(idUsuario, idEmail){
-    return this.http.post<Email>(HttpService.apiURL + HttpService.emailURL + '/updateState/',
-      JSON.stringify({idUsuario: idUsuario, idEmail: idEmail}), HttpService.httpOptions);
+  updateState(idEmail, email){
+    return this.http.put<Email>(HttpService.apiURL + HttpService.emailURL + '/updateState/'+idEmail,
+      JSON.stringify(email), HttpService.httpOptions);
   }
 
   // All services related to reports
+  //this gets the number of users and companies
   getReports(){
     return this.http.get(HttpService.apiURL + HttpService.reportsURL);
   }
@@ -190,18 +210,5 @@ export class HttpService {
   getRecordsByFinishDateAndCompany(finishDate, company) {
     return this.http.post<Record>(HttpService.apiURL + HttpService.recordsURL + HttpService.getCurrentCompanyURL,
       JSON.stringify({company: company , finishDate: finishDate}), HttpService.httpOptions);
-  }
-  //image uploading
-  uploadCompanyImage(imageURI){
-    const fileTransfer: FileTransferObject = this.transfer.create();
-  
-    let options: FileUploadOptions = {
-      fileKey: 'image',
-      chunkedMode: false,
-      mimeType: 'multipart/form-data',
-      headers: {}
-    }
-
-    return fileTransfer.upload(imageURI, HttpService.apiURL+HttpService.companiesURL+"/image", options);
   }
 }

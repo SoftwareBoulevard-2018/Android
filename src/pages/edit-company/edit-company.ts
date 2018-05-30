@@ -86,6 +86,7 @@ export class EditCompanyPage {
   onSubmit(form: NgForm) {
     this.submitted = true;
 
+    //if the image was changed, upload it
     if (form.valid) {
       if(this.changedImage){
         this.uploadImage().then(() => {
@@ -118,7 +119,6 @@ export class EditCompanyPage {
 
   getCurrentProjectManager(companyId) {
     return this.httpService.getUserByRoleCompany('Project Manager', companyId).subscribe( data => {
-      console.log(data[0])
         if (data[0] === undefined) {
           this.lacking_project_manager = true;
           this.getUserByRoleCompany('Project Manager', null);
@@ -131,13 +131,11 @@ export class EditCompanyPage {
 
   getUserByRoleCompany(role, companyId) {
     return this.httpService.getUserByRoleCompany(role, companyId).subscribe( data => {
-        console.log(data);
         if (Array.isArray(data)) {
           this.project_managers = data;
         } else {
           this.project_managers = [data];
         }
-        console.log(this.project_managers);
       }, () => {
         this.project_managers = [];
       }

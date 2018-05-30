@@ -15,4 +15,16 @@ page-user {
   .list {
     margin-bottom: 0;
   }
+  
+}
+login footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  ion-item.item-md{
+    overflow: unset !important;
+    display: inline-block;
+    width: 70%;
+  }
 }
