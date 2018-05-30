@@ -13,6 +13,7 @@ import { Assignment } from './../models/assignment';
 import { InstantProject } from './../models/instantProject';
 import { Invitation } from './../models/invitation';
 import { Record } from './../models/record';
+import { Estimation } from './../models/estimation';
 
 /**
  * Provides communication with the api
@@ -57,9 +58,8 @@ export class HttpService {
   static getCurrentCompanyURL = '/getCurrentProject';
   static getBiddingProjectURL = '/getBiddingProject';
 
-
   static createBiddingProjectURL = '/createBiddingProject';
-
+  static instantProjectURL = '/instantProjects'
   static getInstantProjectURL = '/getInstantProject';
   static getQuestionURL = '/getQuestions';
   static getAssignmentURL = '/getAssignment';
@@ -70,6 +70,11 @@ export class HttpService {
   static developingAttemptsURL = '/developingAttempts';
 
   static invitationsURL = '/invitations';
+  static estimationURL = '/estimations';
+  static getCurrentProjectManagerURL = '/getCurrentPm';
+  static getCurrentProjectManager2URL = '/getCurrentProjectM';
+  static getEstimationByPMAndProjectURL = '/getEstimationByPMAndProject';
+  static getEstimationsByPMAndStateURL = '/getEstimationsByProjectManagerUsernameAndState';
 
   // All services related to Users
   getAllUsers() {
@@ -160,17 +165,17 @@ export class HttpService {
   }
   //All services related to Projects
   getBiddingProjectById(id: String) {
-    return this.http.get<BiddingProject>(HttpService.apiURL +'/biddingProjects/getBiddingProjectById'+ '/' + id);
+    return this.http.get<BiddingProject>(HttpService.apiURL +'/biddingProjects'+ '/' + id);
   }
   getAllBiddingProjects() {
-    return this.http.get<BiddingProject[]>(HttpService.apiURL + HttpService.getBiddingProjectURL + '/' + 'getBiddingProject');
+    return this.http.get<BiddingProject[]>(HttpService.apiURL + HttpService.biddingProjectURL + '/' + 'getBiddingProject');
   }
 
   getInstantProjectById(id: String) {
-    return this.http.get<InstantProject>(HttpService.apiURL + HttpService.getInstantProjectURL+ '/' + id);
+    return this.http.get<InstantProject>(HttpService.apiURL + HttpService.instantProjectURL + '/' +  + id);
   }
   getAllInstantProjects() {
-    return this.http.get<InstantProject[]>(HttpService.apiURL + HttpService.getInstantProjectURL + '/' + 'getInstantProject');
+    return this.http.get<InstantProject[]>(HttpService.apiURL + HttpService.instantProjectURL + '/' + 'getInstantProject');
   }
   createBiddingProject(biddingProject: BiddingProject) {
 	  console.log("puto el que lo lea");
@@ -241,5 +246,19 @@ export class HttpService {
   getRecordsByFinishDateAndCompany(finishDate, company) {
     return this.http.post<Record>(HttpService.apiURL + HttpService.recordsURL + HttpService.getCurrentCompanyURL,
       JSON.stringify({company: company , finishDate: finishDate}), HttpService.httpOptions);
+  }
+
+  //All services related to Estimation
+  createEstimation(estimation: Estimation) {
+    return this.http.post<any>(HttpService.apiURL + HttpService.estimationURL,
+      JSON.stringify(estimation), HttpService.httpOptions);
+  }
+  getEstimationByPMAndProject(projectManagerUsername, projectName) {
+    return this.http.post<Estimation[]>(HttpService.apiURL + HttpService.estimationURL + HttpService.getEstimationByPMAndProjectURL,
+      JSON.stringify({projectManagerUsername: projectManagerUsername , projectName: projectName}), HttpService.httpOptions);
+  }
+  getEstimationByProjectManagerUsernameAndState(projectManagerUsername, state) {
+    return this.http.post<Estimation>(HttpService.apiURL + HttpService.estimationURL + HttpService.getEstimationsByPMAndStateURL,
+      JSON.stringify({projectManagerUsername: projectManagerUsername , state: state}), HttpService.httpOptions);
   }
 }
