@@ -67,16 +67,17 @@ export class ReportsPage {
 
     this.httpService.getAllUsers().subscribe(data => {
       data['data'].forEach(user => {
-        if (user.resourcesSpent !== 0) {
+        user.efficiency = 0;
+        if (user.resourcesSpent) {
           user.efficiency = ((user.correctProjectQuestions + user.correctTrainingQuestions) / (user.resourcesSpent) * 100).toFixed(2);
-        } else {
-          user.efficiency = 0;
         }
+        
       });
-      data['data'].sort((a,b) => {b.efficiency - a.efficiency});
-      this.topEfficentUsers = data['data'].slice(0,5);
-      data['data'].sort((a,b) => {b.resourcesSpent - a.resourcesSpent});
-      this.topActiveUsers = data['data'].slice(0,5);
+      let orden = data['data'].sort((a,b) => {return b.efficiency - a.efficiency});
+      this.topEfficentUsers = orden.slice(0,5);
+      orden = data['data'].sort((a,b) => {return b.resourcesSpent - a.resourcesSpent});
+      this.topActiveUsers = orden.slice(0,5);
+
     })
   }
 
