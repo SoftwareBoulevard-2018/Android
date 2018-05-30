@@ -13,6 +13,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { IonicStorageModule } from '@ionic/storage';
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import { Camera } from '@ionic-native/camera';
 
 import { HttpService } from './http.service';
 
@@ -189,7 +192,10 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
     InAppBrowser,
     SplashScreen,
     GeneralServiceService,
-    servicesEmail
+    servicesEmail,
+    FileTransfer,
+    File,
+    Camera
   ]
 })
 export class AppModule { }
