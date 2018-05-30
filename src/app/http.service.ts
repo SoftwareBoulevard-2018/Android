@@ -7,6 +7,9 @@ import { Email } from '../models/email';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Puzzle } from './../models/puzzle';
 import { BiddingProject } from './../models/biddingProject';
+import { Questions } from './../models/questions';
+import { Assignment } from './../models/assignment';
+import { InstantProject } from './../models/instantProject';
 
 @Injectable()
 export class HttpService {
@@ -33,6 +36,10 @@ export class HttpService {
   static puzzleURL = '/puzzles';
   static getCurrentCompanyURL = '/getCurrentProject';
   static getBiddingProjectURL = '/biddingProjects';
+
+  static getInstantProjectURL = '/instantProjects';
+  static getQuestionURL = '/questions';
+  static getAssignmentURL = '/assignment';
 
   static trainingAttemptsURL = '/trainingAttempts';
   static developingAttemptsURL = '/developingAttempts';
@@ -122,6 +129,25 @@ export class HttpService {
   }
   getAllBiddingProjects() {
     return this.http.get<BiddingProject[]>(HttpService.apiURL + HttpService.getBiddingProjectURL);
+  }
+
+  getInstantProjectById(id: String) {
+    return this.http.get<InstantProject>(HttpService.apiURL + HttpService.getInstantProjectURL+ '/' + id);
+  }
+  getAllInstantProjects() {
+    return this.http.get<InstantProject[]>(HttpService.apiURL + HttpService.getInstantProjectURL);
+  }
+  getQuestionsById(id: String) {
+    return this.http.get<Questions>(HttpService.apiURL + HttpService.getQuestionURL+ '/' + id);
+  }
+  getAllQuestions() {
+    return this.http.get<Questions[]>(HttpService.apiURL + HttpService.getQuestionURL);
+  }
+  getAssignmentById(id: String) {
+    return this.http.get<Assignment>(HttpService.apiURL + HttpService.getAssignmentURL+ '/' + id);
+  }
+  getAllAssignments() {
+    return this.http.get<Assignment[]>(HttpService.apiURL + HttpService.getAssignmentURL);
   }
 
   getTrainingAttemptsByState(state) {
