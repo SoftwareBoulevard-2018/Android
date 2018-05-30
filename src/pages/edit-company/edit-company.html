@@ -29,7 +29,7 @@
 			</ion-item>
 			<ion-item *ngIf="lacking_project_manager">
 				<ion-label floating color="primary">Project Manager</ion-label>
-				<ion-select  name="project_manager" [(ngModel)]="project_manager" #pm="ngModel"required>
+				<ion-select  name="project_manager" [(ngModel)]="project_manager" #pm="ngModel">
 					<ion-option [value]=''>
 						None
 					</ion-option>

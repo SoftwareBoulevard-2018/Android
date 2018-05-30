@@ -5,7 +5,7 @@ import { Component, ViewChild } from '@angular/core';
 
 import { Events, MenuController, Nav, Platform } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { StatusBar } from '@ionic-native/status-bar';
 import { Storage } from '@ionic/storage';
 
 //import { ViewAccountPage } from '../pages/account/account';
@@ -89,8 +89,11 @@ export class SoftwareBoulevardApp {
     public platform: Platform,
     public storage: Storage,
     public splashScreen: SplashScreen,
-    public service: GeneralServiceService
+    public service: GeneralServiceService,
+    private statusBar: StatusBar
   ) {
+    this.statusBar.backgroundColorByHexString('#00585E');
+    
     //verificates if the user is already logged in and skips the login page
     this.service.getCurrentUser().then((user) => {
       if(user !== undefined && user !== null){
@@ -103,7 +106,7 @@ export class SoftwareBoulevardApp {
       }
     });
 
-
+    this.platformReady();
     this.listenToLoginEvents();
   }
 

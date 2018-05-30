@@ -9,6 +9,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -195,7 +196,8 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
     servicesEmail,
     FileTransfer,
     File,
-    Camera
+    Camera,
+    StatusBar
   ]
 })
 export class AppModule { }
