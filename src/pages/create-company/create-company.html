@@ -21,13 +21,12 @@
 			</p>
 
 			<ion-item>
-				<ion-label stacked color="primary">Image</ion-label>
-				<ion-input [(ngModel)]="company.image" name="image" type="text" #image="ngModel" required>
-				</ion-input>
+				<button ion-button color="secondary" (click)="getImage()">Select Image</button>
 			</ion-item>
-			<p ion-text [hidden]="image.valid || submitted == false" color="danger" padding-left>
-				Image is required
-			</p>
+			<ion-item>
+				<h4>Image Preview</h4>
+				<img src="{{company.image}}" *ngIf="imageFileName" width="300" />
+			</ion-item>
 			<ion-item>
 				<ion-label floating color="primary">Project Manager</ion-label>
 				<ion-select  name="project_manager" [(ngModel)]="project_manager" #pm="ngModel"required>

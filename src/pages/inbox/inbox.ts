@@ -29,8 +29,10 @@ export class InboxPage {
   searchQuery: String; //This variable is the text entered by the user to perform the search in the inbox
   private emailArray = []; //This is the arrangement that the user has in the outbox
   private defaultList = []; //This arrangement serves to update the entire list of emails
-  // private username; //It is the user to whom the inbox will be shown
   private idUser; //This id is used to do HTTP requests in order to read emails for that user.
+
+
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController,
     public service: GeneralServiceService, public HttpService: HttpService) {
@@ -38,18 +40,17 @@ export class InboxPage {
     //Here we query the current user that is logged and then we do a request to see what emails he has received.
     this.service.getCurrentUser().then((user) => {
       this.idUser = user.id;
-        this.HttpService.read(this.idUser).subscribe((data) => {
-          if (JSON.parse(JSON.stringify(data)).data.length > this.defaultList.length) {
-            this.listEmailsReceivedForUser(data);
+      this.HttpService.read(this.idUser).subscribe((data) => {
+        if (JSON.parse(JSON.stringify(data)).data.length > this.defaultList.length) {
+          this.listEmailsReceivedForUser(data);
 
-          }
-        })
+        }
+      })
     });
 
 
 
-    //Every 5 seconds the emails are updated.
-
+    //Every 5 seconds the emails are updated, so we need to do the request.
 
     this.service.getCurrentUser().then((user) => {
       this.idUser = user.id;
@@ -57,9 +58,12 @@ export class InboxPage {
 
       Observable.interval(5000).subscribe(() => {
         this.HttpService.read(this.idUser).subscribe((data) => {
+
+
           if (JSON.parse(JSON.stringify(data)).data.length > this.defaultList.length) {
 
             this.listEmailsReceivedForUser(data);
+
           }
         })
       })
@@ -82,9 +86,26 @@ export class InboxPage {
 
     this.updateDate();
     this.updateSender();
+    this.updateState();
+
 
   }
+  /* This method updates in the view, if the user has read the email.
+  Possible States = READ , UNREAD. */
+  updateState() {
 
+    for (let i = 0; i < this.emailArray.length; i++) {
+      if (this.emailArray[i].acknowledgment.indexOf(this.idUser) >= 0) {
+        this.emailArray[i].status = "READ";
+
+      }
+      else {
+        this.emailArray[i].status = "UNREAD";
+      }
+
+    }
+
+  }
 
   /* This method updates the date of an email in a format easy to read for the user*/
   updateDate() {
@@ -94,6 +115,7 @@ export class InboxPage {
     for (let i = 0; i < this.emailArray.length; i++) {
       date = this.emailArray[i].createdAt;
       this.emailArray[i].date = moment(date).format('D MMM YYYY, h:mm:ss A');
+
     }
 
   }
@@ -194,12 +216,58 @@ export class InboxPage {
 
   /*
   This method is responsible for routing the page where the selected email is read.
+  When you read an email, the state is updated because the user has read the email.
+  So we do a request to the server to update the acknoledgment of the email.
   */
   readEmail(emailToRead) {
-    this.navCtrl.push(ReademailPage, {
-      sender: emailToRead.sender,
-      subject: emailToRead.subject,
-      content: emailToRead.content,
+
+    var emails = [];
+    this.HttpService.read(this.idUser).subscribe((data) => {
+      const dataJson = JSON.parse(JSON.stringify(data));
+      emails = dataJson.data;
+
+      var indiceBusqueda = -1;
+
+      for (let index = 0; index < emails.length; index++) {
+
+        if (emails[index].id == emailToRead.id) {
+          indiceBusqueda = index;
+          break;
+        }
+
+      }
+
+      if (emails[indiceBusqueda].acknowledgment == undefined) {
+        emails[indiceBusqueda].acknowledgment = [];
+        emails[indiceBusqueda].acknowledgment[0] = this.idUser;
+
+        this.HttpService.updateState(emails[indiceBusqueda].id, emails[indiceBusqueda]).subscribe();
+      }
+      else {
+        var found = undefined;
+
+        for (let i = 0; i < emails[indiceBusqueda].acknowledgment.length; i++) {
+          if (emails[indiceBusqueda].acknowledgment[i] == this.idUser) {
+            found = true;
+          }
+        }
+        if (found == undefined) {
+          emails[indiceBusqueda].acknowledgment.push(this.idUser);
+          this.HttpService.updateState(emails[indiceBusqueda].id, emails[indiceBusqueda]).subscribe();
+        }
+
+      }
+
+      this.navCtrl.push(ReademailPage, {
+        sender: emailToRead.sender,
+        subject: emailToRead.subject,
+        content: emailToRead.content,
+      });
+
+
     });
+
+
+
   }
 }

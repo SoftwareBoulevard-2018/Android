@@ -8,6 +8,12 @@ import {
 /**
  * shows a list with the subset of reports
  * based on the received parameters.
+ * 
+ * current reports:
+ *  Companies by K:            Bar chart
+ *  Companies by Resources:    Pie chart
+ *  Top 5 users by efficiency: List
+ *  Top 5 users by activity:   List
  */
 @Component({
   selector: 'reports',
@@ -33,6 +39,7 @@ export class ReportsPage {
     public platform: Platform,
     public httpService: HttpService
   ) {
+    //set of reports to show
     if(navParams.get("reportsType") === "companies"){
       this.companiesReports = true;
     }else if(navParams.get("reportsType") === "users"){
@@ -46,6 +53,9 @@ export class ReportsPage {
       this.view = [platform.width()-20, 350];
     });
 
+    /**
+     * obtention of data for reports
+     */
     this.httpService.getAllCompanies().subscribe(data => {
       data['data'].forEach(company => {
         const entryK = {name: company.name,value: company.capacityK};

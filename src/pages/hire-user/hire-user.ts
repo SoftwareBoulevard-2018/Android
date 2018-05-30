@@ -12,6 +12,7 @@ import { GeneralServiceService } from '../../app/general-service.service';
 import { User } from '../../models/user';
 import { HttpService } from '../../app/http.service';
 import { Email } from '../../models/email';
+import { ToastController } from 'ionic-angular';
 
 /**
  * Generated class for the HireUserPage page.
@@ -30,16 +31,18 @@ export class HireUserPage {
   //companies: Company[];
   hService: HttpService;
   serv: GeneralServiceService;
+  toastCtrl: ToastController;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public service: GeneralServiceService,
-    public httpService: HttpService
-    
+    public httpService: HttpService,
+    public toastController: ToastController
   ){
     this.hService = httpService;
     this.serv = this.service;
+    this.toastCtrl = toastController;
   }
   ionViewDidEnter(){
     this.users = [];
@@ -75,11 +78,28 @@ export class HireUserPage {
     var sender: string;
     this.serv.getCurrentUser().then((u) => {
       console.log(u);
-      sender = u.name;
-      var reciver = user.name;
+      sender = u.id;
+      var reciver = user.id;
       var email = new Email(sender, "Recruitment" , [reciver] , "You are invited to our team, join us =D");
       console.log(email);
-      this.httpService.send(email);
+      this.httpService.send(email).subscribe(
+        () => {
+          let toast = this.toastCtrl.create({
+            message: 'Email sent',
+            duration: 3000
+          });
+          toast.present();
+
+        },
+        () => {
+
+          let toast = this.toastCtrl.create({
+            message: 'Something went wrong',
+            duration: 3000
+          });
+          toast.present();
+        }
+      );
       alert('Email sent to ' + user.name + '!');
     });
   }
