@@ -191,6 +191,7 @@ export class HttpService {
     return this.http.post<any>(HttpService.apiURL + HttpService.recordsURL,
       JSON.stringify(record), HttpService.httpOptions);
   }
+
   getAllRecords() {
     return this.http.get<Record[]>(HttpService.apiURL + HttpService.recordsURL);
   }
@@ -216,6 +217,5 @@ export class HttpService {
     }
 
     return fileTransfer.upload(imageURI, HttpService.apiURL+HttpService.companiesURL+"/image", options);
-
   }
 }
