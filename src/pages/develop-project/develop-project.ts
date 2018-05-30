@@ -210,11 +210,17 @@ export class DevelopProjectPage {
   }
 
   checkAvailability(){
+    console.log("Project: " + this.project)
     if (this.user.role == "Analyst"){
       return true;
-    }else if (this.user.role = "Developer" ) {
-      // code...
+    }else if (this.user.role == "Developer" && 
+              this.project.numberOfDevelopingQuestionsPerAnalyst == this.company.numberOfCorrectDevelopingAttempsByAnalyst) {
+      return true;
+    }else if (this.project.numberOfDevelopingQuestionsPerAnalyst == this.company.numberOfCorrectDevelopingAttempsByAnalyst &&
+              this.project.numberOfDevelopingQuestionsPerDeveloper == this.company.numberOfCorrectDevelopingAttempsByDeveloper){
+      return true;
     }
+    return false;
   }
 
   //Confirms the screen loaded (?) auto-generated code
@@ -236,7 +242,7 @@ export class DevelopProjectPage {
                 if (records[i].finishDate == undefined) {
 
                     this.httpService.getInstantProjectById(records[i].project).subscribe((project) => {
-                      this.project = project;
+                      this.setProject(project);
                       console.log(project);
                     });
 
@@ -244,7 +250,7 @@ export class DevelopProjectPage {
                     this.httpService.getAssignmentById(records[i].project).subscribe((assignments) => {
                       console.log(assignments);
                       this.getQuestions(assignments, user);
-
+                      console.log("Availability: " + this.checkAvailability());
                     }, error => {
                       this.hideOptions();
                       console.log(error);
