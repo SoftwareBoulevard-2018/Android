@@ -37,7 +37,13 @@ export class SelectProjectPage {
   }
 
   getAllProjects() {
-    return this.httpService.getAllBiddingProjects().subscribe(data => this.fillProjects(data['data']));
+    return this.httpService.getAllBiddingProjects().subscribe(data => 
+      {
+        this.fillProjects(data['data']);
+        console.log(data);      
+      }
+  );
+    
   }
 
   fillProjects(projects) {
@@ -51,7 +57,7 @@ export class SelectProjectPage {
   viewProjectInfo(p: any)
   {
       var info: String;
-      if(p.required_k == null)
+      if(p.required_k == null || p.required_k == undefined)
       {
         info = "Instant Project Information".concat("\n"
         ).concat("Id: ").concat(p.project_id.toString()).concat("\n").concat("Name: "
@@ -60,7 +66,7 @@ export class SelectProjectPage {
         ).concat("\n").concat("No. Developer Questions: ").concat(p.amount_developer_question.toString()
         ).concat("\n").concat("No. Tester Questions: ").concat(p.amount_tester_question.toString());
       }
-      else if(p !== undefined)
+      else
       {
         info = "Bidding Project Information".concat("\n"
         ).concat("Id: ").concat(p.project_id.toString()).concat("\n").concat("Name: "
@@ -75,10 +81,6 @@ export class SelectProjectPage {
         ).concat("\n").concat("Required Developer Level: ").concat(p.required_developer_level.toString()
         ).concat("\n").concat("Required Tester Level: ").concat(p.required_tester_level.toString())
         ;
-      }
-      else
-      {
-        info = "Not a project";
       }
 
       alert(info);
