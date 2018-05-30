@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { User } from '../models/user';
 import { TrainingAttempt } from '../models/trainingAttempt';
 import { DevelopingAttempt } from '../models/developingAttempt';
@@ -10,6 +11,7 @@ import { BiddingProject } from './../models/biddingProject';
 import { Questions } from './../models/questions';
 import { Assignment } from './../models/assignment';
 import { InstantProject } from './../models/instantProject';
+import { Record } from './../models/record';
 
 @Injectable()
 export class HttpService {
@@ -20,10 +22,12 @@ export class HttpService {
     })
   };
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient,
+    private transfer: FileTransfer
+  ) { }
 
   static apiURL = 'http://35.196.111.251:3000';
-  // static apiURL = 'http://localhost:3000';
+  //static apiURL = 'http://localhost:3000';
   static usersURL = '/users';
   static usersURL2 = '/username';
   static companiesURL = '/companies';
@@ -109,9 +113,9 @@ export class HttpService {
      return this.http.get<Email[]>(HttpService.apiURL + HttpService.emailURL + '/sent/' + idUsuario);
   }  
 
-  updateState(idUsuario, idEmail){
-    return this.http.post<Email>(HttpService.apiURL + HttpService.emailURL + '/updateState/',
-      JSON.stringify({idUsuario: idUsuario, idEmail: idEmail}), HttpService.httpOptions);
+  updateState(idEmail, email){
+    return this.http.put<Email>(HttpService.apiURL + HttpService.emailURL + '/updateState/'+idEmail,
+      JSON.stringify(email), HttpService.httpOptions);
   }
 
   // All services related to reports
@@ -128,14 +132,14 @@ export class HttpService {
     return this.http.get<BiddingProject>(HttpService.apiURL + HttpService.getBiddingProjectURL+ '/' + id);
   }
   getAllBiddingProjects() {
-    return this.http.get<BiddingProject[]>(HttpService.apiURL + HttpService.getBiddingProjectURL);
+    return this.http.get<BiddingProject[]>(HttpService.apiURL + HttpService.getBiddingProjectURL + '/' + 'getBiddingProject');
   }
 
   getInstantProjectById(id: String) {
     return this.http.get<InstantProject>(HttpService.apiURL + HttpService.getInstantProjectURL+ '/' + id);
   }
   getAllInstantProjects() {
-    return this.http.get<InstantProject[]>(HttpService.apiURL + HttpService.getInstantProjectURL);
+    return this.http.get<InstantProject[]>(HttpService.apiURL + HttpService.getInstantProjectURL + '/' + 'getInstantProject');
   }
   getQuestionsById(id: String) {
     return this.http.get<Questions>(HttpService.apiURL + HttpService.getQuestionURL+ '/' + id);
@@ -168,6 +172,36 @@ export class HttpService {
   createDevelopingAttempt(developingAttempt: DevelopingAttempt) {
     return this.http.post<DevelopingAttempt[]>(HttpService.apiURL + HttpService.developingAttemptsURL,
       JSON.stringify(developingAttempt), HttpService.httpOptions);
+  }
+   //All services related to records
+   createRecord(record: Record) {
+    return this.http.post<any>(HttpService.apiURL + HttpService.recordsURL,
+      JSON.stringify(record), HttpService.httpOptions);
+  }
+  getAllRecords() {
+    return this.http.get<Record[]>(HttpService.apiURL + HttpService.recordsURL);
+  }
+  getRecordsByCompany(company: string) {
+    return this.http.get<Record[]>(HttpService.apiURL + HttpService.recordsURL + '/' + company);
+  }
+  getRecordsByProject(project: string) {
+    return this.http.get<Record[]>(HttpService.apiURL + HttpService.recordsURL + '/' + project);
+  }
+  getRecordsByFinishDateAndCompany(finishDate, company) {
+    return this.http.post<Record>(HttpService.apiURL + HttpService.recordsURL + HttpService.getCurrentCompanyURL,
+      JSON.stringify({company: company , finishDate: finishDate}), HttpService.httpOptions);
+  }
+  //image uploading
+  uploadCompanyImage(imageURI){
+    const fileTransfer: FileTransferObject = this.transfer.create();
+  
+    let options: FileUploadOptions = {
+      fileKey: 'image',
+      chunkedMode: false,
+      mimeType: 'multipart/form-data',
+      headers: {}
+    }
 
+    return fileTransfer.upload(imageURI, HttpService.apiURL+HttpService.companiesURL+"/image", options);
   }
 }

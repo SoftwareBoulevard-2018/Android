@@ -5,6 +5,8 @@ import { Company } from './../../models/company';
 import { User } from './../../models/user';
 import { GeneralServiceService } from './../../app/general-service.service';
 import { HttpService } from '../../app/http.service';
+//import { Estimation } from './../../models/estimation';
+import { ToastController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 /**
  * Generated class for the EstimateCostTimePage page.
@@ -30,11 +32,12 @@ export class EstimateCostTimePage {
   lastCostEst: number = 0;
   hService: HttpService;
 
-
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              service: GeneralServiceService,
-              public httpService: HttpService)
+              public service: GeneralServiceService,
+              public httpService: HttpService,
+              public toastController: ToastController
+            )
   {
     this.hService = httpService;
     service.getCurrentUser().then((user) => {
@@ -58,7 +61,7 @@ export class EstimateCostTimePage {
   { 
     if(!(this.comp.companyResource > 0))
     {
-      alert("Not enough resources!! get more!");
+      alert(this.comp.name);
       return;
     }
     else{
@@ -71,6 +74,8 @@ export class EstimateCostTimePage {
     this.timeEst.push(te);
     this.lastCostEst = ce;
     this.lastTimeEst = te;
+
+    //var estimation = new Estimation(this.user.name, "hola", ce, te); 
 
     if(ce >= this.p.cost && te >= this.p.time)
     {

@@ -13,7 +13,7 @@ import {HttpService} from '../../app/http.service';
   templateUrl: 'create-account.html'
 })
 export class CreateAccountPage {
-  user = new User("","","","","");
+  user = new User();
   submitted = false;
   password_confirm = "";
   //TODO: get roles from server
