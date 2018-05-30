@@ -10,6 +10,7 @@ import { BiddingProject } from './../models/biddingProject';
 import { Questions } from './../models/questions';
 import { Assignment } from './../models/assignment';
 import { InstantProject } from './../models/instantProject';
+import { Record } from './../models/record';
 
 @Injectable()
 export class HttpService {
@@ -168,5 +169,23 @@ export class HttpService {
   createDevelopingAttempt(developingAttempt: DevelopingAttempt) {
     return this.http.post<DevelopingAttempt[]>(HttpService.apiURL + HttpService.developingAttemptsURL,
       JSON.stringify(developingAttempt), HttpService.httpOptions);
+  }
+   //All services related to records
+   createRecord(record: Record) {
+    return this.http.post<any>(HttpService.apiURL + HttpService.recordsURL,
+      JSON.stringify(record), HttpService.httpOptions);
+  }
+  getAllRecords() {
+    return this.http.get<Record[]>(HttpService.apiURL + HttpService.recordsURL);
+  }
+  getRecordsByCompany(company: string) {
+    return this.http.get<Record[]>(HttpService.apiURL + HttpService.recordsURL + '/' + company);
+  }
+  getRecordsByProject(project: string) {
+    return this.http.get<Record[]>(HttpService.apiURL + HttpService.recordsURL + '/' + project);
+  }
+  getRecordsByFinishDateAndCompany(finishDate, company) {
+    return this.http.post<Record>(HttpService.apiURL + HttpService.recordsURL + HttpService.getCurrentCompanyURL,
+      JSON.stringify({company: company , finishDate: finishDate}), HttpService.httpOptions);
   }
 }

@@ -4,7 +4,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { GeneralServiceService } from '../../app/general-service.service';
 import { HttpService } from '../../app/http.service';
-
+import { Record } from './../../models/record';
+import { User } from './../../models//user';
+import { ToastController } from 'ionic-angular';
 /**
  * Generated class for the SelectProjectPage page.
  *
@@ -21,13 +23,18 @@ export class SelectProjectPage {
   instP: InstantProject[] = [];
   bidP: BiddingProject[] = [];
   hService: HttpService;
-
+  serv: GeneralServiceService;
+  user: User;
+  toastCtrl: ToastController;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public service: GeneralServiceService,
-    public httpService: HttpService) {
+    public httpService: HttpService,
+    public toastController: ToastController) {
       this.hService = httpService;
+      this.serv = service;
+      this.toastCtrl = toastController;
      // this.instP = service.InstProjects;
      // this.bidP = service.bidProjects;
   }
@@ -115,8 +122,32 @@ export class SelectProjectPage {
 
   selectProject(p: BiddingProject)
   { 
-    //JSON.stringify(p).substring(7,32)
-    alert(p.numberOfDevelopingQuestionsPerAnalyst);
+    this.serv.getCurrentUser().then((u) => {
+      this.user = u;
+      var r: Record = new Record(new Date("12/15/1990"),new Date("12/15/1990"),this.user.companyId,p.id);
+      console.log(r);
+
+      this.hService.createRecord(r).subscribe(
+        () => {
+          let toast = this.toastCtrl.create({
+            message: 'Record Created',
+            duration: 3000
+          });
+          toast.present();
+
+        },
+        () => {
+
+          let toast = this.toastCtrl.create({
+            message: 'Something went wrong',
+            duration: 3000
+          });
+          toast.present();
+        }
+      );;
+
+      alert("Selected");
+    });   
   }
 
 
