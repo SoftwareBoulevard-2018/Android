@@ -21,6 +21,11 @@ export class MainPage {
   users:number;
   companies:number;
   user_type: string;
+  user_name: string;
+  user_level: number;
+  user_company: string;
+  company_resources: number;
+  company_members: number;
 
   constructor(
     public navCtrl: NavController, 
@@ -35,6 +40,17 @@ export class MainPage {
   ionViewWillEnter() {
     this.service.getCurrentUser().then((user) => {
       this.user_type = user.role;
+      this.user_name = user.name;
+      this.user_level = user.competencyLevel;
+      this.user_company = user.companyId;
+
+          this.httpService.getCompanyById(this.user_company).subscribe(company => {
+            this.company_resources = company.companyResource;
+          });
+
+          this.httpService.getUsersByCompany(this.user_company).subscribe((users) => {
+            this.company_members = users.length;   
+          });
     });
     
     //show the number of users and companies in some cards
@@ -42,6 +58,8 @@ export class MainPage {
       this.users = report['users'];
       this.companies = report['companies'];
     })
+
+
   }
   viewUsers() {
     this.navCtrl.push(ListUsersPage);
@@ -63,5 +81,7 @@ export class MainPage {
   createCompany() {
     this.navCtrl.push(CreateCompanyPage);
   }
-
+  print_data(data){
+    console.log(data)
+  }
 }

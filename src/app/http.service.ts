@@ -11,6 +11,7 @@ import { BiddingProject } from './../models/biddingProject';
 import { Questions } from './../models/questions';
 import { Assignment } from './../models/assignment';
 import { InstantProject } from './../models/instantProject';
+import { Invitation } from './../models/invitation';
 import { Record } from './../models/record';
 
 /**
@@ -29,6 +30,7 @@ export class HttpService {
   constructor(public http: HttpClient,
     private transfer: FileTransfer
   ) { }
+
 
   /**
    * defaul apiURL, can be changed in loginPage
@@ -54,11 +56,12 @@ export class HttpService {
 
   static getInstantProjectURL = '/instantProjects';
   static getQuestionURL = '/questions';
-  static getAssignmentURL = '/assignment';
+  static getAssignmentURL = '/assignments';
 
   static trainingAttemptsURL = '/trainingAttempts';
   static developingAttemptsURL = '/developingAttempts';
 
+  static invitationsURL = '/invitations';
 
   // All services related to Users
   getAllUsers() {
@@ -162,13 +165,13 @@ export class HttpService {
     return this.http.get<InstantProject[]>(HttpService.apiURL + HttpService.getInstantProjectURL + '/' + 'getInstantProject');
   }
   getQuestionsById(id: String) {
-    return this.http.get<Questions>(HttpService.apiURL + HttpService.getQuestionURL+ '/' + id);
+    return this.http.get<Questions>(HttpService.apiURL + HttpService.getQuestionURL+ '/getQuestionById/' + id);
   }
   getAllQuestions() {
     return this.http.get<Questions[]>(HttpService.apiURL + HttpService.getQuestionURL);
   }
   getAssignmentById(id: String) {
-    return this.http.get<Assignment>(HttpService.apiURL + HttpService.getAssignmentURL+ '/' + id);
+    return this.http.get<Assignment[]>(HttpService.apiURL + HttpService.getAssignmentURL+ '/' + id);
   }
   getAllAssignments() {
     return this.http.get<Assignment[]>(HttpService.apiURL + HttpService.getAssignmentURL);
@@ -193,11 +196,23 @@ export class HttpService {
     return this.http.post<DevelopingAttempt[]>(HttpService.apiURL + HttpService.developingAttemptsURL,
       JSON.stringify(developingAttempt), HttpService.httpOptions);
   }
+
+  getInvitationByUserAndState(id, state) {
+    return this.http.post<Invitation[]>(HttpService.apiURL + HttpService.invitationsURL + '/getCurrentInvitation',
+      JSON.stringify({ user: id, state: state}), HttpService.httpOptions);
+  }
+
+  updateInvitation(invitation, id: String){
+    return this.http.put<Invitation>(HttpService.apiURL + HttpService.invitationsURL + '/' + id,
+      JSON.stringify(invitation), HttpService.httpOptions);
+  }
+
    //All services related to records
-   createRecord(record: Record) {
+  createRecord(record: Record) {
     return this.http.post<any>(HttpService.apiURL + HttpService.recordsURL,
       JSON.stringify(record), HttpService.httpOptions);
   }
+
   getAllRecords() {
     return this.http.get<Record[]>(HttpService.apiURL + HttpService.recordsURL);
   }
