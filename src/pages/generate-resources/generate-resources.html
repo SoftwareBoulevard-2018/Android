@@ -44,10 +44,9 @@
           <ion-col col-3 no-padding tappable (tap)="movePiece(3,3)"> <img style="width: 15vh;height: 15vh;margin-left: 0vh !important" src={{puzzlePieces[puzzle[3][3]-1]}}></ion-col>
         </ion-row>
       </ion-grid>
-      <button ion-button color="primary" (click)="selectPuzzle()">
-          Select Puzzle &nbsp;
-          <ion-icon name='md-create'></ion-icon>
-      </button>
+      <div>
+        Company {{comp.name}} has: {{comp.companyResource}}
+      </div>
       <button ion-button color="primary" (click)="sendPuzzle()">
         Send Puzzle &nbsp;
         <ion-icon name='md-create'></ion-icon>
