@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UpdatequestPage } from '../updatequest/updatequest';
+import { MainPage } from '../../main/main';
 import { SetUpPage } from '../set-up';
 
 
@@ -16,6 +17,10 @@ export class QuestlistPage {
 
   goToUpdatequest(){
     this.navCtrl.push(UpdatequestPage);
+  }
+
+  goToMain(){
+    this.navCtrl.push(MainPage);
   }
 
   goToHome(){
