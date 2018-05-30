@@ -2,6 +2,7 @@
 export class BiddingProject {
   
   constructor(
+    public id?: string,
     public name?:string,
     public rewarded_k?:number,
     public amount_tester_question?:number,

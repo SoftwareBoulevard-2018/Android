@@ -6,6 +6,7 @@ export class InstantProject {
   public amount_tester_question:number;
   public amount_analyst_question:number;
   constructor(
+    public id?: string,
     name?: string, 
     rewarded_k?: number,
     amount_tester_question?:number, 
