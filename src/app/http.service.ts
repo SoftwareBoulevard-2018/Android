@@ -51,12 +51,20 @@ export class HttpService {
   static puzzlesURL = '/puzzles';
   static recordsURL = '/records';
   static puzzleURL = '/puzzles';
+  
+  static biddingProjectURL = '/biddingProjects';
+  
   static getCurrentCompanyURL = '/getCurrentProject';
-  static getBiddingProjectURL = '/biddingProjects';
+  static getBiddingProjectURL = '/getBiddingProject';
 
-  static getInstantProjectURL = '/instantProjects';
-  static getQuestionURL = '/questions';
-  static getAssignmentURL = '/assignments';
+
+  static createBiddingProjectURL = '/createBiddingProject';
+
+  static getInstantProjectURL = '/getInstantProject';
+  static getQuestionURL = '/getQuestions';
+  static getAssignmentURL = '/getAssignment';
+
+
 
   static trainingAttemptsURL = '/trainingAttempts';
   static developingAttemptsURL = '/developingAttempts';
@@ -152,7 +160,7 @@ export class HttpService {
   }
   //All services related to Projects
   getBiddingProjectById(id: String) {
-    return this.http.get<BiddingProject>(HttpService.apiURL + HttpService.getBiddingProjectURL+ '/' + id);
+    return this.http.get<BiddingProject>(HttpService.apiURL +'/biddingProjects/getBiddingProjectById'+ '/' + id);
   }
   getAllBiddingProjects() {
     return this.http.get<BiddingProject[]>(HttpService.apiURL + HttpService.getBiddingProjectURL + '/' + 'getBiddingProject');
@@ -163,6 +171,14 @@ export class HttpService {
   }
   getAllInstantProjects() {
     return this.http.get<InstantProject[]>(HttpService.apiURL + HttpService.getInstantProjectURL + '/' + 'getInstantProject');
+  }
+  createBiddingProject(biddingProject: BiddingProject) {
+	  console.log("puto el que lo lea");
+	  console.log( JSON.stringify(biddingProject));
+	  console.log(HttpService.apiURL + HttpService.biddingProjectURL,
+      JSON.stringify(biddingProject), HttpService.httpOptions);
+    return this.http.post<BiddingProject>(HttpService.apiURL + HttpService.biddingProjectURL + HttpService.createBiddingProjectURL,
+      JSON.stringify(biddingProject), HttpService.httpOptions);
   }
   getQuestionsById(id: String) {
     return this.http.get<Questions>(HttpService.apiURL + HttpService.getQuestionURL+ '/getQuestionById/' + id);

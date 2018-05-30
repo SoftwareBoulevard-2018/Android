@@ -1,44 +1,52 @@
 <ion-header>
 
-    <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>
-        New Bidding project
-      </ion-title>
-    </ion-navbar>
-  </ion-header>
-  
-  <ion-content padding>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      New Bidding project
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form #creationForm="ngForm" novalidate>
     <ion-grid>
-  
+      <ion-row>
+        <ion-item>
+          <ion-label stacked>
+            Project Name
+          </ion-label>
+          <ion-input [(ngModel)]="biddingProject.name" name="name" type="text" #name="ngModel" required></ion-input>
+        </ion-item>
+      </ion-row>
       <ion-row>
         <ion-col>
           <ion-item>
             <ion-label stacked>
-              Project Reward
+              Rewarded K Unit
             </ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input [(ngModel)]="biddingProject.rewarded_k" name="rewarded_k" type="text" #rewarded_k="ngModel" required></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
             <ion-label stacked>
-              Bidding capacity
+              K Required
             </ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input [(ngModel)]="biddingProject.required_k" name="required_k" type="text" #required_k="ngModel" required></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
-  
+
       <ion-row>
         <ion-col>
           <ion-item>
             <ion-label stacked>
               Analyst question
             </ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input [(ngModel)]="biddingProject.amount_analyst_question" name="amount_analyst_question" type="text" #amount_analyst_question="ngModel" required></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
@@ -46,18 +54,18 @@
             <ion-label stacked>
               Analyst required level
             </ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input [(ngModel)]="biddingProject.required_analyst_level" name="required_analyst_level" type="text" #required_analyst_level="ngModel" required></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
-  
+
       <ion-row>
         <ion-col>
           <ion-item>
             <ion-label stacked>
               Developer question
             </ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input [(ngModel)]="biddingProject.amount_developer_question" name="amount_developer_question" type="text" #amount_developer_question="ngModel" required></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
@@ -65,18 +73,18 @@
             <ion-label stacked>
               Developer required level
             </ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input [(ngModel)]="biddingProject.required_developer_level" name="required_developer_level" type="text" #required_developer_level="ngModel" required></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
-  
+
       <ion-row>
         <ion-col>
           <ion-item>
             <ion-label stacked>
               Tester question
             </ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input [(ngModel)]="biddingProject.amount_tester_question" name="amount_tester_question" type="text" #amount_tester_question="ngModel" required></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
@@ -84,18 +92,18 @@
             <ion-label stacked>
               Tester required level
             </ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input [(ngModel)]="biddingProject.required_tester_level" name="required_tester_level" type="text" #required_tester_level="ngModel" required></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
-  
+
       <ion-row>
         <ion-col>
           <ion-item>
             <ion-label stacked>
               Project cost
             </ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input [(ngModel)]="biddingProject.cost" name="cost" type="text" #cost="ngModel" required></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
@@ -103,17 +111,16 @@
             <ion-label stacked>
               Project time
             </ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input [(ngModel)]="biddingProject.time" name="time" type="text" #time="ngModel" required></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
-  
-      <button ion-button icon-left color="primary" (click)=goToProjeclist()>
+
+      <button ion-button icon-left color="primary" (click)=goToProjeclist(creationForm) type="submit" block>
         <ion-icon name="done-all"></ion-icon>
         Done
       </button>
-  
+
     </ion-grid>
-  
-  
-  </ion-content>
+  </form>
+</ion-content>

@@ -5,7 +5,5 @@ export class Company {
   public numberOfCorrectDevelopingAttempsByAnalyst?:number,
   public numberOfCorrectDevelopingAttempsByDeveloper?:number,
   public numberOfCorrectDevelopingAttempsByTester?:number,
-) {
-
-  }
+) {}
 }

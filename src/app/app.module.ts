@@ -35,6 +35,7 @@ import { QuestlistPage } from '../pages/set-up/questlist/questlist';
 import { UpdatequestPage } from '../pages/set-up/updatequest/updatequest';
 import { OptionquestPage } from '../pages/set-up/optionquest/optionquest';
 import { SelectquestPage } from '../pages/set-up/selectquest/selectquest';
+import { UpdateparameterPage } from '../pages/set-up/updateparameter/updateparameter';
 //Module 2 components
 import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
@@ -109,7 +110,8 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
     QuestlistPage,
     UpdatequestPage,
     OptionquestPage,
-    SelectquestPage
+    SelectquestPage,
+    UpdateparameterPage
   ],
   imports: [
     BrowserModule,
@@ -184,7 +186,8 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
     QuestlistPage,
     UpdatequestPage,
     OptionquestPage,
-    SelectquestPage
+    SelectquestPage,
+    UpdateparameterPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

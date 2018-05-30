@@ -1,61 +1,104 @@
 <ion-header>
 
-    <ion-navbar>
-      <ion-title>Optionquest</ion-title>
-    </ion-navbar>
-  
-  </ion-header>
-  
-  <ion-content padding>
-    <ion-list>
-      <div class="card">
-        <div class="item item-divider">
-          <h4>Option 1</h4>
-          <div class="list">
-            <label class="item item-input">
-              <textarea placeholder="Descripton"></textarea>
-            </label>
-          </div>
-        </div>
-      </div>
-  
-      <div class="card">
-        <div class="item item-divider">
-          <h4>Option 2</h4>
-          <div class="list">
-            <label class="item item-input">
-              <textarea placeholder="Descripton"></textarea>
-            </label>
-          </div>
-        </div>
-      </div>
-  
-      <div class="card">
-        <div class="item item-divider">
-          <h4>Option 3</h4>
-          <div class="list">
-            <label class="item item-input">
-              <textarea placeholder="Descripton"></textarea>
-            </label>
-          </div>
-        </div>
-      </div>
-  
-      <div class="card">
-        <div class="item item-divider">
-          <h4>Option 4</h4>
-          <div class="list">
-            <label class="item item-input">
-              <textarea placeholder="Descripton"></textarea>
-            </label>
-          </div>
-        </div>
-      </div>
-  
-      <button ion-button icon-left color="primary" (click)=goToQuestlist()>
-          <ion-icon name="done-all"></ion-icon>
-          Done
-      </button>
-    </ion-list>
-  
-  </ion-content>
+  <ion-navbar>
+    <ion-title>Optionquest</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label stacked>
+              <h1>Option 1</h1>
+            </ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label>
+              <pre><h1>Veracity</h1></pre>
+            </ion-label>
+            <ion-select [(ngModel)]="veracity1">
+              <ion-option value="T">True</ion-option>
+              <ion-option value="F">False</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label stacked>
+              <h1>Option 2</h1>
+            </ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label>
+              <pre><h1>Veracity</h1></pre>
+            </ion-label>
+            <ion-select [(ngModel)]="veracity2">
+              <ion-option value="T">True</ion-option>
+              <ion-option value="F">False</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label stacked>
+              <h1>Option 3</h1>
+            </ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label>
+              <pre><h1>Veracity</h1></pre>
+            </ion-label>
+            <ion-select [(ngModel)]="veracity3">
+              <ion-option value="T">True</ion-option>
+              <ion-option value="F">False</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label stacked>
+              <h1>Option 4</h1>
+            </ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label>
+              <pre><h1>Veracity</h1></pre>
+            </ion-label>
+            <ion-select [(ngModel)]="veracity4">
+              <ion-option value="T">True</ion-option>
+              <ion-option value="F">False</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <button ion-button icon-left color="primary" (click)=goToQuestlist()>
+      <ion-icon name="done-all"></ion-icon>
+      Done
+    </button>
+  </ion-list>
+
+</ion-content>
