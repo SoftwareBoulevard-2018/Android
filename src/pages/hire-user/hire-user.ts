@@ -101,7 +101,7 @@ export class HireUserPage {
           toast.present();
         }
       );
-      //var invitation: Invitation = new Invitation();
+      var invitation: Invitation = new Invitation("00",user.id, u.companyId, 'pending');
       alert('Email sent to ' + user.name + '!');
     });
   }

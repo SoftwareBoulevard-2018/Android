@@ -125,12 +125,13 @@ export class EstimateCostTimePage {
     console.log('Testing for time '+this.p.time + ' ' + time);
     console.log('Testing for cost '+this.p.cost + ' ' + cost);
 
-    var estimation = new Estimation(this.user.name, this.p.name, ce, te); 
+    var estimation = new Estimation(1000, this.user.name, this.p.name, ce, te, false); 
     console.log(time+ ' ' + cost);
     console.log(cost + cost*0.1);
     if((ce <= cost + cost*0.1 && ce >= cost - cost*0.1) && (te <= time + time*0.1 && te >= time - time*0.1))
     {
       console.log("Success!!");
+      estimation.state = true;
       this.hService.createEstimation(estimation).subscribe(
         () => {
           let toast = this.toastCtrl.create({
@@ -138,7 +139,7 @@ export class EstimateCostTimePage {
             duration: 3000
           });
           toast.present();
-
+          
         },
         () => {
 
@@ -151,6 +152,24 @@ export class EstimateCostTimePage {
     }
     else{
       console.log(estimation);
+      estimation.state = false;
+      this.hService.createEstimation(estimation).subscribe(
+        () => {
+          let toast = this.toastCtrl.create({
+            message: 'Estimation suscessfull!',
+            duration: 3000
+          });
+          toast.present();
+          
+        },
+        () => {
+
+          let toast = this.toastCtrl.create({
+            message: 'Something went wrong',
+            duration: 3000
+          });
+          toast.present();
+        });
     }
     //console.log('The user that got here in estimate is '.concat(this.user.name));
     //console.log('the company id is '.concat(this.user.companyId));

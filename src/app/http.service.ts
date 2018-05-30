@@ -73,6 +73,8 @@ export class HttpService {
   static estimationURL = '/estimations';
   static getCurrentProjectManagerURL = '/getCurrentPm';
   static getCurrentProjectManager2URL = '/getCurrentProjectM';
+  static getEstimationByPMAndProjectURL = '/getEstimationByPMAndProject';
+  static getEstimationsByPMAndStateURL = '/getEstimationsByProjectManagerUsernameAndState';
 
   // All services related to Users
   getAllUsers() {
@@ -246,17 +248,17 @@ export class HttpService {
       JSON.stringify({company: company , finishDate: finishDate}), HttpService.httpOptions);
   }
 
-    //All services related to Estimation
-    createEstimation(estimation: Estimation) {
-      return this.http.post<any>(HttpService.apiURL + HttpService.estimationURL,
-        JSON.stringify(estimation), HttpService.httpOptions);
-    }
-    getEstimationByPMAndProject(projectManagerUsername, projectName) {
-      return this.http.post<Estimation>(HttpService.apiURL + HttpService.estimationURL + HttpService.getCurrentProjectManagerURL,
-        JSON.stringify({projectManagerUsername: projectManagerUsername , projectName: projectName}), HttpService.httpOptions);
-    }
-    getEstimationByProjectManagerUsernameAndState(projectManagerUsername, state) {
-      return this.http.post<Estimation>(HttpService.apiURL + HttpService.estimationURL + HttpService.getCurrentProjectManager2URL,
-        JSON.stringify({projectManagerUsername: projectManagerUsername , state: state}), HttpService.httpOptions);
-    }
+  //All services related to Estimation
+  createEstimation(estimation: Estimation) {
+    return this.http.post<any>(HttpService.apiURL + HttpService.estimationURL,
+      JSON.stringify(estimation), HttpService.httpOptions);
+  }
+  getEstimationByPMAndProject(projectManagerUsername, projectName) {
+    return this.http.post<Estimation[]>(HttpService.apiURL + HttpService.estimationURL + HttpService.getEstimationByPMAndProjectURL,
+      JSON.stringify({projectManagerUsername: projectManagerUsername , projectName: projectName}), HttpService.httpOptions);
+  }
+  getEstimationByProjectManagerUsernameAndState(projectManagerUsername, state) {
+    return this.http.post<Estimation>(HttpService.apiURL + HttpService.estimationURL + HttpService.getEstimationsByPMAndStateURL,
+      JSON.stringify({projectManagerUsername: projectManagerUsername , state: state}), HttpService.httpOptions);
+  }
 }
