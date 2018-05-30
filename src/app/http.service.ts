@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { User } from '../models/user';
 import { TrainingAttempt } from '../models/trainingAttempt';
 import { DevelopingAttempt } from '../models/developingAttempt';
@@ -21,10 +22,12 @@ export class HttpService {
     })
   };
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient,
+    private transfer: FileTransfer
+  ) { }
 
-  static apiURL = 'http://35.196.111.251:3000';
-  // static apiURL = 'http://localhost:3000';
+  // static apiURL = 'http://35.196.111.251:3000';
+  static apiURL = 'http://localhost:3000';
   static usersURL = '/users';
   static usersURL2 = '/username';
   static companiesURL = '/companies';
@@ -187,5 +190,18 @@ export class HttpService {
   getRecordsByFinishDateAndCompany(finishDate, company) {
     return this.http.post<Record>(HttpService.apiURL + HttpService.recordsURL + HttpService.getCurrentCompanyURL,
       JSON.stringify({company: company , finishDate: finishDate}), HttpService.httpOptions);
+  }
+  //image uploading
+  uploadCompanyImage(imageURI){
+    const fileTransfer: FileTransferObject = this.transfer.create();
+  
+    let options: FileUploadOptions = {
+      fileKey: 'image',
+      chunkedMode: false,
+      mimeType: 'multipart/form-data',
+      headers: {}
+    }
+
+    return fileTransfer.upload(imageURI, HttpService.apiURL+HttpService.companiesURL+"/image", options);
   }
 }
