@@ -22,7 +22,9 @@ _Note: You may need to add “sudo” in front of any global commands to install
 ## Deploying
 
 * PWA - Un-comment [this](https://github.com/ionic-team/ionic2-app-base/blob/master/src/index.html#L21), run `npm run ionic:build --prod` and then push the `www` folder to your favorite hosting service
-* Android - Run `ionic cordova run android --prod`
+* Android 
+  - install [requirements](https://ionicframework.com/docs/intro/deploying/) 
+  - Run `ionic cordova run android --prod`, don't use `--release` flag
   - If you are deploying to Android 4.4 or below we recommend adding crosswalk: `cordova plugin add cordova-plugin-crosswalk-webview`
 * iOS - Run `ionic cordova run ios --prod`
 
