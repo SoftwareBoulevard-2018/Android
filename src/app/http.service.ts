@@ -22,8 +22,8 @@ export class HttpService {
 
   constructor(public http: HttpClient) { }
 
-  static apiURL = 'http://35.196.111.251:3000';
-  // static apiURL = 'http://localhost:3000';
+  //static apiURL = 'http://35.196.111.251:3000';
+  static apiURL = 'http://localhost:3000';
   static usersURL = '/users';
   static usersURL2 = '/username';
   static companiesURL = '/companies';
@@ -34,8 +34,13 @@ export class HttpService {
   static puzzlesURL = '/puzzles';
   static recordsURL = '/records';
   static puzzleURL = '/puzzles';
+  
+  static biddingProjectURL = '/biddingProjects';
+  
   static getCurrentCompanyURL = '/getCurrentProject';
   static getBiddingProjectURL = '/getBiddingProject';
+
+  static createBiddingProjectURL = '/createBiddingProject';
 
   static getInstantProjectURL = '/getInstantProject';
   static getQuestionURL = '/getQuestions';
@@ -136,6 +141,14 @@ export class HttpService {
   }
   getAllInstantProjects() {
     return this.http.get<InstantProject[]>(HttpService.apiURL + HttpService.getInstantProjectURL);
+  }
+  createBiddingProject(biddingProject: BiddingProject) {
+	  console.log("puto el que lo lea");
+	  console.log( JSON.stringify(biddingProject));
+	  console.log(HttpService.apiURL + HttpService.biddingProjectURL,
+      JSON.stringify(biddingProject), HttpService.httpOptions);
+    return this.http.post<BiddingProject>(HttpService.apiURL + HttpService.biddingProjectURL + HttpService.createBiddingProjectURL,
+      JSON.stringify(biddingProject), HttpService.httpOptions);
   }
   getQuestionsById(id: String) {
     return this.http.get<Questions>(HttpService.apiURL + HttpService.getQuestionURL+ '/' + id);
