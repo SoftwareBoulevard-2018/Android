@@ -6,43 +6,121 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <ion-item>
-      <ion-label stacked>
-        <h1>Description</h1>
-      </ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
 
-    <ion-item>
-      <ion-label>
-        <h1>Category</h1>
-      </ion-label>
-      <ion-select [(ngModel)]="Category">
-        <ion-option value="A">Analyst</ion-option>
-        <ion-option value="D">Developer</ion-option>
-        <ion-option value="T">Tester</ion-option>
-      </ion-select>
-    </ion-item>
+  <form #creationForm="ngForm" novalidate>
 
-    <ion-item>
-      <ion-label>
-        <h1>Level</h1>
-      </ion-label>
-      <ion-select [(ngModel)]="level">
-        <ion-option value="1">1</ion-option>
-        <ion-option value="2">2</ion-option>
-        <ion-option value="3">3</ion-option>
-        <ion-option value="4">4</ion-option>
-        <ion-option value="5">5</ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
+    <ion-list>
+      <ion-grid>
+        <ion-item>
+          <ion-label stacked>
+            <h1>Description </h1>
+          </ion-label>
+          <ion-input [(ngModel)]="questions.description" name="description" type="text" #description="ngModel" required></ion-input>
+        </ion-item>
 
+        <ion-item>
+          <ion-label>
+            <h1>Category</h1>
+          </ion-label>
+          <ion-select [(ngModel)]="questions.role" name="role" #role="ngModel" required>
+            <ion-option value="A">Analyst</ion-option>
+            <ion-option value="D">Developer</ion-option>
+            <ion-option value="T">Tester</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-grid>
 
-  <button ion-button icon-left color="primary" (click)=goToOptionquest()>
-    <ion-icon name="done-all"></ion-icon>
-    Done
-  </button>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label stacked>
+                <h1>Option 1</h1>
+              </ion-label>
+              <ion-input type="text" ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>
+                <pre><h1>Veracity</h1></pre>
+              </ion-label>
+              <ion-select [(ngModel)]="veracity1" name="veracity1">
+                <ion-option value="T">True</ion-option>
+                <ion-option value="F">False</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label stacked>
+                <h1>Option 2</h1>
+              </ion-label>
+              <ion-input type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>
+                <pre><h1>Veracity</h1></pre>
+              </ion-label>
+              <ion-select [(ngModel)]="veracity2" name="veracity2">
+                <ion-option value="T">True</ion-option>
+                <ion-option value="F">False</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label stacked>
+                <h1>Option 3</h1>
+              </ion-label>
+              <ion-input type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>
+                <pre><h1>Veracity</h1></pre>
+              </ion-label>
+              <ion-select [(ngModel)]="veracity3" name="veracity3">
+                <ion-option value="T">True</ion-option>
+                <ion-option value="F">False</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label stacked>
+                <h1>Option 4</h1>
+              </ion-label>
+              <ion-input type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>
+                <pre><h1>Veracity</h1></pre>
+              </ion-label>
+              <ion-select [(ngModel)]="veracity4" name="veracity4">
+                <ion-option value="T">True</ion-option>
+                <ion-option value="F">False</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
 
+    <button ion-button icon-left color="primary" (click)=goToQuestlist(creationForm) type="submit" block>
+      <ion-icon name="done-all"></ion-icon>
+      Done
+    </button>
+  </form>
 </ion-content>

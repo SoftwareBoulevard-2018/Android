@@ -24,6 +24,7 @@ import { SoftwareBoulevardApp } from './app.component';
 import { GeneralServiceService } from './general-service.service';
 import { AboutPage } from '../pages/about/about';
 //Module 1 components
+
 import { SetUpPage } from '../pages/set-up/set-up';
 import { ProjectlistPage } from '../pages/set-up/projectlist/projectlist';
 import { NewprojectPage } from '../pages/set-up/newproject/newproject';

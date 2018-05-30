@@ -5,15 +5,16 @@ import { BiddingProject } from '../../../models/biddingProject';
 import {HttpService} from '../../../app/http.service';
 import { NgForm } from '@angular/forms';
 
-
 @IonicPage()
 @Component({
   selector: 'page-biddingeditor',
   templateUrl: 'biddingeditor.html',
 })
 export class BiddingeditorPage {
+  
   submitted = false;
   biddingProject = new BiddingProject();
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
