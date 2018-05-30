@@ -3,10 +3,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { GeneralServiceService } from '../../app/general-service.service';
 import { HttpService } from '../../app/http.service';
-import { Assignment } from './../../models/assignment';
+//import { Assignment } from './../../models/assignment';
 import { User } from './../../models/user';
 import { Company } from './../../models/company';
 import { InstantProject } from './../../models/instantProject';
+import { Questions } from './../../models/questions';
 
 @IonicPage()
 @Component({
@@ -20,6 +21,9 @@ export class DevelopProjectPage {
   developer: number;
   tester: number;
   project: InstantProject;
+  a_questions: Questions[] = [];
+  q_developer: Questions[];
+  q_tester: Questions[];
 
   //Should be retrieved from server in the future
   resour: number = 5;
@@ -55,38 +59,7 @@ export class DevelopProjectPage {
 
   ionViewWillEnter() {
 
-    this.service.getCurrentUser().then((user) => {
-      this.user = user;
-
-      this.httpService.getCompanyById(user.companyId).subscribe(company => {
-        this.company = company;
-        this.analyst = this.company.numberOfCorrectDevelopingAttempsByAnalyst;
-        this.developer = this.company.numberOfCorrectDevelopingAttempsByDeveloper;
-        this.tester = this.company.numberOfCorrectDevelopingAttempsByTester;
-
-        this.httpService.getRecordByCompany(company.id).subscribe((records) => {
-          for (var i = 0; i < records.length; ++i) {
-            if (records[i].finishDate = null) {
-              this.httpService.getInstantProjectById(records[i].project).subscribe((project) => {
-                this.project = project;
-
-                this.httpService.getAssignmentById(records[i].project).subscribe((assignments) => {
-                  
-                });
-              });
-              
-            }
-          }
-        })
-      }, error => {
-        this.hideOptions();
-        console.log(error);
-      });
-    });
-
   }
-
-
 
   //It's meant to be used to check for remaining questions for the user in the server. Must be called every time the improve skill level page is opened.
   checkForQuestions(){
@@ -195,11 +168,108 @@ export class DevelopProjectPage {
     }, 2000);
   }
 
+  setUser(user){
+    this.user = user;
+    return user;
+  }
+
+  setCompany(company){
+    this.company = company;
+    return company;
+  }
+
+  setProject(project){
+    this.project = project;
+    return project;
+  }
+
+  setQuestion(question){
+    this.a_questions.push(question);
+  }
+
+  printQuestions(){
+    console.log(this.a_questions);
+  }
+
+  getQuestions(assignments, user){
+    for (var j = 0; j < assignments.length; ++j) {
+                          
+      this.httpService.getQuestionsById(assignments[j].questionId).subscribe((question) => {
+      
+
+        if (question.role == user.role) {
+          this.setQuestion(question);
+          console.log(question);       
+        }
+      }, error => {
+        this.hideOptions();
+        console.log(error);
+      });
+
+    }
+  }
+
+  checkAvailability(){
+    if (this.user.role == "Analyst"){
+      return true;
+    }else if (this.user.role = "Developer" ) {
+      // code...
+    }
+  }
+
   //Confirms the screen loaded (?) auto-generated code
   ionViewDidLoad() {
+        this.service.getCurrentUser().then((user) => {
+          this.user = user;
+          console.log(user);
+          this.httpService.getCompanyById(user.companyId).subscribe(company => {
+            this.company = company;
+            this.analyst = this.company.numberOfCorrectDevelopingAttempsByAnalyst;
+            this.developer = this.company.numberOfCorrectDevelopingAttempsByDeveloper;
+            this.tester = this.company.numberOfCorrectDevelopingAttempsByTester;
+            console.log(company);
+
+            this.httpService.getRecordsByCompany(company.id).subscribe((records) => {
+              console.log(records);
+
+              for (var i = 0; i < records.length; ++i) {
+                if (records[i].finishDate == undefined) {
+
+                    this.httpService.getInstantProjectById(records[i].project).subscribe((project) => {
+                      this.project = project;
+                      console.log(project);
+                    });
+
+
+                    this.httpService.getAssignmentById(records[i].project).subscribe((assignments) => {
+                      console.log(assignments);
+                      this.getQuestions(assignments, user);
+
+                    }, error => {
+                      this.hideOptions();
+                      console.log(error);
+                    });
+                  
+                }
+              }
+            }, error => {
+            this.hideOptions();
+            console.log(error);
+          })
+          }, error => {
+            this.hideOptions();
+            console.log(error);
+          });
+    });
+
     console.log('ionViewDidLoad DevelopProjectPage');
+    
+    
   }
+
+
 }
+
 
 //Object QUESTION
 class Question{

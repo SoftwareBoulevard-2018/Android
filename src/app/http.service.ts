@@ -27,8 +27,8 @@ export class HttpService {
     private transfer: FileTransfer
   ) { }
 
-  static apiURL = 'http://35.196.111.251:3000';
-  //static apiURL = 'http://localhost:3000';
+  //static apiURL = 'http://35.196.111.251:3000';
+  static apiURL = 'http://localhost:3000';
   static usersURL = '/users';
   static usersURL2 = '/username';
   static companiesURL = '/companies';
@@ -144,7 +144,7 @@ export class HttpService {
     return this.http.get<InstantProject[]>(HttpService.apiURL + HttpService.getInstantProjectURL + '/' + 'getInstantProject');
   }
   getQuestionsById(id: String) {
-    return this.http.get<Questions>(HttpService.apiURL + HttpService.getQuestionURL+ '/' + id);
+    return this.http.get<Questions>(HttpService.apiURL + HttpService.getQuestionURL+ '/getQuestionById/' + id);
   }
   getAllQuestions() {
     return this.http.get<Questions[]>(HttpService.apiURL + HttpService.getQuestionURL);
