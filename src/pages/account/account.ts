@@ -5,7 +5,8 @@ import { AlertController, NavController, NavParams, Platform } from 'ionic-angul
 
 
 /**
- * shows an account received in param "u"
+ * shows information about
+ * an account received in param "u"
  */
 @Component({
   selector: 'page-account',
@@ -28,16 +29,19 @@ export class ViewAccountPage {
 
     this.user = navParams.get("u");
 
+    //calculate efficiency
     if (this.user.resourcesSpent !== 0) {
       this.user.efficiency = ((this.user.correctProjectQuestions + this.user.correctTrainingQuestions) / (this.user.resourcesSpent) * 100).toFixed(2);
     } else {
       this.user.efficiency = 0;
     }
 
+    //create cards with information if available
     if (this.user.competencyLevel) this.cards = [...this.cards, {name: "Competency level", value: this.user.competencyLevel}];
     if (this.user.efficiency) this.cards = [...this.cards, {name: "Efficiency", value: this.user.efficiency+"%"}];
     if (this.user.resourcesSpent) this.cards = [...this.cards, {name: "Resources Spent", value: this.user.resourcesSpent}];
 
+    //finds the size of the cards
     platform.ready().then(() => {
       this.view = [platform.width(), 350];
     });
