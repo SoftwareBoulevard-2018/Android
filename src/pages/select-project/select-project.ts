@@ -1,5 +1,5 @@
-import { InstantProject } from './../../models/instantProject';
-import { BiddingProject } from './../../models/biddingProject';
+import { InstantProjectb } from './../../models/instantProjectb';
+import { BiddingProjectb } from './../../models/biddingProjectb';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { GeneralServiceService } from '../../app/general-service.service';
@@ -20,8 +20,8 @@ import { ToastController } from 'ionic-angular';
   templateUrl: 'select-project.html',
 })
 export class SelectProjectPage {
-  instP: InstantProject[] = [];
-  bidP: BiddingProject[] = [];
+  instP: InstantProjectb[] = [];
+  bidP: BiddingProjectb[] = [];
   hService: HttpService;
   serv: GeneralServiceService;
   user: User;
@@ -62,7 +62,7 @@ export class SelectProjectPage {
 
   fillBidProjects(projects) {
     projects.forEach(project => { 
-      var nip = new BiddingProject(JSON.stringify(project).substring(7,32),
+      var nip = new BiddingProjectb(JSON.stringify(project).substring(7,32),
       project.name, project.numberOfDevelopingQuestionsPerAnalyst,
       project.numberOfDevelopingQuestionsPerTester, 
       project.numberOfDevelopingQuestionsPerDeveloper,
@@ -76,7 +76,7 @@ export class SelectProjectPage {
 
   fillInstProjects(projects) {
     projects.forEach(project => { 
-        var nip = new InstantProject(JSON.stringify(project).substring(7,32),
+        var nip = new InstantProjectb(JSON.stringify(project).substring(7,32),
         project.name, project.numberOfDevelopingQuestionsPerAnalyst,
         project.numberOfDevelopingQuestionsPerTester, 
         project.numberOfDevelopingQuestionsPerDeveloper,
@@ -120,7 +120,7 @@ export class SelectProjectPage {
   }
 
 
-  selectProject(p: BiddingProject)
+  selectProject(p: BiddingProjectb)
   { 
     this.serv.getCurrentUser().then((u) => {
       this.user = u;
