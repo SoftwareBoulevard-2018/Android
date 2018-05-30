@@ -92,8 +92,8 @@ export class SoftwareBoulevardApp {
     public service: GeneralServiceService,
     private statusBar: StatusBar
   ) {
-    this.statusBar.backgroundColorByHexString('#00585E');
     
+
     //verificates if the user is already logged in and skips the login page
     this.service.getCurrentUser().then((user) => {
       if(user !== undefined && user !== null){
@@ -148,6 +148,7 @@ export class SoftwareBoulevardApp {
   platformReady() {
     // Call any initial plugins when ready
     this.platform.ready().then(() => {
+      this.statusBar.backgroundColorByHexString('#00585E');
       this.splashScreen.hide();
     });
   }
