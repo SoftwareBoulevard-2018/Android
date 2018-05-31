@@ -87,6 +87,8 @@ export class HireUserPage {
       var reciver = user.id;
       var email = new Email(sender, "Recruitment" , [reciver] , "You are invited to our team, join us =D");
       console.log(email);
+
+      //Sends the email, and clech for errors
       this.httpService.send(email).subscribe(
         () => {
           let toast = this.toastCtrl.create({
@@ -105,6 +107,7 @@ export class HireUserPage {
           toast.present();
         }
       );
+      //Creates the invitation, and checks for errors
       var invitation: Invitation = new Invitation(user.id, u.companyId, 'pending');
       console.log(invitation);
       this.hService.createinvitations(invitation).subscribe(

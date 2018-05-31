@@ -89,6 +89,7 @@ export class GenerateResourcesPage {// here is the vars that use the backend
     var suffle: number[] = this.solvable_puzzles[this.randomIntFromInterval(0, this.solvable_puzzles.length)];
     //var suffle = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16] ;
     this.puzzleReward = this.real_puzzle.rewarded_resources;
+    //Filles the array with the slices
     for(i=0; i<15; i++)
     {
       var imgSrc: String = this.real_puzzle.slicedImage[i];
@@ -193,7 +194,7 @@ export class GenerateResourcesPage {// here is the vars that use the backend
     }
     return true;
   }
-
+//Checks if the tile is adjacent to the black tile, if so returns true and calls for a swapp
   private isAdjacent(row: number, col: number): boolean
   {
     console.log('Piece moved ' + 'Row: ' + row + ' Col: ' + col);
@@ -399,7 +400,7 @@ export class GenerateResourcesPage {// here is the vars that use the backend
     }
     return false;
   }
-  
+  //Here the tiles are swapped
   private swappPiece(a_row:number, a_col:number, n_row:number, n_col:number)
   {
     var temp = this.puzzle[a_row][a_col];
