@@ -124,7 +124,7 @@ export class SelectProjectPage {
   { 
     this.serv.getCurrentUser().then((u) => {
       this.user = u;
-      var r: Record = new Record(new Date("12/15/1990"),new Date("12/15/1990"),this.user.companyId,p.id);
+      var r: Record = new Record(null, new Date("12/15/1990"),new Date("12/15/1990"),this.user.companyId,p.id);
       console.log(r);
 
       this.hService.createRecord(r).subscribe(
