@@ -19,3 +19,4 @@ export class InstantProject {
     this.numberOfDevelopingQuestionsPerTester = numberOfDevelopingQuestionsPerTester;
   }
 }
+//This was the original class, its consistent with the database, it was created due to the fack that someone changed the model at the last minute

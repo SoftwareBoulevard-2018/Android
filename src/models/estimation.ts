@@ -15,3 +15,4 @@ export class Estimation {
     this.state = state;
   }
 }
+//This is the estimation class, its used to store the estimation tries at cost and time of project

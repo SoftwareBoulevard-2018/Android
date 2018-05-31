@@ -238,10 +238,12 @@ Android/
   * ReportsPag
   
 ### Module 3
-  * HireUserPage: allows users to look and start the process of contraction. 
-  * SelectProjectPage: allows you to select the project you want to perform.
-  * EstimateCostTimePage: allows to estimate the times and costs of the project that is being developed.
-  * GenerateResurcesPage: it is possible to solve the puzzles and with these generate recourses for the project.
+  * HireUserPage: allows users to look and start the process of inviting users to join their team, the project manager can view the user info
+  tapping in its name as well as send an invitation to the user via tapping the invite button, after the invitation is sent, an email will be sent as well in order to notify the invitee. 
+  * SelectProjectPage: Displays the list of all projects, their information can be checked by tapping in the round button, they can also be
+  selected by tapping the select project button, this will create a record that the project was selected.
+  * EstimateCostTimePage: Allows the user to try an estimate the time and the cost of the project, the user inserts its guesses and then the system cheks that thoses guesses are withing the thresehold, if so then the estimation is created and send to te database, either way the uses looses one unit of resources per try.
+  * GenerateResurcesPage: Displays a random puzzle that the user can solve, after solved correctly the user can send it to revision which will gain him some resources.
 
 ### Module 4
   * MainPage (Profile): The main component allows the user to see his profile including his stats and data.
