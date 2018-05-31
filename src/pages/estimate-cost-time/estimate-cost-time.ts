@@ -22,6 +22,7 @@ import 'rxjs/add/operator/map';
   templateUrl: 'estimate-cost-time.html',
 })
 export class EstimateCostTimePage {
+  //here is the vars that we use in the page 
   comp: Company = new Company("00000000000null", "Null Company", "No image",
   0, 0, 0, 0, 0);;
   user: User;
@@ -38,7 +39,7 @@ export class EstimateCostTimePage {
   lastRecord: Record;
   toastCtrl: ToastController;
 
-
+//constructor for the page 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public service: GeneralServiceService,
@@ -50,7 +51,7 @@ export class EstimateCostTimePage {
     this.hService = httpService;
     service.getCurrentUser().then((user) => {
       this.user = user;
-        if (!(user.companyId == null))
+        if (!(user.companyId == null))//check users compani and charge the necesari data for the page 
         {
           httpService.getCompanyById(user.companyId).subscribe((comp) => {
             this.comp = comp;
@@ -81,7 +82,7 @@ export class EstimateCostTimePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad EstimateCostTimePage');
   }
-
+//this function is for calculate de time-costs update company resources
   estimateCostTime()
   { 
     if(!(this.comp.companyResource > 0))
@@ -92,7 +93,7 @@ export class EstimateCostTimePage {
     else{
       var c = this.comp;
       c.companyResource = c.companyResource -1;
-      this.hService.updateCompany(c,this.comp.id).subscribe(
+      this.hService.updateCompany(c,this.comp.id).subscribe(    //here update de resources
         () => {
           let toast = this.toastCtrl.create({
             message: 'Lost 1 resources!',
@@ -124,10 +125,12 @@ export class EstimateCostTimePage {
     var time = this.p.time;
     console.log('Testing for time '+this.p.time + ' ' + time);
     console.log('Testing for cost '+this.p.cost + ' ' + cost);
-
+    //here calculate de estimation 
+    
     var estimation = new Estimation(1000, this.user.name, this.p.name, ce, te, false); 
     console.log(time+ ' ' + cost);
     console.log(cost + cost*0.1);
+    //here this IF check that stimation are in the range permitted
     if((ce <= cost + cost*0.1 && ce >= cost - cost*0.1) && (te <= time + time*0.1 && te >= time - time*0.1))
     {
       console.log("Success!!");
