@@ -319,7 +319,7 @@ export class ImproveSkillLevelPage {
               if (certifications[i].level == this.user.competencyLevel) {
 
                 for (var j = 0; j < certifications[i].questions.length; ++i) {
-                  this.httpService.getQuestionsById(certifications[i].questions[i]).subscribe((question) => {
+                  this.httpService.getQuestionsById(certifications[i].questions[i]).subscribe(() => {
 
                   });
                 }
