@@ -15,6 +15,7 @@ import { Invitation } from './../models/invitation';
 import { Record } from './../models/record';
 import { Estimation } from './../models/estimation';
 import { Certification } from './../models/certification';
+import { ThrowStmt } from '@angular/compiler';
 
 /**
  * Provides communication with the api
@@ -73,6 +74,7 @@ export class HttpService {
   static getAssignmentURL = '/getAssignment';
   static certificationURL = '/certification';
 
+  static updateInstantProjectURL = '/updateInstantProject';
 
   static trainingAttemptsURL = '/trainingAttempts';
   static developingAttemptsURL = '/developingAttempts';
@@ -105,6 +107,15 @@ export class HttpService {
     return this.http.put<Object>(HttpService.apiURL + HttpService.usersURL + '/' + userId,
       JSON.stringify(user), HttpService.httpOptions);
   }
+
+  updateInstantProject(instantProject: InstantProject ){
+    console.log(instantProject);
+    console.log(instantProject.id);
+    return this.http.put<Object>(HttpService.apiURL + HttpService.instantProjectURL + HttpService.updateInstantProjectURL +'/'+ instantProject.id,
+    JSON.stringify(instantProject), HttpService.httpOptions);
+    
+  }
+
   getUserByRoleCompany(role, companyId) {
     return this.http.post<User[]>(HttpService.apiURL + HttpService.usersURL + HttpService.usersURL2,
       JSON.stringify({ role: role, companyId: companyId }), HttpService.httpOptions);
@@ -132,6 +143,8 @@ export class HttpService {
     return this.http.put<Object>(HttpService.apiURL + HttpService.companiesURL + '/' + companyId,
       JSON.stringify(company), HttpService.httpOptions);
   }
+
+
   // uploads the image to the server before a company is created or updated
   uploadCompanyImage(imageURI){
     const fileTransfer: FileTransferObject = this.transfer.create();

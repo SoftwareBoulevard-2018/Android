@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ProjectlistPage } from '../projectlist/projectlist';
 import { InstantProject } from '../../../models/instantProject';
 import { HttpService } from '../../../app/http.service';
+
 import { NgForm } from '@angular/forms';
+
 
 @IonicPage()
 @Component({
-  selector: 'page-instanteditor',
-  templateUrl: 'instanteditor.html',
+  selector: 'updateInstantProject',
+  templateUrl: 'updateInstantProject.html',
 })
 export class UpdateInstantProjectPage {
   instant:InstantProject;
@@ -21,12 +22,12 @@ export class UpdateInstantProjectPage {
     public httpService: HttpService
   ) {this.instantProject = this.navParams.data.c; }
 
-  goToProjeclist(form: NgForm) {
+  goToProjectlist(form: NgForm) {
     this.submitted = true;
 
     if (form.valid) {
-      return this.httpService.createInstantProject(this.instantProject).subscribe(() => {
-        this.navCtrl.push(ProjectlistPage);
+      return this.httpService.updateInstantProject(this.instantProject).subscribe(() => {
+        this.navCtrl.pop();
 
       });
 
