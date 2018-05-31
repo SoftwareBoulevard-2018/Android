@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { InstantProject } from '../../../models/instantProject';
+import { BiddingProject } from '../../../models/biddingProject';
 import { HttpService } from '../../../app/http.service';
 
 import { NgForm } from '@angular/forms';
@@ -8,25 +8,25 @@ import { NgForm } from '@angular/forms';
 
 @IonicPage()
 @Component({
-  selector: 'updateInstantProject',
-  templateUrl: 'updateInstantProject.html',
+  selector: 'updateBiddingProject',
+  templateUrl: 'updateBiddingProject.html',
 })
-export class UpdateInstantProjectPage {
-  instant:InstantProject;
+export class UpdateBiddingProjectPage {
+  bidding:BiddingProject;
   submitted = false;
-  instantProject = new InstantProject();
+  biddingProject = new BiddingProject();
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public httpService: HttpService
-  ) {this.instantProject = this.navParams.data.c; }
+  ) {this.biddingProject = this.navParams.data.c; }
 
-  goToProjectlist(form: NgForm,idinstant:string) {
+  goToProjectlist(form: NgForm,idbidding:string) {
     this.submitted = true;
-    console.log(idinstant);
+    console.log(idbidding);
     if (form.valid) {
-      return this.httpService.updateInstantProject(this.instantProject,idinstant).subscribe(() => {
+      return this.httpService.updateBiddingProject(this.biddingProject,idbidding).subscribe(() => {
         this.navCtrl.pop();
 
       });

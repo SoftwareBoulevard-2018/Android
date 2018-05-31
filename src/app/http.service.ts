@@ -75,6 +75,7 @@ export class HttpService {
   static certificationURL = '/certification';
 
   static updateInstantProjectURL = '/updateInstantProject';
+  static updateBiddingProjectURL = '/updateBiddingProject';
 
   static trainingAttemptsURL = '/trainingAttempts';
   static developingAttemptsURL = '/developingAttempts';
@@ -108,10 +109,10 @@ export class HttpService {
       JSON.stringify(user), HttpService.httpOptions);
   }
 
-  updateInstantProject(instantProject: InstantProject ){
+  updateInstantProject(instantProject: InstantProject, id :string ){
     console.log(instantProject);
     console.log(instantProject.id);
-    return this.http.put<Object>(HttpService.apiURL + HttpService.instantProjectURL + HttpService.updateInstantProjectURL +'/'+ instantProject.id,
+    return this.http.put<Object>(HttpService.apiURL + HttpService.instantProjectURL + HttpService.updateInstantProjectURL +'/'+ id,
     JSON.stringify(instantProject), HttpService.httpOptions);
     
   }
@@ -223,7 +224,15 @@ export class HttpService {
       JSON.stringify(questions), HttpService.httpOptions);
     return this.http.post<InstantProject>(HttpService.apiURL + HttpService.questionURL + HttpService.createQuestionURL,
       JSON.stringify(questions), HttpService.httpOptions);
-  } 
+  }
+  
+  updateBiddingProject(biddingProject: BiddingProject, id :string ){
+    console.log(biddingProject);
+    console.log(biddingProject.id);
+    return this.http.put<Object>(HttpService.apiURL + HttpService.biddingProjectURL + HttpService.updateBiddingProjectURL +'/'+ id,
+    JSON.stringify(biddingProject), HttpService.httpOptions);
+    
+  }
 
   getQuestionsById(id: String) {
     return this.http.get<Questions>(HttpService.apiURL + '/questions/getQuestionById/' + id);
