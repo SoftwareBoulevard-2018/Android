@@ -25,7 +25,7 @@ export class GenerateResourcesPage {
   puzzleReward: number = 0;
   comp: Company = new Company("00000000000null", "Null Company", "No image",
   0, 0, 0, 0, 0);
-  image = 'https://dondelaviste.cl/public/images/species/1/delfin_austral.png';
+  image = 'http://35.196.111.251:3000/puzzleImages/black.jpg';
   user: User;
   puzzles = [];
   real_puzzle: Puzzle;

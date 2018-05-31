@@ -156,7 +156,7 @@ export class EstimateCostTimePage {
       this.hService.createEstimation(estimation).subscribe(
         () => {
           let toast = this.toastCtrl.create({
-            message: 'Estimation suscessfull!',
+            message: 'Keeep trying =D!',
             duration: 3000
           });
           toast.present();
