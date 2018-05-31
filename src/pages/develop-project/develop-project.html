@@ -16,7 +16,7 @@
 
   <div class="stats">
       <p>Resources: {{resour}}</p>
-      <p>Team Members: 2</p>
+      <p>Team Members: {{mem}}</p>
   </div>
 
   
@@ -27,7 +27,6 @@
   <div [hidden]=textHid>
     <h3 class="title1">{{questions[questionnumber].qtext}}</h3>
   </div>
-
   <div class="answers">
     <ion-item [hidden]=ans1hid>
       <ion-label>{{questions[questionnumber].option1}}</ion-label>

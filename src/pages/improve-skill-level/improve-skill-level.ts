@@ -1,6 +1,14 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { GeneralServiceService } from '../../app/general-service.service';
+import { HttpService } from '../../app/http.service';
+//import { Assignment } from './../../models/assignment';
+import { User } from './../../models/user';
+import { Company } from './../../models/company';
+import { InstantProject } from './../../models/instantProject';
+//import { Questions } from './../../models/questions';
+import { TrainingAttempt } from './../../models/trainingAttempt';
 
 /**
  * Generated class for the ImproveSkillLevelPage page.
@@ -15,6 +23,15 @@ import { AlertController } from 'ionic-angular';
   templateUrl: 'improve-skill-level.html',
 })
 export class ImproveSkillLevelPage {
+  user: User;
+  company: Company;
+  analyst: number;
+  developer: number;
+  tester: number;
+  project: InstantProject;
+
+  resour: number;
+  mem: number;
 
   //Should be retrieved from server in the future
   left: number = 0;
@@ -42,7 +59,8 @@ export class ImproveSkillLevelPage {
   sendhid: boolean = false;
 
   //Constructor
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
+  constructor(public service: GeneralServiceService, public httpService: HttpService, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
+    
     this.checkForQuestions();
   }
 
@@ -119,20 +137,63 @@ export class ImproveSkillLevelPage {
 
   //Function called with the SEND button, checks if the answers are correct and calls the alerts according to the result
   checkAnswers(){
-    if(this.left <= 0){
+
+    var answers = [];
+
+    if (this.answer1temp) {
+      answers.push(this.questions[this.questionnumber].option1);
+    }
+
+    if (this.answer2temp) {
+      answers.push(this.questions[this.questionnumber].option2);
+    }
+
+    if (this.answer3temp) {
+      answers.push(this.questions[this.questionnumber].option3);
+    }
+
+    if (this.answer4temp) {
+      answers.push(this.questions[this.questionnumber].option4);
+    }
+
+    if(this.resour <= 0){
+
       this.showNoResour();
+
     }else if(this.answer1temp == this.questions[this.questionnumber].answer1 && this.answer2temp == this.questions[this.questionnumber].answer2 && this.answer3temp == this.questions[this.questionnumber].answer3 && this.answer4temp == this.questions[this.questionnumber].answer4){
+
       if(this.questionnumber<this.questions.length-1){
+
         this.showCorrectAnswer();
         this.questionnumber = this.questionnumber + 1;
+        
       }else{
         this.showLastAnswer();
         this.hideOptions();
+
+        this.increaseCompetencyLevel();
       }
-      this.left = this.left-1;
+
+      this.left = this.left - 1;
+      //this.sendTrainingAttempt('right', this.questions[this.questionnumber].qtext, answers, this.user.id);
+      this.increaseCorrectTrainingQuestions();
+      this.increaseSpentResources();
+      this.decreaseResources();
+      this.resour = this.resour - 1;
     }else{
+      this.decreaseResources();
+      this.increaseSpentResources();
+      //this.sendTrainingAttempt('right', this.questions[this.questionnumber].qtext, answers, this.user.id);
       this.showWrongAnswer();
+      this.resour = this.resour - 1;
     }
+
+    setTimeout(() => {
+     this.updateUser();
+      this.updateCompany();
+      console.log("User and company have been updated");
+    }, 2000);
+
   }
   //Slide down refresher, works for the first deliverable demo's purpose, must be updated when theres connection to the server
   doRefresh(refresher) {
@@ -153,8 +214,121 @@ export class ImproveSkillLevelPage {
     }, 2000);
   }
 
+  updateUser(){
+    this.httpService.updateUser(this.user, this.user.id).subscribe((data) => {console.log(data)}, (error) => {console.log(error)});
+    return this.user;
+  }
+
+  updateCompany(){
+    this.httpService.updateCompany(this.company, this.company.id).subscribe((data) => {console.log(data)}, (error) => {console.log(error)});
+    return this.company;
+  }
+
+  sendTrainingAttempt(state, question, answer, user){
+    var ta = new TrainingAttempt(0, state, question, answer, user);
+    setTimeout(() => {
+      this.httpService.createTrainingAttempt(ta).subscribe((data) => {console.log(data)}, (error) => {console.log(error)});
+      console.log("Yay");
+    }, 2000);
+  }
+
+  decreaseResources(){
+    this.company.companyResource = this.company.companyResource - 1;
+    return this.user;
+  }
+
+  increaseSpentResources(){
+    this.user.resourcesSpent = this.user.resourcesSpent + 1;
+    return this.user;
+  }
+
+  increaseCompetencyLevel(){
+    this.user.competencyLevel = this.user.competencyLevel + 1;
+    return this.user;
+  }
+
+  increaseCorrectTrainingQuestions(){
+    this.user.correctTrainingQuestions = this.user.correctTrainingQuestions + 1;
+    return this.user;
+  }
+
+  setResources(resources){
+    this.resour = resources;
+  }
+
+  setMembers(members){
+    this.mem = members;
+  }
+
+  setQuestionNumber(q_number){
+    this.questionnumber = q_number;
+  }
+
+  setUser(user){
+    this.user = user;
+    return user;
+  }
+
+  setCompany(company){
+    this.company = company;
+    return company;
+  }
+
+  setProject(project){
+    this.project = project;
+    return project;
+  }
+
+  checkAvailability(){
+    console.log("Project: " + this.project)
+    if (this.user.role == "Analyst"){
+      return true;
+    }else if (this.user.role == "Developer" && 
+              this.project.amount_analyst_question <= this.company.numberOfCorrectDevelopingAttempsByAnalyst) {
+      return true;
+    }else if (this.project.amount_analyst_question <= this.company.numberOfCorrectDevelopingAttempsByAnalyst &&
+              this.project.amount_developer_question <= this.company.numberOfCorrectDevelopingAttempsByDeveloper){
+      return true;
+    }
+    return false;
+  }
+
   //Confirms the screen loaded (?) auto-generated code
   ionViewDidLoad() {
+        this.service.getCurrentUser().then((user) => {
+          this.user = user;
+          console.log(user);
+          this.httpService.getCompanyById(user.companyId).subscribe(company => {
+            this.setCompany(company);
+            this.setResources(company.companyResource);
+
+
+            this.httpService.getUsersByCompany(company.id).subscribe((users) => {
+              this.setMembers(users.length);   
+            });
+
+            console.log(company);
+
+          }, error => {
+            this.hideOptions();
+            console.log(error);
+          });
+
+          this.httpService.getCertifications().subscribe((certifications) => {
+            for (var i = 0; i < certifications.length; ++i) {
+              if (certifications[i].level == this.user.competencyLevel) {
+
+                for (var j = 0; j < certifications[i].questions.length; ++i) {
+                  this.httpService.getQuestionsById(certifications[i].questions[i]).subscribe((question) => {
+
+                  });
+                }
+
+              }
+            }
+          });
+    });
+
     console.log('ionViewDidLoad DevelopProjectPage');
   }
 }
