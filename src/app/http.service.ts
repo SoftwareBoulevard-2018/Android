@@ -301,6 +301,11 @@ export class HttpService {
       JSON.stringify({company: company , finishDate: finishDate}), HttpService.httpOptions);
   }
 
+  updateRecord(record, id: String){
+    return this.http.post<Record>(HttpService.apiURL + HttpService.recordsURL + '/update/' + id,
+      JSON.stringify(record), HttpService.httpOptions);
+  }
+
   //All services related to Estimation
   createEstimation(estimation: Estimation) {
     return this.http.post<any>(HttpService.apiURL + HttpService.estimationURL,

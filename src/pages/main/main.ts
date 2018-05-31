@@ -41,16 +41,20 @@ export class MainPage {
     this.service.getCurrentUser().then((user) => {
       this.user_type = user.role;
       this.user_name = user.name;
-      this.user_level = user.competencyLevel;
       this.user_company = user.companyId;
 
-          this.httpService.getCompanyById(this.user_company).subscribe(company => {
-            this.company_resources = company.companyResource;
-          });
+      this.httpService.getUserById(user.id).subscribe((u_user) => {
 
-          this.httpService.getUsersByCompany(this.user_company).subscribe((users) => {
-            this.company_members = users.length;   
-          });
+        this.user_level = u_user.competencyLevel;
+
+        this.httpService.getCompanyById(this.user_company).subscribe(company => {
+          this.company_resources = company.companyResource;
+        });
+
+        this.httpService.getUsersByCompany(this.user_company).subscribe((users) => {
+          this.company_members = users.length;   
+        });
+      });  
     });
     
     //show the number of users and companies in some cards
@@ -59,8 +63,10 @@ export class MainPage {
       this.companies = report['companies'];
     })
 
-
+    console.log("ionViewWillEnter");
   }
+
+
   viewUsers() {
     this.navCtrl.push(ListUsersPage);
   }
