@@ -15,7 +15,7 @@ import { Invitation } from './../models/invitation';
 import { Record } from './../models/record';
 import { Estimation } from './../models/estimation';
 import { Certification } from './../models/certification';
-import { ThrowStmt } from '@angular/compiler';
+//import { ThrowStmt } from '@angular/compiler';
 
 /**
  * Provides communication with the api
@@ -38,8 +38,8 @@ export class HttpService {
   /**
    * defaul apiURL, can be changed in loginPage
    */
-  //static apiURL = 'http://35.196.111.251:3000';
-  static apiURL = 'http://localhost:3000';
+  static apiURL = 'http://35.196.111.251:3000';
+  //static apiURL = 'http://localhost:3000';
 
   /**
    * routes must coincide with backend services
