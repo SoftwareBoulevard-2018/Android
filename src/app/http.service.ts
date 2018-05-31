@@ -61,14 +61,13 @@ export class HttpService {
 
   
   static getCurrentCompanyURL = '/getCurrentProject';
-  static getBiddingProjectURL = '/getBiddingProject';
-
+ 
   static createBiddingProjectURL = '/createBiddingProject';
   static createInstantProjectURL = '/createInstantProject';
   static createQuestionURL = '/createQuestion';
 
 
-
+  static getBiddingProjectURL = '/getBiddingProject';
   static getInstantProjectURL = '/getInstantProject';
   static getQuestionURL = '/getQuestions';
   static getAssignmentURL = '/getAssignment';
