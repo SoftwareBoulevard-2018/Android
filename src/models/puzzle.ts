@@ -11,3 +11,5 @@ export class Puzzle {
   
     }
   }
+
+  //This is the model for the puzzle

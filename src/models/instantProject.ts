@@ -19,3 +19,4 @@ export class InstantProject {
     this.amount_developer_question = amount_developer_question;
   }
 }
+//This was the original class, its consistent with the database, it was created due to the fack that someone changed the model at the last minute

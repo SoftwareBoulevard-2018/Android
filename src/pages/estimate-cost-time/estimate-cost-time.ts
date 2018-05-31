@@ -98,6 +98,7 @@ export class EstimateCostTimePage {
           let toast = this.toastCtrl.create({
             message: 'Lost 1 resources!',
             duration: 3000
+            //a messege is print if successfull
           });
           toast.present();
 
@@ -107,6 +108,7 @@ export class EstimateCostTimePage {
           let toast = this.toastCtrl.create({
             message: 'Something went wrong',
             duration: 3000
+            //a messege is print if not successfull
           });
           toast.present();
         }
@@ -140,6 +142,7 @@ export class EstimateCostTimePage {
           let toast = this.toastCtrl.create({
             message: 'Estimation suscessfull!',
             duration: 3000
+            //a messege is print if successfull
           });
           toast.present();
           
@@ -149,6 +152,7 @@ export class EstimateCostTimePage {
           let toast = this.toastCtrl.create({
             message: 'Something went wrong',
             duration: 3000
+            //a messege is print if not successfull
           });
           toast.present();
         });
@@ -161,6 +165,7 @@ export class EstimateCostTimePage {
           let toast = this.toastCtrl.create({
             message: 'Keeep trying =D!',
             duration: 3000
+            //a messege is print if successfull
           });
           toast.present();
           
@@ -170,6 +175,7 @@ export class EstimateCostTimePage {
           let toast = this.toastCtrl.create({
             message: 'Something went wrong',
             duration: 3000
+            //a messege is print if not successfull
           });
           toast.present();
         });

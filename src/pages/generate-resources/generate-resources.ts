@@ -146,6 +146,7 @@ export class GenerateResourcesPage {// here is the vars that use the backend
           let toast = this.toastCtrl.create({
             message: 'Right answer, you got ' + this.real_puzzle.rewarded_resources +' of k!',
             duration: 3000
+            //a messege is print if successfull
           });
           toast.present();
 
@@ -155,6 +156,7 @@ export class GenerateResourcesPage {// here is the vars that use the backend
           let toast = this.toastCtrl.create({
             message: 'Something went wrong',
             duration: 3000
+            //a messege is print if not successfull
           });
           toast.present();
         }
@@ -199,6 +201,7 @@ export class GenerateResourcesPage {// here is the vars that use the backend
   {
     console.log('Piece moved ' + 'Row: ' + row + ' Col: ' + col);
     console.log(this.puzzlePieces[(this.puzzle[row][col])]);
+    //list of ifs that check for adjacency
     if(row < 3 && col < 3 && row > 0 && col > 0)
     {
       if(this.puzzle[row+1][col] === 16)
@@ -400,6 +403,7 @@ export class GenerateResourcesPage {// here is the vars that use the backend
     }
     return false;
   }
+
   //Here the tiles are swapped
   private swappPiece(a_row:number, a_col:number, n_row:number, n_col:number)
   {
