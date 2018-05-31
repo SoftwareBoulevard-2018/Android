@@ -15,6 +15,7 @@ import { Invitation } from './../models/invitation';
 import { Record } from './../models/record';
 import { Estimation } from './../models/estimation';
 import { Certification } from './../models/certification';
+import { invitations } from '../models/invitations';
 
 /**
  * Provides communication with the api
@@ -275,12 +276,14 @@ export class HttpService {
     getinvitations() {
       return this.http.get<Invitation[]>(HttpService.apiURL + HttpService.invitationsURL);
     }
-    createinvitations(invitation: Invitation) {
-      return this.http.post<Invitation>(HttpService.apiURL + HttpService.invitationsURL ,
+    createinvitations(invitation: invitations) {
+      return this.http.post<invitations>(HttpService.apiURL + HttpService.invitationsURL ,
         JSON.stringify(invitation), HttpService.httpOptions);
     }
     getinvitationsByUserAndCompany(user, company){
       return this.http.post<Invitation>(HttpService.apiURL + HttpService.certificationURL + '/getCurrentInvitationCom/' ,
         JSON.stringify(user,company), HttpService.httpOptions);
     }
+
+    
 }

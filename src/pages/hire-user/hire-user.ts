@@ -13,7 +13,7 @@ import { User } from '../../models/user';
 import { HttpService } from '../../app/http.service';
 import { Email } from '../../models/email';
 import { ToastController } from 'ionic-angular';
-import { Invitation } from '../../models/invitation';
+import { invitations } from '../../models/invitations';
 
 /**
  * Generated class for the HireUserPage page.
@@ -111,7 +111,7 @@ export class HireUserPage {
         }
       );
       //Creates the invitation, and checks for request errors
-      var invitation: Invitation = new Invitation(user.id, u.companyId, 'pending');
+      var invitation: invitations = new invitations(user.id, u.companyId, 'pending');
       console.log(invitation);
       this.hService.createinvitations(invitation).subscribe(
         () => {
