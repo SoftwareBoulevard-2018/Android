@@ -1,6 +1,13 @@
-export class Invitation {
+export class Invitation{
+	_id: string;
+	user: string;
+	company: string;
+	state: string;
+  constructor(_id?: string, user?: string, company?: string, state?: string,){
+  			  this._id = _id;
+              this.user=user;
+              this.company=company;
+              this.state=state;
 
-  constructor(public _id?: string, public user?:string, public company?: string, public state?: string) {
-
-  }
+}
 }

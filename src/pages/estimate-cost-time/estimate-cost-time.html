@@ -3,6 +3,9 @@
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
+
+This is the frontend of estimate-cost-time page and here shows the company resources and have
+two cage for write the cost-time and a button for calculate it 
 -->
 <ion-header>
 
@@ -23,12 +26,12 @@
   
   <ion-item>
     <ion-label stacked color="primary">Time</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-input [(ngModel)]="timeTry" type="text" aria-placeholder="Try your time"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label stacked color="primary">Cost</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-input [(ngModel)]="costTry" type="text" aria-placeholder="Try your cost"></ion-input>
   </ion-item>
  
   

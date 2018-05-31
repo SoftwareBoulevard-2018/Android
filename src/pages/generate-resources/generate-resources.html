@@ -3,9 +3,12 @@
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
+
+  Frontend for the page where is the puzzle and here generete resources 
 -->
 <ion-header>
-
+<!-- here is the normal menu button 
+-->
   <ion-navbar>
     <ion-title>Generate Resources</ion-title>
     <button ion-button menuToggle>
@@ -14,7 +17,8 @@
   </ion-navbar>
 
 </ion-header>
-
+<!-- Here is the puzzle pieces and the navigation movements the style and the distribution in the page 
+-->
 
 <ion-content no-padding>
 
@@ -47,6 +51,7 @@
       <div>
         Company {{comp.name}} has: {{comp.companyResource}}
       </div>
+  <!-- here the button that sends the actual positions inthe puzzle to check it and generate resources -->
       <button ion-button color="primary" (click)="sendPuzzle()">
         Send Puzzle &nbsp;
         <ion-icon name='md-create'></ion-icon>

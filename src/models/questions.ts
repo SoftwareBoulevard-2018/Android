@@ -1,11 +1,14 @@
 import { Answer } from '../models/answer';
-export class Questions {
-  role: string;
-  description: string;
-  answers: Answer[] = [];
-  constructor(role?: string, description?: string, answer1?: Answer, answer2?: Answer, answer3?: Answer, answer4?: Answer) {
-		this.role = role;
-		this.description = description;
-		this.answers.push(answer1, answer2, answer3, answer4);
+export class  Questions{
+    question_id: string;
+    role: string;
+    description: string;
+    answers: Answer[];
+    constructor(_id?:string, role?:string, description?:string, answers?: Answer[]) {
+        this.question_id = _id;
+        this.role = role;
+        this.description = description;
+        this.answers = answers;     
+    }
   }
 } 
