@@ -28,12 +28,11 @@ export class ViewAccountPage {
   ) {
 
     this.user = navParams.get("u");
-
+    
     //calculate efficiency
-    if (this.user.resourcesSpent !== 0) {
+    this.user.efficiency = 0;
+    if (this.user.resourcesSpent) {
       this.user.efficiency = ((this.user.correctProjectQuestions + this.user.correctTrainingQuestions) / (this.user.resourcesSpent) * 100).toFixed(2);
-    } else {
-      this.user.efficiency = 0;
     }
 
     //create cards with information if available

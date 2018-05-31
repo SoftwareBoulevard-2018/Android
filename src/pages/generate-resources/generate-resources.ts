@@ -12,6 +12,8 @@ import { Puzzle } from './../../models/puzzle';
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
+ 
+ //Here is the backend of Generate resocurces 
  */
 
 @IonicPage()
@@ -19,17 +21,18 @@ import { Puzzle } from './../../models/puzzle';
   selector: 'page-generate-resources',
   templateUrl: 'generate-resources.html',
 })
-export class GenerateResourcesPage {
+export class GenerateResourcesPage {// here is the vars that use the backend 
   puzzlePieces: String[] = [];
   puzzle: number[][] = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
   puzzleReward: number = 0;
   comp: Company = new Company("00000000000null", "Null Company", "No image",
   0, 0, 0, 0, 0);
-  image = 'https://dondelaviste.cl/public/images/species/1/delfin_austral.png';
+  image = 'http://35.196.111.251:3000/puzzleImages/black.jpg';
   user: User;
   puzzles = [];
   real_puzzle: Puzzle;
   toastCtrl: ToastController;
+  //this are different solvable puzzle orders
   solvable_puzzles = [[9, 6, 5, 8, 4, 2, 16, 15, 7, 13, 3, 12, 11, 10, 1, 14],
                       [9, 6, 5, 8, 4, 3, 13, 12, 7, 10, 15, 14, 16, 11, 2, 1],
                       [10, 6, 12, 11, 16, 14, 4, 2, 9, 8, 3, 5, 13, 1, 15, 7],
@@ -43,7 +46,7 @@ export class GenerateResourcesPage {
                       [7, 5, 9, 6, 12, 11, 1, 3, 16, 14, 8, 15, 13, 4, 2, 10],
                       [10, 3, 16, 12, 4, 11, 6, 1, 9, 8, 2, 7, 13, 15, 5, 14]];
   //[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]                    
-
+  // here is the constructor for the page 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public httpService: HttpService,
@@ -64,7 +67,7 @@ export class GenerateResourcesPage {
   ionViewDidEnter(){
     this.getAllPuzzles();
   }
-
+//this function gets all the puzzles in the database and star to create the puzzle 
   getAllPuzzles() {
     return this.httpService.getAllPuzzles().subscribe(data => {
       const data2 = JSON.parse(JSON.stringify((data)));
@@ -74,7 +77,7 @@ export class GenerateResourcesPage {
       //this.getCompanyById(this.service.user.companyId);
     });
   }
-
+//this function get the image and distribute this in one of the orders of solvable_puzzles
   initializePuzzle(data2) {
     this.puzzles = data2;
    // let image: string;
@@ -129,6 +132,7 @@ export class GenerateResourcesPage {
     //console.log(this.comp)
 
   }
+  //this function give the resources to the company when the puzzle is right 
   sendPuzzle()
   {
     if(this.isOrdered())
@@ -160,7 +164,7 @@ export class GenerateResourcesPage {
       alert("Wrong answer");
     }
   }
-
+//this function move the image in the puzzle 
   movePiece(row: number, col: number)
   {
     if(this.isAdjacent(row,col))
@@ -171,7 +175,7 @@ export class GenerateResourcesPage {
     //alert(r.toString());
     //alert(row.toString().concat(col.toString()));
   }
-
+//this function checks the order of the puzzle an return a boolean if it is right or wrong 
   private isOrdered():boolean
   {
     var order: number = 1;

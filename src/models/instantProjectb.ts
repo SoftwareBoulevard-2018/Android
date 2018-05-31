@@ -1,4 +1,4 @@
-export class InstantProject {
+export class InstantProjectb {
   id: string;
   name: string;
   numberOfDevelopingQuestionsPerAnalyst:number;

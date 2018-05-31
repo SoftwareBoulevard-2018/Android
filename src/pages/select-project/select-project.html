@@ -18,7 +18,7 @@
 
 <ion-content padding>
     <ion-list>
-        <ion-item *ngFor="let ip of bidP" >
+        <ion-item *ngFor="let ip of instP" >
             <h2>{{ip.name}}</h2>
             <p>Reward K: {{ip.rewarded_K}} - Instant Project</p>
             <button ion-button color="primary" item-end (click)="selectProject(ip)">

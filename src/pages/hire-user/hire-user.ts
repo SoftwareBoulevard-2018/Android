@@ -13,12 +13,15 @@ import { User } from '../../models/user';
 import { HttpService } from '../../app/http.service';
 import { Email } from '../../models/email';
 import { ToastController } from 'ionic-angular';
+import { Invitation } from '../../models/invitation';
 
 /**
  * Generated class for the HireUserPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
+ 
+ Backend for the hire user page 
  */
 
 @IonicPage()
@@ -33,7 +36,7 @@ export class HireUserPage {
   serv: GeneralServiceService;
   toastCtrl: ToastController;
 
-  constructor(
+  constructor(//Basic things for create the page 
     public navCtrl: NavController, 
     public navParams: NavParams,
     public service: GeneralServiceService,
@@ -49,10 +52,10 @@ export class HireUserPage {
     this.getAllUsers();
   }
 
-  getAllUsers() {
+  getAllUsers() {//Funtion for bring from the database all users 
     return this.httpService.getAllUsers().subscribe(data => this.addCompanies(data['data']));
   }
-  addCompanies(users) {
+  addCompanies(users) {//funtion that change the company to which the user belongs
     users.forEach(user => {
       this.httpService.getCompanyById(user.companyId).subscribe(company => {
         user.company = company;
@@ -73,7 +76,7 @@ export class HireUserPage {
     });
   }
 
-  hireUser(user: User) 
+  hireUser(user: User) //function for chatch the user and send the email invitation 
   {
     var sender: string;
     this.serv.getCurrentUser().then((u) => {
@@ -85,7 +88,7 @@ export class HireUserPage {
       this.httpService.send(email).subscribe(
         () => {
           let toast = this.toastCtrl.create({
-            message: 'Email sent',
+            message: 'Email sent to ' + user.name + '!',
             duration: 3000
           });
           toast.present();
@@ -100,7 +103,25 @@ export class HireUserPage {
           toast.present();
         }
       );
-      alert('Email sent to ' + user.name + '!');
+      var invitation: Invitation = new Invitation(user.id, u.companyId, 'pending');
+      this.hService.createinvitations(invitation).subscribe(
+        () => {
+          let toast = this.toastCtrl.create({
+            message: 'Invitation sent to ' + user.name + '!',
+            duration: 3500
+          });
+          toast.present();
+
+        },
+        () => {
+
+          let toast = this.toastCtrl.create({
+            message: 'Something went wrong',
+            duration: 3000
+          });
+          toast.present();
+        }
+      );
     });
   }
 }
