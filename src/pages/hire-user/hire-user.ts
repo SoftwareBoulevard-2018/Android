@@ -55,7 +55,7 @@ export class HireUserPage {
   getAllUsers() {//Funtion for bring from the database all users 
     return this.httpService.getAllUsers().subscribe(data => this.addCompanies(data['data']));
   }
-  addCompanies(users) {//funtion that change the company to which the user belongs
+  addCompanies(users) {//This functions checks if user has company and add it
     users.forEach(user => {
       this.httpService.getCompanyById(user.companyId).subscribe(company => {
         user.company = company;
@@ -69,6 +69,8 @@ export class HireUserPage {
       })
     });
   }
+
+  //Displays the users info
 
   viewUser(user) {
     this.navCtrl.push(ViewAccountPage,{
@@ -85,6 +87,8 @@ export class HireUserPage {
       var reciver = user.id;
       var email = new Email(sender, "Recruitment" , [reciver] , "You are invited to our team, join us =D");
       console.log(email);
+
+      //Sends the email, and clech for errors
       this.httpService.send(email).subscribe(
         () => {
           let toast = this.toastCtrl.create({
@@ -103,7 +107,9 @@ export class HireUserPage {
           toast.present();
         }
       );
+      //Creates the invitation, and checks for errors
       var invitation: Invitation = new Invitation(user.id, u.companyId, 'pending');
+      console.log(invitation);
       this.hService.createinvitations(invitation).subscribe(
         () => {
           let toast = this.toastCtrl.create({
