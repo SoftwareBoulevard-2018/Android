@@ -10,25 +10,41 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-fab right edge (click)=goToNewproject()>
+    <button ion-fab mini>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
   <ion-grid>
     <ion-row>
       <ion-col>
         <h1> Bidding Project List</h1>
         <ion-list>
-          <ion-item>
-            <ion-icon></ion-icon>
-            Project 1
-            <ion-icon name="repeat" item-end></ion-icon>
+          <ion-item *ngFor="let c of biddingProject">
+            <p>
+              <ion-icon name="md-pint"></ion-icon> {{c.name}} 
+              <ion-icon name="name"></ion-icon>
+            </p>
+            <button ion-button color="primary" item-end (click)="updateInstant(c)">
+                    <ion-icon name='md-create'></ion-icon>
+                </button>
           </ion-item>
+          <ion-item></ion-item>
         </ion-list>
-
+      </ion-col>
+      <ion-col>
         <h1> Instant Project List</h1>
         <ion-list>
-          <ion-item>
-            <ion-icon></ion-icon>
-            Project 1
-            <ion-icon name="repeat" item-end></ion-icon>
+          <ion-item *ngFor="let c of instantProject">
+            <p>
+              <ion-icon name="md-pint"></ion-icon> {{c.name}} 
+              <ion-icon name="name"></ion-icon>
+            </p>
+            <button ion-button color="primary" item-end (click)="updateInstant(c)">
+                    <ion-icon name='md-create'></ion-icon>
+                </button>
           </ion-item>
+          <ion-item></ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
@@ -49,12 +65,6 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-content>
-    <ion-fab right edge (click)=goToNewproject()>
-      <button ion-fab mini>
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-fab>
-  </ion-content>
+
 
 </ion-content>

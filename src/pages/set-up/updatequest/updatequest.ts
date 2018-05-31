@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { OptionquestPage } from '../optionquest/optionquest';
+import { QuestlistPage } from '../questlist/questlist';
+import { Questions} from '../../../models/questions';
+import { HttpService } from '../../../app/http.service';
+import { NgForm } from '@angular/forms';
+
 
 @IonicPage()
 @Component({
@@ -8,12 +12,28 @@ import { OptionquestPage } from '../optionquest/optionquest';
   templateUrl: 'updatequest.html',
 })
 export class UpdatequestPage {
+  
+  submitted = false;
+  questions = new Questions();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public httpService: HttpService
+  ) {}
 
-  goToOptionquest(){
-    this.navCtrl.push(OptionquestPage);
+  goToQuestlist(form: NgForm){
+    this.submitted = true;
+
+    if (form.valid) {
+
+      return this.httpService.createQuestion(this.questions).subscribe(() => {
+        this.navCtrl.push(QuestlistPage);
+
+      });
+
+    }
+
   }
 
   ionViewDidLoad() {
@@ -21,3 +41,4 @@ export class UpdatequestPage {
   }
 
 }
+ 

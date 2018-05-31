@@ -25,6 +25,7 @@ import { SoftwareBoulevardApp } from './app.component';
 import { GeneralServiceService } from './general-service.service';
 import { AboutPage } from '../pages/about/about';
 //Module 1 components
+
 import { SetUpPage } from '../pages/set-up/set-up';
 import { ProjectlistPage } from '../pages/set-up/projectlist/projectlist';
 import { NewprojectPage } from '../pages/set-up/newproject/newproject';
@@ -37,6 +38,7 @@ import { UpdatequestPage } from '../pages/set-up/updatequest/updatequest';
 import { OptionquestPage } from '../pages/set-up/optionquest/optionquest';
 import { SelectquestPage } from '../pages/set-up/selectquest/selectquest';
 import { UpdateparameterPage } from '../pages/set-up/updateparameter/updateparameter';
+import { UpdateInstantProjectPage } from '../pages/set-up/UpdateInstantProject/updateInstantProject';
 //Module 2 components
 import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
@@ -112,7 +114,8 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
     UpdatequestPage,
     OptionquestPage,
     SelectquestPage,
-    UpdateparameterPage
+    UpdateparameterPage,
+    UpdateInstantProjectPage
   ],
   imports: [
     BrowserModule,
@@ -188,7 +191,8 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
     UpdatequestPage,
     OptionquestPage,
     SelectquestPage,
-    UpdateparameterPage
+    UpdateparameterPage,
+    UpdateInstantProjectPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

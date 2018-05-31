@@ -10,8 +10,8 @@ import { NgForm } from '@angular/forms';
   selector: 'page-instanteditor',
   templateUrl: 'instanteditor.html',
 })
-export class InstanteditorPage {
-
+export class UpdateInstantProjectPage {
+  instant:InstantProject;
   submitted = false;
   instantProject = new InstantProject();
 
@@ -19,7 +19,7 @@ export class InstanteditorPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public httpService: HttpService
-  ) { }
+  ) {this.instantProject = this.navParams.data.c; }
 
   goToProjeclist(form: NgForm) {
     this.submitted = true;

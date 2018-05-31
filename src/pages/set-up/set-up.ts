@@ -17,7 +17,7 @@ export class SetUpPage {
 
   }
 
-  goToProjeclist(){
+  goToProjectlist(){
     this.navCtrl.push(ProjectlistPage);
   }
   goToQuestlist(){

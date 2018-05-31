@@ -8,7 +8,7 @@ import { Email } from '../models/email';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Puzzle } from './../models/puzzle';
 import { BiddingProject } from './../models/biddingProject';
-import { Questions } from './../models/questions';
+import { Questions} from './../models/questions';
 import { Assignment } from './../models/assignment';
 import { InstantProject } from './../models/instantProject';
 import { Invitation } from './../models/invitation';
@@ -37,8 +37,8 @@ export class HttpService {
   /**
    * defaul apiURL, can be changed in loginPage
    */
-  static apiURL = 'http://35.196.111.251:3000';
-  //static apiURL = 'http://localhost:3000';
+  //static apiURL = 'http://35.196.111.251:3000';
+  static apiURL = 'http://localhost:3000';
 
   /**
    * routes must coincide with backend services
@@ -56,12 +56,18 @@ export class HttpService {
   static puzzleURL = '/puzzles';
   
   static biddingProjectURL = '/biddingProjects';
+  static questionURL = '/questions';
+  static instantProjectURL = '/instantProjects'
+
   
   static getCurrentCompanyURL = '/getCurrentProject';
-  static getBiddingProjectURL = '/getBiddingProject';
-
+ 
   static createBiddingProjectURL = '/createBiddingProject';
-  static instantProjectURL = '/instantProjects'
+  static createInstantProjectURL = '/createInstantProject';
+  static createQuestionURL = '/createQuestion';
+
+
+  static getBiddingProjectURL = '/getBiddingProject';
   static getInstantProjectURL = '/getInstantProject';
   static getQuestionURL = '/getQuestions';
   static getAssignmentURL = '/getAssignment';
@@ -183,13 +189,29 @@ export class HttpService {
     return this.http.get<InstantProject[]>(HttpService.apiURL + HttpService.instantProjectURL + '/' + 'getInstantProject');
   }
   createBiddingProject(biddingProject: BiddingProject) {
-	  console.log("puto el que lo lea");
 	  console.log( JSON.stringify(biddingProject));
 	  console.log(HttpService.apiURL + HttpService.biddingProjectURL,
       JSON.stringify(biddingProject), HttpService.httpOptions);
     return this.http.post<BiddingProject>(HttpService.apiURL + HttpService.biddingProjectURL + HttpService.createBiddingProjectURL,
       JSON.stringify(biddingProject), HttpService.httpOptions);
   }
+
+  createInstantProject(instantProject: InstantProject) {
+	  console.log( JSON.stringify(instantProject));
+	  console.log(HttpService.apiURL + HttpService.instantProjectURL,
+      JSON.stringify(instantProject), HttpService.httpOptions);
+    return this.http.post<InstantProject>(HttpService.apiURL + HttpService.instantProjectURL + HttpService.createInstantProjectURL,
+      JSON.stringify(instantProject), HttpService.httpOptions);
+  }
+
+  createQuestion(questions: Questions) {
+	  console.log( JSON.stringify(questions));
+	  console.log(HttpService.apiURL + HttpService.questionURL,
+      JSON.stringify(questions), HttpService.httpOptions);
+    return this.http.post<InstantProject>(HttpService.apiURL + HttpService.questionURL + HttpService.createQuestionURL,
+      JSON.stringify(questions), HttpService.httpOptions);
+  } 
+
   getQuestionsById(id: String) {
     return this.http.get<Questions>(HttpService.apiURL + '/questions/getQuestionById/' + id);
   }
