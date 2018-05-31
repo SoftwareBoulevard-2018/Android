@@ -35,6 +35,7 @@ export class DevelopProjectPage {
   //Should be retrieved from server in the future
   resour: number;
   mem: number;
+  error: string;
 
   questionspending:number = 0;
 
@@ -75,7 +76,8 @@ export class DevelopProjectPage {
   //It's meant to be used to check for remaining questions for the user in the server. Must be called every time the improve skill level page is opened.
   checkForQuestions(){
     if(this.questionspending == 0){
-      this.hideOptions();  
+      this.hideOptions(); 
+      this.error =  "You don't have any activities pending in this project";
     }else{
       this.showOptions();
     }
@@ -177,8 +179,10 @@ export class DevelopProjectPage {
         this.showLastAnswer();
         this.hideOptions();
 
+
         if (this.user.role == "Tester") {
           end_project = true;
+          this.error = "Your company does not have any active project right now"
         }
       }
 
@@ -229,7 +233,12 @@ export class DevelopProjectPage {
   closeProject(){
     this.httpService.getRecordsByFinishDateAndCompany(undefined, this.company.id).subscribe((record) => {
         record.finishDate = new Date();
-        this.httpService.updateRecord(record, record._id).subscribe(() => {}, (error) => {console.log(error)});
+        this.company.capacityK = this.company.capacityK + this.project.rewarded_k;
+
+        setTimeout(() => {
+          this.httpService.updateRecord(record, record._id).subscribe(() => {}, (error) => {console.log(error)});
+          this.httpService.updateCompany(this.company, this.company.id).subscribe(() => {}, (error) => {console.log(error)});
+        }, 2000);
     });
   }
 
@@ -340,9 +349,6 @@ export class DevelopProjectPage {
   //Confirms the screen loaded (?) auto-generated code
   ionViewDidLoad() {
     this.work();
-    //setTimeout(() => {
-    //  this.closeProject();
-    //}, 50000)
   }
 
   work(){
@@ -379,6 +385,7 @@ export class DevelopProjectPage {
                   if (!this.checkAvailability()) {
                     console.log("No puede");
                     this.hideOptions();
+                    this.error = "You don't have any activities pending in this project"
                   }else{
                     console.log("Sí puede");
 
@@ -411,6 +418,7 @@ export class DevelopProjectPage {
                         
               }, error => {
                 this.hideOptions();
+                this.error = "This project does not have any assigned questions right now"
                 console.log(error);
               });
                   
@@ -418,10 +426,12 @@ export class DevelopProjectPage {
           }
         }, error => {
           this.hideOptions();
+          this.error = "Your company does not have any active project right now"
           console.log(error);
         });
       }, error => {
         this.hideOptions();
+        this.error = "You are not part of a company so you can't develop a project"
         console.log(error);
       });
     });    

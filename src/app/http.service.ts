@@ -38,8 +38,8 @@ export class HttpService {
   /**
    * defaul apiURL, can be changed in loginPage
    */
-  static apiURL = 'http://35.196.111.251:3000';
-  //static apiURL = 'http://localhost:3000';
+  //static apiURL = 'http://35.196.111.251:3000';
+  static apiURL = 'http://localhost:3000';
 
   /**
    * routes must coincide with backend services
