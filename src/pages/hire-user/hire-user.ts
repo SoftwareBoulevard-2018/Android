@@ -88,7 +88,7 @@ export class HireUserPage {
       this.httpService.send(email).subscribe(
         () => {
           let toast = this.toastCtrl.create({
-            message: 'Email sent',
+            message: 'Email sent to ' + user.name + '!',
             duration: 3000
           });
           toast.present();
@@ -103,8 +103,25 @@ export class HireUserPage {
           toast.present();
         }
       );
-      var invitation: Invitation = new Invitation("00",user.id, u.companyId, 'pending');
-      alert('Email sent to ' + user.name + '!');
+      var invitation: Invitation = new Invitation(user.id, u.companyId, 'pending');
+      this.hService.createinvitations(invitation).subscribe(
+        () => {
+          let toast = this.toastCtrl.create({
+            message: 'Invitation sent to ' + user.name + '!',
+            duration: 3500
+          });
+          toast.present();
+
+        },
+        () => {
+
+          let toast = this.toastCtrl.create({
+            message: 'Something went wrong',
+            duration: 3000
+          });
+          toast.present();
+        }
+      );
     });
   }
 }

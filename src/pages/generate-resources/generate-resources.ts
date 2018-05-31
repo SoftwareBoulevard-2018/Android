@@ -32,7 +32,7 @@ export class GenerateResourcesPage {// here is the vars that use the backend
   puzzles = [];
   real_puzzle: Puzzle;
   toastCtrl: ToastController;
-  //this are the orders for puzzles who have solve 
+  //this are different solvable puzzle orders
   solvable_puzzles = [[9, 6, 5, 8, 4, 2, 16, 15, 7, 13, 3, 12, 11, 10, 1, 14],
                       [9, 6, 5, 8, 4, 3, 13, 12, 7, 10, 15, 14, 16, 11, 2, 1],
                       [10, 6, 12, 11, 16, 14, 4, 2, 9, 8, 3, 5, 13, 1, 15, 7],
