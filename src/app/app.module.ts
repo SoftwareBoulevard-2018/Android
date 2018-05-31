@@ -39,6 +39,7 @@ import { OptionquestPage } from '../pages/set-up/optionquest/optionquest';
 import { SelectquestPage } from '../pages/set-up/selectquest/selectquest';
 import { UpdateparameterPage } from '../pages/set-up/updateparameter/updateparameter';
 import { UpdateInstantProjectPage } from '../pages/set-up/updateInstantProject/updateInstantProject';
+import { UpdateBiddingProjectPage } from '../pages/set-up/updateBiddingProject/updateBiddingProject';
 //Module 2 components
 import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
@@ -115,7 +116,8 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
     OptionquestPage,
     SelectquestPage,
     UpdateparameterPage,
-    UpdateInstantProjectPage
+    UpdateInstantProjectPage,
+    UpdateBiddingProjectPage
   ],
   imports: [
     BrowserModule,
@@ -192,7 +194,8 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
     OptionquestPage,
     SelectquestPage,
     UpdateparameterPage,
-    UpdateInstantProjectPage
+    UpdateInstantProjectPage,
+    UpdateBiddingProjectPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
