@@ -13,7 +13,7 @@ import {HttpService} from '../../app/http.service';
 @Component({
   selector: 'edit-company',
   templateUrl: 'edit-company.html'
-})
+}) 
 export class EditCompanyPage {
   company: Company;
   submitted = false;

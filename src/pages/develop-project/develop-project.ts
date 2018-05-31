@@ -399,10 +399,10 @@ export class DevelopProjectPage {
     if (this.user.role == "Analyst"){
       return true;
     }else if (this.user.role == "Developer" && 
-              this.project.amount_analyst_question <= this.company.numberOfCorrectDevelopingAttempsByAnalyst) {
+              this.project.numberOfDevelopingQuestionsPerAnalyst <= this.company.numberOfCorrectDevelopingAttempsByAnalyst) {
       return true;
-    }else if (this.project.amount_analyst_question <= this.company.numberOfCorrectDevelopingAttempsByAnalyst &&
-              this.project.amount_developer_question <= this.company.numberOfCorrectDevelopingAttempsByDeveloper){
+    }else if (this.project.numberOfDevelopingQuestionsPerAnalyst <= this.company.numberOfCorrectDevelopingAttempsByAnalyst &&
+              this.project.numberOfDevelopingQuestionsPerDeveloper <= this.company.numberOfCorrectDevelopingAttempsByDeveloper){
       return true;
     }
     return false;

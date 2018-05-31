@@ -38,7 +38,7 @@ import { UpdatequestPage } from '../pages/set-up/updatequest/updatequest';
 import { OptionquestPage } from '../pages/set-up/optionquest/optionquest';
 import { SelectquestPage } from '../pages/set-up/selectquest/selectquest';
 import { UpdateparameterPage } from '../pages/set-up/updateparameter/updateparameter';
-import { UpdateInstantProjectPage } from '../pages/set-up/UpdateInstantProject/updateInstantProject';
+import { UpdateInstantProjectPage } from '../pages/set-up/updateInstantProject/updateInstantProject';
 //Module 2 components
 import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
