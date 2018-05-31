@@ -63,7 +63,7 @@ export class HttpService {
   static getInstantProjectURL = '/getInstantProject';
   static getQuestionURL = '/getQuestions';
   static getAssignmentURL = '/getAssignment';
-
+  static certificationURL = '/certification';
 
 
   static trainingAttemptsURL = '/trainingAttempts';
@@ -75,6 +75,7 @@ export class HttpService {
   static getCurrentProjectManager2URL = '/getCurrentProjectM';
   static getEstimationByPMAndProjectURL = '/getEstimationByPMAndProject';
   static getEstimationsByPMAndStateURL = '/getEstimationsByProjectManagerUsernameAndState';
+  
 
   // All services related to Users
   getAllUsers() {
@@ -261,4 +262,17 @@ export class HttpService {
     return this.http.post<Estimation>(HttpService.apiURL + HttpService.estimationURL + HttpService.getEstimationsByPMAndStateURL,
       JSON.stringify({projectManagerUsername: projectManagerUsername , state: state}), HttpService.httpOptions);
   }
+
+    // All services related to Invitations
+    getinvitations() {
+      return this.http.get<Invitation[]>(HttpService.apiURL + HttpService.invitationsURL);
+    }
+    createinvitations(invitation: Invitation) {
+      return this.http.post<Invitation>(HttpService.apiURL + HttpService.invitationsURL ,
+        JSON.stringify(invitation), HttpService.httpOptions);
+    }
+    getinvitationsByUserAndCompany(user, company){
+      return this.http.post<Invitation>(HttpService.apiURL + HttpService.certificationURL + '/getCurrentInvitationCom/' ,
+        JSON.stringify(user,company), HttpService.httpOptions);
+    }
 }
