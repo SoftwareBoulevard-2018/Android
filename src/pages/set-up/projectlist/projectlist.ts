@@ -5,6 +5,7 @@ import { MainPage } from '../../main/main';
 import { SetUpPage } from '../set-up';
 import { HttpService } from '../../../app/http.service';
 import { UpdateInstantProjectPage } from '../updateInstantProject/updateInstantProject';
+import { UpdateBiddingProjectPage } from '../updateBiddingProject/updateBiddingProject';
 
  
 @IonicPage()
@@ -37,6 +38,9 @@ export class ProjectlistPage {
     this.navCtrl.push(UpdateInstantProjectPage,{c:instantProject});
   }
 
+  updateBidding(biddingProject){
+    this.navCtrl.push(UpdateBiddingProjectPage,{c:biddingProject});
+  }
 
   goToNewproject(){
     this.navCtrl.push(NewprojectPage);
