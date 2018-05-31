@@ -143,22 +143,26 @@ export class JoinTeamPage {
       console.log('Async operation has ended');
       refresher.complete();
 
+      this.service.getCurrentUser().then((user) => {
 
-    this.httpService.getInvitationByUserAndState("5afd895ef65c8b079be139c4","pending").subscribe((invitation) => {
-            console.log(invitation);
-            console.log(invitation.length);
+        this.httpService.getInvitationByUserAndState(user.id,"pending").subscribe((invitation) => {
+          console.log(invitation);
+          console.log(invitation.length);
             if (invitation.length == 1) {
               this.httpService.getCompanyById(invitation[0].company).subscribe((company) => {
-                  this.teamName = company.name;
+                this.teamName = company.name;
               });
               this.invitation = invitation[0];
               this.haveInvitations();
             }else{
               this.noInvitations();
             }
-            
+                
           }
-    );
+        );       
+      });
+
+
 
     }, 2000);
   }
