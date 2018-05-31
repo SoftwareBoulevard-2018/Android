@@ -57,14 +57,18 @@ export class HttpService {
   
   static biddingProjectURL = '/biddingProjects';
   static questionURL = '/questions';
-
+  static instantProjectURL = '/instantProjects'
 
   
   static getCurrentCompanyURL = '/getCurrentProject';
   static getBiddingProjectURL = '/getBiddingProject';
 
   static createBiddingProjectURL = '/createBiddingProject';
-  static instantProjectURL = '/instantProjects'
+  static createInstantProjectURL = '/createInstantProject';
+  static createQuestionURL = '/createQuestion';
+
+
+
   static getInstantProjectURL = '/getInstantProject';
   static getQuestionURL = '/getQuestions';
   static getAssignmentURL = '/getAssignment';
@@ -186,7 +190,6 @@ export class HttpService {
     return this.http.get<InstantProject[]>(HttpService.apiURL + HttpService.instantProjectURL + '/' + 'getInstantProject');
   }
   createBiddingProject(biddingProject: BiddingProject) {
-	  console.log("puto el que lo lea");
 	  console.log( JSON.stringify(biddingProject));
 	  console.log(HttpService.apiURL + HttpService.biddingProjectURL,
       JSON.stringify(biddingProject), HttpService.httpOptions);
@@ -195,7 +198,6 @@ export class HttpService {
   }
 
   createInstantProject(instantProject: InstantProject) {
-	  console.log("puto el que lo lea");
 	  console.log( JSON.stringify(instantProject));
 	  console.log(HttpService.apiURL + HttpService.instantProjectURL,
       JSON.stringify(instantProject), HttpService.httpOptions);
@@ -204,7 +206,6 @@ export class HttpService {
   }
 
   createQuestion(questions: Questions) {
-	  console.log("puto el que lo lea");
 	  console.log( JSON.stringify(questions));
 	  console.log(HttpService.apiURL + HttpService.questionURL,
       JSON.stringify(questions), HttpService.httpOptions);
