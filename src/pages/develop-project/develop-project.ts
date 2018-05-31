@@ -391,7 +391,7 @@ export class DevelopProjectPage {
       
       //this.questionnumber = 1;                
     }, 2000);
-    
+  
   }
 
   checkAvailability(){

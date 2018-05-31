@@ -177,7 +177,7 @@ export class HttpService {
   }
 
   getInstantProjectById(id: String) {
-    return this.http.get<InstantProject>(HttpService.apiURL + HttpService.instantProjectURL + '/' +  + id);
+    return this.http.get<InstantProject>(HttpService.apiURL + HttpService.instantProjectURL + '/' + id);
   }
   getAllInstantProjects() {
     return this.http.get<InstantProject[]>(HttpService.apiURL + HttpService.instantProjectURL + '/' + 'getInstantProject');

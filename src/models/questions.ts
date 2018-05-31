@@ -1,10 +1,11 @@
+import { Answer } from '../models/answer';
 export class  Questions{
     question_id: string;
     role: string;
     description: string;
-    answers: [[string,string],[string,string],[string,string],[string,string]]
-    constructor(question_id?:string, role?:string, description?:string, answers?: [[string,string],[string,string],[string,string],[string,string]]) {
-        this.question_id = question_id;
+    answers: Answer[];
+    constructor(_id?:string, role?:string, description?:string, answers?: Answer[]) {
+        this.question_id = _id;
         this.role = role;
         this.description = description;
         this.answers = answers;     
