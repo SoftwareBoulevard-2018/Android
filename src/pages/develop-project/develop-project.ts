@@ -8,6 +8,7 @@ import { User } from './../../models/user';
 import { Company } from './../../models/company';
 import { InstantProject } from './../../models/instantProject';
 import { Questions } from './../../models/questions';
+import { DevelopingAttempt } from './../../models/developingAttempt';
 
 @IonicPage()
 @Component({
@@ -21,12 +22,16 @@ export class DevelopProjectPage {
   developer: number;
   tester: number;
   project: InstantProject;
-  a_questions: Questions[] = [];
+  //a_questions: Questions[] = [new Questions("A", "B", "C", 
+  //                            [["D", "E"], ["F", "G"], ["H", "I"], ["J", "K"]])];
+  //temp_array = Questions[] = [];
+  a_questions: Questions[];
   q_developer: Questions[];
   q_tester: Questions[];
 
   //Should be retrieved from server in the future
-  resour: number = 5;
+  resour: number;
+  mem: number;
 
   questionspending:number = 0;
 
@@ -42,7 +47,7 @@ export class DevelopProjectPage {
   answer3temp: boolean = false;
   answer4temp: boolean = false;
 
-  textNoHid: boolean = true;
+  textNoHid: boolean = false;
   textHid: boolean = false;
   ans1hid: boolean = false;
   ans2hid: boolean = false;
@@ -52,13 +57,8 @@ export class DevelopProjectPage {
 
   //Constructor
   constructor(public service: GeneralServiceService, public httpService: HttpService, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
+    
     this.checkForQuestions();
-  }
-
-
-
-  ionViewWillEnter() {
-
   }
 
   //It's meant to be used to check for remaining questions for the user in the server. Must be called every time the improve skill level page is opened.
@@ -100,6 +100,7 @@ export class DevelopProjectPage {
     });
     alert.present();
   }
+
   //Correct answer alert, but there are more questions remaining
   showCorrectAnswer() {
     let alert = this.alertCtrl.create({
@@ -113,6 +114,7 @@ export class DevelopProjectPage {
     this.answer4temp = false;
     alert.present();
   }
+
   //Correct answer alert, in the last available question
   showLastAnswer() {
     let alert = this.alertCtrl.create({
@@ -122,6 +124,7 @@ export class DevelopProjectPage {
     });
     alert.present();
   }
+
   //Alert to be used when user tries to send an answer but his team has no resources left
   showNoResour() {
     let alert = this.alertCtrl.create({
@@ -134,22 +137,69 @@ export class DevelopProjectPage {
 
   //Function called with the SEND button, checks if the answers are correct and calls the alerts according to the result
   checkAnswers(){
+
+    var answers = [];
+
+    if (this.answer1temp) {
+      answers.push(this.questions[this.questionnumber].option1);
+    }
+
+    if (this.answer2temp) {
+      answers.push(this.questions[this.questionnumber].option2);
+    }
+
+    if (this.answer3temp) {
+      answers.push(this.questions[this.questionnumber].option3);
+    }
+
+    if (this.answer4temp) {
+      answers.push(this.questions[this.questionnumber].option4);
+    }
+
     if(this.resour <= 0){
+
       this.showNoResour();
+
     }else if(this.answer1temp == this.questions[this.questionnumber].answer1 && this.answer2temp == this.questions[this.questionnumber].answer2 && this.answer3temp == this.questions[this.questionnumber].answer3 && this.answer4temp == this.questions[this.questionnumber].answer4){
-      if(this.questionnumber<this.questions.length-1){
+
+      if (this.user.role == "Analyst") {
+        this.increaseAnalystQuestions();
+      }else if (this.user.role == "Developer") {
+        this.increaseDeveloperQuestions();
+      }else{
+        this.increaseTesterQuestions();
+      }
+
+      if(this.questionnumber < this.questions.length-1){
         this.showCorrectAnswer();
         this.questionnumber = this.questionnumber + 1;
       }else{
         this.showLastAnswer();
         this.hideOptions();
       }
+
       this.resour = this.resour-1;
+      this.sendDevelopingAttempt('right', this.questions[this.questionnumber].qtext, answers, this.user.id);
+      this.increaseCorrectProjectQuestions();
+      this.increaseSpentResources();
+      this.decreaseResources();
+
     }else{
+
+      this.decreaseResources();
+      this.increaseSpentResources();
+      this.sendDevelopingAttempt('right', this.questions[this.questionnumber].qtext, answers, this.user.id);
       this.showWrongAnswer();
       this.resour = this.resour-1;
     }
+
+    setTimeout(() => {
+      this.updateUser();
+      this.updateCompany();
+      console.log("User and company have been updated");
+    }, 2000);
   }
+
   //Slide down refresher, works for the first deliverable demo's purpose, must be updated when theres connection to the server
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
@@ -168,6 +218,63 @@ export class DevelopProjectPage {
     }, 2000);
   }
 
+  updateUser(){
+    this.httpService.updateUser(this.user, this.user.id).subscribe((data) => {console.log(data)}, (error) => {console.log(error)});
+    return this.user;
+  }
+
+  updateCompany(){
+    this.httpService.updateCompany(this.company, this.company.id).subscribe((data) => {console.log(data)}, (error) => {console.log(error)});
+    return this.company;
+  }
+
+  sendDevelopingAttempt(state, question, answer, user){
+    var ta = new DevelopingAttempt(0, state, question, answer, user);
+    this.httpService.createDevelopingAttempt(ta).subscribe((data) => {console.log(data)}, (error) => {console.log(error)});
+  }
+
+  decreaseResources(){
+    this.company.companyResource = this.company.companyResource - 1;
+    return this.user;
+  }
+
+  increaseSpentResources(){
+    this.user.resourcesSpent = this.user.resourcesSpent + 1;
+    return this.user;
+  }
+
+  increaseCorrectProjectQuestions(){
+    this.user.correctProjectQuestions = this.user.correctProjectQuestions + 1;
+    return this.user;
+  }
+
+  increaseAnalystQuestions(){
+    this.company.numberOfCorrectDevelopingAttempsByAnalyst = this.company.numberOfCorrectDevelopingAttempsByAnalyst + 1;
+    return this.company;
+  }
+
+  increaseDeveloperQuestions(){
+    this.company.numberOfCorrectDevelopingAttempsByDeveloper = this.company.numberOfCorrectDevelopingAttempsByDeveloper + 1;
+    return this.company;
+  }
+
+  increaseTesterQuestions(){
+    this.company.numberOfCorrectDevelopingAttempsByTester = this.company.numberOfCorrectDevelopingAttempsByTester + 1;
+    return this.company;
+  }
+
+  setResources(resources){
+    this.resour = resources;
+  }
+
+  setMembers(members){
+    this.mem = members;
+  }
+
+  setQuestionNumber(q_number){
+    this.questionnumber = q_number;
+  }
+
   setUser(user){
     this.user = user;
     return user;
@@ -183,8 +290,47 @@ export class DevelopProjectPage {
     return project;
   }
 
-  setQuestion(question){
-    this.a_questions.push(question);
+  setQuestion(question: Questions, position){
+  //setQuestion(des, o1, o2, o3, o4, a1, a2, a3, a4, position){
+    //this.a_questions.push(question);
+    //console.log(this.a_questions);
+    /*
+    if (position >= this.questions.length) {
+      this.questions.push(
+        new Question(des,
+                     o1,
+                     o2,
+                     o3,
+                     o4,
+                     a1,
+                     a2,
+                     a3,
+                     a4,
+        )
+
+      )
+    }else{
+      this.questions[position].qtext =  des;
+      this.questions[position].option1 =  o1;
+      this.questions[position].option2 =  o2;
+      this.questions[position].option3 =  o3;
+      this.questions[position].option4 =  o4;
+      this.questions[position].answer1 =  a1;
+      this.questions[position].answer2 =  a2;
+      this.questions[position].answer3 =  a3;
+      this.questions[position].answer4 =  a4;
+    }
+    */
+
+    if (position >= this.questions.length) {
+      this.a_questions.push(question)
+    }else{
+      this.a_questions[position].description = question.description;
+      this.a_questions[position].answers = question.answers;
+      this.a_questions[position].question_id = question.question_id;
+      this.a_questions[position].role = question.role;
+    }
+
   }
 
   printQuestions(){
@@ -192,14 +338,35 @@ export class DevelopProjectPage {
   }
 
   getQuestions(assignments, user){
+    
+
     for (var j = 0; j < assignments.length; ++j) {
                           
       this.httpService.getQuestionsById(assignments[j].questionId).subscribe((question) => {
       
 
         if (question.role == user.role) {
-          this.setQuestion(question);
-          console.log(question);       
+          console.log(question.description);  
+          /*
+          this.setQuestion(question.description,
+                           question.answers[0][0],
+                           question.answers[1][0],
+                           question.answers[2][0],
+                           question.answers[3][0],
+                           question.answers[0][1], 
+                           question.answers[1][1], 
+                           question.answers[2][1], 
+                           question.answers[3][1], 
+                           j);*/
+          //this.setQuestion(question, j);
+          /*if (j >= this.a_questions.length) {
+            this.a_questions.push(question)
+          }else{
+            this.a_questions[j].description = "a";
+            this.a_questions[j].answers = question.answers;
+            this.a_questions[j].question_id = question.question_id;
+            this.a_questions[j].role = question.role;
+          }*/
         }
       }, error => {
         this.hideOptions();
@@ -207,6 +374,24 @@ export class DevelopProjectPage {
       });
 
     }
+
+    
+
+    //this.a_questions.pop();
+
+    setTimeout(() => {
+      console.log(this.a_questions);
+
+      if (!this.checkAvailability()) {
+        console.log(this.checkAvailability())
+        this.hideOptions();
+      }else{
+        this.showOptions();
+      }
+      
+      //this.questionnumber = 1;                
+    }, 2000);
+    
   }
 
   checkAvailability(){
@@ -214,10 +399,10 @@ export class DevelopProjectPage {
     if (this.user.role == "Analyst"){
       return true;
     }else if (this.user.role == "Developer" && 
-              this.project.numberOfDevelopingQuestionsPerAnalyst == this.company.numberOfCorrectDevelopingAttempsByAnalyst) {
+              this.project.amount_analyst_question <= this.company.numberOfCorrectDevelopingAttempsByAnalyst) {
       return true;
-    }else if (this.project.numberOfDevelopingQuestionsPerAnalyst == this.company.numberOfCorrectDevelopingAttempsByAnalyst &&
-              this.project.numberOfDevelopingQuestionsPerDeveloper == this.company.numberOfCorrectDevelopingAttempsByDeveloper){
+    }else if (this.project.amount_analyst_question <= this.company.numberOfCorrectDevelopingAttempsByAnalyst &&
+              this.project.amount_developer_question <= this.company.numberOfCorrectDevelopingAttempsByDeveloper){
       return true;
     }
     return false;
@@ -229,10 +414,14 @@ export class DevelopProjectPage {
           this.user = user;
           console.log(user);
           this.httpService.getCompanyById(user.companyId).subscribe(company => {
-            this.company = company;
-            this.analyst = this.company.numberOfCorrectDevelopingAttempsByAnalyst;
-            this.developer = this.company.numberOfCorrectDevelopingAttempsByDeveloper;
-            this.tester = this.company.numberOfCorrectDevelopingAttempsByTester;
+            this.setCompany(company);
+            this.setResources(company.companyResource);
+
+
+            this.httpService.getUsersByCompany(company.id).subscribe((users) => {
+              this.setMembers(users.length);   
+            });
+
             console.log(company);
 
             this.httpService.getRecordsByCompany(company.id).subscribe((records) => {
@@ -249,8 +438,11 @@ export class DevelopProjectPage {
 
                     this.httpService.getAssignmentById(records[i].project).subscribe((assignments) => {
                       console.log(assignments);
-                      this.getQuestions(assignments, user);
-                      console.log("Availability: " + this.checkAvailability());
+                      setTimeout(() => {
+                        this.getQuestions(assignments, user);
+                      }, 2000);
+
+                      //console.log("Availability: " + this.checkAvailability());
                     }, error => {
                       this.hideOptions();
                       console.log(error);

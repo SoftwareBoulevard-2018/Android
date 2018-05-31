@@ -13,6 +13,7 @@ import { Assignment } from './../models/assignment';
 import { InstantProject } from './../models/instantProject';
 import { Invitation } from './../models/invitation';
 import { Record } from './../models/record';
+import { Certification } from './../models/certification';
 
 /**
  * Provides communication with the api
@@ -47,6 +48,7 @@ export class HttpService {
   static loginURL = '/login';
   static emailURL = '/emails';
   static reportsURL = '/reports';
+  static certificationsURL = '/certification';
 
   static puzzlesURL = '/puzzles';
   static recordsURL = '/records';
@@ -70,6 +72,8 @@ export class HttpService {
   static developingAttemptsURL = '/developingAttempts';
 
   static invitationsURL = '/invitations';
+
+  static getCertificationsURL = '/getCertification';
 
   // All services related to Users
   getAllUsers() {
@@ -167,7 +171,7 @@ export class HttpService {
   }
 
   getInstantProjectById(id: String) {
-    return this.http.get<InstantProject>(HttpService.apiURL + HttpService.getInstantProjectURL+ '/' + id);
+    return this.http.get<InstantProject>(HttpService.apiURL + '/instantProjects/' + id);
   }
   getAllInstantProjects() {
     return this.http.get<InstantProject[]>(HttpService.apiURL + HttpService.getInstantProjectURL + '/' + 'getInstantProject');
@@ -181,13 +185,13 @@ export class HttpService {
       JSON.stringify(biddingProject), HttpService.httpOptions);
   }
   getQuestionsById(id: String) {
-    return this.http.get<Questions>(HttpService.apiURL + HttpService.getQuestionURL+ '/getQuestionById/' + id);
+    return this.http.get<Questions>(HttpService.apiURL + '/questions/getQuestionById/' + id);
   }
   getAllQuestions() {
     return this.http.get<Questions[]>(HttpService.apiURL + HttpService.getQuestionURL);
   }
   getAssignmentById(id: String) {
-    return this.http.get<Assignment[]>(HttpService.apiURL + HttpService.getAssignmentURL+ '/' + id);
+    return this.http.get<Assignment[]>(HttpService.apiURL + '/assignments/' + id);
   }
   getAllAssignments() {
     return this.http.get<Assignment[]>(HttpService.apiURL + HttpService.getAssignmentURL);
@@ -221,6 +225,10 @@ export class HttpService {
   updateInvitation(invitation, id: String){
     return this.http.put<Invitation>(HttpService.apiURL + HttpService.invitationsURL + '/' + id,
       JSON.stringify(invitation), HttpService.httpOptions);
+  }
+
+  getCertifications() {
+    return this.http.get<Certification[]>(HttpService.apiURL + HttpService.certificationsURL + HttpService.getCertificationsURL);
   }
 
    //All services related to records
