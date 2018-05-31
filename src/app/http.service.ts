@@ -8,13 +8,14 @@ import { Email } from '../models/email';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Puzzle } from './../models/puzzle';
 import { BiddingProject } from './../models/biddingProject';
-import { Questions } from './../models/questions';
+import { Questions} from './../models/questions';
 import { Assignment } from './../models/assignment';
 import { InstantProject } from './../models/instantProject';
 import { Invitation } from './../models/invitation';
 import { Record } from './../models/record';
 import { Estimation } from './../models/estimation';
 import { Certification } from './../models/certification';
+//import { ThrowStmt } from '@angular/compiler';
 
 /**
  * Provides communication with the api
@@ -56,17 +57,24 @@ export class HttpService {
   static puzzleURL = '/puzzles';
   
   static biddingProjectURL = '/biddingProjects';
+  static questionURL = '/questions';
+  static instantProjectURL = '/instantProjects'
+
   
   static getCurrentCompanyURL = '/getCurrentProject';
-  static getBiddingProjectURL = '/getBiddingProject';
-
+ 
   static createBiddingProjectURL = '/createBiddingProject';
-  static instantProjectURL = '/instantProjects'
+  static createInstantProjectURL = '/createInstantProject';
+  static createQuestionURL = '/createQuestion';
+
+
+  static getBiddingProjectURL = '/getBiddingProject';
   static getInstantProjectURL = '/getInstantProject';
   static getQuestionURL = '/getQuestions';
   static getAssignmentURL = '/getAssignment';
   static certificationURL = '/certification';
 
+  static updateInstantProjectURL = '/updateInstantProject';
 
   static trainingAttemptsURL = '/trainingAttempts';
   static developingAttemptsURL = '/developingAttempts';
@@ -99,6 +107,15 @@ export class HttpService {
     return this.http.put<Object>(HttpService.apiURL + HttpService.usersURL + '/' + userId,
       JSON.stringify(user), HttpService.httpOptions);
   }
+
+  updateInstantProject(instantProject: InstantProject ){
+    console.log(instantProject);
+    console.log(instantProject.id);
+    return this.http.put<Object>(HttpService.apiURL + HttpService.instantProjectURL + HttpService.updateInstantProjectURL +'/'+ instantProject.id,
+    JSON.stringify(instantProject), HttpService.httpOptions);
+    
+  }
+
   getUserByRoleCompany(role, companyId) {
     return this.http.post<User[]>(HttpService.apiURL + HttpService.usersURL + HttpService.usersURL2,
       JSON.stringify({ role: role, companyId: companyId }), HttpService.httpOptions);
@@ -126,6 +143,8 @@ export class HttpService {
     return this.http.put<Object>(HttpService.apiURL + HttpService.companiesURL + '/' + companyId,
       JSON.stringify(company), HttpService.httpOptions);
   }
+
+
   // uploads the image to the server before a company is created or updated
   uploadCompanyImage(imageURI){
     const fileTransfer: FileTransferObject = this.transfer.create();
@@ -183,13 +202,29 @@ export class HttpService {
     return this.http.get<InstantProject[]>(HttpService.apiURL + HttpService.instantProjectURL + '/' + 'getInstantProject');
   }
   createBiddingProject(biddingProject: BiddingProject) {
-	  console.log("puto el que lo lea");
 	  console.log( JSON.stringify(biddingProject));
 	  console.log(HttpService.apiURL + HttpService.biddingProjectURL,
       JSON.stringify(biddingProject), HttpService.httpOptions);
     return this.http.post<BiddingProject>(HttpService.apiURL + HttpService.biddingProjectURL + HttpService.createBiddingProjectURL,
       JSON.stringify(biddingProject), HttpService.httpOptions);
   }
+
+  createInstantProject(instantProject: InstantProject) {
+	  console.log( JSON.stringify(instantProject));
+	  console.log(HttpService.apiURL + HttpService.instantProjectURL,
+      JSON.stringify(instantProject), HttpService.httpOptions);
+    return this.http.post<InstantProject>(HttpService.apiURL + HttpService.instantProjectURL + HttpService.createInstantProjectURL,
+      JSON.stringify(instantProject), HttpService.httpOptions);
+  }
+
+  createQuestion(questions: Questions) {
+	  console.log( JSON.stringify(questions));
+	  console.log(HttpService.apiURL + HttpService.questionURL,
+      JSON.stringify(questions), HttpService.httpOptions);
+    return this.http.post<InstantProject>(HttpService.apiURL + HttpService.questionURL + HttpService.createQuestionURL,
+      JSON.stringify(questions), HttpService.httpOptions);
+  } 
+
   getQuestionsById(id: String) {
     return this.http.get<Questions>(HttpService.apiURL + '/questions/getQuestionById/' + id);
   }

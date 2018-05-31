@@ -3,7 +3,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { NewprojectPage } from '../newproject/newproject';
 import { MainPage } from '../../main/main';
 import { SetUpPage } from '../set-up';
+import { HttpService } from '../../../app/http.service';
+import { UpdateInstantProjectPage } from '../updateInstantProject/updateInstantProject';
 
+ 
 @IonicPage()
 @Component({
   selector: 'page-projectlist',
@@ -11,7 +14,29 @@ import { SetUpPage } from '../set-up';
 })
 export class ProjectlistPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  biddingProject: any;
+  instantProject: any;
+
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public httpService: HttpService
+  ) {}
+
+  ionViewWillEnter(){
+    this.httpService.getAllBiddingProjects().subscribe(data => {
+      this.biddingProject = data['data']
+    })
+    this.httpService.getAllInstantProjects().subscribe(data => {
+      this.instantProject = data['data']
+    })
+  }
+
+  updateInstant(instantProject){
+    this.navCtrl.push(UpdateInstantProjectPage,{c:instantProject});
+  }
+
 
   goToNewproject(){
     this.navCtrl.push(NewprojectPage);

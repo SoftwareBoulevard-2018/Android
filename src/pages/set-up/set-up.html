@@ -11,7 +11,7 @@
 
 <ion-content padding>
   <ion-card>
-    <ion-card-header>
+    <ion-card-header (click)=goToProjectlist()>
       <ion-card-title>
         <ion-icon name='albums' margin-right></ion-icon>Project
       </ion-card-title>
@@ -27,7 +27,7 @@
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button clear small color="Primary" icon-start (click)=goToProjeclist()>
+        <button ion-button clear small color="Primary" icon-start (click)=goToProjectlist()>
           <ion-icon name='repeat'></ion-icon>
           Update
         </button>

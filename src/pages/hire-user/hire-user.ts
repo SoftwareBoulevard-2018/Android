@@ -61,6 +61,7 @@ export class HireUserPage {
         user.company = company;
         user.companyName = company.name;
         this.users.push(user);
+        //Fills the array
       }, error => {
         console.log(error);
         user.company = undefined;
@@ -70,7 +71,7 @@ export class HireUserPage {
     });
   }
 
-  //Displays the users info
+  //Displays the users info in another page
 
   viewUser(user) {
     this.navCtrl.push(ViewAccountPage,{
@@ -78,7 +79,7 @@ export class HireUserPage {
     });
   }
 
-  hireUser(user: User) //function for chatch the user and send the email invitation 
+  hireUser(user: User) //This function sends the invitation to the user, and an email to notify him
   {
     var sender: string;
     this.serv.getCurrentUser().then((u) => {
@@ -94,6 +95,7 @@ export class HireUserPage {
           let toast = this.toastCtrl.create({
             message: 'Email sent to ' + user.name + '!',
             duration: 3000
+            //a messege is print if successfull
           });
           toast.present();
 
@@ -103,18 +105,20 @@ export class HireUserPage {
           let toast = this.toastCtrl.create({
             message: 'Something went wrong',
             duration: 3000
+            //a messege is print if not successfull
           });
           toast.present();
         }
       );
-      //Creates the invitation, and checks for errors
-      var invitation: Invitation = new Invitation(user.id, u.companyId, 'pending');
+      //Creates the invitation, and checks for request errors
+      var invitation: Invitation = new Invitation("0000",user.id, u.companyId, 'pending');
       console.log(invitation);
       this.hService.createinvitations(invitation).subscribe(
         () => {
           let toast = this.toastCtrl.create({
             message: 'Invitation sent to ' + user.name + '!',
             duration: 3500
+            //a messege is print if successfull
           });
           toast.present();
 
@@ -124,6 +128,7 @@ export class HireUserPage {
           let toast = this.toastCtrl.create({
             message: 'Something went wrong',
             duration: 3000
+            //a messege is print if not successfull
           });
           toast.present();
         }

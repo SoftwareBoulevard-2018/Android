@@ -19,3 +19,4 @@ export class BiddingProjectb extends InstantProjectb{
       this.required_tester_level = required_tester_level;
     }
 }
+//This was the original class, its consistent with the database, it was created due to the fack that someone changed the model at the last minute

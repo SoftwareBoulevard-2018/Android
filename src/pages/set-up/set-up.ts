@@ -7,6 +7,9 @@ import { NewprojectPage } from '../set-up/newproject/newproject';
 import { NewpuzzlePage } from '../set-up/newpuzzle/newpuzzle';
 import { UpdatequestPage } from '../set-up/updatequest/updatequest';
 import { UpdateparameterPage } from '../set-up/updateparameter/updateparameter';
+
+
+
 @Component({
   selector: 'set-up',
   templateUrl: 'set-up.html'
@@ -17,7 +20,7 @@ export class SetUpPage {
 
   }
 
-  goToProjeclist(){
+  goToProjectlist(){
     this.navCtrl.push(ProjectlistPage);
   }
   goToQuestlist(){
