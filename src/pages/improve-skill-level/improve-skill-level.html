@@ -15,7 +15,8 @@
   </ion-refresher>
 
     <div class="stats">
-        <p>Questions left: {{left}}</p>
+      <p>Resources: {{resour}}</p>
+      <p>Team Members: {{mem}}</p>
     </div>
   
     
@@ -24,24 +25,24 @@
         <p class="title3">Slide down to refresh</p>
       </div>
     <div [hidden]=textHid>
-      <h3 class="title1">{{questions[questionnumber].qtext}}</h3>
+      <h3 class="title1">{{qd}}</h3>
     </div>
   
     <div class="answers">
       <ion-item [hidden]=ans1hid>
-        <ion-label>{{questions[questionnumber].option1}}</ion-label>
+        <ion-label>{{a1}}</ion-label>
         <ion-checkbox [(ngModel)]="answer1temp"></ion-checkbox>
       </ion-item>
       <ion-item [hidden]=ans2hid>
-        <ion-label>{{questions[questionnumber].option2}}</ion-label>
+        <ion-label>{{a2}}</ion-label>
         <ion-checkbox [(ngModel)]="answer2temp"></ion-checkbox>
       </ion-item>
       <ion-item [hidden]=ans3hid>
-        <ion-label>{{questions[questionnumber].option3}}</ion-label>
+        <ion-label>{{a3}}</ion-label>
         <ion-checkbox [(ngModel)]="answer3temp"></ion-checkbox>
       </ion-item>
       <ion-item [hidden]=ans4hid>
-        <ion-label>{{questions[questionnumber].option4}}</ion-label>
+        <ion-label>{{a4}}</ion-label>
         <ion-checkbox [(ngModel)]="answer4temp"></ion-checkbox>
       </ion-item>
     </div>
