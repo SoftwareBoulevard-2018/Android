@@ -27,7 +27,7 @@ export class GenerateResourcesPage {// here is the vars that use the backend
   puzzleReward: number = 0;
   comp: Company = new Company("00000000000null", "Null Company", "No image",
   0, 0, 0, 0, 0);
-  image = 'http://35.196.111.251:3000/puzzleImages/black.jpg';
+  image = 'http://35.196.111.251:3000/static/PuzzleImages/black.jpg';
   user: User;
   puzzles = [];
   real_puzzle: Puzzle;
@@ -71,6 +71,7 @@ export class GenerateResourcesPage {// here is the vars that use the backend
   getAllPuzzles() {
     return this.httpService.getAllPuzzles().subscribe(data => {
       const data2 = JSON.parse(JSON.stringify((data)));
+      console.log(data2);
       var p = data2.data[this.randomIntFromInterval(0, data2.data.length-1)];
       this.real_puzzle = p;
       this.initializePuzzle(data2);
