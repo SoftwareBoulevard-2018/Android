@@ -39,8 +39,8 @@ export class HttpService {
   /**
    * defaul apiURL, can be changed in loginPage
    */
-  //static apiURL = 'http://35.196.111.251:3000';
-  static apiURL = 'http://localhost:3000';
+  static apiURL = 'http://35.196.111.251:3000';
+  //static apiURL = 'http://localhost:3000';
 
   /**
    * routes must coincide with backend services
@@ -303,6 +303,11 @@ export class HttpService {
   getRecordsByFinishDateAndCompany(finishDate, company) {
     return this.http.post<Record>(HttpService.apiURL + HttpService.recordsURL + HttpService.getCurrentCompanyURL,
       JSON.stringify({company: company , finishDate: finishDate}), HttpService.httpOptions);
+  }
+
+  updateRecord(record, id: String){
+    return this.http.post<Record>(HttpService.apiURL + HttpService.recordsURL + '/update/' + id,
+      JSON.stringify(record), HttpService.httpOptions);
   }
 
   //All services related to Estimation

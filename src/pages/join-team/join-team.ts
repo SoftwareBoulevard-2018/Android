@@ -19,13 +19,6 @@ import { GeneralServiceService } from '../../app/general-service.service';
 })
 export class JoinTeamPage {
 
-
-
-
-
-
-
-
   invitationPending: boolean = false;
   //invitations: Array<any>  = ["The defenders", "Guardians of the Galaxy", "Avengers"];
   noInvita: boolean = true;
@@ -52,10 +45,7 @@ export class JoinTeamPage {
 
   ionViewWillEnter() {
     this.service.getCurrentUser().then((user) => {
-      console.log(user.id);
       this.httpService.getInvitationByUserAndState(user.id,"pending").subscribe((invitation) => {
-              console.log(invitation);
-              console.log(invitation.length);
               if (invitation.length == 1) {
                 this.httpService.getCompanyById(invitation[0].company).subscribe((company) => {
                     this.teamName = company.name;
@@ -94,7 +84,6 @@ export class JoinTeamPage {
   //Show alert when the invitation was accepted, should be updated to actually join the team when the server is available
   showAccepted() {
     this.invitation.state = "accepted";
-    console.log(this.invitation);
     this.httpService.updateInvitation(this.invitation, this.invitation._id).subscribe(() => {
         this.httpService.getUserById(this.invitation.user).subscribe(user => {
           user.companyId = this.invitation.company;
@@ -117,7 +106,6 @@ export class JoinTeamPage {
   //Show alert when the invitation was rejected
   showRejected() {
     this.invitation.state = "rejected";
-    console.log(this.invitation);
     this.httpService.updateInvitation(this.invitation, this.invitation._id).subscribe(() => {
       let alert = this.alertCtrl.create({
         title: 'Invitation rejected',
@@ -129,25 +117,15 @@ export class JoinTeamPage {
     });
   }
 
-  //Automatically generated code
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad JoinTeamPage');
-    
-  }
-
   //Refresher
   doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
 
     setTimeout(() => {
-      console.log('Async operation has ended');
       refresher.complete();
 
       this.service.getCurrentUser().then((user) => {
 
         this.httpService.getInvitationByUserAndState(user.id,"pending").subscribe((invitation) => {
-          console.log(invitation);
-          console.log(invitation.length);
             if (invitation.length == 1) {
               this.httpService.getCompanyById(invitation[0].company).subscribe((company) => {
                 this.teamName = company.name;
@@ -162,13 +140,8 @@ export class JoinTeamPage {
         );       
       });
 
-
-
     }, 2000);
   }
 
-  print_data(data){
-    console.log(data);
-  }
 
 }

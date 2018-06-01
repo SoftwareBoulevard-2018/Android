@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { GeneralServiceService } from '../../app/general-service.service';
 import { HttpService } from '../../app/http.service';
-//import { Assignment } from './../../models/assignment';
 import { User } from './../../models/user';
 import { Company } from './../../models/company';
 import { InstantProject } from './../../models/instantProject';
@@ -22,24 +21,22 @@ export class DevelopProjectPage {
   developer: number;
   tester: number;
   project: InstantProject;
-  //a_questions: Questions[] = [new Questions("A", "B", "C", 
-  //                            [["D", "E"], ["F", "G"], ["H", "I"], ["J", "K"]])];
-  //temp_array = Questions[] = [];
-  a_questions: Questions[];
-  q_developer: Questions[];
-  q_tester: Questions[];
+  question: Questions;
 
-  //Should be retrieved from server in the future
   resour: number;
   mem: number;
-
-  questionspending:number = 0;
+  error: string;
+  instruction: string;
 
   questionnumber: number = 0;
-  preg1: Question = new Question("Some kinds of UML diagrams are:","Goal Diagram  <-","Class Diagram","Process Diagram","State Machine Diagram",true,false,false,false);
-  preg2: Question = new Question("The possible verbs used in a structural relation are:","Is  <-","Are","Has  <-","Have",true,false,true,false);
-  preg3: Question = new Question("Which of these are possible states of an activity in the kanban board","Done  <-","Doing  <-","Planned","Achieved",true,true,false,false);
-  questions: Array<Question> = [this.preg1, this.preg2, this.preg3];
+  //questions: string[];
+
+  qid: string;
+  qd: string;
+  a1: string;
+  a2: string;
+  a3: string;
+  a4: string;
 
   //Actual code
   answer1temp: boolean = false;
@@ -58,16 +55,6 @@ export class DevelopProjectPage {
   //Constructor
   constructor(public service: GeneralServiceService, public httpService: HttpService, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
     
-    this.checkForQuestions();
-  }
-
-  //It's meant to be used to check for remaining questions for the user in the server. Must be called every time the improve skill level page is opened.
-  checkForQuestions(){
-    if(this.questionspending == 0){
-      this.hideOptions();  
-    }else{
-      this.showOptions();
-    }
   }
 
   //Shows the questions and it's options in case there is a question available
@@ -138,48 +125,48 @@ export class DevelopProjectPage {
   //Function called with the SEND button, checks if the answers are correct and calls the alerts according to the result
   checkAnswers(){
 
-    var answers = [];
-
-    if (this.answer1temp) {
-      answers.push(this.questions[this.questionnumber].option1);
-    }
-
-    if (this.answer2temp) {
-      answers.push(this.questions[this.questionnumber].option2);
-    }
-
-    if (this.answer3temp) {
-      answers.push(this.questions[this.questionnumber].option3);
-    }
-
-    if (this.answer4temp) {
-      answers.push(this.questions[this.questionnumber].option4);
-    }
+    var next_question = false;
+    var end_project = false;
 
     if(this.resour <= 0){
 
       this.showNoResour();
 
-    }else if(this.answer1temp == this.questions[this.questionnumber].answer1 && this.answer2temp == this.questions[this.questionnumber].answer2 && this.answer3temp == this.questions[this.questionnumber].answer3 && this.answer4temp == this.questions[this.questionnumber].answer4){
+    }else if(this.answer1temp == this.question.answers[0].veracity && this.answer2temp == this.question.answers[1].veracity && this.answer3temp == this.question.answers[2].veracity && this.answer4temp == this.question.answers[3].veracity){
 
+      var nun: number;
       if (this.user.role == "Analyst") {
         this.increaseAnalystQuestions();
+        nun = this.project.numberOfDevelopingQuestionsPerAnalyst;
       }else if (this.user.role == "Developer") {
         this.increaseDeveloperQuestions();
+        nun = this.project.numberOfDevelopingQuestionsPerDeveloper;
       }else{
         this.increaseTesterQuestions();
+        nun = this.project.numberOfDevelopingQuestionsPerTester;
       }
 
-      if(this.questionnumber < this.questions.length-1){
+      if(this.questionnumber < nun - 1){
         this.showCorrectAnswer();
-        this.questionnumber = this.questionnumber + 1;
+        next_question = true;
       }else{
         this.showLastAnswer();
         this.hideOptions();
+
+
+        if (this.user.role == "Tester") {
+          end_project = true;
+          this.error = "Your company does not have any active project right now";
+          this.instruction = "Slide down to refresh";
+        }else{
+          this.error = "You don't have any activities pending in this project";
+          this.instruction = "Slide down to refresh";         
+        }
       }
 
-      this.resour = this.resour-1;
-      this.sendDevelopingAttempt('right', this.questions[this.questionnumber].qtext, answers, this.user.id);
+      this.questionnumber = this.questionnumber + 1;
+      this.resour = this.resour - 1;
+      //this.sendDevelopingAttempt('right', this.questions[this.questionnumber].qtext, answers, this.user.id);
       this.increaseCorrectProjectQuestions();
       this.increaseSpentResources();
       this.decreaseResources();
@@ -188,49 +175,73 @@ export class DevelopProjectPage {
 
       this.decreaseResources();
       this.increaseSpentResources();
-      this.sendDevelopingAttempt('right', this.questions[this.questionnumber].qtext, answers, this.user.id);
+      //this.sendDevelopingAttempt('right', this.questions[this.questionnumber].qtext, answers, this.user.id);
       this.showWrongAnswer();
       this.resour = this.resour-1;
     }
 
     setTimeout(() => {
-      this.updateUser();
-      this.updateCompany();
-      console.log("User and company have been updated");
-    }, 2000);
+      this.updateUserAndCompany(next_question, end_project);
+    }, 500);
   }
 
   //Slide down refresher, works for the first deliverable demo's purpose, must be updated when theres connection to the server
   doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
-    this.answer1temp = false;
-    this.answer2temp = false;
-    this.answer3temp = false;
-    this.answer4temp = false;
-    this.questionnumber = 0;
 
-    this.questionspending = 3;
-    
     setTimeout(() => {
-      console.log('Async operation has ended');
       refresher.complete();
-      this.checkForQuestions();
+      this.work()
     }, 2000);
+    
+  }
+
+  closeProject(){
+    this.httpService.getRecordsByFinishDateAndCompany(undefined, this.company.id).subscribe((record) => {
+        record.finishDate = new Date();
+
+        this.httpService.getInstantProjectById(record.project).subscribe((project) => {
+          console.log(this.company.capacityK + " + " + project.rewarded_K);
+          this.company.capacityK = this.company.capacityK + project.rewarded_K;
+          this.company.numberOfCorrectDevelopingAttempsByAnalyst = 0;
+          this.company.numberOfCorrectDevelopingAttempsByDeveloper = 0;
+          this.company.numberOfCorrectDevelopingAttempsByTester = 0;
+          
+          setTimeout(() => {
+            this.httpService.updateCompany(this.company, this.company.id).subscribe(() => {
+              this.httpService.updateRecord(record, record._id).subscribe(() => {}, (error) => {console.log(error)});
+            }, (error) => {console.log(error)});
+
+          }, 2000);
+        });
+    });
+  }
+
+  updateUserAndCompany(next_question, end_project){
+    this.httpService.updateUser(this.user, this.user.id).subscribe(() => {
+      this.httpService.updateCompany(this.company, this.company.id).subscribe(() => {
+        if (next_question) {
+          this.work();
+        }else if(end_project){
+          this.closeProject();
+        }
+      }, (error) => {console.log(error)});
+    }, (error) => {console.log(error)});
+    return this.user;
   }
 
   updateUser(){
-    this.httpService.updateUser(this.user, this.user.id).subscribe((data) => {console.log(data)}, (error) => {console.log(error)});
+    this.httpService.updateUser(this.user, this.user.id).subscribe(() => {}, (error) => {console.log(error)});
     return this.user;
   }
 
   updateCompany(){
-    this.httpService.updateCompany(this.company, this.company.id).subscribe((data) => {console.log(data)}, (error) => {console.log(error)});
+    this.httpService.updateCompany(this.company, this.company.id).subscribe(() => {}, (error) => {console.log(error)});
     return this.company;
   }
 
   sendDevelopingAttempt(state, question, answer, user){
     var ta = new DevelopingAttempt(0, state, question, answer, user);
-    this.httpService.createDevelopingAttempt(ta).subscribe((data) => {console.log(data)}, (error) => {console.log(error)});
+    this.httpService.createDevelopingAttempt(ta).subscribe(() => {}, (error) => {console.log(error)});
   }
 
   decreaseResources(){
@@ -290,119 +301,27 @@ export class DevelopProjectPage {
     return project;
   }
 
-  setQuestion(question: Questions, position){
-  //setQuestion(des, o1, o2, o3, o4, a1, a2, a3, a4, position){
-    //this.a_questions.push(question);
-    //console.log(this.a_questions);
-    /*
-    if (position >= this.questions.length) {
-      this.questions.push(
-        new Question(des,
-                     o1,
-                     o2,
-                     o3,
-                     o4,
-                     a1,
-                     a2,
-                     a3,
-                     a4,
-        )
-
-      )
-    }else{
-      this.questions[position].qtext =  des;
-      this.questions[position].option1 =  o1;
-      this.questions[position].option2 =  o2;
-      this.questions[position].option3 =  o3;
-      this.questions[position].option4 =  o4;
-      this.questions[position].answer1 =  a1;
-      this.questions[position].answer2 =  a2;
-      this.questions[position].answer3 =  a3;
-      this.questions[position].answer4 =  a4;
-    }
-    */
-
-    if (position >= this.questions.length) {
-      this.a_questions.push(question)
-    }else{
-      this.a_questions[position].description = question.description;
-      this.a_questions[position].answers = question.answers;
-      this.a_questions[position].question_id = question.question_id;
-      this.a_questions[position].role = question.role;
-    }
-
-  }
-
-  printQuestions(){
-    console.log(this.a_questions);
-  }
-
-  getQuestions(assignments, user){
-    
-
-    for (var j = 0; j < assignments.length; ++j) {
-                          
-      this.httpService.getQuestionsById(assignments[j].questionId).subscribe((question) => {
-      
-
-        if (question.role == user.role) {
-          console.log(question.description);  
-          /*
-          this.setQuestion(question.description,
-                           question.answers[0][0],
-                           question.answers[1][0],
-                           question.answers[2][0],
-                           question.answers[3][0],
-                           question.answers[0][1], 
-                           question.answers[1][1], 
-                           question.answers[2][1], 
-                           question.answers[3][1], 
-                           j);*/
-          //this.setQuestion(question, j);
-          /*if (j >= this.a_questions.length) {
-            this.a_questions.push(question)
-          }else{
-            this.a_questions[j].description = "a";
-            this.a_questions[j].answers = question.answers;
-            this.a_questions[j].question_id = question.question_id;
-            this.a_questions[j].role = question.role;
-          }*/
-        }
-      }, error => {
-        this.hideOptions();
-        console.log(error);
-      });
-
-    }
-
-    
-
-    //this.a_questions.pop();
-
-    setTimeout(() => {
-      console.log(this.a_questions);
-
-      if (!this.checkAvailability()) {
-        console.log(this.checkAvailability())
-        this.hideOptions();
-      }else{
-        this.showOptions();
-      }
-      
-      //this.questionnumber = 1;                
-    }, 2000);
-  
+  setQuestion(question){
+    this.question = question;
+    return question;  
   }
 
   checkAvailability(){
-    console.log("Project: " + this.project)
-    if (this.user.role == "Analyst"){
+
+    if (this.user.role == "Analyst" &&
+        this.company.numberOfCorrectDevelopingAttempsByAnalyst < this.project.numberOfDevelopingQuestionsPerAnalyst){
+      this.questionnumber = this.company.numberOfCorrectDevelopingAttempsByAnalyst;
       return true;
     }else if (this.user.role == "Developer" && 
-              this.project.numberOfDevelopingQuestionsPerAnalyst <= this.company.numberOfCorrectDevelopingAttempsByAnalyst) {
+              this.project.numberOfDevelopingQuestionsPerAnalyst <= this.company.numberOfCorrectDevelopingAttempsByAnalyst &&
+              this.company.numberOfCorrectDevelopingAttempsByDeveloper < this.project.numberOfDevelopingQuestionsPerDeveloper) {
+      this.questionnumber = this.company.numberOfCorrectDevelopingAttempsByDeveloper;
       return true;
-    }else if (this.project.numberOfDevelopingQuestionsPerAnalyst <= this.company.numberOfCorrectDevelopingAttempsByAnalyst &&
-              this.project.numberOfDevelopingQuestionsPerDeveloper <= this.company.numberOfCorrectDevelopingAttempsByDeveloper){
+    }else if (this.user.role == "Tester" && 
+              this.project.numberOfDevelopingQuestionsPerAnalyst <= this.company.numberOfCorrectDevelopingAttempsByAnalyst &&
+              this.project.numberOfDevelopingQuestionsPerDeveloper <= this.company.numberOfCorrectDevelopingAttempsByDeveloper &&
+              this.company.numberOfCorrectDevelopingAttempsByTester < this.project.numberOfDevelopingQuestionsPerTester){
+      this.questionnumber = this.company.numberOfCorrectDevelopingAttempsByTester;
       return true;
     }
     return false;
@@ -410,86 +329,95 @@ export class DevelopProjectPage {
 
   //Confirms the screen loaded (?) auto-generated code
   ionViewDidLoad() {
-        this.service.getCurrentUser().then((user) => {
-          this.user = user;
-          console.log(user);
-          this.httpService.getCompanyById(user.companyId).subscribe(company => {
-            this.setCompany(company);
-            this.setResources(company.companyResource);
+    this.hideOptions();
+    this.work();
+  }
+
+  work(){
+    this.service.getCurrentUser().then((user_s) => {
+      this.httpService.getUserById(user_s.id).subscribe((user) => {
+        this.user = user;
+
+        this.httpService.getCompanyById(user.companyId).subscribe(company => {
+
+          this.setCompany(company);
+          this.setResources(company.companyResource);
 
 
-            this.httpService.getUsersByCompany(company.id).subscribe((users) => {
-              this.setMembers(users.length);   
-            });
-
-            console.log(company);
-
-            this.httpService.getRecordsByCompany(company.id).subscribe((records) => {
-              console.log(records);
-
-              for (var i = 0; i < records.length; ++i) {
-                if (records[i].finishDate == undefined) {
-
-                    this.httpService.getInstantProjectById(records[i].project).subscribe((project) => {
-                      this.setProject(project);
-                      console.log(project);
-                    });
-
-
-                    this.httpService.getAssignmentById(records[i].project).subscribe((assignments) => {
-                      console.log(assignments);
-                      setTimeout(() => {
-                        this.getQuestions(assignments, user);
-                      }, 2000);
-
-                      //console.log("Availability: " + this.checkAvailability());
-                    }, error => {
-                      this.hideOptions();
-                      console.log(error);
-                    });
-                  
-                }
-              }
-            }, error => {
-            this.hideOptions();
-            console.log(error);
-          })
-          }, error => {
-            this.hideOptions();
-            console.log(error);
+          this.httpService.getUsersByCompany(company.id).subscribe((users) => {
+            this.setMembers(users.length);   
           });
-    });
 
-    console.log('ionViewDidLoad DevelopProjectPage');
-    
-    
+          this.httpService.getRecordsByFinishDateAndCompany(undefined, company.id).subscribe((record) => {
+
+
+
+                  this.httpService.getInstantProjectById(record.project).subscribe((project) => {
+                    this.setProject(project);
+                  });
+
+
+                  this.httpService.getAssignmentById(record.project).subscribe((assignments) => {
+
+                    setTimeout(() => {
+
+                      if (!this.checkAvailability()) {
+                        this.hideOptions();
+                        this.error = "You don't have any activities pending in this project"
+                        this.instruction = "Slide down to refresh";
+
+                      }else{
+
+                        var count = 0;
+
+                        for (var i = 0; i < assignments.length; ++i) {
+                          console.log(assignments[i].question);
+                          this.httpService.getQuestionsById(assignments[i].question).subscribe((question) => {
+                                   
+                            if (question.role == user.role) {
+
+                              if (count == this.questionnumber) {
+                                this.setQuestion(question);
+                                this.qd = question.description;
+                                this.a1 = question.answers[0].description;
+                                this.a2 = question.answers[1].description;
+                                this.a3 = question.answers[2].description;
+                                this.a4 = question.answers[3].description;
+                                this.showOptions();
+                              }
+
+
+                              count = count + 1;
+                            }
+                          });
+                        }
+                      }
+                    }, 1000);                     
+                            
+                  }, () => {
+                    this.hideOptions();
+                    this.error = "This project does not have any assigned questions right now";
+                    this.instruction = "Slide down to refresh";
+                  });
+                      
+                
+              
+
+          }, () => {
+            this.hideOptions();
+            this.error = "Your company does not have any active project right now";
+            this.instruction = "Slide down to refresh";
+          });
+        }, () => {
+          this.hideOptions();
+          this.error = "You are not part of a company so you can't develop a project";
+          this.instruction = "Slide down to refresh";
+        });
+
+
+      });
+
+    });    
   }
-
-
 }
 
-
-//Object QUESTION
-class Question{
-  qtext: string;
-  option1: string;
-  option2: string;
-  option3: string;
-  option4: string;
-  answer1: boolean;
-  answer2: boolean;
-  answer3: boolean;
-  answer4: boolean;
-
-  constructor(qtext: string, option1: string, option2: string, option3: string, option4: string, answer1: boolean, answer2: boolean, answer3: boolean, answer4: boolean){
-    this.qtext = qtext;
-    this.option1 = option1;
-    this.option2 = option2;
-    this.option3 = option3;
-    this.option4 = option4;
-    this.answer1 = answer1;
-    this.answer2 = answer2;
-    this.answer3 = answer3;
-    this.answer4 = answer4;
-  }
-}
