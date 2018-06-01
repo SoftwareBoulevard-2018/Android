@@ -63,7 +63,6 @@ export class MainPage {
       this.companies = report['companies'];
     })
 
-    console.log("ionViewWillEnter");
   }
 
 
@@ -86,8 +85,5 @@ export class MainPage {
   }
   createCompany() {
     this.navCtrl.push(CreateCompanyPage);
-  }
-  print_data(data){
-    console.log(data)
   }
 }

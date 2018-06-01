@@ -2,7 +2,7 @@ export class InstantProject {
 
   public id: string;
   public name: string;
-  public rewarded_k: number;
+  public rewarded_K: number;
   public numberOfDevelopingQuestionsPerAnalyst:number;
   public numberOfDevelopingQuestionsPerDeveloper:number;
   public numberOfDevelopingQuestionsPerTester:number;
@@ -12,10 +12,10 @@ export class InstantProject {
     numberOfDevelopingQuestionsPerAnalyst?:number, 
     numberOfDevelopingQuestionsPerDeveloper?:number, 
     numberOfDevelopingQuestionsPerTester?:number,
-    rewarded_k?: number) {
+    rewarded_K?: number) {
     this.id = id;
     this.name = name;
-    this.rewarded_k = rewarded_k;
+    this.rewarded_K = rewarded_K;
     this.numberOfDevelopingQuestionsPerAnalyst = numberOfDevelopingQuestionsPerAnalyst;
     this.numberOfDevelopingQuestionsPerDeveloper = numberOfDevelopingQuestionsPerDeveloper;
     this.numberOfDevelopingQuestionsPerTester = numberOfDevelopingQuestionsPerTester;

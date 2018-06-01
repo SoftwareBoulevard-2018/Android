@@ -156,8 +156,11 @@ export class DevelopProjectPage {
 
         if (this.user.role == "Tester") {
           end_project = true;
-          this.error = "Your company does not have any active project right now"
+          this.error = "Your company does not have any active project right now";
           this.instruction = "Slide down to refresh";
+        }else{
+          this.error = "You don't have any activities pending in this project";
+          this.instruction = "Slide down to refresh";         
         }
       }
 
@@ -178,20 +181,8 @@ export class DevelopProjectPage {
     }
 
     setTimeout(() => {
-      this.updateUser();
-      this.updateCompany();
-
-      setTimeout(() => {
-
-        if (next_question) {
-          this.work();
-        }else if(end_project){
-          this.closeProject();
-        }
-
-      }, 1000);
-
-    }, 1000);
+      this.updateUserAndCompany(next_question, end_project);
+    }, 500);
   }
 
   //Slide down refresher, works for the first deliverable demo's purpose, must be updated when theres connection to the server
@@ -209,9 +200,12 @@ export class DevelopProjectPage {
         record.finishDate = new Date();
 
         this.httpService.getInstantProjectById(record.project).subscribe((project) => {
-          this.company.capacityK = this.company.capacityK + project.rewarded_k;
-          console.log(this.company.capacityK + " + " + project.rewarded_k);
-
+          console.log(this.company.capacityK + " + " + project.rewarded_K);
+          this.company.capacityK = this.company.capacityK + project.rewarded_K;
+          this.company.numberOfCorrectDevelopingAttempsByAnalyst = 0;
+          this.company.numberOfCorrectDevelopingAttempsByDeveloper = 0;
+          this.company.numberOfCorrectDevelopingAttempsByTester = 0;
+          
           setTimeout(() => {
             this.httpService.updateCompany(this.company, this.company.id).subscribe(() => {
               this.httpService.updateRecord(record, record._id).subscribe(() => {}, (error) => {console.log(error)});
@@ -222,19 +216,32 @@ export class DevelopProjectPage {
     });
   }
 
+  updateUserAndCompany(next_question, end_project){
+    this.httpService.updateUser(this.user, this.user.id).subscribe(() => {
+      this.httpService.updateCompany(this.company, this.company.id).subscribe(() => {
+        if (next_question) {
+          this.work();
+        }else if(end_project){
+          this.closeProject();
+        }
+      }, (error) => {console.log(error)});
+    }, (error) => {console.log(error)});
+    return this.user;
+  }
+
   updateUser(){
-    this.httpService.updateUser(this.user, this.user.id).subscribe((data) => {console.log(data)}, (error) => {console.log(error)});
+    this.httpService.updateUser(this.user, this.user.id).subscribe(() => {}, (error) => {console.log(error)});
     return this.user;
   }
 
   updateCompany(){
-    this.httpService.updateCompany(this.company, this.company.id).subscribe((data) => {console.log(data)}, (error) => {console.log(error)});
+    this.httpService.updateCompany(this.company, this.company.id).subscribe(() => {}, (error) => {console.log(error)});
     return this.company;
   }
 
   sendDevelopingAttempt(state, question, answer, user){
     var ta = new DevelopingAttempt(0, state, question, answer, user);
-    this.httpService.createDevelopingAttempt(ta).subscribe((data) => {console.log(data)}, (error) => {console.log(error)});
+    this.httpService.createDevelopingAttempt(ta).subscribe(() => {}, (error) => {console.log(error)});
   }
 
   decreaseResources(){
@@ -300,16 +307,20 @@ export class DevelopProjectPage {
   }
 
   checkAvailability(){
-    console.log("Project: " + this.project)
-    if (this.user.role == "Analyst"){
+
+    if (this.user.role == "Analyst" &&
+        this.company.numberOfCorrectDevelopingAttempsByAnalyst < this.project.numberOfDevelopingQuestionsPerAnalyst){
       this.questionnumber = this.company.numberOfCorrectDevelopingAttempsByAnalyst;
       return true;
     }else if (this.user.role == "Developer" && 
-              this.project.numberOfDevelopingQuestionsPerAnalyst <= this.company.numberOfCorrectDevelopingAttempsByAnalyst) {
+              this.project.numberOfDevelopingQuestionsPerAnalyst <= this.company.numberOfCorrectDevelopingAttempsByAnalyst &&
+              this.company.numberOfCorrectDevelopingAttempsByDeveloper < this.project.numberOfDevelopingQuestionsPerDeveloper) {
       this.questionnumber = this.company.numberOfCorrectDevelopingAttempsByDeveloper;
       return true;
-    }else if (this.project.numberOfDevelopingQuestionsPerAnalyst <= this.company.numberOfCorrectDevelopingAttempsByAnalyst &&
-              this.project.numberOfDevelopingQuestionsPerDeveloper <= this.company.numberOfCorrectDevelopingAttempsByDeveloper){
+    }else if (this.user.role == "Tester" && 
+              this.project.numberOfDevelopingQuestionsPerAnalyst <= this.company.numberOfCorrectDevelopingAttempsByAnalyst &&
+              this.project.numberOfDevelopingQuestionsPerDeveloper <= this.company.numberOfCorrectDevelopingAttempsByDeveloper &&
+              this.company.numberOfCorrectDevelopingAttempsByTester < this.project.numberOfDevelopingQuestionsPerTester){
       this.questionnumber = this.company.numberOfCorrectDevelopingAttempsByTester;
       return true;
     }
@@ -323,85 +334,88 @@ export class DevelopProjectPage {
   }
 
   work(){
-    this.service.getCurrentUser().then((user) => {
-      this.user = user;
+    this.service.getCurrentUser().then((user_s) => {
+      this.httpService.getUserById(user_s.id).subscribe((user) => {
+        this.user = user;
 
-      this.httpService.getCompanyById(user.companyId).subscribe(company => {
+        this.httpService.getCompanyById(user.companyId).subscribe(company => {
 
-        this.setCompany(company);
-        this.setResources(company.companyResource);
-
-
-        this.httpService.getUsersByCompany(company.id).subscribe((users) => {
-          this.setMembers(users.length);   
-        });
-
-        this.httpService.getRecordsByFinishDateAndCompany(undefined, company.id).subscribe((record) => {
+          this.setCompany(company);
+          this.setResources(company.companyResource);
 
 
+          this.httpService.getUsersByCompany(company.id).subscribe((users) => {
+            this.setMembers(users.length);   
+          });
 
-                this.httpService.getInstantProjectById(record.project).subscribe((project) => {
-                  this.setProject(project);
-                });
+          this.httpService.getRecordsByFinishDateAndCompany(undefined, company.id).subscribe((record) => {
 
 
-                this.httpService.getAssignmentById(record.project).subscribe((assignments) => {
 
-                  setTimeout(() => {
+                  this.httpService.getInstantProjectById(record.project).subscribe((project) => {
+                    this.setProject(project);
+                  });
 
-                    if (!this.checkAvailability()) {
-                      console.log("No puede");
-                      this.hideOptions();
-                      this.error = "You don't have any activities pending in this project"
-                      this.instruction = "Slide down to refresh";
 
-                    }else{
-                      console.log("Sí puede");
+                  this.httpService.getAssignmentById(record.project).subscribe((assignments) => {
 
-                      var count = 0;
+                    setTimeout(() => {
 
-                      for (var i = 0; i < assignments.length; ++i) {
-                        this.httpService.getQuestionsById(assignments[i].questionId).subscribe((question) => {
-                                 
-                          if (question.role == user.role) {
+                      if (!this.checkAvailability()) {
+                        this.hideOptions();
+                        this.error = "You don't have any activities pending in this project"
+                        this.instruction = "Slide down to refresh";
 
-                            if (count == this.questionnumber) {
-                              this.setQuestion(question);
-                              this.qd = question.description;
-                              this.a1 = question.answers[0].description;
-                              this.a2 = question.answers[1].description;
-                              this.a3 = question.answers[2].description;
-                              this.a4 = question.answers[3].description;
-                              this.showOptions();
+                      }else{
+
+                        var count = 0;
+
+                        for (var i = 0; i < assignments.length; ++i) {
+                          this.httpService.getQuestionsById(assignments[i].questionId).subscribe((question) => {
+                                   
+                            if (question.role == user.role) {
+
+                              if (count == this.questionnumber) {
+                                this.setQuestion(question);
+                                this.qd = question.description;
+                                this.a1 = question.answers[0].description;
+                                this.a2 = question.answers[1].description;
+                                this.a3 = question.answers[2].description;
+                                this.a4 = question.answers[3].description;
+                                this.showOptions();
+                              }
+
+
+                              count = count + 1;
                             }
-
-
-                            count = count + 1;
-                          }
-                        });
+                          });
+                        }
                       }
-                    }
-                  }, 1000);                     
-                          
-                }, () => {
-                  this.hideOptions();
-                  this.error = "This project does not have any assigned questions right now";
-                  this.instruction = "Slide down to refresh";
-                });
-                    
+                    }, 1000);                     
+                            
+                  }, () => {
+                    this.hideOptions();
+                    this.error = "This project does not have any assigned questions right now";
+                    this.instruction = "Slide down to refresh";
+                  });
+                      
+                
               
-            
 
+          }, () => {
+            this.hideOptions();
+            this.error = "Your company does not have any active project right now";
+            this.instruction = "Slide down to refresh";
+          });
         }, () => {
           this.hideOptions();
-          this.error = "Your company does not have any active project right now";
+          this.error = "You are not part of a company so you can't develop a project";
           this.instruction = "Slide down to refresh";
         });
-      }, () => {
-        this.hideOptions();
-        this.error = "You are not part of a company so you can't develop a project";
-        this.instruction = "Slide down to refresh";
+
+
       });
+
     });    
   }
 }
