@@ -371,7 +371,8 @@ export class DevelopProjectPage {
                         var count = 0;
 
                         for (var i = 0; i < assignments.length; ++i) {
-                          this.httpService.getQuestionsById(assignments[i].questionId).subscribe((question) => {
+                          console.log(assignments[i].question);
+                          this.httpService.getQuestionsById(assignments[i].question).subscribe((question) => {
                                    
                             if (question.role == user.role) {
 
