@@ -156,7 +156,6 @@ export class ImproveSkillLevelPage {
                 break;
               }
               suma = suma + certifications[i].questions.length;
-              console.log("Suma" + suma);
             }
           });  
         });
@@ -205,20 +204,19 @@ export class ImproveSkillLevelPage {
   }
 
   updateUser(){
-    this.httpService.updateUser(this.user, this.user.id).subscribe((data) => {console.log(data)}, (error) => {console.log(error)});
+    this.httpService.updateUser(this.user, this.user.id).subscribe(() => {}, (error) => {console.log(error)});
     return this.user;
   }
 
   updateCompany(){
-    this.httpService.updateCompany(this.company, this.company.id).subscribe((data) => {console.log(data)}, (error) => {console.log(error)});
+    this.httpService.updateCompany(this.company, this.company.id).subscribe(() => {}, (error) => {console.log(error)});
     return this.company;
   }
 
   sendTrainingAttempt(state, question, answer, user){
     var ta = new TrainingAttempt(0, state, question, answer, user);
     setTimeout(() => {
-      this.httpService.createTrainingAttempt(ta).subscribe((data) => {console.log(data)}, (error) => {console.log(error)});
-      console.log("Yay");
+      this.httpService.createTrainingAttempt(ta).subscribe(() => {}, (error) => {console.log(error)});
     }, 2000);
   }
 
@@ -275,7 +273,6 @@ export class ImproveSkillLevelPage {
   }
 
   checkAvailability(){
-    console.log("Project: " + this.project)
     if (this.user.role == "Analyst"){
       return true;
     }else if (this.user.role == "Developer" && 
@@ -309,7 +306,6 @@ export class ImproveSkillLevelPage {
           });
 
           this.httpService.getCertifications().subscribe((certifications) => {
-            console.log(certifications);
 
             var suma: number = 0;
 
@@ -321,19 +317,11 @@ export class ImproveSkillLevelPage {
                 break;
               }
               suma = suma + certifications[i].questions.length;
-              console.log("Suma" + suma);
             }            
 
             for (var j = 0; j < certifications.length; ++j) {
-              console.log(user.competencyLevel + 1);
 
               if (certifications[j].level == user.competencyLevel + 1) {
-                console.log(user.competencyLevel + 1);
-
-                
-
-                //setTimeout(() => {
-                  
 
                   this.httpService.getQuestionsById(certifications[i].questions[this.questionnumber]).subscribe((question) => {
                                    
@@ -346,8 +334,7 @@ export class ImproveSkillLevelPage {
                     this.showOptions();
                                 
                   });
-                        
-                //}, 500);               
+                                  
               }
             }
             
