@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { GeneralServiceService } from '../../app/general-service.service';
 import { HttpService } from '../../app/http.service';
-import { Assignment } from './../../models/assignment';
 import { User } from './../../models/user';
 import { Company } from './../../models/company';
 import { InstantProject } from './../../models/instantProject';
@@ -22,29 +21,15 @@ export class DevelopProjectPage {
   developer: number;
   tester: number;
   project: InstantProject;
-  assignments: Assignment;
   question: Questions;
 
-  //a_questions: Questions[] = [new Questions("A", "B", "C", 
-  //                            [["D", "E"], ["F", "G"], ["H", "I"], ["J", "K"]])];
-  //temp_array = Questions[] = [];
-  a_questions: Questions[];
-  q_developer: Questions[];
-  q_tester: Questions[];
-
-  //Should be retrieved from server in the future
   resour: number;
   mem: number;
   error: string;
-
-  questionspending:number = 0;
+  instruction: string;
 
   questionnumber: number = 0;
-  preg1: Question = new Question("Some kinds of UML diagrams are:","Goal Diagram  <-","Class Diagram","Process Diagram","State Machine Diagram",true,false,false,false);
-  preg2: Question = new Question("The possible verbs used in a structural relation are:","Is  <-","Are","Has  <-","Have",true,false,true,false);
-  preg3: Question = new Question("Which of these are possible states of an activity in the kanban board","Done  <-","Doing  <-","Planned","Achieved",true,true,false,false);
-  //questions: Array<Question> = [this.preg1, this.preg2, this.preg3];
-  questions: string[];
+  //questions: string[];
 
   qid: string;
   qd: string;
@@ -70,17 +55,6 @@ export class DevelopProjectPage {
   //Constructor
   constructor(public service: GeneralServiceService, public httpService: HttpService, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
     
-    this.checkForQuestions();
-  }
-
-  //It's meant to be used to check for remaining questions for the user in the server. Must be called every time the improve skill level page is opened.
-  checkForQuestions(){
-    if(this.questionspending == 0){
-      this.hideOptions(); 
-      this.error =  "You don't have any activities pending in this project";
-    }else{
-      this.showOptions();
-    }
   }
 
   //Shows the questions and it's options in case there is a question available
@@ -183,6 +157,7 @@ export class DevelopProjectPage {
         if (this.user.role == "Tester") {
           end_project = true;
           this.error = "Your company does not have any active project right now"
+          this.instruction = "Slide down to refresh";
         }
       }
 
@@ -216,7 +191,6 @@ export class DevelopProjectPage {
 
       }, 1000);
 
-      console.log("User and company have been updated");
     }, 1000);
   }
 
@@ -233,12 +207,18 @@ export class DevelopProjectPage {
   closeProject(){
     this.httpService.getRecordsByFinishDateAndCompany(undefined, this.company.id).subscribe((record) => {
         record.finishDate = new Date();
-        this.company.capacityK = this.company.capacityK + this.project.rewarded_k;
 
-        setTimeout(() => {
-          this.httpService.updateRecord(record, record._id).subscribe(() => {}, (error) => {console.log(error)});
-          this.httpService.updateCompany(this.company, this.company.id).subscribe(() => {}, (error) => {console.log(error)});
-        }, 2000);
+        this.httpService.getInstantProjectById(record.project).subscribe((project) => {
+          this.company.capacityK = this.company.capacityK + project.rewarded_k;
+          console.log(this.company.capacityK + " + " + project.rewarded_k);
+
+          setTimeout(() => {
+            this.httpService.updateCompany(this.company, this.company.id).subscribe(() => {
+              this.httpService.updateRecord(record, record._id).subscribe(() => {}, (error) => {console.log(error)});
+            }, (error) => {console.log(error)});
+
+          }, 2000);
+        });
     });
   }
 
@@ -314,16 +294,6 @@ export class DevelopProjectPage {
     return project;
   }
 
-  setAssignment(assignment){
-    //this.assignment = assignment;
-    return assignment;
-  }
-
-  setQuestions(questions){
-    this.questions = questions;
-    return questions;
-  }
-
   setQuestion(question){
     this.question = question;
     return question;  
@@ -348,14 +318,16 @@ export class DevelopProjectPage {
 
   //Confirms the screen loaded (?) auto-generated code
   ionViewDidLoad() {
+    this.hideOptions();
     this.work();
   }
 
   work(){
     this.service.getCurrentUser().then((user) => {
       this.user = user;
-      //console.log(user);
+
       this.httpService.getCompanyById(user.companyId).subscribe(company => {
+
         this.setCompany(company);
         this.setResources(company.companyResource);
 
@@ -364,102 +336,73 @@ export class DevelopProjectPage {
           this.setMembers(users.length);   
         });
 
-        //console.log(company);
-
-        this.httpService.getRecordsByCompany(company.id).subscribe((records) => {
-          //console.log(records);
-
-          for (var i = 0; i < records.length; ++i) {
-            if (records[i].finishDate == undefined) {
-
-              this.httpService.getInstantProjectById(records[i].project).subscribe((project) => {
-                this.setProject(project);
-                //console.log(project);
-              });
+        this.httpService.getRecordsByFinishDateAndCompany(undefined, company.id).subscribe((record) => {
 
 
-              this.httpService.getAssignmentById(records[i].project).subscribe((assignments) => {
 
-                setTimeout(() => {
+                this.httpService.getInstantProjectById(record.project).subscribe((project) => {
+                  this.setProject(project);
+                });
 
-                  if (!this.checkAvailability()) {
-                    console.log("No puede");
-                    this.hideOptions();
-                    this.error = "You don't have any activities pending in this project"
-                  }else{
-                    console.log("Sí puede");
 
-                    var count = 0;
+                this.httpService.getAssignmentById(record.project).subscribe((assignments) => {
 
-                    for (var i = 0; i < assignments.length; ++i) {
-                      this.httpService.getQuestionsById(assignments[i].questionId).subscribe((question) => {
-                               
-                        if (question.role == user.role) {
-                          //console.log("holiwis");
+                  setTimeout(() => {
 
-                          if (count == this.questionnumber) {
-                            this.setQuestion(question);
-                            this.qd = question.description;
-                            this.a1 = question.answers[0].description;
-                            this.a2 = question.answers[1].description;
-                            this.a3 = question.answers[2].description;
-                            this.a4 = question.answers[3].description;
-                            this.showOptions();
+                    if (!this.checkAvailability()) {
+                      console.log("No puede");
+                      this.hideOptions();
+                      this.error = "You don't have any activities pending in this project"
+                      this.instruction = "Slide down to refresh";
+
+                    }else{
+                      console.log("Sí puede");
+
+                      var count = 0;
+
+                      for (var i = 0; i < assignments.length; ++i) {
+                        this.httpService.getQuestionsById(assignments[i].questionId).subscribe((question) => {
+                                 
+                          if (question.role == user.role) {
+
+                            if (count == this.questionnumber) {
+                              this.setQuestion(question);
+                              this.qd = question.description;
+                              this.a1 = question.answers[0].description;
+                              this.a2 = question.answers[1].description;
+                              this.a3 = question.answers[2].description;
+                              this.a4 = question.answers[3].description;
+                              this.showOptions();
+                            }
+
+
+                            count = count + 1;
                           }
-
-                          count = count + 1;
-                        }else{
-                            //console.log(question.role + " != " + user.role);
-                        }
-                      });
+                        });
+                      }
                     }
-                  }
-                }, 1000);                     
-                        
-              }, error => {
-                this.hideOptions();
-                this.error = "This project does not have any assigned questions right now"
-                console.log(error);
-              });
-                  
-            }
-          }
-        }, error => {
+                  }, 1000);                     
+                          
+                }, () => {
+                  this.hideOptions();
+                  this.error = "This project does not have any assigned questions right now";
+                  this.instruction = "Slide down to refresh";
+                });
+                    
+              
+            
+
+        }, () => {
           this.hideOptions();
-          this.error = "Your company does not have any active project right now"
-          console.log(error);
+          this.error = "Your company does not have any active project right now";
+          this.instruction = "Slide down to refresh";
         });
-      }, error => {
+      }, () => {
         this.hideOptions();
-        this.error = "You are not part of a company so you can't develop a project"
-        console.log(error);
+        this.error = "You are not part of a company so you can't develop a project";
+        this.instruction = "Slide down to refresh";
       });
     });    
   }
 }
 
-
-//Object QUESTION
-class Question{
-  qtext: string;
-  option1: string;
-  option2: string;
-  option3: string;
-  option4: string;
-  answer1: boolean;
-  answer2: boolean;
-  answer3: boolean;
-  answer4: boolean;
-
-  constructor(qtext: string, option1: string, option2: string, option3: string, option4: string, answer1: boolean, answer2: boolean, answer3: boolean, answer4: boolean){
-    this.qtext = qtext;
-    this.option1 = option1;
-    this.option2 = option2;
-    this.option3 = option3;
-    this.option4 = option4;
-    this.answer1 = answer1;
-    this.answer2 = answer2;
-    this.answer3 = answer3;
-    this.answer4 = answer4;
-  }
-}
