@@ -15,6 +15,7 @@ import { Invitation } from './../models/invitation';
 import { Record } from './../models/record';
 import { Estimation } from './../models/estimation';
 import { Certification } from './../models/certification';
+import { Answer } from './../models/answer';
 //import { ThrowStmt } from '@angular/compiler';
 
 /**
@@ -218,10 +219,13 @@ export class HttpService {
       JSON.stringify(instantProject), HttpService.httpOptions);
   }
 
-  createQuestion(questions: Questions) {
+  createQuestion(questions: Questions, answers : Answer[]) {
+    questions.answers=answers;
 	  console.log( JSON.stringify(questions));
 	  console.log(HttpService.apiURL + HttpService.questionURL,
       JSON.stringify(questions), HttpService.httpOptions);
+
+
     return this.http.post<InstantProject>(HttpService.apiURL + HttpService.questionURL + HttpService.createQuestionURL,
       JSON.stringify(questions), HttpService.httpOptions);
   }

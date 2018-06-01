@@ -23,9 +23,9 @@
             <h1>Category</h1>
           </ion-label>
           <ion-select [(ngModel)]="questions.role" name="role" #role="ngModel" required>
-            <ion-option value="A">Analyst</ion-option>
-            <ion-option value="D">Developer</ion-option>
-            <ion-option value="T">Tester</ion-option>
+            <ion-option value="Analyst">Analyst</ion-option>
+            <ion-option value="Developer">Developer</ion-option>
+            <ion-option value="Tester">Tester</ion-option>
           </ion-select>
         </ion-item>
       </ion-grid>
@@ -46,8 +46,8 @@
                 <pre><h1>Veracity</h1></pre>
               </ion-label>
               <ion-select [(ngModel)]="veracity1" name="veracity1" required>
-                <ion-option value="T">True</ion-option>
-                <ion-option value="F">False</ion-option>
+                <ion-option value="true">True</ion-option>
+                <ion-option value="false">False</ion-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -67,8 +67,8 @@
                 <pre><h1>Veracity</h1></pre>
               </ion-label>
               <ion-select [(ngModel)]="veracity2" name="veracity2" required> 
-                <ion-option value="T">True</ion-option>
-                <ion-option value="F">False</ion-option>
+                <ion-option value="true">True</ion-option>
+                <ion-option value="false">False</ion-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -88,8 +88,8 @@
                 <pre><h1>Veracity</h1></pre>
               </ion-label>
               <ion-select [(ngModel)]="veracity3" name="veracity3" required>
-                <ion-option value="T">True</ion-option>
-                <ion-option value="F">False</ion-option>
+                <ion-option value="true">True</ion-option>
+                <ion-option value="false">False</ion-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -109,8 +109,8 @@
                 <pre><h1>Veracity</h1></pre>
               </ion-label>
               <ion-select [(ngModel)]="veracity4" name="veracity4" required>
-                <ion-option value="T">True</ion-option>
-                <ion-option value="F">False</ion-option>
+                <ion-option value="true">True</ion-option>
+                <ion-option value="false">False</ion-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -118,7 +118,7 @@
       </ion-grid>
     </ion-list>
 
-    <button ion-button icon-left color="primary" (click)=goToQuestlist(creationForm) type="submit" block>
+    <button ion-button icon-left color="primary" (click)=goToQuestlist(creationForm,option1,veracity1,option2,veracity2,option3,veracity3,option4,veracity4) type="submit" block>
       <ion-icon name="done-all"></ion-icon>
       Done
     </button>
