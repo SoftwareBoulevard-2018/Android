@@ -35,6 +35,7 @@ import { NewpuzzlePage } from '../pages/set-up/newpuzzle/newpuzzle';
 import { PuzzlelistPage } from '../pages/set-up/puzzlelist/puzzlelist';
 import { QuestlistPage } from '../pages/set-up/questlist/questlist';
 import { UpdatequestPage } from '../pages/set-up/updatequest/updatequest';
+import { CreatequestPage } from '../pages/set-up/createquest/createquest';
 import { OptionquestPage } from '../pages/set-up/optionquest/optionquest';
 import { SelectquestPage } from '../pages/set-up/selectquest/selectquest';
 import { UpdateparameterPage } from '../pages/set-up/updateparameter/updateparameter';
@@ -117,7 +118,8 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
     SelectquestPage,
     UpdateparameterPage,
     UpdateInstantProjectPage,
-    UpdateBiddingProjectPage
+    UpdateBiddingProjectPage,
+    CreatequestPage
   ],
   imports: [
     BrowserModule,
@@ -195,7 +197,8 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
     SelectquestPage,
     UpdateparameterPage,
     UpdateInstantProjectPage,
-    UpdateBiddingProjectPage
+    UpdateBiddingProjectPage,
+    CreatequestPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
