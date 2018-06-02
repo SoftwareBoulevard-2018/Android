@@ -4,6 +4,7 @@ import { UpdatequestPage } from '../updatequest/updatequest';
 import { MainPage } from '../../main/main';
 import { SetUpPage } from '../set-up';
 import { HttpService } from '../../../app/http.service';
+import { CreatequestPage } from '../createquest/createquest';
 
 
 
@@ -28,7 +29,7 @@ export class QuestlistPage {
     this.navCtrl.push(UpdatequestPage,{c:question});
   }
   goToCreatenewquest(){
-    this.navCtrl.push(UpdatequestPage);
+    this.navCtrl.push(CreatequestPage);
   }
 
   goToMain(){

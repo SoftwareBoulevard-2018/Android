@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Question</ion-title>
+    <ion-title>Questions</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -13,38 +13,19 @@
 
   <ion-list>
     <ion-item *ngFor="let c of questions">
-      <p>
-        <ion-icon name="md-pint"></ion-icon> {{c.description}} 
-        <ion-icon name="name"></ion-icon>
-      </p>
+      <p>{{c.description}}</p>
       <button ion-button color="primary" item-end (click)="goToUpdatequest(c)">
         <ion-icon name='md-create'></ion-icon>
-    </button>
-    </ion-item>
-    <ion-item></ion-item>
-  </ion-list>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <button ion-button icon-left color="primary" (click)=goToMain()>
-          <ion-icon name="home"></ion-icon>
-          Main
-        </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button icon-left color="primary" (click)=goToHome()>
-          <ion-icon name="md-cog"></ion-icon>
-          Set-up
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-content>
-    <ion-fab right edge (click)=goToCreatenewquest()>
-      <button ion-fab>
-        <ion-icon name="add"></ion-icon>
       </button>
-    </ion-fab>
-  </ion-content>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-fab right edge (click)=goToCreatenewquest()>
+    <button ion-fab>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
 
 </ion-content>
