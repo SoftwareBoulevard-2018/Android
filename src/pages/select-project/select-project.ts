@@ -26,6 +26,7 @@ export class SelectProjectPage {
   serv: GeneralServiceService;
   user: User;
   toastCtrl: ToastController;
+  k: any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -124,31 +125,57 @@ export class SelectProjectPage {
   { 
     this.serv.getCurrentUser().then((u) => {
       this.user = u;
-      var r: Record = new Record(null, new Date("12/15/1990"),new Date("12/15/1990"),this.user.companyId,p.id);
-      console.log(r);
-
-      this.hService.createRecord(r).subscribe(
-        () => {
-          let toast = this.toastCtrl.create({
-            message: 'Record Created',
-            duration: 3000
-          });
-          toast.present();
-
-        },
-        () => {
-
-          let toast = this.toastCtrl.create({
-            message: 'Something went wrong',
-            duration: 3000
-          });
-          toast.present();
-        }
-      );;
-
-      alert("Selected");
+      var r: Record = new Record();
+      r.project = p.id;
+      r.company = u.companyId;
+      r.startDate = new Date();
+      //console.log(r);
+      if(!p.hasOwnProperty('required_K'))
+      {  
+        this.createRecord(r);
+        //console.log('Got in the null if');
+      }else
+      {  
+        return this.hService.getCompanyById(u.companyId).subscribe((c) => {
+          this.k = c.capacityK;
+          if(p.required_K <= this.k)
+          {
+            this.createRecord(r)
+            //console.log('Got in the null if');
+          }
+          else
+          {
+            alert('K is insuficient')
+          }
+        });
+        console.log(this.k + 'daaaaam k');  
+      }
     });   
   }
 
+  createRecord(r: Record)
+  {
+    this.hService.createRecord(r).subscribe(
+      () => {
+        let toast = this.toastCtrl.create({
+          message: 'Record Created',
+          duration: 3000
+        });
+        toast.present();
+  
+      },
+      () => {
+  
+        let toast = this.toastCtrl.create({
+          message: 'Something went wrong',
+          duration: 3000
+        });
+        toast.present();
+      }
+    );;
+  }
 
 }
+
+
+
