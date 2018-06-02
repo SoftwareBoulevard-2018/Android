@@ -71,6 +71,9 @@ $card-md-title-text-color: #fff;
 .card-header-md + .card-content-md, .card-md .item + .card-content-md{
   padding-top: 13px !important;
 }
+.card-md h1 {
+  color: white !important;
+}
 
 // Use the primary color as the background for the toolbar-md-background
 $toolbar-md-background:                   color($colors, primary);
