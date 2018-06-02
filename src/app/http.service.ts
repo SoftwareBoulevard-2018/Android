@@ -54,8 +54,8 @@ export class HttpService {
   /**
    * defaul apiURL, can be changed in loginPage
    */
-  static apiURL = 'http://35.196.111.251:3000';
-  //static apiURL = 'http://localhost:3000';
+  //static apiURL = 'http://35.196.111.251:3000';
+  static apiURL = 'http://localhost:3000';
 
   /**
    * routes must coincide with backend services
@@ -82,6 +82,7 @@ export class HttpService {
   static createBiddingProjectURL = '/createBiddingProject';
   static createInstantProjectURL = '/createInstantProject';
   static createQuestionURL = '/createQuestion';
+  static updateQuestionURL = '/updateQuestion';
 
 
   static getBiddingProjectURL = '/getBiddingProject';
@@ -259,14 +260,14 @@ export class HttpService {
     return this.http.post<Questions>(HttpService.apiURL + HttpService.questionURL + HttpService.createQuestionURL,
       JSON.stringify(questions), HttpService.httpOptions);
   }
-  updateQuestion(questions: Questions, answers : Answer[]) {
+  updateQuestion(questions: Questions, answers : Answer[],questId:string) {
     questions.answers=answers;
 	  console.log( JSON.stringify(questions));
 	  console.log(HttpService.apiURL + HttpService.questionURL,
       JSON.stringify(questions), HttpService.httpOptions);
 
 
-    return this.http.put<Questions>(HttpService.apiURL + HttpService.questionURL + HttpService.createQuestionURL,
+    return this.http.put<Questions>(HttpService.apiURL + HttpService.questionURL + HttpService.updateQuestionURL+'/'+questId,
       JSON.stringify(questions), HttpService.httpOptions);
   }
   
@@ -282,7 +283,7 @@ export class HttpService {
     return this.http.get<Questions>(HttpService.apiURL + '/questions/getQuestionById/' + id);
   }
   getAllQuestions() {
-    return this.http.get<Questions[]>(HttpService.apiURL + HttpService.getQuestionURL);
+    return this.http.get<Questions[]>(HttpService.apiURL + HttpService.questionURL);
   }
   getAssignmentById(id: String) {
     return this.http.get<Assignment[]>(HttpService.apiURL + '/assignments/' + id);

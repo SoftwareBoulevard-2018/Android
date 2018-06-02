@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UpdatequestPage } from '../updatequest/updatequest';
 import { MainPage } from '../../main/main';
 import { SetUpPage } from '../set-up';
+import { HttpService } from '../../../app/http.service';
+
 
 
 @IonicPage()
@@ -12,10 +14,20 @@ import { SetUpPage } from '../set-up';
 })
 export class QuestlistPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  questions: any;
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public httpService: HttpService
+
+  ) {
   }
 
-  goToUpdatequest(){
+  goToUpdatequest(question){
+    this.navCtrl.push(UpdatequestPage,{c:question});
+  }
+  goToCreatenewquest(){
     this.navCtrl.push(UpdatequestPage);
   }
 
@@ -27,8 +39,19 @@ export class QuestlistPage {
     this.navCtrl.push(SetUpPage);
   }
 
+  ionViewWillEnter(){
+    this.httpService.getAllQuestions().subscribe(data => {
+  
+      this.questions = data['data']
+    })
+    this.httpService.getAllQuestions().subscribe(data => {
+      this.questions = data['data']
+    })
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad QuestlistPage');
   }
 
 }
+ 
