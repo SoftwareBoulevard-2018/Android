@@ -321,9 +321,9 @@ export class ImproveSkillLevelPage {
 
             for (var j = 0; j < certifications.length; ++j) {
 
-              if (certifications[j].level == user.competencyLevel + 1 && certifications[i].role == user.role) {
+              if (certifications[j].level == user.competencyLevel + 1 && certifications[j].role == user.role) {
 
-                  this.httpService.getQuestionsById(certifications[i].questions[this.questionnumber]).subscribe((question) => {
+                  this.httpService.getQuestionsById(certifications[j].questions[this.questionnumber]).subscribe((question) => {
                                    
                     this.setQuestion(question);
                     this.qd = question.description;
