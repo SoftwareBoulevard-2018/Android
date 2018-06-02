@@ -60,11 +60,9 @@ export class InboxPage {
         this.HttpService.read(this.idUser).subscribe((data) => {
 
 
-          if (JSON.parse(JSON.stringify(data)).data.length > this.defaultList.length) {
 
             this.listEmailsReceivedForUser(data);
 
-          }
         })
       })
     });
@@ -136,8 +134,9 @@ export class InboxPage {
         for (let j = 0; j < userData.length; j++) {
 
           if (sender.localeCompare(userData[j].id) == 0) {
+                           //Update sender name
 
-            this.emailArray[i].sender = userData[j].username;
+            this.emailArray[i].sname = userData[j].username;
             break;
           }
         }
@@ -158,7 +157,7 @@ export class InboxPage {
     */
     for (var i = 0; i < this.emailArray.length; i++) {
       var subjectElement = this.emailArray[i].subject;
-      var senderElement = this.emailArray[i].sender;
+      var senderElement = this.emailArray[i].sname;
 
       if (subjectElement.includes(this.searchQuery) || senderElement.includes(this.searchQuery)) {
         IDEmailSolution.push(this.emailArray[i].id);
@@ -259,7 +258,7 @@ export class InboxPage {
       }
 
       this.navCtrl.push(ReademailPage, {
-        sender: emailToRead.sender,
+        sender: emailToRead.sname,
         subject: emailToRead.subject,
         content: emailToRead.content,
       });

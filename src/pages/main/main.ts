@@ -46,14 +46,16 @@ export class MainPage {
       this.httpService.getUserById(user.id).subscribe((u_user) => {
 
         this.user_level = u_user.competencyLevel;
-
-        this.httpService.getCompanyById(this.user_company).subscribe(company => {
-          this.company_resources = company.companyResource;
-        });
-
-        this.httpService.getUsersByCompany(this.user_company).subscribe((users) => {
-          this.company_members = users.length;   
-        });
+        if(u_user.companyId){
+          this.httpService.getCompanyById(this.user_company).subscribe(company => {
+            this.company_resources = company.companyResource;
+          });
+  
+          this.httpService.getUsersByCompany(this.user_company).subscribe((users) => {
+            this.company_members = users.length;   
+          });
+        }
+        
       });  
     });
     

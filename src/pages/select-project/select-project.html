@@ -32,10 +32,10 @@
         </ion-item>
     </ion-list>
     <ion-list>
-        <ion-item *ngFor="let bp of bidP" (click)="selectProject(bp)">
+        <ion-item *ngFor="let bp of bidP" >
             <h2>{{bp.name}}</h2>
             <p>Reward K: {{bp.rewarded_K}} - Bidding Project</p>
-            <button ion-button color="primary" item-end>
+            <button ion-button color="primary" item-end (click)="selectProject(bp)">
                 Select Project
                 <ion-icon name='md-create'></ion-icon>
             </button>

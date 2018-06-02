@@ -57,10 +57,10 @@ export class HireUserPage {
   }
   addCompanies(users) {//This functions checks if user has company and add it
     users.forEach(user => {
-      this.httpService.getCompanyById(user.companyId).subscribe(company => {
-        user.company = company;
-        user.companyName = company.name;
-        this.users.push(user);
+      this.httpService.getCompanyById(user.companyId).subscribe(() => {
+        //user.company = company;
+        //user.companyName = company.name;
+        //this.users.push(user);
         //Fills the array
       }, error => {
         console.log(error);
@@ -111,7 +111,8 @@ export class HireUserPage {
         }
       );
       //Creates the invitation, and checks for request errors
-      var invitation: Invitation = new Invitation("0000",user.id, u.companyId, 'pending');
+      var invitation: Invitation = new Invitation(null,user.id, u.companyId, 'pending');
+
       console.log(invitation);
       this.hService.createinvitations(invitation).subscribe(
         () => {
