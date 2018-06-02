@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { AlertController } from 'ionic-angular';
+
+import {_throw} from 'rxjs/observable/throw';
+import { catchError, /*retry*/ } from 'rxjs/operators';
+
 import { User } from '../models/user';
 import { TrainingAttempt } from '../models/trainingAttempt';
 import { DevelopingAttempt } from '../models/developingAttempt';
 import { Company } from '../models/company';
 import { Email } from '../models/email';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Puzzle } from './../models/puzzle';
 import { BiddingProject } from './../models/biddingProject';
 import { Questions} from './../models/questions';
@@ -17,6 +22,7 @@ import { Estimation } from './../models/estimation';
 import { Certification } from './../models/certification';
 import { Answer } from './../models/answer';
 //import { ThrowStmt } from '@angular/compiler';
+
 
 /**
  * Provides communication with the api
@@ -32,9 +38,18 @@ export class HttpService {
   };
 
   constructor(public http: HttpClient,
-    private transfer: FileTransfer
-  ) { }
-
+    private transfer: FileTransfer,
+    public alertCtrl: AlertController
+  ) {
+    window.addEventListener("offline", function() {
+      const alert = alertCtrl.create({
+        title: 'No connection',
+        subTitle: 'You don\'t have internet connection, check it before using the app',
+        buttons: ['OK']
+      });
+      alert.present();
+    }, false); 
+  }
 
   /**
    * defaul apiURL, can be changed in loginPage
@@ -91,6 +106,24 @@ export class HttpService {
 
   static getCertificationsURL = '/getCertification';
 
+  login(username, password) {
+    return this.http.post<User>(HttpService.apiURL + HttpService.loginURL,
+      JSON.stringify({ username: username, password: password }), HttpService.httpOptions)
+      .pipe(
+        catchError((error) => {
+          let msg;
+          if (error.status==0) {
+            // A client-side or network error occurred..
+            msg = 'Can\'t connect, maybe server is down, retry later';
+          } else {
+            // The response contains the error in the backend
+            msg = error.error.errors;
+          }
+          // return an observable with a user-facing error message
+          return _throw(msg);
+        })
+      );;
+    }
   // All services related to Users
   getAllUsers() {
     return this.http.get<User[]>(HttpService.apiURL + HttpService.usersURL);
@@ -124,10 +157,6 @@ export class HttpService {
   }
   getUsersByCompany(companyId){
     return this.http.get<User[]>(HttpService.apiURL + HttpService.usersURL + '/company/' + companyId);
-  }
-  login(username, password) {
-    return this.http.post<User>(HttpService.apiURL + HttpService.loginURL,
-      JSON.stringify({ username: username, password: password }), HttpService.httpOptions);
   }
 
   // All services related to companies

@@ -68,15 +68,12 @@ import { DevelopProjectPage } from '../pages/develop-project/develop-project';
 import { ImproveSkillLevelPage } from '../pages/improve-skill-level/improve-skill-level';
 import { JoinTeamPage } from '../pages/join-team/join-team';
 
-
-
-
-
-
 import { servicesEmail } from '../providers/servicesEmail';
 import { SelectProjectPage } from '../pages/select-project/select-project';
 import { GenerateResourcesPage } from '../pages/generate-resources/generate-resources';
 import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cost-time';
+
+import { ConfigurationPage } from './../pages/configuration/configuration';
 
 @NgModule({
   declarations: [
@@ -119,7 +116,8 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
     UpdateparameterPage,
     UpdateInstantProjectPage,
     UpdateBiddingProjectPage,
-    CreatequestPage
+    CreatequestPage,
+    ConfigurationPage
   ],
   imports: [
     BrowserModule,
@@ -198,7 +196,8 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
     UpdateparameterPage,
     UpdateInstantProjectPage,
     UpdateBiddingProjectPage,
-    CreatequestPage
+    CreatequestPage,
+    ConfigurationPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

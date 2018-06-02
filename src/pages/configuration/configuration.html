@@ -1,0 +1,42 @@
+<ion-header>
+	<ion-toolbar>
+	  <ion-title>
+		Server Selection
+	  </ion-title>
+	  <ion-buttons start>
+		<button ion-button (click)="dismiss()">
+		  <ion-icon name="md-close"></ion-icon>
+		</button>
+	  </ion-buttons>
+	</ion-toolbar>
+</ion-header>
+<ion-content padding>
+	<div padding margin-top text-center color="primary">
+		<h1>Server Selection</h1>
+	</div>
+	<form #APIform="ngForm" novalidate>
+		<ion-list>
+			<ion-item (click)="template('http://35.196.111.251:3000')">
+				<h2>Universidad Nacional de Colombia</h2>
+				<p>http://35.196.111.251:3000</p>
+			</ion-item>
+			<ion-item (click)="template('http://ix.cs.uoregon.edu')">
+				<h2>University of Oregon</h2>
+				<p>http://ix.cs.uoregon.edu</p>
+			</ion-item>
+			<ion-item>
+				<h2>University Hu Yiling</h2>
+				<p>--</p>
+			</ion-item>
+			<ion-item (click)="template('http://localhost:3000')">
+				<h2>there is no place like 127.0.0.1</h2>
+				<p>http://localhost:3000</p>
+			</ion-item>
+			<ion-item></ion-item>
+
+				<ion-input [ngModel]="apiOld" name="api"></ion-input>
+
+			<button ion-button (click)="changeAPI(APIform)" type="submit" block>Select Server</button>
+		</ion-list>
+	</form>
+</ion-content>

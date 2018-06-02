@@ -47,10 +47,7 @@ export class ListUsersPage {
           user.company = company;
           user.companyName = company.name;
         }, error => {
-          console.log(error);
-          user.company = undefined;
-          user.companyName = undefined;
-          
+          console.log(error);          
         })
       }
       this.users.push(user);
