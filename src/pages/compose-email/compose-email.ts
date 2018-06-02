@@ -33,7 +33,7 @@ export class ComposeEmailPage {
   content: string;
 
 
-  receiversSelectedByUser: string[];
+  receiversSelectedByUser = [];
 
   private sender; //This is the object id of the user that will send the email.
 
@@ -76,37 +76,49 @@ export class ComposeEmailPage {
 
     let receiversObjectID: [string] = [""];
 
-
-    for (let index = 0; index < this.receiversSelectedByUser.length; index++) {
-      receiversObjectID[index] = this.receiversSelectedByUser[index]['id'];
+    if (this.receiversSelectedByUser.length > 0) {
+      for (let index = 0; index < this.receiversSelectedByUser.length; index++) {
+        receiversObjectID[index] = this.receiversSelectedByUser[index]['id'];
+      }
     }
 
     this.service.getCurrentUser().then((user) => {
 
       this.sender = user.id;
+      if (receiversObjectID.length > 0) {
+        var emailToSend = new Email(this.sender, this.subject, receiversObjectID, this.content);
+        /*We are sending a notification, depending if the email is sent or not*/
+        this.HttpService.send(emailToSend).subscribe(
+          () => {
+            let toast = this.toastCtrl.create({
+              message: 'Email sent',
+              duration: 3000
+            });
+            toast.present();
 
-      var emailToSend = new Email(this.sender, this.subject, receiversObjectID, this.content);
+          },
+          () => {
 
-      /*We are sending a notification, depending if the email is sent or not*/
-      this.HttpService.send(emailToSend).subscribe(
-        () => {
-          let toast = this.toastCtrl.create({
-            message: 'Email sent',
-            duration: 3000
-          });
-          toast.present();
+            let toast = this.toastCtrl.create({
+              message: 'Something went wrong',
+              duration: 3000
+            });
+            toast.present();
 
-        },
-        () => {
+          }
+        )
+      }
+      else {
 
-          let toast = this.toastCtrl.create({
-            message: 'Something went wrong',
-            duration: 3000
-          });
-          toast.present();
+        let toast = this.toastCtrl.create({
+          message: 'Something went wrong',
+          duration: 3000
+        });
+        toast.present();
 
-        }
-      )
+
+
+      }
 
     });
 
