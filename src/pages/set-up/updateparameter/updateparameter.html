@@ -9,25 +9,28 @@
     </ion-navbar>
 </ion-header>
 <ion-content padding>
-    <ion-card>
-        <ion-card-header>
-            <ion-card-title>
-                <ion-icon name='stats' margin-right></ion-icon>Threshold
-            </ion-card-title>
-            <ion-card-content class="outer-content">
-                information
-            </ion-card-content>
-            <ion-card-content class="outer-content">
-                <ion-list>
-                    <ion-item>
-                        <ion-input type="text" placeholder="Threshold"></ion-input>
-                    </ion-item>
-                </ion-list>
-            </ion-card-content>
-        </ion-card-header>
-    </ion-card>
-    <button ion-button icon-left color="primary" (click)="goToMain()">
-        <ion-icon name="done-all"></ion-icon>
-        Done
-    </button>
+    <form #updateForm="ngForm" novalidate>
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>
+                    <ion-icon name='stats' margin-right></ion-icon>Threshold
+                </ion-card-title>
+                <ion-card-content class="outer-content">
+                    information
+                </ion-card-content>
+                <ion-card-content class="outer-content">
+                    <ion-list>
+                        <ion-item>
+                            <ion-input [(ngModel)]="user.Threshold" name="Threshold"
+                            type="text" #Threshold="ngModel" required></ion-input>
+                        </ion-item>
+                    </ion-list>
+                </ion-card-content>
+            </ion-card-header>
+        </ion-card>
+        <button ion-button icon-left color="primary" (click)="goToMain(updateForm, 'id de zapata')" type="submit" block>
+            <ion-icon name="done-all"></ion-icon>
+            Done
+        </button>
+    </form>
 </ion-content>

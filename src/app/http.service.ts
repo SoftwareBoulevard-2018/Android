@@ -61,6 +61,7 @@ export class HttpService {
    * routes must coincide with backend services
    */
   static usersURL = '/users';
+  static updateGAURL = '/users/updateGA';
   static usersURL2 = '/username';
   static companiesURL = '/companies';
   static loginURL = '/login';
@@ -141,6 +142,11 @@ export class HttpService {
   }
   updateUser(user, userId) {
     return this.http.put<Object>(HttpService.apiURL + HttpService.usersURL + '/' + userId,
+      JSON.stringify(user), HttpService.httpOptions);
+  }
+
+  updateParameter(user,id) {
+    return this.http.put<Object>(HttpService.apiURL + HttpService.usersURL + HttpService.updateGAURL+'/' +id,
       JSON.stringify(user), HttpService.httpOptions);
   }
 
