@@ -24,7 +24,7 @@ export class ProjectlistPage {
     public navParams: NavParams,
     public httpService: HttpService
   ) {}
-
+ 
   ionViewWillEnter(){
     this.httpService.getAllBiddingProjects().subscribe(data => {
       this.biddingProject = data['data']

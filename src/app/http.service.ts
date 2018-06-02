@@ -67,6 +67,7 @@ export class HttpService {
   static createBiddingProjectURL = '/createBiddingProject';
   static createInstantProjectURL = '/createInstantProject';
   static createQuestionURL = '/createQuestion';
+  static updateQuestionURL = '/updateQuestion';
 
 
   static getBiddingProjectURL = '/getBiddingProject';
@@ -230,14 +231,14 @@ export class HttpService {
     return this.http.post<Questions>(HttpService.apiURL + HttpService.questionURL + HttpService.createQuestionURL,
       JSON.stringify(questions), HttpService.httpOptions);
   }
-  updateQuestion(questions: Questions, answers : Answer[]) {
+  updateQuestion(questions: Questions, answers : Answer[],questId:string) {
     questions.answers=answers;
 	  console.log( JSON.stringify(questions));
 	  console.log(HttpService.apiURL + HttpService.questionURL,
       JSON.stringify(questions), HttpService.httpOptions);
 
 
-    return this.http.put<Questions>(HttpService.apiURL + HttpService.questionURL + HttpService.createQuestionURL,
+    return this.http.put<Questions>(HttpService.apiURL + HttpService.questionURL + HttpService.updateQuestionURL+'/'+questId,
       JSON.stringify(questions), HttpService.httpOptions);
   }
   

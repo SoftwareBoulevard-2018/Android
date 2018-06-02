@@ -117,7 +117,11 @@
         </ion-row>
       </ion-grid>
     </ion-list>
-
+    <ion-item>
+      <ion-label stacked>
+      </ion-label>
+      <ion-input  [(ngModel)]="instantProject._id" name="_id" type="text" #_id="ngModel" required></ion-input>
+    </ion-item>
     <button ion-button icon-left color="primary" (click)=goToQuestlist(creationForm,option1,veracity1,option2,veracity2,option3,veracity3,option4,veracity4) type="submit" block>
       <ion-icon name="done-all"></ion-icon>
       Done

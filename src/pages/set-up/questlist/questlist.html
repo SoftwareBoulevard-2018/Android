@@ -12,11 +12,16 @@
   <h1>Question List</h1>
 
   <ion-list>
-    <ion-item>
-      <ion-icon></ion-icon>
-      Question 1
-      <ion-icon name="sync" item-end></ion-icon>
+    <ion-item *ngFor="let c of questions">
+      <p>
+        <ion-icon name="md-pint"></ion-icon> {{c.description}} 
+        <ion-icon name="name"></ion-icon>
+      </p>
+      <button ion-button color="primary" item-end (click)="goToUpdatequest(c)">
+        <ion-icon name='md-create'></ion-icon>
+    </button>
     </ion-item>
+    <ion-item></ion-item>
   </ion-list>
   <ion-grid>
     <ion-row>
