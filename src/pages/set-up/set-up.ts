@@ -51,9 +51,4 @@ export class SetUpPage {
   goToParameterlist(){
     this.navCtrl.push(UpdateparameterPage);
   }
-
-
-  ionViewDidLoad(){
-    console.log('Inicio page esta cargada')
-  }
 }
