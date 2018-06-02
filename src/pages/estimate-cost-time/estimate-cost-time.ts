@@ -60,10 +60,8 @@ export class EstimateCostTimePage {
               console.log(data2);
               this.recordsByCompany = data2;
               this.lastRecord = data2[data2.length - 1];
-              console.log(this.lastRecord.project.substring(1, 
-                this.lastRecord.project.length));
-              httpService.getBiddingProjectById(this.lastRecord.project.substring(1, 
-                this.lastRecord.project.length)).subscribe((p) => {
+              console.log(this.lastRecord.project);
+              httpService.getBiddingProjectById(this.lastRecord.project).subscribe((p) => {
                 this.p = p;
                 console.log(this.p);
               });

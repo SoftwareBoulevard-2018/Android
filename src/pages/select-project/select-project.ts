@@ -126,10 +126,11 @@ export class SelectProjectPage {
     this.serv.getCurrentUser().then((u) => {
       this.user = u;
       var r: Record = new Record();
-      r.project = p.id;
+      //console.log(r)
+      r.project = p.id.substring(1,p.id.length);
       r.company = u.companyId;
       r.startDate = new Date();
-      //console.log(r);
+      console.log(r);
       if(!p.hasOwnProperty('required_K'))
       {  
         this.createRecord(r);
@@ -148,7 +149,7 @@ export class SelectProjectPage {
             alert('K is insuficient')
           }
         });
-        console.log(this.k + 'daaaaam k');  
+        //console.log(this.k + 'daaaaam k');  
       }
     });   
   }
