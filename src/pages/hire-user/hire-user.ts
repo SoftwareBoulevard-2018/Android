@@ -57,10 +57,10 @@ export class HireUserPage {
   }
   addCompanies(users) {//This functions checks if user has company and add it
     users.forEach(user => {
-      this.httpService.getCompanyById(user.companyId).subscribe(company => {
-        user.company = company;
-        user.companyName = company.name;
-        this.users.push(user);
+      this.httpService.getCompanyById(user.companyId).subscribe(() => {
+        //user.company = company;
+        //user.companyName = company.name;
+        //this.users.push(user);
         //Fills the array
       }, error => {
         console.log(error);
