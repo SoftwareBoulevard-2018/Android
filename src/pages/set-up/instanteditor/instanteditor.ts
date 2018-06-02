@@ -26,7 +26,7 @@ export class InstanteditorPage {
 
     if (form.valid) {
       return this.httpService.createInstantProject(this.instantProject).subscribe(() => {
-        this.navCtrl.push(ProjectlistPage);
+        this.navCtrl.popTo(ProjectlistPage);
 
       });
 

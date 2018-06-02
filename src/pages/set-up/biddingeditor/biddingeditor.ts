@@ -27,7 +27,7 @@ export class BiddingeditorPage {
 
       if(form.valid){
         return this.httpService.createBiddingProject(this.biddingProject).subscribe(() => {
-          this.navCtrl.push(ProjectlistPage);
+          this.navCtrl.popTo(ProjectlistPage);
           
         });
       }

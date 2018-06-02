@@ -7,51 +7,14 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-fab right edge (click)=goToNewpuzzle()>
+    <button ion-fab>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 
-  <ion-list>
-    <ion-item>
-      <h1> Bidding Project List</h1>
-      <ion-icon></ion-icon>
-      Puzzle 1
-      <ion-icon name="repeat" item-end></ion-icon>
-    </ion-item>
-    <ion-item>
-      <ion-icon></ion-icon>
-      Puzzle 2
-      <ion-icon name="repeat" item-end></ion-icon>
-    </ion-item>
-    <ion-item>
-      <ion-icon></ion-icon>
-      Puzzle 3
-      <ion-icon name="repeat" item-end></ion-icon>
-    </ion-item>
-    <ion-item>
-      <ion-icon></ion-icon>
-      Puzzle 4
-      <ion-icon name="repeat" item-end></ion-icon>
-    </ion-item>
-  </ion-list>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <button ion-button icon-left color="primary" (click)=goToMain()>
-          <ion-icon name="home"></ion-icon>
-          Main
-        </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button icon-left color="primary" (click)=goToHome()>
-          <ion-icon name="md-cog"></ion-icon>
-          Set-up
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-content>
-    <ion-fab right edge (click)=goToNewpuzzle()>
-      <button ion-fab>
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-fab>
-  </ion-content>
+  <ion-item *ngFor="let p of puzzles">
+    <img src="{{p.originalImage}}">
+  </ion-item>
+  
 </ion-content>

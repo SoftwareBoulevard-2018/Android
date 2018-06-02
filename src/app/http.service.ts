@@ -12,6 +12,7 @@ import { DevelopingAttempt } from '../models/developingAttempt';
 import { Company } from '../models/company';
 import { Email } from '../models/email';
 import { Puzzle } from './../models/puzzle';
+import { creationPuzzle } from './../models/creationPuzzle';
 import { BiddingProject } from './../models/biddingProject';
 import { Questions} from './../models/questions';
 import { Assignment } from './../models/assignment';
@@ -197,6 +198,19 @@ export class HttpService {
     return fileTransfer.upload(imageURI, HttpService.apiURL+HttpService.companiesURL+"/image", options);
   }
 
+  uploadPuzzleImage(imageURI){
+    const fileTransfer: FileTransferObject = this.transfer.create();
+  
+    let options: FileUploadOptions = {
+      fileKey: 'image',
+      chunkedMode: false,
+      mimeType: 'multipart/form-data',
+      headers: {}
+    }
+
+    return fileTransfer.upload(imageURI, HttpService.apiURL + '/puzzles' + '/uploadImage', options);
+  }
+
   // All services related to email
   read(idUsuario) {
      return this.http.get<Email[]>(HttpService.apiURL + HttpService.emailURL + '/read/' + idUsuario);
@@ -224,6 +238,10 @@ export class HttpService {
   //All services related to Puzzles
   getAllPuzzles() {
     return this.http.get<Puzzle[]>(HttpService.apiURL + HttpService.puzzleURL);
+  }
+  createPuzzle(puzzle: creationPuzzle) {
+    return this.http.post<creationPuzzle>(HttpService.apiURL + '/puzzles' + '/createPuzzleAndroid',
+      JSON.stringify(puzzle), HttpService.httpOptions);
   }
   //All services related to Projects
   getBiddingProjectById(id: String) {
