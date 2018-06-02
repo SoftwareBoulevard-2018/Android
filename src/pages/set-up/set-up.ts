@@ -6,6 +6,7 @@ import { PuzzlelistPage } from '../set-up/puzzlelist/puzzlelist';
 import { NewprojectPage } from '../set-up/newproject/newproject';
 import { NewpuzzlePage } from '../set-up/newpuzzle/newpuzzle';
 import { UpdatequestPage } from '../set-up/updatequest/updatequest';
+import { CreatequestPage } from '../set-up/createquest/createquest';
 import { UpdateparameterPage } from '../set-up/updateparameter/updateparameter';
 
 
@@ -37,6 +38,10 @@ export class SetUpPage {
 
   goToNewpuzzle(){
     this.navCtrl.push(NewpuzzlePage);
+  }
+
+  goToCreatequest(){
+    this.navCtrl.push(CreatequestPage);
   }
 
   goToUpdatequest(){

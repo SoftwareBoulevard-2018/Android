@@ -34,7 +34,7 @@ export class UpdatequestPage {
 
     if (form.valid) {
       var ans=[(new Answer(option1,this.stringToBoolean(veracity1))),(new Answer(option2,this.stringToBoolean(veracity2))),(new Answer(option3,this.stringToBoolean(veracity3))),(new Answer(option4,this.stringToBoolean(veracity4)))];
-      return this.httpService.createQuestion(this.questions,ans).subscribe(() => {
+      return this.httpService.updateQuestion(this.questions,ans).subscribe(() => {
         this.navCtrl.push(QuestlistPage);
 
       });
