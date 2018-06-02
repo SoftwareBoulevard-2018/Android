@@ -27,6 +27,9 @@ export class QuestlistPage {
   goToUpdatequest(question){
     this.navCtrl.push(UpdatequestPage,{c:question});
   }
+  goToCreatenewquest(){
+    this.navCtrl.push(UpdatequestPage);
+  }
 
   goToMain(){
     this.navCtrl.push(MainPage);

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Edit question</ion-title>
+    <ion-title>Update question</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -23,9 +23,9 @@
             <h1>Category</h1>
           </ion-label>
           <ion-select [(ngModel)]="questions.role" name="role" #role="ngModel" required>
-            <ion-option value="A">Analyst</ion-option>
-            <ion-option value="D">Developer</ion-option>
-            <ion-option value="T">Tester</ion-option>
+            <ion-option value="Analyst">Analyst</ion-option>
+            <ion-option value="Developer">Developer</ion-option>
+            <ion-option value="Tester">Tester</ion-option>
           </ion-select>
         </ion-item>
       </ion-grid>
@@ -37,7 +37,7 @@
               <ion-label stacked>
                 <h1>Option 1</h1>
               </ion-label>
-              <ion-input type="text" ></ion-input>
+              <ion-input [(ngModel)]="option1" name="option1" type="text"  required  ></ion-input>
             </ion-item>
           </ion-col>
           <ion-col>
@@ -45,9 +45,9 @@
               <ion-label>
                 <pre><h1>Veracity</h1></pre>
               </ion-label>
-              <ion-select [(ngModel)]="veracity1" name="veracity1">
-                <ion-option value="T">True</ion-option>
-                <ion-option value="F">False</ion-option>
+              <ion-select [(ngModel)]="veracity1" name="veracity1" required>
+                <ion-option value="true">true</ion-option>
+                <ion-option value="false">false</ion-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -58,7 +58,7 @@
               <ion-label stacked>
                 <h1>Option 2</h1>
               </ion-label>
-              <ion-input type="text"></ion-input>
+              <ion-input [(ngModel)]="option2" name="option2" type="text"  required  ></ion-input>
             </ion-item>
           </ion-col>
           <ion-col>
@@ -66,9 +66,9 @@
               <ion-label>
                 <pre><h1>Veracity</h1></pre>
               </ion-label>
-              <ion-select [(ngModel)]="veracity2" name="veracity2">
-                <ion-option value="T">True</ion-option>
-                <ion-option value="F">False</ion-option>
+              <ion-select [(ngModel)]="veracity2" name="veracity2" required> 
+                <ion-option value="true">true</ion-option>
+                <ion-option value="false">false</ion-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -79,7 +79,7 @@
               <ion-label stacked>
                 <h1>Option 3</h1>
               </ion-label>
-              <ion-input type="text"></ion-input>
+              <ion-input [(ngModel)]="option3" name="option3" type="text"  required  ></ion-input>
             </ion-item>
           </ion-col>
           <ion-col>
@@ -87,9 +87,9 @@
               <ion-label>
                 <pre><h1>Veracity</h1></pre>
               </ion-label>
-              <ion-select [(ngModel)]="veracity3" name="veracity3">
-                <ion-option value="T">True</ion-option>
-                <ion-option value="F">False</ion-option>
+              <ion-select [(ngModel)]="veracity3" name="veracity3" required>
+                <ion-option value="true">true</ion-option>
+                <ion-option value="false">false</ion-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -100,7 +100,7 @@
               <ion-label stacked>
                 <h1>Option 4</h1>
               </ion-label>
-              <ion-input type="text"></ion-input>
+              <ion-input [(ngModel)]="option4" name="option4" type="text"  required  ></ion-input>
             </ion-item>
           </ion-col>
           <ion-col>
@@ -108,20 +108,22 @@
               <ion-label>
                 <pre><h1>Veracity</h1></pre>
               </ion-label>
-              <ion-select [(ngModel)]="veracity4" name="veracity4">
-                <ion-option value="T">True</ion-option>
-                <ion-option value="F">False</ion-option>
+              <ion-select [(ngModel)]="veracity4" name="veracity4" required>
+                <ion-option value="true">true</ion-option>
+                <ion-option value="false">false</ion-option>
               </ion-select>
             </ion-item>
           </ion-col>
         </ion-row>
       </ion-grid>
+      <ion-item>
+        <ion-label stacked>
+          id del question
+        </ion-label>
+        <ion-input  [(ngModel)]="questions._id" name="_id" type="text" #_id="ngModel" required></ion-input>
+      </ion-item>
     </ion-list>
-    <ion-item>
-      <ion-label stacked>
-      </ion-label>
-      <ion-input  [(ngModel)]="instantProject._id" name="_id" type="text" #_id="ngModel" required></ion-input>
-    </ion-item>
+
     <button ion-button icon-left color="primary" (click)=goToQuestlist(creationForm,option1,veracity1,option2,veracity2,option3,veracity3,option4,veracity4) type="submit" block>
       <ion-icon name="done-all"></ion-icon>
       Done
