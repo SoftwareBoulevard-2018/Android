@@ -12,6 +12,7 @@ import { DevelopingAttempt } from '../models/developingAttempt';
 import { Company } from '../models/company';
 import { Email } from '../models/email';
 import { Puzzle } from './../models/puzzle';
+import { creationPuzzle } from './../models/creationPuzzle';
 import { BiddingProject } from './../models/biddingProject';
 import { Questions} from './../models/questions';
 import { Assignment } from './../models/assignment';
@@ -61,6 +62,7 @@ export class HttpService {
    * routes must coincide with backend services
    */
   static usersURL = '/users';
+  static updateGAURL = '/users/updateGA';
   static usersURL2 = '/username';
   static companiesURL = '/companies';
   static loginURL = '/login';
@@ -82,6 +84,7 @@ export class HttpService {
   static createBiddingProjectURL = '/createBiddingProject';
   static createInstantProjectURL = '/createInstantProject';
   static createQuestionURL = '/createQuestion';
+  static updateQuestionURL = '/updateQuestion';
 
 
   static getBiddingProjectURL = '/getBiddingProject';
@@ -143,6 +146,11 @@ export class HttpService {
       JSON.stringify(user), HttpService.httpOptions);
   }
 
+  updateParameter(user,id) {
+    return this.http.put<Object>(HttpService.apiURL + HttpService.usersURL + HttpService.updateGAURL+'/' +id,
+      JSON.stringify(user), HttpService.httpOptions);
+  }
+
   updateInstantProject(instantProject: InstantProject, id :string ){
     console.log(instantProject);
     console.log(instantProject.id);
@@ -190,6 +198,19 @@ export class HttpService {
     return fileTransfer.upload(imageURI, HttpService.apiURL+HttpService.companiesURL+"/image", options);
   }
 
+  uploadPuzzleImage(imageURI){
+    const fileTransfer: FileTransferObject = this.transfer.create();
+  
+    let options: FileUploadOptions = {
+      fileKey: 'image',
+      chunkedMode: false,
+      mimeType: 'multipart/form-data',
+      headers: {}
+    }
+
+    return fileTransfer.upload(imageURI, HttpService.apiURL + '/puzzles' + '/uploadImage', options);
+  }
+
   // All services related to email
   read(idUsuario) {
      return this.http.get<Email[]>(HttpService.apiURL + HttpService.emailURL + '/read/' + idUsuario);
@@ -217,6 +238,10 @@ export class HttpService {
   //All services related to Puzzles
   getAllPuzzles() {
     return this.http.get<Puzzle[]>(HttpService.apiURL + HttpService.puzzleURL);
+  }
+  createPuzzle(puzzle: creationPuzzle) {
+    return this.http.post<creationPuzzle>(HttpService.apiURL + '/puzzles' + '/createPuzzleAndroid',
+      JSON.stringify(puzzle), HttpService.httpOptions);
   }
   //All services related to Projects
   getBiddingProjectById(id: String) {
@@ -259,14 +284,14 @@ export class HttpService {
     return this.http.post<Questions>(HttpService.apiURL + HttpService.questionURL + HttpService.createQuestionURL,
       JSON.stringify(questions), HttpService.httpOptions);
   }
-  updateQuestion(questions: Questions, answers : Answer[]) {
+  updateQuestion(questions: Questions, answers : Answer[],questId:string) {
     questions.answers=answers;
 	  console.log( JSON.stringify(questions));
 	  console.log(HttpService.apiURL + HttpService.questionURL,
       JSON.stringify(questions), HttpService.httpOptions);
 
 
-    return this.http.put<Questions>(HttpService.apiURL + HttpService.questionURL + HttpService.createQuestionURL,
+    return this.http.put<Questions>(HttpService.apiURL + HttpService.questionURL + HttpService.updateQuestionURL+'/'+questId,
       JSON.stringify(questions), HttpService.httpOptions);
   }
   
@@ -282,7 +307,7 @@ export class HttpService {
     return this.http.get<Questions>(HttpService.apiURL + '/questions/getQuestionById/' + id);
   }
   getAllQuestions() {
-    return this.http.get<Questions[]>(HttpService.apiURL + HttpService.getQuestionURL);
+    return this.http.get<Questions[]>(HttpService.apiURL + HttpService.questionURL);
   }
   getAssignmentById(id: String) {
     return this.http.get<Assignment[]>(HttpService.apiURL + '/assignments/' + id);

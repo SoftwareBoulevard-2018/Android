@@ -62,8 +62,6 @@ import { MenuemailpopoverPage } from '../pages/menuemailpopover/menuemailpopover
 import { ReademailPage } from '../pages/reademail/reademail';
 import { SentemailpagePage } from '../pages/sentemailpage/sentemailpage';
 
-
-
 import { DevelopProjectPage } from '../pages/develop-project/develop-project';
 import { ImproveSkillLevelPage } from '../pages/improve-skill-level/improve-skill-level';
 import { JoinTeamPage } from '../pages/join-team/join-team';

@@ -35,8 +35,4 @@ export class UpdateBiddingProjectPage {
 
   }
 
-    ionViewDidLoad() {
-      console.log('ionViewDidLoad InstanteditorPage');
-    }
-
-  }
+}

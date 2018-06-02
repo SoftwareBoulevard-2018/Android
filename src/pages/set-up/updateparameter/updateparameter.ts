@@ -1,22 +1,34 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { MainPage } from '../../main/main';
+import { HttpService } from '../../../app/http.service';
+import { GeneralServiceService } from '../../../app/general-service.service';
+
+import { NgForm } from '@angular/forms';
+import { User } from '../../../models/user';
 @Component({
   selector: 'updateparameter',
   templateUrl: 'updateparameter.html'
 })
 export class UpdateparameterPage {
 
-  constructor(public navCtrl: NavController,public navParams: NavParams){
-
+  user=new User();
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public httpService: HttpService,
+    public service: GeneralServiceService){
+    
   }
-
-  goToMain(){
-    this.navCtrl.push(MainPage);
+  ionViewWillEnter() {
+    this.service.getCurrentUser().then((user) => {
+       this.user = user
+    });
   }
-
-
-  ionViewDidLoad(){
-    console.log('Inicio page esta cargada')
+  onSubmit(form: NgForm) {
+    if (form.valid) {
+      return this.httpService.updateUser(this.user, this.user.id).subscribe(() => {
+        this.navCtrl.pop();
+      });
+      
+    }
   }
 }

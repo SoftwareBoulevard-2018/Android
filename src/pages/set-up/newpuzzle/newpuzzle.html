@@ -1,30 +1,26 @@
 <ion-header>
+  <ion-navbar color="primary">
+    <ion-title>New puzzle</ion-title>
+  </ion-navbar>
+</ion-header>
+  
+<ion-content padding>
+  <form #creationForm="ngForm" novalidate>
+    <ion-list>
+      <ion-item>
+				<button ion-button color="secondary" (click)="getImage()">Select Image</button>
+			</ion-item>
 
-    <ion-navbar color="primary">
-      <ion-title>New puzzle</ion-title>
-    </ion-navbar>
-  
-  </ion-header>
-  
-  <ion-content padding>
-  
-    <ion-item>
-      <ion-label stacked>
-        <h1>Photo puzzle</h1>
-      </ion-label>
-      <ion-input type="image"></ion-input>
-    </ion-item>
-  
-    <ion-item>
-      <ion-label stacked>
-        <h1>Reward</h1>
-      </ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-  
-    <button ion-button icon-left color="primary" (click)=goToPuzzlelist()>
-      <ion-icon name="done-all"></ion-icon>
-      Done
-    </button>
-  
-  </ion-content>
+      <ion-item padding-top>
+        <ion-label floating color="primary">Reward</ion-label>
+        <ion-input [(ngModel)]="puzzle.rewarded_resources" name="rewarded_resources" type="number" #name="ngModel" required>
+        </ion-input>
+      </ion-item>
+
+    </ion-list>
+    <div padding>
+        <button ion-button (click)="onSubmit(creationForm)" type="submit" block>Create</button>
+      </div>
+  </form>
+
+</ion-content>
