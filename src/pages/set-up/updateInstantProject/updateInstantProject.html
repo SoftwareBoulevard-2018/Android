@@ -71,7 +71,7 @@
       <ion-item>
         <ion-label stacked>
         </ion-label>
-        <ion-input hidden [(ngModel)]="instantProject._id" name="_id" type="text" #_id="ngModel" required></ion-input>
+        <ion-input hidden type="submit" blocktype="submit" block></ion-input>
       </ion-item>
 
       <button ion-button icon-left color="primary" (click)=goToProjectlist(creationForm,instantProject._id) type="submit" block>
