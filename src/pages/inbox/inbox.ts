@@ -157,7 +157,7 @@ export class InboxPage {
     */
     for (var i = 0; i < this.emailArray.length; i++) {
       var subjectElement = this.emailArray[i].subject;
-      var senderElement = this.emailArray[i].sender;
+      var senderElement = this.emailArray[i].sname;
 
       if (subjectElement.includes(this.searchQuery) || senderElement.includes(this.searchQuery)) {
         IDEmailSolution.push(this.emailArray[i].id);
