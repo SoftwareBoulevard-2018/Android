@@ -71,6 +71,8 @@ import { SelectProjectPage } from '../pages/select-project/select-project';
 import { GenerateResourcesPage } from '../pages/generate-resources/generate-resources';
 import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cost-time';
 
+import { ConfigurationPage } from './../pages/configuration/configuration';
+
 @NgModule({
   declarations: [
     SoftwareBoulevardApp,
@@ -112,7 +114,8 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
     UpdateparameterPage,
     UpdateInstantProjectPage,
     UpdateBiddingProjectPage,
-    CreatequestPage
+    CreatequestPage,
+    ConfigurationPage
   ],
   imports: [
     BrowserModule,
@@ -191,7 +194,8 @@ import { EstimateCostTimePage } from './../pages/estimate-cost-time/estimate-cos
     UpdateparameterPage,
     UpdateInstantProjectPage,
     UpdateBiddingProjectPage,
-    CreatequestPage
+    CreatequestPage,
+    ConfigurationPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

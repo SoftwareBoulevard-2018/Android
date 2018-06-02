@@ -33,14 +33,10 @@
 			</ion-col>
 		</ion-row>
 	</form>
-	<footer>
-		<form #APIform="ngForm" novalidate>
-			<ion-item>
-				<ion-label color="primary">Api url:</ion-label>
-				<ion-input [ngModel]="apiOld" name="api"></ion-input>
-				
-			</ion-item>
-			<button ion-button (click)="changeAPI(APIform)" type="submit" end>change</button>
-		</form>
-	</footer>
+	<ion-item no-lines>
+		<p>Server: {{api}}</p>
+		<button ion-button (click)="configuration()" item-end>
+			<ion-icon name="md-cog"></ion-icon>
+		</button>
+	</ion-item>
 </ion-content>
