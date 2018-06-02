@@ -34,7 +34,11 @@ export class CreatequestPage {
   goToQuestlist(form: NgForm,option1 : string,veracity1 : string,option2 : string,veracity2 : string,option3 : string,veracity3 : string,option4 : string,veracity4 : string){
     console.log(form);
     this.submitted = true;
-    var ans=[(new Answer(option1,this.stringToBoolean(veracity1))),(new Answer(option2,this.stringToBoolean(veracity2))),(new Answer(option3,this.stringToBoolean(veracity3))),(new Answer(option4,this.stringToBoolean(veracity4)))];
+    let res =(new Answer(option1,this.stringToBoolean(veracity1)));
+    console.log("puto el que lo lea");
+    console.log(res);
+    console.log("puto el que lo lea");
+    var ans=[res,(new Answer(option2,this.stringToBoolean(veracity2))),(new Answer(option3,this.stringToBoolean(veracity3))),(new Answer(option4,this.stringToBoolean(veracity4)))];
     console.log(ans);
     if (form.valid) {
       return this.httpService.createQuestion(this.questions,ans).subscribe(() => {

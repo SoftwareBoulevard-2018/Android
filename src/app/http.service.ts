@@ -39,8 +39,8 @@ export class HttpService {
   /**
    * defaul apiURL, can be changed in loginPage
    */
-  static apiURL = 'http://35.196.111.251:3000';
-  //static apiURL = 'http://localhost:3000';
+  //static apiURL = 'http://35.196.111.251:3000';
+  static apiURL = 'http://localhost:3000';
 
   /**
    * routes must coincide with backend services
@@ -221,12 +221,23 @@ export class HttpService {
 
   createQuestion(questions: Questions, answers : Answer[]) {
     questions.answers=answers;
+    console.log( JSON.stringify(questions));
+    console.log("puto el que lo lea");
+	  console.log(HttpService.apiURL + HttpService.questionURL,
+      JSON.stringify(questions), HttpService.httpOptions);
+
+
+    return this.http.post<Questions>(HttpService.apiURL + HttpService.questionURL + HttpService.createQuestionURL,
+      JSON.stringify(questions), HttpService.httpOptions);
+  }
+  updateQuestion(questions: Questions, answers : Answer[]) {
+    questions.answers=answers;
 	  console.log( JSON.stringify(questions));
 	  console.log(HttpService.apiURL + HttpService.questionURL,
       JSON.stringify(questions), HttpService.httpOptions);
 
 
-    return this.http.post<InstantProject>(HttpService.apiURL + HttpService.questionURL + HttpService.createQuestionURL,
+    return this.http.put<Questions>(HttpService.apiURL + HttpService.questionURL + HttpService.createQuestionURL,
       JSON.stringify(questions), HttpService.httpOptions);
   }
   
